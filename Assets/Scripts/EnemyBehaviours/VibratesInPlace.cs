@@ -7,24 +7,34 @@ public class VibratesInPlace : EnemyBehaviour
     public Vector3 startPosition;
     public Rigidbody rb;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         startPosition = transform.position;
         
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
+
+        if (!enemyController.active)
+        {
+            return;
+        }
+
+
         Vector3 direction = Utils.randomVector3() + (startPosition - transform.position).normalized;
 
         direction = direction.normalized;
 
-        rb.AddForce(direction * data.acceleration, ForceMode.Acceleration);
+        rb.AddForce(direction * enemyController.data.acceleration, ForceMode.Acceleration);
 
-        if(rb.velocity.magnitude > data.maxSpeed)
+        if(rb.velocity.magnitude > enemyController.data.maxSpeed)
         {
-            rb.velocity *= (data.maxSpeed / rb.velocity.magnitude);
+            rb.velocity *= (enemyController.data.maxSpeed / rb.velocity.magnitude);
         }
     }
 }

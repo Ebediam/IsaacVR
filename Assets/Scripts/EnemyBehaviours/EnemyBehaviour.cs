@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public EnemyData data;
+    public Enemy enemyController;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
-        
+        enemyController = gameObject.GetComponent<Enemy>();
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
-        
+
     }
 }

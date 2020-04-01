@@ -12,15 +12,23 @@ public class ShootAt : EnemyBehaviour
     float timer;
     bool cooldown = true;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         GetTarget();
-        timer = data.baseAttackCooldown/2 + Random.Range(-data.baseAttackCooldownRangeModifier, data.baseAttackCooldownRangeModifier);
+        timer = enemyController.data.baseAttackCooldown/2 + Random.Range(-enemyController.data.baseAttackCooldownRangeModifier, enemyController.data.baseAttackCooldownRangeModifier);
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
+
+        if (!enemyController.active)
+        {
+            return;
+        }
+
         if (!target)
         {
             GetTarget();
@@ -31,7 +39,7 @@ public class ShootAt : EnemyBehaviour
         {
             timer += Time.deltaTime;
 
-            if(timer >= data.baseAttackCooldown)
+            if(timer >= enemyController.data.baseAttackCooldown)
             {
                 Shoot();
 
@@ -57,9 +65,9 @@ public class ShootAt : EnemyBehaviour
 
         bulletInstantiate.transform.position = spawnPoint.position;
         bulletInstantiate.transform.rotation = spawnPoint.rotation;
-        bulletInstantiate.rb.AddForce(bulletInstantiate.transform.forward * data.bulletSpeed, ForceMode.VelocityChange);
-        bulletInstantiate.damage = data.damage;
+        bulletInstantiate.rb.AddForce(bulletInstantiate.transform.forward * enemyController.data.bulletSpeed, ForceMode.VelocityChange);
+        bulletInstantiate.damage = enemyController.data.damage;
         cooldown = true;
-        timer = Random.Range(-data.baseAttackCooldownRangeModifier, data.baseAttackCooldownRangeModifier);
+        timer = Random.Range(-enemyController.data.baseAttackCooldownRangeModifier, enemyController.data.baseAttackCooldownRangeModifier);
     }
 }

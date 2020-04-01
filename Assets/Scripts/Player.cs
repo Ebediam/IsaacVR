@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public delegate void PlayerDelegate();
+    public static PlayerDelegate EnterSafeZoneEvent;
+    public static PlayerDelegate ExitSafeZoneEvent;
+
     public static Player local;
     public Rigidbody rb;
     public Transform head;
@@ -16,9 +20,11 @@ public class Player : MonoBehaviour
 
     bool invincible = false;
 
+
     // Start is called before the first frame update
     void Start()
     {
+
         local = this;
         GameManager.leftJoystickEvent += Move;
         GameManager.rightJoystickEvent += Rotate;
@@ -89,6 +95,16 @@ public class Player : MonoBehaviour
         }
 
         invincible = true;
+    }
+
+    public void DeactivateGuns()
+    {
+        EnterSafeZoneEvent?.Invoke();
+    }
+
+    public void ActivateGuns()
+    {
+        ExitSafeZoneEvent?.Invoke();
     }
 
 

@@ -28,12 +28,26 @@ public class Door : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<Bullet>())
+        {
+            other.gameObject.GetComponent<Bullet>().DestroyBullet();
+        }
+
+        if (other.gameObject.GetComponent<Player>())
+        {
+            other.gameObject.GetComponent<Player>().DeactivateGuns();
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.GetComponent<Player>())
         {
             hasPassed = true;
             LockDoors();
+            other.gameObject.GetComponent<Player>().ActivateGuns();
         }
 
     }

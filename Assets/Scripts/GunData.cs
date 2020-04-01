@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class GunData : ScriptableObject
+public class GunData : ItemData
 {
     public GameObject bulletPrefab;
     public float fireRate;

@@ -11,15 +11,23 @@ public class Chase : EnemyBehaviour
     // Start is called before the first frame update
 
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
         GetTarget();
-        enemy = gameObject.GetComponent<Enemy>();
+
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
+
+        if (!enemyController.active)
+        {
+            return;
+        }
+
         if (!target)
         {
             GetTarget();
@@ -27,10 +35,10 @@ public class Chase : EnemyBehaviour
         }
 
         transform.LookAt(target);
-        rb.AddRelativeForce(Vector3.forward * data.acceleration, ForceMode.Acceleration);
-        if(rb.velocity.magnitude > data.maxSpeed)
+        rb.AddRelativeForce(Vector3.forward * enemyController.data.acceleration, ForceMode.Acceleration);
+        if(rb.velocity.magnitude > enemyController.data.maxSpeed)
         {
-            rb.velocity *= (data.maxSpeed / rb.velocity.magnitude);
+            rb.velocity *= (enemyController.data.maxSpeed / rb.velocity.magnitude);
         }
 
 

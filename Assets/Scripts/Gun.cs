@@ -8,7 +8,8 @@ public class Gun : Item
     public GunData data;
     public Transform spawnPoint;
 
-    public Material gunSwitchMaterial;
+    public GameObject redCube;
+    public GameObject greenCube;
 
     public bool OnCooldown = false;
 
@@ -19,9 +20,19 @@ public class Gun : Item
     // Start is called before the first frame update
     void Start()
     {
-        
+        Player.EnterSafeZoneEvent += Deactivate;
+        Player.ExitSafeZoneEvent += Activate;
     }
 
+    public void Deactivate()
+    {
+        active = false;
+    }
+
+    public void Activate()
+    {
+        active = true;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -41,7 +52,8 @@ public class Gun : Item
         {
             OnCooldown = false;
             timer = 0f;
-            gunSwitchMaterial.color = Color.green;
+            greenCube.SetActive(true);
+            redCube.SetActive(false);
         }
     }
 
@@ -67,7 +79,8 @@ public class Gun : Item
         bullet.rb.AddForce(bullet.transform.forward * data.bulletSpeed, ForceMode.VelocityChange);
         bullet.damage = data.bulletDamage;
         OnCooldown = true;
-        gunSwitchMaterial.color = Color.red;
+        redCube.SetActive(true);
+        greenCube.SetActive(false);
 
     }
 

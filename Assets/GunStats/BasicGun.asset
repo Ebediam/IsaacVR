@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb958693b6a12cb458e6e96111f2f6b3, type: 3}
-  m_Name: Basic
+  m_Name: BasicGun
   m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 7743832118939548052, guid: 158d034fa48dbe540a8cc5abb3a7bcd6,
+    type: 3}
   bulletPrefab: {fileID: 4290915699790844812, guid: 9d4b9681e7e6e9b4daa2cf31750e8a7e,
     type: 3}
   fireRate: 1

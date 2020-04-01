@@ -5,15 +5,17 @@ using UnityEngine;
 public class Enemy : Damageable
 {
 
+    public delegate void EnemyDelegate(Enemy enemy);
+    public EnemyDelegate EnemyDeadEvent;
+
     public EnemyData data;
-    public Room room;
+    public EnemyManager enemyManager;
     public bool active = false;
 
     void Start()
     {
 
         currentHealth = data.hitPoints;
-        room = GetComponentInParent<Room>();
 
     }
 
@@ -37,7 +39,7 @@ public class Enemy : Damageable
 
     public override void DestroyDamageable()
     {
-        room.EnemyKilled();
+        EnemyDeadEvent?.Invoke(this);
         base.DestroyDamageable();
     }
 }
