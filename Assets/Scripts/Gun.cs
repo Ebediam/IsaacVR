@@ -12,6 +12,8 @@ public class Gun : Item
 
     public bool OnCooldown = false;
 
+    public bool active = true;
+
     public float timer=0f;
 
     // Start is called before the first frame update
@@ -23,6 +25,11 @@ public class Gun : Item
     // Update is called once per frame
     void Update()
     {
+        if (!active)
+        {
+            return;
+        }
+
         if (!OnCooldown) 
         {
             return;
@@ -48,19 +55,19 @@ public class Gun : Item
     void Shoot()
     {
         if (OnCooldown)
-        {
-            
+        {            
             return;
         }
-        GameObject bullet = Instantiate(data.bulletPrefab);
-        bullet.transform.position = spawnPoint.position;
-        bullet.transform.rotation = spawnPoint.rotation;
+        GameObject bulletGO = Instantiate(data.bulletPrefab);
+        bulletGO.transform.position = spawnPoint.position;
+        bulletGO.transform.rotation = spawnPoint.rotation;
+        Bullet bullet = bulletGO.GetComponent<Bullet>();
 
-        bullet.GetComponent<Bullet>().rb.AddForce(bullet.transform.forward * data.bulletSpeed, ForceMode.VelocityChange);
-        bullet.GetComponent<Bullet>().damage = data.bulletDamage;
+        bullet.rb.velocity = Player.local.rb.velocity/10f;
+        bullet.rb.AddForce(bullet.transform.forward * data.bulletSpeed, ForceMode.VelocityChange);
+        bullet.damage = data.bulletDamage;
         OnCooldown = true;
         gunSwitchMaterial.color = Color.red;
-
 
     }
 

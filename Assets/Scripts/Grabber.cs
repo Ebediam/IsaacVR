@@ -70,7 +70,7 @@ public class Grabber : MonoBehaviour
 
 
         heldItem.rb.constraints = RigidbodyConstraints.FreezeAll;
-
+        
 
         heldItem.transform.position = transform.position;        
         heldItem.transform.parent = transform;

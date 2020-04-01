@@ -5,7 +5,6 @@ using UnityEngine;
 public class VibratesInPlace : EnemyBehaviour
 {
     public Vector3 startPosition;
-    public float speed;
     public Rigidbody rb;
     // Start is called before the first frame update
     void Start()
@@ -21,11 +20,11 @@ public class VibratesInPlace : EnemyBehaviour
 
         direction = direction.normalized;
 
-        rb.AddForce(direction * data.speed, ForceMode.Acceleration);
+        rb.AddForce(direction * data.acceleration, ForceMode.Acceleration);
 
-        if(rb.velocity.magnitude > speed)
+        if(rb.velocity.magnitude > data.maxSpeed)
         {
-            rb.velocity *= (speed / rb.velocity.magnitude);
+            rb.velocity *= (data.maxSpeed / rb.velocity.magnitude);
         }
     }
 }

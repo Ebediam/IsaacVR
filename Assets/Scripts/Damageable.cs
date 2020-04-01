@@ -38,7 +38,7 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         if (invicible)
         {
@@ -54,7 +54,7 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    public void DestroyDamageable()
+    public virtual void DestroyDamageable()
     {
         Destroy(gameObject, 0.1f);
     }

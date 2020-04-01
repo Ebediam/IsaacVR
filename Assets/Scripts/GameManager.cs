@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
 
     public delegate void ButtonPressDelegate();
+    public delegate void JoystickPressDelegate(Vector2 vector2);
     public static ButtonPressDelegate L1PressEvent;
     public static ButtonPressDelegate L2PressEvent;
     public static ButtonPressDelegate R1PressEvent;
     public static ButtonPressDelegate R2PressEvent;
 
+    public static JoystickPressDelegate leftJoystickEvent;
+    public static JoystickPressDelegate rightJoystickEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,17 @@ public class GameManager : MonoBehaviour
         // A & X = One
         // B & Y = Two
         // Tres rayas (izq) = Start
+
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch).magnitude > 0)
+        {
+            leftJoystickEvent(OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch));
+        }
+
+
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch).magnitude > 0)
+        {
+            rightJoystickEvent(OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch));
+        }
 
         if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch)) //L2
         {
@@ -46,7 +60,16 @@ public class GameManager : MonoBehaviour
             R1PressEvent?.Invoke();
         }
 
+        if(OVRInput.GetDown(OVRInput.Button.Left, OVRInput.Controller.LTouch))
+        {
+
+        }
 
 
+    }
+
+    public static void GameOver()
+    {
+        SceneManager.LoadScene(0);
     }
 }

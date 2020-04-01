@@ -9,10 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
-  m_Name: IdleFly
+  m_Script: {fileID: 11500000, guid: 141434e49cbc3b74e849da67e6639a01, type: 3}
+  m_Name: Playerdata
   m_EditorClassIdentifier: 
-  hitPoints: 6
-  maxSpeed: 1
-  acceleration: 1
-  damage: 0.5
+  maxSpeed: 1.5
+  acceleration: 2500
+  turnAngle: 2
+  maxHealth: 6
+  invincibilityTime: 0.5
+  coins: 0
+  keys: 0
+  bombs: 0
