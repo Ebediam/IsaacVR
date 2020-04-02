@@ -14,9 +14,8 @@ public class Enemy : Damageable
 
     void Start()
     {
-
         currentHealth = data.hitPoints;
-
+        rb.mass = data.mass;
     }
 
     // Update is called once per frame

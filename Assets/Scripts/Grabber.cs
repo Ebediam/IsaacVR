@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Grabber : MonoBehaviour
 {
+    public delegate void GrabberDelegate(Grabber grabber);
+    public static GrabberDelegate FailGrabEvent;
+
     public enum Side
     {
         Right,
@@ -15,6 +18,13 @@ public class Grabber : MonoBehaviour
 
     public Item heldItem;
 
+    public Collider handCollider;
+    public Rigidbody handRB;
+
+
+    public static Grabber leftHand;
+    public static Grabber rightHand;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,11 +32,13 @@ public class Grabber : MonoBehaviour
         {
             GameManager.L1PressEvent += IndexTriggerPress;
             GameManager.L2PressEvent += HandTriggerPress;
+            leftHand = this;
         }
         else if(side == Side.Right)
         {
             GameManager.R1PressEvent += IndexTriggerPress;
             GameManager.R2PressEvent += HandTriggerPress;
+            rightHand = this;
         }
 
         itemsInRange = new List<Item>();
@@ -54,39 +66,69 @@ public class Grabber : MonoBehaviour
         }
         else
         {
-            Grab();
+            TryGrab();
         }
 
     }
 
-    void Grab()
+    void TryGrab()
     {
-       heldItem =  Utils.CalculateNearestItem(itemsInRange, transform.position);
+       Item nearestItem =  Utils.CalculateNearestItem(itemsInRange, transform.position);
 
-        if (!heldItem)
+        if (!nearestItem)
         {
+            FailGrabEvent?.Invoke(this);
             return;
         }
 
-
-        heldItem.rb.constraints = RigidbodyConstraints.FreezeAll;
-        
-
-        heldItem.transform.position = transform.position;        
-        heldItem.transform.parent = transform;
-        heldItem.transform.localPosition -= heldItem.holdPoint.localPosition;
+        Grab(nearestItem);
 
         
-        heldItem.transform.rotation = transform.rotation;
-
 
     }
 
-    void Release()
+    public void Grab(Item item)
     {
+        heldItem = item;
+        handCollider.enabled = false;
+
+        heldItem.rb.constraints = RigidbodyConstraints.FreezeAll;
+
+
+        heldItem.transform.position = transform.position;
+        heldItem.transform.parent = transform;
+        heldItem.transform.localPosition -= heldItem.holdPoint.localPosition;
+
+
+
+
+
+        heldItem.transform.rotation = transform.rotation;
+
+        heldItem.holder = this;
+
+        heldItem.OnItemPickup?.Invoke();
+    }
+
+    public void Release()
+    {
+        //heldItem.transform.parent = Room.activeRoom.transform ;
         heldItem.transform.parent = null;
+
+
         heldItem.rb.constraints = RigidbodyConstraints.None;
+        heldItem.holder = null;
+
+        heldItem.OnItemDrop?.Invoke();
         heldItem = null;
+
+
+        Invoke("ActivateHandCollider", 0.5f);
+    }
+
+    public void ActivateHandCollider()
+    {
+        handCollider.enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -123,6 +165,27 @@ public class Grabber : MonoBehaviour
         {
             itemsInRange.Remove(item);
         }
+    }
+
+    public static void RemoveFromItemsInRange(Item item)
+    {
+        if(leftHand.itemsInRange.Count > 0)
+        {
+            if (leftHand.itemsInRange.Contains(item))
+            {
+                leftHand.itemsInRange.Remove(item);
+            }
+        }
+
+        if(rightHand.itemsInRange.Count > 0)
+        {
+            if (rightHand.itemsInRange.Contains(item))
+            {
+                rightHand.itemsInRange.Remove(item);
+            }
+        }
+
+
     }
 
 }

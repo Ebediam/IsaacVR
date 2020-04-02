@@ -6,15 +6,14 @@ public class Chase : EnemyBehaviour
 {
 
     Transform target;
-    public Rigidbody rb;
-    public Enemy enemy;
+
     // Start is called before the first frame update
 
 
     public override void Start()
     {
         base.Start();
-        GetTarget();
+        target = Utils.GetTarget();
 
     }
 
@@ -30,25 +29,19 @@ public class Chase : EnemyBehaviour
 
         if (!target)
         {
-            GetTarget();
+            target = Utils.GetTarget();
             return;
         }
 
         transform.LookAt(target);
-        rb.AddRelativeForce(Vector3.forward * enemyController.data.acceleration, ForceMode.Acceleration);
-        if(rb.velocity.magnitude > enemyController.data.maxSpeed)
+        enemyController.rb.AddRelativeForce(Vector3.forward * enemyController.data.acceleration, ForceMode.Acceleration);
+        if(enemyController.rb.velocity.magnitude > enemyController.data.maxSpeed)
         {
-            rb.velocity *= (enemyController.data.maxSpeed / rb.velocity.magnitude);
+            enemyController.rb.velocity *= (enemyController.data.maxSpeed / enemyController.rb.velocity.magnitude);
         }
 
 
     }
 
-    public void GetTarget()
-    {
-        if (Player.local)
-        {
-            target = Player.local.head;
-        }
-    }
+
 }

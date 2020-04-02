@@ -5,7 +5,7 @@ using UnityEngine;
 public class VibratesInPlace : EnemyBehaviour
 {
     public Vector3 startPosition;
-    public Rigidbody rb;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -30,11 +30,11 @@ public class VibratesInPlace : EnemyBehaviour
 
         direction = direction.normalized;
 
-        rb.AddForce(direction * enemyController.data.acceleration, ForceMode.Acceleration);
+        enemyController.rb.AddForce(direction * enemyController.data.acceleration, ForceMode.Acceleration);
 
-        if(rb.velocity.magnitude > enemyController.data.maxSpeed)
+        if(enemyController.rb.velocity.magnitude > enemyController.data.maxSpeed)
         {
-            rb.velocity *= (enemyController.data.maxSpeed / rb.velocity.magnitude);
+            enemyController.rb.velocity *= (enemyController.data.maxSpeed / enemyController.rb.velocity.magnitude);
         }
     }
 }

@@ -151,7 +151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7743832118939548052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.562, z: 0.255}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7743832120060458049}
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 7743832118939548010}
   holdPoint: {fileID: 7743832119227709605}
+  holder: {fileID: 0}
   data: {fileID: 11400000, guid: 729603148c548cf4191b4e7681ffcafd, type: 2}
   spawnPoint: {fileID: 5899155321491199106}
   redCube: {fileID: 8855380682044976776}
@@ -638,7 +639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9171903453654543199
 Transform:
   m_ObjectHideFlags: 0

@@ -27,6 +27,8 @@ public class Utils : MonoBehaviour
 
     public static Item CalculateNearestItem(List<Item> items, Vector3 centerPoint)
     {
+
+
         if(items.Count == 0)
         {
             return null;
@@ -36,11 +38,17 @@ public class Utils : MonoBehaviour
             return items[0];
         }
 
-        Item nearestItem = items[0];
-        float nearestDistance = Vector3.Distance(items[0].transform.position, centerPoint);
+        Item nearestItem = null;
+
+        float nearestDistance = 9999f;
 
         foreach(Item item in items)
         {
+            if (item.holder)
+            {
+                continue;
+            }
+
             float distance = Vector3.Distance(item.transform.position, centerPoint);
             if (distance < nearestDistance)
             {
@@ -51,4 +59,18 @@ public class Utils : MonoBehaviour
 
         return nearestItem;
     }
+
+    public static Transform GetTarget()
+    {
+        Transform target = null;
+
+        if (Player.local)
+        {
+           target = Player.local.head;
+        }
+
+        return target;
+
+
+    } 
 }

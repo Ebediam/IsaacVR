@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: AttackFly
   m_EditorClassIdentifier: 
   hitPoints: 10
-  maxSpeed: 1.5
+  maxSpeed: 2
   acceleration: 2
   damage: 0.5
   baseAttackCooldown: 0
   baseAttackCooldownRangeModifier: 0
   bulletSpeed: 0
+  mass: 0.25

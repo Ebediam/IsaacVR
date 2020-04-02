@@ -12,4 +12,5 @@ public class EnemyData : ScriptableObject
     public float baseAttackCooldown;
     public float baseAttackCooldownRangeModifier;
     public float bulletSpeed;
+    public float mass;
 }

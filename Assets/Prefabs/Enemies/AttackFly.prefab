@@ -160,6 +160,9 @@ MonoBehaviour:
   timer: 0
   invicible: 0
   data: {fileID: 11400000, guid: 4d6ea452aa87d8848b23aa56abe1a69a, type: 2}
+  rb: {fileID: 7252315651492053300}
+  enemyManager: {fileID: 0}
+  active: 0
 --- !u!114 &5701190086592886076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,8 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372e0a7644e1f7949826796c71f40ec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 4d6ea452aa87d8848b23aa56abe1a69a, type: 2}
-  rb: {fileID: 7252315651492053300}
+  enemyController: {fileID: 0}
 --- !u!1 &7252315651643217297
 GameObject:
   m_ObjectHideFlags: 0

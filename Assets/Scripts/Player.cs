@@ -8,6 +8,13 @@ public class Player : MonoBehaviour
     public static PlayerDelegate EnterSafeZoneEvent;
     public static PlayerDelegate ExitSafeZoneEvent;
 
+    public delegate void PlayerFloatDelegate(float floatVariable);
+    public PlayerFloatDelegate PlayerTookDamageEvent;
+    public static PlayerDelegate UpdateHealthEvent;
+    public static PlayerDelegate UpdateInventoryEvent;
+
+    public HandUIManager UIManager;
+
     public static Player local;
     public Rigidbody rb;
     public Transform head;
@@ -29,10 +36,16 @@ public class Player : MonoBehaviour
         GameManager.leftJoystickEvent += Move;
         GameManager.rightJoystickEvent += Rotate;
 
+        data.ClearModifiers();
+        data.ClearItems();
+
         maxSpeed = data.maxSpeed;
         acceleration = data.acceleration;
         turnAngle = data.turnAngle;
         health = data.maxHealth;
+
+        PlayerTookDamageEvent += UpdateHealth;
+        UpdateHealth();
     }
 
     // Update is called once per frame
@@ -64,9 +77,9 @@ public class Player : MonoBehaviour
 
         
 
-        if(rb.velocity.magnitude > maxSpeed)
+        if(rb.velocity.magnitude > (maxSpeed+data.movementBoost))
         {
-            rb.velocity *= (maxSpeed / rb.velocity.magnitude);
+            rb.velocity *= ((maxSpeed+data.movementBoost) / rb.velocity.magnitude);
         }     
                
                 
@@ -95,8 +108,19 @@ public class Player : MonoBehaviour
         }
 
         invincible = true;
+
+        PlayerTookDamageEvent?.Invoke(damage);
     }
 
+    static void UpdateHealth(float damage)
+    {
+        UpdateHealthEvent?.Invoke();
+    }
+
+    public static void UpdateHealth()
+    {
+        UpdateHealth(0f);
+    }
     public void DeactivateGuns()
     {
         EnterSafeZoneEvent?.Invoke();
@@ -105,6 +129,13 @@ public class Player : MonoBehaviour
     public void ActivateGuns()
     {
         ExitSafeZoneEvent?.Invoke();
+    }
+
+    public void AddBombs(int number)
+    {
+        data.bombs += number;
+        UpdateInventoryEvent?.Invoke();
+
     }
 
 

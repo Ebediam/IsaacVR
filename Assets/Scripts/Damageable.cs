@@ -7,6 +7,7 @@ public class Damageable : MonoBehaviour
 
     public float currentHealth;
 
+    public Rigidbody rb;
     public float invencibilityTime = 0.1f;
     public float timer = 0f;
     public bool invicible = false;

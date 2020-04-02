@@ -256,6 +256,9 @@ MonoBehaviour:
   timer: 0
   invicible: 0
   data: {fileID: 11400000, guid: 9402200183e2e464fb966ba81e75d395, type: 2}
+  rb: {fileID: 3169880825914856724}
+  enemyManager: {fileID: 0}
+  active: 0
 --- !u!114 &3539811168441254427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcafb5dbaa649ec41a779bb005bec79c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9402200183e2e464fb966ba81e75d395, type: 2}
+  enemyController: {fileID: 0}
   target: {fileID: 0}
 --- !u!114 &339748120388898279
 MonoBehaviour:
@@ -282,9 +285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2308018758a21645bc779753865d8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9402200183e2e464fb966ba81e75d395, type: 2}
+  enemyController: {fileID: 0}
   startPosition: {x: 0, y: 0, z: 0}
-  rb: {fileID: 3169880825914856724}
 --- !u!114 &8198163054609722961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd03968f897c964b8adc42f84303c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9402200183e2e464fb966ba81e75d395, type: 2}
+  enemyController: {fileID: 0}
   spawnPoint: {fileID: 7050655866406970741}
   bullet: {fileID: 2660910708425824620, guid: 97cbc7862e49d3e43a7bc06157bd2259, type: 3}
 --- !u!1 &3169880826043892540

@@ -48,7 +48,7 @@ public class Gun : Item
 
         timer += Time.deltaTime;
 
-        if(timer >= data.fireRate)
+        if(timer >= (data.fireRate+Player.local.data.fireRateBoost))
         {
             OnCooldown = false;
             timer = 0f;
@@ -76,8 +76,8 @@ public class Gun : Item
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         bullet.rb.velocity = Player.local.rb.velocity/10f;
-        bullet.rb.AddForce(bullet.transform.forward * data.bulletSpeed, ForceMode.VelocityChange);
-        bullet.damage = data.bulletDamage;
+        bullet.rb.AddForce(bullet.transform.forward * (data.bulletSpeed+Player.local.data.bulletSpeedBoost), ForceMode.VelocityChange);
+        bullet.damage = data.bulletDamage + Player.local.data.damageBoost;
         OnCooldown = true;
         redCube.SetActive(true);
         greenCube.SetActive(false);

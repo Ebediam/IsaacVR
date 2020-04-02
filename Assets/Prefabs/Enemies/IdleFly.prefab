@@ -287,6 +287,9 @@ MonoBehaviour:
   timer: 0
   invicible: 0
   data: {fileID: 11400000, guid: 0e34af927ff022d4283f07bfcb99f3be, type: 2}
+  rb: {fileID: 7396412670916035828}
+  enemyManager: {fileID: 0}
+  active: 0
 --- !u!114 &8955148868811150331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcafb5dbaa649ec41a779bb005bec79c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  enemyController: {fileID: 0}
   target: {fileID: 0}
 --- !u!114 &5327754985117522951
 MonoBehaviour:
@@ -313,9 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2308018758a21645bc779753865d8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 0e34af927ff022d4283f07bfcb99f3be, type: 2}
+  enemyController: {fileID: 0}
   startPosition: {x: 0, y: 0, z: 0}
-  rb: {fileID: 7396412670916035828}
 --- !u!1 &7396412671055565532
 GameObject:
   m_ObjectHideFlags: 0

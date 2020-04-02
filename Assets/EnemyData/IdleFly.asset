@@ -16,3 +16,7 @@ MonoBehaviour:
   maxSpeed: 1
   acceleration: 1
   damage: 0.5
+  baseAttackCooldown: 0
+  baseAttackCooldownRangeModifier: 0
+  bulletSpeed: 0
+  mass: 0.2

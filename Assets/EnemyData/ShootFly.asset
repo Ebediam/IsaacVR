@@ -19,3 +19,4 @@ MonoBehaviour:
   baseAttackCooldown: 3
   baseAttackCooldownRangeModifier: 0.5
   bulletSpeed: 2
+  mass: 0.3

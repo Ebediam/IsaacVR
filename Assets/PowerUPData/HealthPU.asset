@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 959daec7bac7376449247d450abaaf22, type: 3}
+  m_Name: HealthPU
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 4216971562896833087, guid: dd28fabc4b242fb45895bc2248c42f16,
+    type: 3}
+  boostedStat: 3
+  amount: 1

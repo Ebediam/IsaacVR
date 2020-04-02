@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class EnemyBullet : AllBullet
 {
-    public Rigidbody rb;
-    public float damage;
     // Start is called before the first frame update
     void Start()
     {

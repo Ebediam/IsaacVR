@@ -17,6 +17,13 @@ MonoBehaviour:
   turnAngle: 2
   maxHealth: 6
   invincibilityTime: 0.5
+  damageBoost: 0
+  bulletSpeedBoost: 0
+  fireRateBoost: 0
+  movementBoost: 0
+  healthBoost: 0
   coins: 0
   keys: 0
-  bombs: 0
+  bombs: 3
+  bombData: {fileID: 11400000, guid: 0fd122f397832004a906eafb483f4490, type: 2}
+  keyData: {fileID: 11400000, guid: f99dfa4f5633b2541b7420733736a185, type: 2}
