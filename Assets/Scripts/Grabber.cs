@@ -126,6 +126,8 @@ public class Grabber : MonoBehaviour
         Invoke("ActivateHandCollider", 0.5f);
     }
 
+   
+
     public void ActivateHandCollider()
     {
         handCollider.enabled = true;
@@ -133,12 +135,18 @@ public class Grabber : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger)
+        {
+            return;
+        }
+
         Item item = other.gameObject.GetComponentInParent<Item>();
 
         if (!item)
         {
             return;
         }
+
 
         if(itemsInRange.Count > 0)
         {

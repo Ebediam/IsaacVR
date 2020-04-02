@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
+    public delegate void DamageableDelegate(Damageable damageable);
+    public DamageableDelegate DamageableDestroyedEvent;
+
+    public delegate void TakeDamageDelegate(Damageable damageable, float damage);
+    public TakeDamageDelegate TakeDamageEvent;
 
     public float currentHealth;
 
@@ -49,14 +54,23 @@ public class Damageable : MonoBehaviour
         currentHealth -= damage;
         invicible = true;
 
+
+
         if(currentHealth <= 0f)
         {
             DestroyDamageable();
         }
+        else
+        {
+            TakeDamageEvent?.Invoke(this, damage);
+        }
+
+
     }
 
     public virtual void DestroyDamageable()
     {
+        DamageableDestroyedEvent?.Invoke(this);
         Destroy(gameObject, 0.1f);
     }
 }

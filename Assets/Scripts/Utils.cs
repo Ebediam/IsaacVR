@@ -27,16 +27,11 @@ public class Utils : MonoBehaviour
 
     public static Item CalculateNearestItem(List<Item> items, Vector3 centerPoint)
     {
-
-
         if(items.Count == 0)
         {
             return null;
         }
-        if(items.Count == 1)
-        {
-            return items[0];
-        }
+
 
         Item nearestItem = null;
 

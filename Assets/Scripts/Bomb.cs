@@ -108,8 +108,9 @@ public class Bomb : Item
 
     public void InitiateExplosionTimer()
     {
-        holder.Release();
         activated = true;
+        holder.Release();
+
 
     }
 

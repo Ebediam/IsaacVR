@@ -9,6 +9,8 @@ public class Room : MonoBehaviour
     public RoomDelegate RoomStartEvent;
     public RoomDelegate RoomEndEvent;
 
+    public List<Door> doors;
+
     public static Room activeRoom;
 
     public bool isCompleted = false;
@@ -16,13 +18,23 @@ public class Room : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(doors.Count > 0)
+        {
+            foreach (Door door in doors)
+            {
+                RoomStartEvent += door.LockDoor;
+                RoomEndEvent += door.OpenDoor;
+                               
+                door.rooms.Add(this);
+            }
+        }
+
     }
 
     public void RoomClear()
     {
+        isCompleted = true;
         RoomEndEvent?.Invoke();
-        Door.OpenDoors();
     }
 
     // Update is called once per frame

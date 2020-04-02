@@ -5,8 +5,7 @@ using UnityEngine;
 public class Enemy : Damageable
 {
 
-    public delegate void EnemyDelegate(Enemy enemy);
-    public EnemyDelegate EnemyDeadEvent;
+
 
     public EnemyData data;
     public EnemyManager enemyManager;
@@ -38,7 +37,6 @@ public class Enemy : Damageable
 
     public override void DestroyDamageable()
     {
-        EnemyDeadEvent?.Invoke(this);
         base.DestroyDamageable();
     }
 }

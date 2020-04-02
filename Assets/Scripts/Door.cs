@@ -13,7 +13,9 @@ public class Door : MonoBehaviour
     public GameObject openDoor;
     public GameObject closedDoor;
     public GameObject keyLockedDoor;
-    public bool hasPassed = false;
+
+    public List<Room> rooms;
+
     public enum DoorState
     {
         Open,
@@ -27,9 +29,9 @@ public class Door : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rooms = new List<Room>();
         LockDoorsEvent += LockDoor;
         OpenDoorsEvent += OpenDoor;
-
 
         SetDoorState(state);
     
@@ -75,8 +77,6 @@ public class Door : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Player>())
         {
-            hasPassed = true;
-            LockDoors();
             other.gameObject.GetComponent<Player>().ActivateGuns();
         }
 
@@ -84,15 +84,28 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
-        if (hasPassed)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
+        
 
         if(state == DoorState.Closed)
         {
             SetDoorState(DoorState.Open);
+
+            bool allClear = true;
+            foreach(Room room in rooms)
+            {
+                if (!room.isCompleted)
+                {
+                    allClear = false;
+                }
+
+            }
+
+            if(allClear == true)
+            {
+                gameObject.SetActive(false);
+            }
+
+
         }
         else if(state == DoorState.KeyLockedClosed)
         {

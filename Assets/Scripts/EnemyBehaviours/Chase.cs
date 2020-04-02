@@ -5,7 +5,7 @@ using UnityEngine;
 public class Chase : EnemyBehaviour
 {
 
-    Transform target;
+    public Transform target;
 
     // Start is called before the first frame update
 
@@ -13,7 +13,11 @@ public class Chase : EnemyBehaviour
     public override void Start()
     {
         base.Start();
-        target = Utils.GetTarget();
+        if (!target)
+        {
+            target = Utils.GetTarget();
+        }
+
 
     }
 

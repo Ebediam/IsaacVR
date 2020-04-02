@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombHolder : Holder
+public class KeyHolder : Holder
 {
-    public Bomb inRangeBomb;
-    public GameObject bombIndicator;
+    public Key inRangeKey;
+    public GameObject keyIndicator;
     public Grabber inRangeHand;
 
     public void Start()
     {
-        Grabber.FailGrabEvent += WithdrawBomb;
-        
+        Grabber.FailGrabEvent += WithdrawKey;
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Bomb bomb = other.gameObject.GetComponentInParent<Bomb>();
+        Key key = other.gameObject.GetComponentInParent<Key>();
 
-        if (bomb)
+        if (key)
         {
-            bombIndicator.SetActive(true);
-            inRangeBomb = bomb;
-            inRangeBomb.OnItemDrop += StoreBomb;
+            keyIndicator.SetActive(true);
+            inRangeKey = key;
+            inRangeKey.OnItemDrop += StoreKey;
             return;
         }
 
@@ -47,13 +47,13 @@ public class BombHolder : Holder
 
 
 
-        Bomb bomb = other.gameObject.GetComponentInParent<Bomb>();
-        if (bomb)
+        Key key = other.gameObject.GetComponentInParent<Key>();
+        if (key)
         {
-            if (bomb == inRangeBomb)
+            if (key == inRangeKey)
             {
-                inRangeBomb = null;
-                bombIndicator.SetActive(false);
+                inRangeKey = null;
+                keyIndicator.SetActive(false);
                 return;
             }
         }
@@ -74,27 +74,22 @@ public class BombHolder : Holder
 
     }
 
-    public void StoreBomb()
+    public void StoreKey()
     {
-        if (!inRangeBomb)
+        if (!inRangeKey)
         {
             return;
         }
 
-        if (inRangeBomb.activated)
-        {
-            return;
-        }
-
-        Player.local.AddBombs(1);
-        inRangeBomb.DespawnItem();
-        inRangeBomb = null;
-        bombIndicator.SetActive(false);
+        Player.local.AddKeys(1);
+        inRangeKey.DespawnItem();
+        inRangeKey = null;
+        keyIndicator.SetActive(false);
     }
 
-    public void WithdrawBomb(Grabber hand)
+    public void WithdrawKey(Grabber hand)
     {
-        if(Player.local.data.bombs <= 0)
+        if (Player.local.data.keys <= 0)
         {
             return;
         }
@@ -104,19 +99,15 @@ public class BombHolder : Holder
             return;
         }
 
-        if(Vector3.Distance(transform.position, hand.transform.position) > 0.35f)
+        if (Vector3.Distance(transform.position, hand.transform.position) > 0.35f)
         {
             return;
         }
 
-        Item bombInstance = Item.SpawnItem(Player.local.data.bombData);
-        hand.Grab(bombInstance);
-        Player.local.AddBombs(-1);
+        Item keyInstance = Item.SpawnItem(Player.local.data.keyData);
+        hand.Grab(keyInstance);
+        Player.local.AddKeys(-1);
 
 
-    }
-    private void Update()
-    {
-        
     }
 }

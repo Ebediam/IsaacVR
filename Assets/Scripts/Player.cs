@@ -138,5 +138,11 @@ public class Player : MonoBehaviour
 
     }
 
+    public void AddKeys(int number)
+    {
+        data.keys += number;
+        UpdateInventoryEvent?.Invoke();
+    }
+
 
 }

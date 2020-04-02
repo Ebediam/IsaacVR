@@ -21,17 +21,16 @@ public class EnemyManager : MonoBehaviour
         AllEnemiesDeadEvent += room.RoomClear;
 
 
-
     }
 
-    public void DeadEnemyListener(Enemy enemy)
+    public void DeadEnemyListener(Damageable enemy)
     {
         if (clear)
         {
             return;
         }
 
-        enemy.EnemyDeadEvent -= DeadEnemyListener;
+        enemy.DamageableDestroyedEvent -= DeadEnemyListener;
         totalEnemies--;
         if(totalEnemies <= 0)
         {
@@ -54,7 +53,7 @@ public class EnemyManager : MonoBehaviour
         {
             enemy.active = true;
             enemy.enemyManager = this;
-            enemy.EnemyDeadEvent += DeadEnemyListener;
+            enemy.DamageableDestroyedEvent += DeadEnemyListener;
         }
     }
 }

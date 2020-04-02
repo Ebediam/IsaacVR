@@ -206,7 +206,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 1.05}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3037491093572371049
 MonoBehaviour:
@@ -224,8 +224,8 @@ MonoBehaviour:
   openDoor: {fileID: 1620761774051166592}
   closedDoor: {fileID: 3456086846646131083}
   keyLockedDoor: {fileID: 78618972004036760}
-  hasPassed: 0
-  keyLocked: 0
+  rooms: []
+  state: 0
 --- !u!1 &1620761774051166592
 GameObject:
   m_ObjectHideFlags: 0
