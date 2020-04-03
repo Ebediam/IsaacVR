@@ -18,12 +18,13 @@ public class VibratesInPlace : EnemyBehaviour
     // Update is called once per frame
     public override void Update()
     {
-        base.Update();
-
         if (!enemyController.active)
         {
             return;
         }
+        base.Update();
+
+
 
 
         Vector3 direction = Utils.randomVector3() + (startPosition - transform.position).normalized;
@@ -32,9 +33,9 @@ public class VibratesInPlace : EnemyBehaviour
 
         enemyController.rb.AddForce(direction * enemyController.data.acceleration, ForceMode.Acceleration);
 
-        if(enemyController.rb.velocity.magnitude > enemyController.data.maxSpeed)
+        if(enemyController.rb.velocity.magnitude > enemyController.maxSpeed)
         {
-            enemyController.rb.velocity *= (enemyController.data.maxSpeed / enemyController.rb.velocity.magnitude);
+            enemyController.rb.velocity *= (enemyController.maxSpeed / enemyController.rb.velocity.magnitude);
         }
     }
 }

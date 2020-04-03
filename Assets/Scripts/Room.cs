@@ -15,6 +15,8 @@ public class Room : MonoBehaviour
 
     public bool isCompleted = false;
 
+    public List<Transform> corners;
+
     // Start is called before the first frame update
     void Start()
     {

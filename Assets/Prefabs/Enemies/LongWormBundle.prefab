@@ -41,6 +41,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5357433359112304358}
     m_Modifications:
+    - target: {fileID: -3309318666789801307, guid: d83732a9c989ceb43bf110572ca9d9e4,
+        type: 3}
+      propertyPath: enemyToSlowdown
+      value: 
+      objectReference: {fileID: 1229898301831020197}
     - target: {fileID: 2272284666317318560, guid: d83732a9c989ceb43bf110572ca9d9e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -126,6 +131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5357433359112304358}
     m_Modifications:
+    - target: {fileID: -3309318666789801307, guid: d83732a9c989ceb43bf110572ca9d9e4,
+        type: 3}
+      propertyPath: enemyToSlowdown
+      value: 
+      objectReference: {fileID: 1229898301831020197}
     - target: {fileID: 2272284666317318560, guid: d83732a9c989ceb43bf110572ca9d9e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -328,6 +338,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5357433359112304358}
     m_Modifications:
+    - target: {fileID: -3309318666789801307, guid: d83732a9c989ceb43bf110572ca9d9e4,
+        type: 3}
+      propertyPath: enemyToSlowdown
+      value: 
+      objectReference: {fileID: 1229898301831020197}
     - target: {fileID: 2272284666317318560, guid: d83732a9c989ceb43bf110572ca9d9e4,
         type: 3}
       propertyPath: m_LocalPosition.x

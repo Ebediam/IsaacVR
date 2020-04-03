@@ -5,35 +5,26 @@ using UnityEngine;
 public class ShootAt : EnemyBehaviour
 {
 
-    Transform target;
     public Transform spawnPoint;
     public EnemyBullet bullet;
 
-    float timer;
+    float timer = 0f;
     bool cooldown = true;
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
-        GetTarget();
-        timer = enemyController.data.baseAttackCooldown/2 + Random.Range(-enemyController.data.baseAttackCooldownRangeModifier, enemyController.data.baseAttackCooldownRangeModifier);
+        
     }
 
     // Update is called once per frame
     public override void Update()
     {
-        base.Update();
-
         if (!enemyController.active)
         {
             return;
         }
-
-        if (!target)
-        {
-            GetTarget();
-            return;
-        }
+        base.Update();
 
         if (cooldown)
         {
@@ -48,16 +39,12 @@ public class ShootAt : EnemyBehaviour
 
 
     }
-
-    public void GetTarget()
+    public override void Initialize()
     {
-        if (!Player.local)
-        {
-            return;
-        }
-
-        target = Player.local.head;
+        base.Initialize();
+        timer = enemyController.data.baseAttackCooldown / 2 + Random.Range(-enemyController.data.baseAttackCooldownRangeModifier, enemyController.data.baseAttackCooldownRangeModifier);
     }
+
 
     public void Shoot()
     {
@@ -65,7 +52,7 @@ public class ShootAt : EnemyBehaviour
 
         bulletInstantiate.transform.position = spawnPoint.position;
         bulletInstantiate.transform.rotation = spawnPoint.rotation;
-        bulletInstantiate.rb.AddForce(bulletInstantiate.transform.forward * enemyController.data.bulletSpeed, ForceMode.VelocityChange);
+        bulletInstantiate.rb.AddForce((target.transform.position-spawnPoint.position).normalized * enemyController.data.bulletSpeed, ForceMode.VelocityChange);
         bulletInstantiate.damage = enemyController.data.damage;
         cooldown = true;
         timer = Random.Range(-enemyController.data.baseAttackCooldownRangeModifier, enemyController.data.baseAttackCooldownRangeModifier);

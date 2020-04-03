@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2272284666317318574}
   - component: {fileID: 2272284666317318561}
   - component: {fileID: 2272284666317318571}
+  - component: {fileID: -3309318666789801307}
   m_Layer: 12
   m_Name: LongWormBody
   m_TagString: Untagged
@@ -132,6 +133,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: c7a16247275075148a633ef47a0268aa, type: 2}
   enemyManager: {fileID: 0}
   active: 0
+  maxSpeed: 0
 --- !u!54 &2272284666317318561
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,7 +163,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
+  target: {fileID: 0}
   linkedTo: {fileID: 0}
+--- !u!114 &-3309318666789801307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2272284666317318563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ecaf0f62df7124b9769e17451a0c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyController: {fileID: 0}
+  target: {fileID: 0}
+  enemyToSlowdown: {fileID: 0}
+  slowdownPercent: 0.25
 --- !u!1 &9182064209693849998
 GameObject:
   m_ObjectHideFlags: 0

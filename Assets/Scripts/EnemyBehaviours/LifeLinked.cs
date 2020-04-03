@@ -18,13 +18,14 @@ public class LifeLinked : EnemyBehaviour
     // Update is called once per frame
     public override void Update()
     {
-        base.Update();
-
-
         if (!enemyController.active)
         {
             return;
         }
+        base.Update();
+
+
+
 
 
     }

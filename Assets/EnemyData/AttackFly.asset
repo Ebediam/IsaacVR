@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
   m_Name: AttackFly
   m_EditorClassIdentifier: 
-  hitPoints: 10
+  hitPoints: 5
   maxSpeed: 2
   acceleration: 2
   damage: 0.5

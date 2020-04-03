@@ -5,14 +5,14 @@ using UnityEngine;
 public class WanderGrid : EnemyBehaviour
 {
 
-    public bool isTurninginCooldown = false;
-    public float turnCooldownTime;
+    public bool isTurningInCooldown = false;
+    public float turnCooldownTime = 0.1f;
     float timer = 0f;
 
     float movementTimer = 0f;
 
-    public float turnTime;
-    public float turnTimeModifier;
+    public float turnTime = 2f;
+    public float turnTimeModifier = 0.5f;
     public Sensor leftSensor;
     public Sensor rightSensor;
     // Start is called before the first frame update
@@ -24,18 +24,19 @@ public class WanderGrid : EnemyBehaviour
     // Update is called once per frame
     public override void Update()
     {
-        base.Update();
-
         if (!enemyController.active)
         {
             return;
         }
+        base.Update();
+
+
 
         enemyController.rb.AddForce(transform.forward * enemyController.data.acceleration, ForceMode.Acceleration);
 
-        if(enemyController.rb.velocity.magnitude > enemyController.data.maxSpeed)
+        if(enemyController.rb.velocity.magnitude > enemyController.maxSpeed)
         {
-            enemyController.rb.velocity *= (enemyController.data.maxSpeed / enemyController.rb.velocity.magnitude);
+            enemyController.rb.velocity *= (enemyController.maxSpeed / enemyController.rb.velocity.magnitude);
         }
 
 
@@ -49,7 +50,7 @@ public class WanderGrid : EnemyBehaviour
         }
 
 
-        if (!isTurninginCooldown)
+        if (!isTurningInCooldown)
         {
             return;
         }
@@ -59,7 +60,7 @@ public class WanderGrid : EnemyBehaviour
         if(timer >= turnCooldownTime)
         {
             timer = 0f;
-            isTurninginCooldown = false;
+            isTurningInCooldown = false;
         }
 
 
@@ -97,7 +98,7 @@ public class WanderGrid : EnemyBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (isTurninginCooldown)
+        if (isTurningInCooldown)
         {
             return;
         }
@@ -107,8 +108,13 @@ public class WanderGrid : EnemyBehaviour
             return;
         }
 
+        if(other.gameObject.layer == 10) //Player layer
+        {
+            return;
+        }
+
         Turn();
-        isTurninginCooldown = true;
+        isTurningInCooldown = true;
         Debug.Log("LongWorm has collided with "+other.gameObject.name);
 
 

@@ -54,6 +54,7 @@ public class EnemyManager : MonoBehaviour
             enemy.active = true;
             enemy.enemyManager = this;
             enemy.DamageableDestroyedEvent += DeadEnemyListener;
+            
         }
     }
 }

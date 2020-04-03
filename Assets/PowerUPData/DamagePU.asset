@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
-  m_Name: ShootFly
+  m_Script: {fileID: 11500000, guid: 959daec7bac7376449247d450abaaf22, type: 3}
+  m_Name: DamagePU
   m_EditorClassIdentifier: 
-  hitPoints: 8
-  maxSpeed: 1
-  acceleration: 1
-  damage: 0.5
-  baseAttackCooldown: 3
-  baseAttackCooldownRangeModifier: 0.5
-  bulletSpeed: 2.5
-  mass: 0.3
+  itemPrefab: {fileID: 2315962249870315285, guid: 12bd272e20f2b684b9a1f4c20f0d9764,
+    type: 3}
+  boostedStat: 2
+  amount: 0.75
