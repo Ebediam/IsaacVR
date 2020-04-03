@@ -2,6 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum Direction
+{
+    North,
+    West,
+    East,
+    South,
+    None
+}
+
 public class Utils : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -68,4 +78,76 @@ public class Utils : MonoBehaviour
 
 
     } 
+
+    public static Direction OpositeDirection(Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.East:
+                return Direction.West;
+
+            case Direction.North:
+                return Direction.South;
+
+            case Direction.South:
+                return Direction.North;
+
+            case Direction.West:
+                return Direction.East;
+
+            default:
+                return Direction.None;
+
+        }
+
+
+    }
+
+    public static Direction RandomDirection(Direction directionToExclude)
+    {
+        Direction direction;
+
+
+
+
+        do
+        {
+            int randomNumber = Random.Range(0, 4);
+
+            switch (randomNumber)
+            {
+                case 0:
+                    direction = Direction.North;
+                    break;
+
+                case 1:
+                    direction = Direction.West;
+                    break;
+
+                case 2:
+                    direction = Direction.East;
+                    break;
+
+                case 3:
+                    direction = Direction.South;
+                    break;
+
+                default:
+                    Debug.LogError("Error generation random direction");
+                    direction = Direction.South;
+                    break;
+
+            }
+        } while (direction == directionToExclude);
+
+
+        return direction;
+
+
+       
+
+
+
+
+    }
 }
