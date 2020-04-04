@@ -11,6 +11,8 @@ public class DungeonData : ScriptableObject
     public int maxRooms;
     public int minRooms;
 
+    public int maxBranchSize;
+
     public float roomSide;
 
     public DungeonPartsData dungeonParts;

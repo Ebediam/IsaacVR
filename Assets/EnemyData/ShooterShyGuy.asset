@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
   m_Name: ShooterShyGuy
   m_EditorClassIdentifier: 
+  prefab: {fileID: 2393846888996878842, guid: b4ca4bb9e6f3e084684b604a9df03466, type: 3}
   hitPoints: 13
+  damage: 5
   maxSpeed: 4
   acceleration: 25
-  damage: 0.5
-  baseAttackCooldown: 2
-  baseAttackCooldownRangeModifier: 0.5
-  bulletSpeed: 2.5
   mass: 0.5
+  actionCooldown: 1.5
+  actionCooldownModifier: 0.5
+  bulletSpeed: 2.5

@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
-  m_Name: ShootFly
+  m_Name: Portal
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3169880825914856730, guid: 7bbd26cff65ce6644aec03b67eb8b845, type: 3}
-  hitPoints: 8
-  damage: 5
-  maxSpeed: 1
-  acceleration: 1
-  mass: 0.3
-  actionCooldown: 2
-  actionCooldownModifier: 0.5
-  bulletSpeed: 2.5
+  hitPoints: 25
+  damage: 0
+  maxSpeed: 0
+  acceleration: 0
+  mass: 10
+  actionCooldown: 5
+  actionCooldownModifier: 2
+  bulletSpeed: 0

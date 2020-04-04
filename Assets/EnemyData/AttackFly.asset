@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
   m_Name: AttackFly
   m_EditorClassIdentifier: 
+  prefab: {fileID: 7252315651492053306, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920, type: 3}
   hitPoints: 5
+  damage: 4
   maxSpeed: 2
   acceleration: 2
-  damage: 0.5
-  baseAttackCooldown: 0
-  baseAttackCooldownRangeModifier: 0
-  bulletSpeed: 0
   mass: 0.25
+  actionCooldown: 0
+  actionCooldownModifier: 0
+  bulletSpeed: 0

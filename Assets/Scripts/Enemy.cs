@@ -5,9 +5,9 @@ using UnityEngine;
 public class Enemy : Damageable
 {
     public EnemyData data;
-    public EnemyManager enemyManager;
+    [HideInInspector] public EnemyManager enemyManager;
     public bool active = false;
-    public float maxSpeed;
+    [HideInInspector] public float maxSpeed;
 
     void Start()
     {

@@ -12,6 +12,7 @@ public class DungeonGenerator : MonoBehaviour
     public DungeonData dungeonData;
     public RoomManager[,] positions;
     int generatedRooms = 0;
+    int generatedBrances = 0;
     RoomManager startPosition;
     List<RoomManager> positionsWithRoom;
 
@@ -22,9 +23,10 @@ public class DungeonGenerator : MonoBehaviour
         positionsWithRoom = new List<RoomManager>();
 
 
-        startPosition = positions[Random.Range(0, dungeonData.maxColumns), Random.Range(0, dungeonData.maxRows)];
+        //startPosition = positions[Random.Range(0, dungeonData.maxColumns), Random.Range(0, dungeonData.maxRows)];
+        startPosition = positions[Mathf.RoundToInt(dungeonData.maxColumns) / 2, Mathf.RoundToInt(dungeonData.maxRows / 2)];
         CreateRoom(startPosition);
-
+        
         int iterations = 0;
         do
         {
@@ -33,7 +35,7 @@ public class DungeonGenerator : MonoBehaviour
 
 
         } 
-        while ((generatedRooms < dungeonData.minRooms) || iterations > 100);
+        while ((generatedRooms <= dungeonData.minRooms) && (iterations < 100));
 
         Debug.Log(iterations + " iterations to complete the dungeon");
 
@@ -69,23 +71,38 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    
+
     public void CreateBranch(RoomManager startingRoom)
     {
-        RoomManager currentPosition = startPosition;
+        RoomManager currentPosition = startingRoom;
         DirectionData lastDirection = RandomDirection();
+        DirectionData randomDirection;
 
+        generatedBrances++;
+        Debug.Log("Iniciando rama " + generatedBrances + " en la habitacion " + currentPosition.room.number);
         int safetyCounter = 0;
         while (generatedRooms < dungeonData.maxRooms)
         {
             safetyCounter++;
-            if(safetyCounter > 100)
+            if(safetyCounter > dungeonData.maxBranchSize)
             {
-                Debug.Log("Safety counter fired");
+                Debug.Log("Tamaño máximo de rama alcanzado con la habitación "+generatedRooms+", iniciando una nueva rama");
                 return;
             }
-            DirectionData randomDirection = RandomDirection(dungeonData.directionLibrary.OpositeDirection(lastDirection));
 
-            if (CheckAdjacentSpace(currentPosition, randomDirection, RoomManager.RoomType.Empty))
+            if(safetyCounter == 2)
+            {
+                randomDirection = lastDirection;
+            }
+            else
+            {
+                randomDirection = RandomDirection(dungeonData.directionLibrary.OpositeDirection(lastDirection));
+            }
+
+            //DirectionData randomDirection = RandomDirection();
+
+            if (CheckAdjacentSpace(currentPosition, randomDirection, RoomManager.RoomType.Empty) == true)
             {
 
                 RoomManager validPosition = positions[currentPosition.column + randomDirection.columnsModifier, currentPosition.row + randomDirection.rowsModifier];
@@ -95,11 +112,12 @@ public class DungeonGenerator : MonoBehaviour
             }
             else
             {
+                Debug.Log("La rama numero "+generatedBrances+" ha chocado contra algo al intentar crear la habitacion "+(generatedRooms+1)+", generando rama nueva");
                 return;
             }
         }
 
-        
+
 
     }
 
@@ -170,6 +188,8 @@ public class DungeonGenerator : MonoBehaviour
         positionsWithRoom.Add(roomManager);
 
         InitializeRoomsEvent += roomManager.InitializeRoom;
+        roomManager.room.text.text = generatedRooms.ToString();
+        roomManager.room.number = generatedRooms;
 
     }
 

@@ -75,13 +75,20 @@ public class Player : MonoBehaviour
 
         rb.AddRelativeForce(direction * Time.deltaTime, ForceMode.Acceleration);
 
+        //maxSpeed, data.movementBoost
+
+        Vector2 horizontalSpeed = new Vector2(rb.velocity.x, rb.velocity.z);
+
+        if(horizontalSpeed.magnitude > (maxSpeed + data.movementBoost))
+        {
+            horizontalSpeed = Vector2.ClampMagnitude(horizontalSpeed, (maxSpeed + data.movementBoost));
+
+            rb.velocity = new Vector3(horizontalSpeed.x, rb.velocity.y, horizontalSpeed.y);
+        }
+
         
 
-        if(rb.velocity.magnitude > (maxSpeed+data.movementBoost))
-        {
-            rb.velocity *= ((maxSpeed+data.movementBoost) / rb.velocity.magnitude);
-        }     
-               
+       
                 
     }
 

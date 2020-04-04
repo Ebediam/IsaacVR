@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
   m_Name: SmallChaser
   m_EditorClassIdentifier: 
+  prefab: {fileID: 5222449700273301106, guid: 0deeba3a7e9e512429b056ee5e031869, type: 3}
   hitPoints: 10
+  damage: 3
   maxSpeed: 2
   acceleration: 15
-  damage: 0.5
-  baseAttackCooldown: 0
-  baseAttackCooldownRangeModifier: 0
-  bulletSpeed: 0
   mass: 0.5
+  actionCooldown: 0
+  actionCooldownModifier: 0
+  bulletSpeed: 0

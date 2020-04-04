@@ -11,8 +11,7 @@ public class WanderGrid : EnemyBehaviour
 
     float movementTimer = 0f;
 
-    public float turnTime = 2f;
-    public float turnTimeModifier = 0.5f;
+
     public Sensor leftSensor;
     public Sensor rightSensor;
     // Start is called before the first frame update
@@ -42,9 +41,9 @@ public class WanderGrid : EnemyBehaviour
 
         movementTimer += Time.deltaTime;
 
-        if(movementTimer >= turnTime)
+        if(movementTimer >= enemyController.data.actionCooldown)
         {
-            movementTimer = Random.Range(-turnTimeModifier, turnTimeModifier);
+            movementTimer = Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
             
             Turn();
         }

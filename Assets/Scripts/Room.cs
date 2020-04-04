@@ -1,9 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class Room : MonoBehaviour
 {
+
+    public TextMeshPro text;
+    public int number;
+
     public delegate void RoomDelegate();
 
     public RoomDelegate RoomStartEvent;

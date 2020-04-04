@@ -10,12 +10,12 @@ public class Damageable : MonoBehaviour
     public delegate void TakeDamageDelegate(Damageable damageable, float damage);
     public TakeDamageDelegate TakeDamageEvent;
 
-    public float currentHealth;
+    [HideInInspector] public float currentHealth;
 
     public Rigidbody rb;
     public float invencibilityTime = 0.1f;
-    public float timer = 0f;
-    public bool invicible = false;
+    float timer = 0f;
+    [HideInInspector] public bool invicible = false;
     // Start is called before the first frame update
     void Start()
     {

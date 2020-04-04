@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
   m_Name: Chaser
   m_EditorClassIdentifier: 
+  prefab: {fileID: 4063344774492290957, guid: adcddf4decf849f46b05b12913b18bfd, type: 3}
   hitPoints: 20
+  damage: 5
   maxSpeed: 1
   acceleration: 15
-  damage: 0.5
-  baseAttackCooldown: 0
-  baseAttackCooldownRangeModifier: 0
-  bulletSpeed: 0
   mass: 1
+  actionCooldown: 0
+  actionCooldownModifier: 0
+  bulletSpeed: 0

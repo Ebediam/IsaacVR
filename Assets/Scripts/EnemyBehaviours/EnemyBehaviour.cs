@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public Enemy enemyController;
-    public Transform target;
+
+    [HideInInspector] public Enemy enemyController;
+    [HideInInspector] public Transform target;
     protected bool initialized;
 
     // Start is called before the first frame update

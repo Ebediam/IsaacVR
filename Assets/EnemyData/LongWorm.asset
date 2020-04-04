@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
   m_Name: LongWorm
   m_EditorClassIdentifier: 
+  prefab: {fileID: 7055455999984757162, guid: f78d073adcfac744eb340d17886fd170, type: 3}
   hitPoints: 50
+  damage: 8
   maxSpeed: 4
   acceleration: 20
-  damage: 1
-  baseAttackCooldown: 0
-  baseAttackCooldownRangeModifier: 0
-  bulletSpeed: 0
   mass: 10
+  actionCooldown: 1
+  actionCooldownModifier: 0.5
+  bulletSpeed: 0

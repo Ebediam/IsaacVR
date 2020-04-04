@@ -14,6 +14,8 @@ public class Door : MonoBehaviour
     public GameObject closedDoor;
     public GameObject keyLockedDoor;
 
+    bool allClear = false;
+
     public List<Room> rooms;
 
     public enum DoorState
@@ -80,17 +82,24 @@ public class Door : MonoBehaviour
         {
             other.gameObject.GetComponent<Player>().ActivateGuns();
             hasPassed = true;
+
+            if (allClear)
+            {
+                RemoveDoor();
+            }
         }
+
+
 
     }
 
     public void OpenDoor()
-    {        
+    {          
         if(state == DoorState.Closed)
         {
             SetDoorState(DoorState.Open);
 
-            bool allClear = true;
+            allClear = true;
             foreach(Room room in rooms)
             {
                 if (!room.isCompleted)
@@ -102,7 +111,7 @@ public class Door : MonoBehaviour
 
             if((allClear == true) && hasPassed)
             {
-                gameObject.SetActive(false);
+                RemoveDoor();
             }
 
 
@@ -114,6 +123,12 @@ public class Door : MonoBehaviour
 
 
     }
+
+    public void RemoveDoor()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void LockDoor()
     {
         if(state == DoorState.Open)
@@ -124,8 +139,6 @@ public class Door : MonoBehaviour
         {
             SetDoorState(DoorState.KeyLockedClosed);
         }
-
-
     }
 
     public static void OpenDoors()
