@@ -24,6 +24,7 @@ public class Door : MonoBehaviour
         KeyLockedClosed
     }
 
+    public bool hasPassed;
     public DoorState state;
 
     // Start is called before the first frame update
@@ -78,14 +79,13 @@ public class Door : MonoBehaviour
         if (other.gameObject.GetComponent<Player>())
         {
             other.gameObject.GetComponent<Player>().ActivateGuns();
+            hasPassed = true;
         }
 
     }
 
     public void OpenDoor()
-    {
-        
-
+    {        
         if(state == DoorState.Closed)
         {
             SetDoorState(DoorState.Open);
@@ -100,7 +100,7 @@ public class Door : MonoBehaviour
 
             }
 
-            if(allClear == true)
+            if((allClear == true) && hasPassed)
             {
                 gameObject.SetActive(false);
             }

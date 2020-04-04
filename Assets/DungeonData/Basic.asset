@@ -17,6 +17,5 @@ MonoBehaviour:
   maxRooms: 20
   minRooms: 7
   roomSide: 11
-  roomPrefab: {fileID: 3575179940754599242, guid: 219c64e16372bfb44994be4c3533cbcc,
-    type: 3}
+  dungeonParts: {fileID: 11400000, guid: 6e339e4442f802a4a8f6abca4459dc72, type: 2}
   directionLibrary: {fileID: 11400000, guid: 4e6f218911958a542b4982f350934707, type: 2}

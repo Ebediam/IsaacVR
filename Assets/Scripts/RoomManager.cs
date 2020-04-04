@@ -17,15 +17,11 @@ public class RoomManager : MonoBehaviour
     public int row;
     public Room room;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void InitializeRoom()
     {
+        room.doors = new List<Door>();
+
         
     }
 }

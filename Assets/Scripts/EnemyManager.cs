@@ -34,19 +34,29 @@ public class EnemyManager : MonoBehaviour
         totalEnemies--;
         if(totalEnemies <= 0)
         {
-            clear = true;
-            AllEnemiesDeadEvent?.Invoke();
-            room.RoomStartEvent -= AwakeEnemies;
+            NoEnemiesLeft();
         }
 
     }
 
+
+    public void NoEnemiesLeft()
+    {
+        clear = true;
+        AllEnemiesDeadEvent?.Invoke();
+        room.RoomStartEvent -= AwakeEnemies;
+    }
 
     public void AwakeEnemies()
     {
         if (clear)
         {
             return;
+        }
+
+        if(enemies.Count == 0)
+        {
+            NoEnemiesLeft();
         }
 
         foreach(Enemy enemy in enemies)

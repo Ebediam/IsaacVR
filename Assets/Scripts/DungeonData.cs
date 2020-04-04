@@ -13,7 +13,7 @@ public class DungeonData : ScriptableObject
 
     public float roomSide;
 
-    public GameObject roomPrefab;
+    public DungeonPartsData dungeonParts;
 
     public DirectionLibrary directionLibrary;
 

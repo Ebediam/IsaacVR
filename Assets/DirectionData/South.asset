@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rowsModifier: -1
   columnsModifier: 0
+  angleToLookAt: 180

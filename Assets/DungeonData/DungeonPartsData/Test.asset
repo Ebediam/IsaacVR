@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b0b533e0f3efe49a5bb4d188b39415, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  room: {fileID: 3575179940754599242, guid: 219c64e16372bfb44994be4c3533cbcc, type: 3}
+  doorFrame: {fileID: 8767979215165880271, guid: 64c9436b7386b2b4ca6531b76692108d,
+    type: 3}
+  wall: {fileID: 8097191043991752959, guid: 981e481e807ece343b6142ec0073326c, type: 3}
+  door: {fileID: 9048337207877526877, guid: 0d4740b05f8788f4283c63a518697e24, type: 3}

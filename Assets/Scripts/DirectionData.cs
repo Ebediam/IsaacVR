@@ -7,5 +7,6 @@ public class DirectionData : ScriptableObject
 {
     public int rowsModifier;
     public int columnsModifier;
+    public float angleToLookAt;
 
 }
