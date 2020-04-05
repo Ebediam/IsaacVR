@@ -16,6 +16,7 @@ public class Damageable : MonoBehaviour
     public float invencibilityTime = 0.1f;
     float timer = 0f;
     [HideInInspector] public bool invicible = false;
+    [HideInInspector] public bool ignoreMaxSpeed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +54,6 @@ public class Damageable : MonoBehaviour
 
         currentHealth -= damage;
         invicible = true;
-
 
 
         if(currentHealth <= 0f)

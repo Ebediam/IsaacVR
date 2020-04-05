@@ -14,6 +14,11 @@ public class EnemyData : ScriptableObject
     public float acceleration;
     public float mass;
 
+
+    [Header("Pushback after hit")]
+    public bool pushback;
+    public float pushbackVelocity;
+
     [Header("If it performs any action")]
     public float actionCooldown;
     public float actionCooldownModifier;

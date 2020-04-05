@@ -15,9 +15,11 @@ MonoBehaviour:
   prefab: {fileID: 5222449700273301106, guid: 0deeba3a7e9e512429b056ee5e031869, type: 3}
   hitPoints: 10
   damage: 3
-  maxSpeed: 2
-  acceleration: 15
-  mass: 0.5
+  maxSpeed: 1
+  acceleration: 5
+  mass: 0.1
+  pushback: 1
+  pushbackVelocity: 6
   actionCooldown: 0
   actionCooldownModifier: 0
   bulletSpeed: 0

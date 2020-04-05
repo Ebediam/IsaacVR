@@ -9,6 +9,8 @@ public class Enemy : Damageable
     public bool active = false;
     [HideInInspector] public float maxSpeed;
 
+    float timer2;
+
     void Start()
     {
         currentHealth = data.hitPoints;
@@ -20,6 +22,16 @@ public class Enemy : Damageable
     void Update()
     {
         CheckInvincibility();
+        if (ignoreMaxSpeed)
+        {
+            timer2 += Time.deltaTime;
+
+            if(timer2 > 0.5f)
+            {
+                timer2 = 0f;
+                ignoreMaxSpeed = false;
+            }
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -37,7 +49,22 @@ public class Enemy : Damageable
         }
 
         player.TakeDamage(data.damage);
+
+        if (data.pushback)
+        {
+            ignoreMaxSpeed = true;
+            Pushback();
+        }
+
+        
     }
+
+    public void Pushback()
+    {
+
+        rb.AddForce(transform.forward * -data.pushbackVelocity, ForceMode.VelocityChange);
+    }
+
 
     public override void DestroyDamageable()
     {

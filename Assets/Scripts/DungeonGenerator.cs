@@ -14,6 +14,8 @@ public class DungeonGenerator : MonoBehaviour
     int generatedRooms = 0;
     int generatedBrances = 0;
     RoomManager startPosition;
+    RoomManager itemPosition;
+    RoomManager bossPosition;
     List<RoomManager> positionsWithRoom;
 
     private void Awake()
@@ -38,6 +40,9 @@ public class DungeonGenerator : MonoBehaviour
         while ((generatedRooms <= dungeonData.minRooms) && (iterations < 100));
 
         Debug.Log(iterations + " iterations to complete the dungeon");
+
+        CreateBossRoom();
+        CreatePowerupRoom();
 
         InitializeRoomsEvent?.Invoke();
         ConnectRooms();
@@ -178,19 +183,24 @@ public class DungeonGenerator : MonoBehaviour
 
     }
 
-    public void CreateRoom(RoomManager roomManager)
+    public void CreateRoom(RoomManager roomManager, string roomName)
     {
         roomManager.room = Instantiate(dungeonData.dungeonParts.room.GetComponentInChildren<Room>());
         roomManager.room.transform.parent = roomManager.transform;
         roomManager.room.transform.localPosition = Vector3.zero;
         roomManager.roomType = RoomManager.RoomType.Room;
         generatedRooms++;
+        roomManager.room.number = generatedRooms;
         positionsWithRoom.Add(roomManager);
 
         InitializeRoomsEvent += roomManager.InitializeRoom;
-        roomManager.room.text.text = generatedRooms.ToString();
-        roomManager.room.number = generatedRooms;
+        roomManager.room.text.text = roomName;
 
+    }
+
+    public void CreateRoom(RoomManager roomManager)
+    {
+        CreateRoom(roomManager, (generatedRooms+1).ToString());
     }
 
     public void ConnectRooms()
@@ -241,6 +251,80 @@ public class DungeonGenerator : MonoBehaviour
 
 
         }
+    }
+
+    public void CreateBossRoom()
+    {
+        for(int i= (positionsWithRoom.Count-1); i>=0; i--)
+        {
+            foreach(DirectionData direction in dungeonData.directionLibrary.directions)
+            {
+                if (!CheckAdjacentSpace(positionsWithRoom[i], direction, RoomManager.RoomType.Empty))
+                {
+                    continue;
+                }
+
+                RoomManager checkingPosition = positions[(positionsWithRoom[i].column + direction.columnsModifier), (positionsWithRoom[i].row + direction.rowsModifier)];
+
+
+
+                if (CheckIsolatedPosition(checkingPosition))
+                {
+                    CreateRoom(checkingPosition, "Boss");
+                    bossPosition = checkingPosition;
+                    return;
+                }
+            }
+        }
+    }
+
+    public void CreatePowerupRoom()
+    {
+        for (int i = (Mathf.RoundToInt(generatedRooms * 0.60f)); i >= 0; i--)
+        {
+            foreach (DirectionData direction in dungeonData.directionLibrary.directions)
+            {
+                if (!CheckAdjacentSpace(positionsWithRoom[i], direction, RoomManager.RoomType.Empty))
+                {
+                    continue;
+                }
+
+                RoomManager checkingPosition = positions[(positionsWithRoom[i].column + direction.columnsModifier), (positionsWithRoom[i].row + direction.rowsModifier)];
+                if (CheckIsolatedPosition(checkingPosition))
+                {
+                    CreateRoom(checkingPosition, "Item");
+                    itemPosition = checkingPosition;
+                    return;
+                }
+            }
+        }
+    }
+
+    public bool CheckIsolatedPosition(RoomManager position)
+    {
+        if (position.room)
+        {
+            return false;
+        }
+
+        int adjacentRooms = 0;
+        foreach(DirectionData direction in dungeonData.directionLibrary.directions)
+        {
+            if(CheckAdjacentSpace(position, direction, RoomManager.RoomType.Room)){
+                adjacentRooms++;
+            }
+        }
+
+        if(adjacentRooms > 1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+
     }
 
 }

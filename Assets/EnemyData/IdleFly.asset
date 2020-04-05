@@ -18,6 +18,8 @@ MonoBehaviour:
   maxSpeed: 1
   acceleration: 1
   mass: 0.2
+  pushback: 1
+  pushbackVelocity: 2
   actionCooldown: 0
   actionCooldownModifier: 0
   bulletSpeed: 0

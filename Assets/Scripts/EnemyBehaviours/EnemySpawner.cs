@@ -6,13 +6,14 @@ public class EnemySpawner : EnemyBehaviour
 {
     public Enemy enemyToSpawn;
     public Transform spawnPoint;
+    public float autoInflictedDamage = 0f;
 
     float timer;
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
-        timer = (enemyController.data.actionCooldown / 2);
+        timer = (enemyController.data.actionCooldown / 2) + Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
 
     }
 
@@ -42,5 +43,10 @@ public class EnemySpawner : EnemyBehaviour
         enemyInstance.transform.position = spawnPoint.transform.position;
         enemyInstance.transform.rotation = spawnPoint.transform.rotation;
         enemyInstance.active = true;
+
+        if(autoInflictedDamage != 0)
+        {
+            enemyController.TakeDamage(autoInflictedDamage);
+        }
     }
 }

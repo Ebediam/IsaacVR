@@ -16,8 +16,10 @@ MonoBehaviour:
   hitPoints: 20
   damage: 5
   maxSpeed: 1
-  acceleration: 15
+  acceleration: 5
   mass: 1
+  pushback: 1
+  pushbackVelocity: 6
   actionCooldown: 0
   actionCooldownModifier: 0
   bulletSpeed: 0

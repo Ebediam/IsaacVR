@@ -8,7 +8,11 @@ public class RoomManager : MonoBehaviour
     {
         Empty,
         Room,
-        StartRoom
+        StartRoom,
+        MinibossRoom,
+        PowerUpRoom,
+        BossRoom,
+        EndRoom
     }
 
     public RoomType roomType;

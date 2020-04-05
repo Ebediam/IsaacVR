@@ -26,6 +26,11 @@ public class Chase : EnemyBehaviour
 
         transform.LookAt(target);
         enemyController.rb.AddRelativeForce(Vector3.forward * enemyController.data.acceleration, ForceMode.Acceleration);
+
+        if (enemyController.ignoreMaxSpeed)
+        {
+            return;
+        }
         if(enemyController.rb.velocity.magnitude > enemyController.maxSpeed)
         {
             enemyController.rb.velocity *= (enemyController.maxSpeed / enemyController.rb.velocity.magnitude);
@@ -33,6 +38,7 @@ public class Chase : EnemyBehaviour
 
 
     }
+
 
 
 
