@@ -8,7 +8,7 @@ public class DungeonGenerator : MonoBehaviour
 
     public DungeonGeneratorDelegate InitializeRoomsEvent;
 
-
+    public RoomManager theVoidPosition;
     public DungeonData dungeonData;
     public RoomManager[,] positions;
     int generatedRooms = 0;
@@ -25,9 +25,11 @@ public class DungeonGenerator : MonoBehaviour
         positionsWithRoom = new List<RoomManager>();
 
 
+
         //startPosition = positions[Random.Range(0, dungeonData.maxColumns), Random.Range(0, dungeonData.maxRows)];
-        startPosition = positions[Mathf.RoundToInt(dungeonData.maxColumns) / 2, Mathf.RoundToInt(dungeonData.maxRows / 2)];
+        startPosition = positions[Mathf.RoundToInt(dungeonData.maxRows) / 2, Mathf.RoundToInt(dungeonData.maxColumns / 2)];
         CreateRoom(startPosition);
+        startPosition.room.roomType = Room.RoomType.Start;
         
         int iterations = 0;
         do
@@ -43,9 +45,9 @@ public class DungeonGenerator : MonoBehaviour
 
         CreateBossRoom();
         CreatePowerupRoom();
-
-        InitializeRoomsEvent?.Invoke();
         ConnectRooms();
+        InitializeRoomsEvent?.Invoke();
+
 
         startPosition.room.isCompleted = true;
 
@@ -63,17 +65,55 @@ public class DungeonGenerator : MonoBehaviour
         {
             for (int row = 0; row < dungeonData.maxRows; row++)
             {
-                positions[column, row] = new GameObject().AddComponent<RoomManager>();
-                positions[column, row].transform.parent = transform;
-                positions[column, row].name = "Position " + column.ToString() + "-" + row.ToString();
-                positions[column, row].transform.position = new Vector3(column * dungeonData.roomSide, 0f, row * dungeonData.roomSide);
-                positions[column, row].column = column;
-                positions[column, row].row = row;
-                positions[column, row].roomType = RoomManager.RoomType.Empty;
+                positions[row, column] = new GameObject().AddComponent<RoomManager>();
+                positions[row, column].transform.parent = transform;
+                positions[row, column].name = "Position " + column.ToString() + "-" + row.ToString();
+                positions[row, column].transform.position = new Vector3(column * dungeonData.roomSide, 0f, row * dungeonData.roomSide);
+                positions[row, column].column = column;
+                positions[row, column].row = row;
+                positions[row, column].zoneType = RoomManager.ZoneType.Empty;
+
+                positions[row, column].partsData = dungeonData.dungeonParts;
+
+                if(row > 0)
+                {
+                    positions[row, column].southPosition = positions[row-1, column];
+                    positions[row-1, column].northPosition = positions[row, column];
+
+                    if(row == (dungeonData.maxRows - 1))
+                    {
+                        positions[row, column].northPosition = theVoidPosition;
+                    }
+
+                }
+                else
+                {
+                    positions[row, column].southPosition = theVoidPosition;
+                }
+
+
+
+                if(column > 0)
+                {
+                    positions[row, column].westPosition = positions[row, column-1];
+                    positions[row, column-1].eastPosition = positions[row, column];
+
+                    if(column == (dungeonData.maxColumns - 1))
+                    {
+                        positions[row, column].eastPosition = theVoidPosition;
+                    }
+                }
+                else
+                {
+                    positions[row, column].westPosition = theVoidPosition;
+                }
 
 
             }
         }
+
+
+
     }
 
     
@@ -107,10 +147,10 @@ public class DungeonGenerator : MonoBehaviour
 
             //DirectionData randomDirection = RandomDirection();
 
-            if (CheckAdjacentSpace(currentPosition, randomDirection, RoomManager.RoomType.Empty) == true)
+            if (CheckAdjacentSpace(currentPosition, randomDirection, RoomManager.ZoneType.Empty) == true)
             {
 
-                RoomManager validPosition = positions[currentPosition.column + randomDirection.columnsModifier, currentPosition.row + randomDirection.rowsModifier];
+                RoomManager validPosition = positions[currentPosition.row + randomDirection.rowsModifier, currentPosition.column + randomDirection.columnsModifier];
                 CreateRoom(validPosition);
                 lastDirection = randomDirection;
                 currentPosition = validPosition;
@@ -147,7 +187,7 @@ public class DungeonGenerator : MonoBehaviour
                 
     }
     
-    public bool CheckAdjacentSpace(RoomManager startingRoom, DirectionData checkDirection, RoomManager.RoomType typeOfRoomYouWantToCheck)
+    public bool CheckAdjacentSpace(RoomManager startingRoom, DirectionData checkDirection, RoomManager.ZoneType typeOfRoomYouWantToCheck)
     {
         int checkingColumn = startingRoom.column + checkDirection.columnsModifier;
 
@@ -172,7 +212,7 @@ public class DungeonGenerator : MonoBehaviour
             return false;
         }
 
-        if(positions[checkingColumn, checkingRow].roomType == typeOfRoomYouWantToCheck)
+        if(positions[checkingRow, checkingColumn].zoneType == typeOfRoomYouWantToCheck)
         {
             return true;
         }
@@ -188,13 +228,15 @@ public class DungeonGenerator : MonoBehaviour
         roomManager.room = Instantiate(dungeonData.dungeonParts.room.GetComponentInChildren<Room>());
         roomManager.room.transform.parent = roomManager.transform;
         roomManager.room.transform.localPosition = Vector3.zero;
-        roomManager.roomType = RoomManager.RoomType.Room;
+        roomManager.zoneType = RoomManager.ZoneType.Room;
+        roomManager.room.doors = new List<Door>();
         generatedRooms++;
         roomManager.room.number = generatedRooms;
         positionsWithRoom.Add(roomManager);
 
         InitializeRoomsEvent += roomManager.InitializeRoom;
         roomManager.room.text.text = roomName;
+        roomManager.room.roomType = Room.RoomType.Regular;
 
     }
 
@@ -209,7 +251,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             foreach(DirectionData direction in dungeonData.directionLibrary.directions)
             {
-                if(CheckAdjacentSpace(roomManager, direction, RoomManager.RoomType.Room))
+                if(CheckAdjacentSpace(roomManager, direction, RoomManager.ZoneType.Room))
                 {
                     
                     GameObject doorFrame = Instantiate(dungeonData.dungeonParts.doorFrame);
@@ -230,7 +272,7 @@ public class DungeonGenerator : MonoBehaviour
                         door.transform.parent.Rotate(door.transform.up, direction.angleToLookAt);
 
                         roomManager.room.doors.Add(door);
-                        positions[roomManager.column+direction.columnsModifier, roomManager.row+direction.rowsModifier].room.doors.Add(door);
+                        positions[roomManager.row+direction.rowsModifier, roomManager.column+direction.columnsModifier].room.doors.Add(door);
 
 
                     }
@@ -259,12 +301,12 @@ public class DungeonGenerator : MonoBehaviour
         {
             foreach(DirectionData direction in dungeonData.directionLibrary.directions)
             {
-                if (!CheckAdjacentSpace(positionsWithRoom[i], direction, RoomManager.RoomType.Empty))
+                if (!CheckAdjacentSpace(positionsWithRoom[i], direction, RoomManager.ZoneType.Empty))
                 {
                     continue;
                 }
 
-                RoomManager checkingPosition = positions[(positionsWithRoom[i].column + direction.columnsModifier), (positionsWithRoom[i].row + direction.rowsModifier)];
+                RoomManager checkingPosition = positions[(positionsWithRoom[i].row + direction.rowsModifier), (positionsWithRoom[i].column + direction.columnsModifier)];
 
 
 
@@ -272,6 +314,7 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     CreateRoom(checkingPosition, "Boss");
                     bossPosition = checkingPosition;
+                    bossPosition.room.roomType = Room.RoomType.Boss;
                     return;
                 }
             }
@@ -284,16 +327,17 @@ public class DungeonGenerator : MonoBehaviour
         {
             foreach (DirectionData direction in dungeonData.directionLibrary.directions)
             {
-                if (!CheckAdjacentSpace(positionsWithRoom[i], direction, RoomManager.RoomType.Empty))
+                if (!CheckAdjacentSpace(positionsWithRoom[i], direction, RoomManager.ZoneType.Empty))
                 {
                     continue;
                 }
 
-                RoomManager checkingPosition = positions[(positionsWithRoom[i].column + direction.columnsModifier), (positionsWithRoom[i].row + direction.rowsModifier)];
+                RoomManager checkingPosition = positions[(positionsWithRoom[i].row + direction.rowsModifier), (positionsWithRoom[i].column + direction.columnsModifier)];
                 if (CheckIsolatedPosition(checkingPosition))
                 {
                     CreateRoom(checkingPosition, "Item");
                     itemPosition = checkingPosition;
+                    itemPosition.room.roomType = Room.RoomType.Treasure;
                     return;
                 }
             }
@@ -310,7 +354,7 @@ public class DungeonGenerator : MonoBehaviour
         int adjacentRooms = 0;
         foreach(DirectionData direction in dungeonData.directionLibrary.directions)
         {
-            if(CheckAdjacentSpace(position, direction, RoomManager.RoomType.Room)){
+            if(CheckAdjacentSpace(position, direction, RoomManager.ZoneType.Room)){
                 adjacentRooms++;
             }
         }

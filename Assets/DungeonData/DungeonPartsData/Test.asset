@@ -17,3 +17,24 @@ MonoBehaviour:
     type: 3}
   wall: {fileID: 8097191043991752959, guid: 981e481e807ece343b6142ec0073326c, type: 3}
   door: {fileID: 9048337207877526877, guid: 0d4740b05f8788f4283c63a518697e24, type: 3}
+  firstRoomContent: {fileID: 904129202788698996, guid: f0fcb9fbc4bcdf848b8c58f91b1eebc9,
+    type: 3}
+  treasureRoomContentList:
+  - {fileID: 7257769133482576059, guid: c74afbae975c83e449b2d9c7c7458e10, type: 3}
+  bossRoomContentList:
+  - {fileID: 3203354495437503398, guid: 1819b21b597898149980b08a50d6d456, type: 3}
+  - {fileID: 5659395363089609975, guid: 339c1f6d49f313345a2a9ecff6648892, type: 3}
+  oneWayRoomContent:
+  - {fileID: 1278797257751581654, guid: 5744657f477b6c74d98a2f51d63cd04f, type: 3}
+  twoWayRoomContentStraigh:
+  - {fileID: 8813047297828500530, guid: 3e95ff9810d3382469a57dc8554f7324, type: 3}
+  - {fileID: 1091748516858444191, guid: 75c3c047460fb344490ee74cc5e87a8d, type: 3}
+  twoWayRoomContentTurn: []
+  threeWayRoomContent:
+  - {fileID: 4734852797100110562, guid: 9a4bc3eeea840214fb31a8bb1ef141fc, type: 3}
+  - {fileID: 2662053863941580992, guid: 584f379a60dbfb84b8c20e4158b8f7a3, type: 3}
+  fourWayRoomContent:
+  - {fileID: 1319188541931169180, guid: 7bbb0e4e25e97d4439d45a7814513a12, type: 3}
+  - {fileID: 4948576820272814102, guid: aa4c5c073563709448667cbf7b8ade29, type: 3}
+  - {fileID: 567997171150273531, guid: ff89a5043097572468ae907f4b75bf55, type: 3}
+  - {fileID: 299660875175389177, guid: c0ad7f8b907e9dd42bc0cc22d2c0a1ab, type: 3}

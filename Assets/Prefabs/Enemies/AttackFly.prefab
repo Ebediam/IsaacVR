@@ -119,14 +119,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7252315651492053306}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 4.338, y: 1.549541, z: 4.33}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 7252315653053854593}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7252315651492053300
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,13 +156,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  invencibilityTime: 0.1
-  timer: 0
-  invicible: 0
-  data: {fileID: 11400000, guid: 4d6ea452aa87d8848b23aa56abe1a69a, type: 2}
   rb: {fileID: 7252315651492053300}
+  invencibilityTime: 0.1
+  invicible: 0
+  ignoreMaxSpeed: 0
+  data: {fileID: 11400000, guid: 4d6ea452aa87d8848b23aa56abe1a69a, type: 2}
   enemyManager: {fileID: 0}
   active: 0
+  maxSpeed: 0
 --- !u!114 &5701190086592886076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
+  target: {fileID: 0}
 --- !u!1 &7252315651643217297
 GameObject:
   m_ObjectHideFlags: 0

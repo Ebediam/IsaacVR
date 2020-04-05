@@ -6,7 +6,15 @@ using TMPro;
 
 public class Room : MonoBehaviour
 {
+    public enum RoomType
+    {
+        Regular,
+        Start,
+        Boss,
+        Treasure
+    }
 
+    public RoomType roomType;
     public TextMeshPro text;
     public int number;
 

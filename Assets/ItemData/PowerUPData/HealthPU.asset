@@ -15,4 +15,4 @@ MonoBehaviour:
   itemPrefab: {fileID: 4216971562896833087, guid: dd28fabc4b242fb45895bc2248c42f16,
     type: 3}
   boostedStat: 3
-  amount: 1
+  amount: 10
