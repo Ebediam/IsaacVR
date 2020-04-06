@@ -32,7 +32,6 @@ public class Door : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rooms = new List<Room>();
         LockDoorsEvent += LockDoor;
         OpenDoorsEvent += OpenDoor;
 

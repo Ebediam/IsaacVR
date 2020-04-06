@@ -22,6 +22,7 @@ public class EnemyData : ScriptableObject
     [Header("If it performs any action")]
     public float actionCooldown;
     public float actionCooldownModifier;
+    public float actionDuration;
 
     [Header("If it shoots")]
     public float bulletSpeed;

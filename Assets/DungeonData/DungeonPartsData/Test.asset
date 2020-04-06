@@ -33,8 +33,10 @@ MonoBehaviour:
   threeWayRoomContent:
   - {fileID: 4734852797100110562, guid: 9a4bc3eeea840214fb31a8bb1ef141fc, type: 3}
   - {fileID: 2662053863941580992, guid: 584f379a60dbfb84b8c20e4158b8f7a3, type: 3}
+  - {fileID: 1033982186169825014, guid: 1221ad9f0f1299e45b317f32ade3d328, type: 3}
   fourWayRoomContent:
   - {fileID: 1319188541931169180, guid: 7bbb0e4e25e97d4439d45a7814513a12, type: 3}
   - {fileID: 4948576820272814102, guid: aa4c5c073563709448667cbf7b8ade29, type: 3}
   - {fileID: 567997171150273531, guid: ff89a5043097572468ae907f4b75bf55, type: 3}
   - {fileID: 299660875175389177, guid: c0ad7f8b907e9dd42bc0cc22d2c0a1ab, type: 3}
+  - {fileID: 1614051402202671099, guid: 0d6e0d617651cee44831621bb871ff08, type: 3}

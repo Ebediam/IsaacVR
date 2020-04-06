@@ -45,8 +45,6 @@ public class KeyHolder : Holder
     private void OnTriggerExit(Collider other)
     {
 
-
-
         Key key = other.gameObject.GetComponentInParent<Key>();
         if (key)
         {

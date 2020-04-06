@@ -26,14 +26,39 @@ public class Utils : MonoBehaviour
         
     }
 
-    public static Vector3 randomVector3()
+    public static Vector3 RandomVector3()
     {
-        Vector3 vector = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        Vector3 vector = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
 
         vector = vector.normalized;
 
         return vector;
     }
+    
+    public static Vector3 RandomVector3(bool zeroXaxis, bool zeroYaxis, bool zeroZaxis)
+    {
+        Vector3 vector = RandomVector3();
+
+        if (zeroXaxis)
+        {
+            
+        }
+
+        if (zeroYaxis)
+        {
+            vector = new Vector3(vector.x, 0f, vector.z);
+        }
+
+        if (zeroZaxis)
+        {
+            vector = new Vector3(vector.x, vector.y, 0f);
+        }
+
+        vector = vector.normalized;
+
+        return vector;
+    }
+
 
     public static Item CalculateNearestItem(List<Item> items, Vector3 centerPoint)
     {
@@ -106,9 +131,6 @@ public class Utils : MonoBehaviour
     public static Direction RandomDirection(Direction directionToExclude)
     {
         Direction direction;
-
-
-
 
         do
         {

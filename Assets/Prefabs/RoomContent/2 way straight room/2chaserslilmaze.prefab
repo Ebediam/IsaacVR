@@ -295,6 +295,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adcddf4decf849f46b05b12913b18bfd, type: 3}
+--- !u!114 &2525168189420739213 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3183368098051952423, guid: adcddf4decf849f46b05b12913b18bfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1091748515748025770}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93631467524684943817f93748a91c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1091748515792798137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -364,6 +376,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adcddf4decf849f46b05b12913b18bfd, type: 3}
+--- !u!114 &2525168189450571422 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3183368098051952423, guid: adcddf4decf849f46b05b12913b18bfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1091748515792798137}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93631467524684943817f93748a91c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1091748515935358869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -736,6 +760,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3955008446538324581, guid: 64e0804c2cdb16548a2d145dbf9349db,
+        type: 3}
+      propertyPath: enemies.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3955008446538324581, guid: 64e0804c2cdb16548a2d145dbf9349db,
+        type: 3}
+      propertyPath: enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 2525168189420739213}
+    - target: {fileID: 3955008446538324581, guid: 64e0804c2cdb16548a2d145dbf9349db,
+        type: 3}
+      propertyPath: enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 2525168189450571422}
     - target: {fileID: 4525373964997577052, guid: 64e0804c2cdb16548a2d145dbf9349db,
         type: 3}
       propertyPath: m_Name

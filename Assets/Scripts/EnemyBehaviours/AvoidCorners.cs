@@ -63,6 +63,8 @@ public class AvoidCorners : EnemyBehaviour
     public override void Initialize()
     {
         base.Initialize();
+
+
         corners = enemyController.enemyManager.room.corners;
     }
 

@@ -11,7 +11,7 @@ public class VibratesInPlace : EnemyBehaviour
     {
         base.Start();
 
-        startPosition = transform.position;
+
         
     }
 
@@ -27,7 +27,7 @@ public class VibratesInPlace : EnemyBehaviour
 
 
 
-        Vector3 direction = Utils.randomVector3() + (startPosition - transform.position).normalized;
+        Vector3 direction = Utils.RandomVector3() + (startPosition - transform.position).normalized;
 
         direction = direction.normalized;
 
@@ -37,5 +37,12 @@ public class VibratesInPlace : EnemyBehaviour
         {
             enemyController.rb.velocity *= (enemyController.maxSpeed / enemyController.rb.velocity.magnitude);
         }
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        startPosition = transform.position;
     }
 }

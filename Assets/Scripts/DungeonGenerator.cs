@@ -264,6 +264,7 @@ public class DungeonGenerator : MonoBehaviour
                     if((direction == dungeonData.directionLibrary.north)|| direction == dungeonData.directionLibrary.east)
                     {
                         Door door = Instantiate(dungeonData.dungeonParts.door).GetComponentInChildren<Door>();
+                        door.rooms = new List<Room>();
 
                         door.transform.parent.parent = roomManager.transform;
                         door.transform.parent.localPosition = Vector3.zero;
@@ -272,14 +273,17 @@ public class DungeonGenerator : MonoBehaviour
                         door.transform.parent.Rotate(door.transform.up, direction.angleToLookAt);
 
                         roomManager.room.doors.Add(door);
+
                         positions[roomManager.row+direction.rowsModifier, roomManager.column+direction.columnsModifier].room.doors.Add(door);
+
+
 
 
                     }
                 }
                 else
                 {
-                    //Poner wall
+                    
                     GameObject wall = Instantiate(dungeonData.dungeonParts.wall);
                     wall.transform.parent = roomManager.room.transform;
                     wall.transform.localPosition = Vector3.zero;

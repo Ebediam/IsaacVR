@@ -157,5 +157,11 @@ public class Player : MonoBehaviour
         UpdateInventoryEvent?.Invoke();
     }
 
+    public void AddCoins(int number)
+    {
+        data.coins += number;
+        UpdateInventoryEvent?.Invoke();
+    }
+
 
 }

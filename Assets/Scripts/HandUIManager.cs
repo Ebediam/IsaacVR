@@ -8,12 +8,15 @@ public class HandUIManager : MonoBehaviour
     public TextMeshPro healthText;
     public TextMeshPro bombText;
     public TextMeshPro keyText;
+    public TextMeshPro coinsText;
     // Start is called before the first frame update
     void Start()
     {
         Player.UpdateHealthEvent += UpdateHealthUIText;
         Player.UpdateInventoryEvent += UpdateBombText;
         Player.UpdateInventoryEvent += UpdateKeyText;
+        Player.UpdateInventoryEvent += UpdateCoinText;
+        
     
     }
 
@@ -37,9 +40,11 @@ public class HandUIManager : MonoBehaviour
         keyText.text = _keyText;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateCoinText()
     {
-        
+        string _coinText = Player.local.data.coins.ToString();
+        coinsText.text = _coinText;
+
     }
+
 }

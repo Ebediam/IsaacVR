@@ -18,5 +18,6 @@ public class DungeonData : ScriptableObject
     public DungeonPartsData dungeonParts;
 
     public DirectionLibrary directionLibrary;
+    public EnemyPoolData enemyPoolData;
 
 }
