@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class Bomb : Item
 {
-    public ParticleSystem explosionVFX;
-    public List<Damageable> inRangeDamageables;
-    public float explosionForce;
-    public float explosionRadius;
 
-    public float maxDamage;
 
-    public bool activated = false;
+    [HideInInspector]public bool activated = false;
     public float timer;
     public Transform cilinder;
     public Transform cilinderEndPoint;
-    public float totalDistance;
-    public float step;
+    float totalDistance;
+    float step;
+
+    public Explosive explosionController;
 
 
     // Start is called before the first frame update
@@ -25,61 +22,9 @@ public class Bomb : Item
         totalDistance = Vector3.Distance(cilinder.position, cilinderEndPoint.position);
         step = totalDistance / timer;
 
-        inRangeDamageables = new List<Damageable>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Damageable damageable = other.gameObject.GetComponentInParent<Damageable>();
-
-        if (!damageable)
-        {
-            return;
-        }
-
-        if(inRangeDamageables.Count > 0)
-        {
-            if (inRangeDamageables.Contains(damageable))
-            {
-                return;
-            }
-        }
-
-
-
-        inRangeDamageables.Add(damageable);
-
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        AllBullet bullet = collision.gameObject.GetComponent<AllBullet>();
-
-        if (!bullet)
-        {
-            return;
-        }
-
-        Explode();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-
-        if (inRangeDamageables.Count == 0)
-        {
-            return;
-        }
-
-        Damageable damageable = other.gameObject.GetComponentInParent<Damageable>();
-
-        if (!damageable)
-        {
-            return;
-        }
-
-        inRangeDamageables.Remove(damageable);
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -95,8 +40,22 @@ public class Bomb : Item
 
         if(timer <= 0f)
         {
-            Explode();
+            explosionController.Explode();
+            activated = false;
+        }
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        AllBullet bullet = collision.gameObject.GetComponent<AllBullet>();
+
+        if (!bullet)
+        {
+            return;
+        }
+        if (holder)
+        {
+            holder.Release();
         }
     }
 
@@ -114,22 +73,4 @@ public class Bomb : Item
 
     }
 
-    public void Explode()
-    {
-        explosionVFX.Play();
-
-        foreach(Damageable damageable  in inRangeDamageables)
-        {
-            damageable.TakeDamage(maxDamage);
-            Vector3 explosionDirection = damageable.transform.position - transform.position;
-            float forcePercent = ((explosionRadius - explosionDirection.magnitude) / explosionRadius);
-
-            explosionDirection = explosionDirection.normalized;
-
-            damageable.rb.AddForce(explosionDirection * explosionForce * forcePercent, ForceMode.Impulse);
-        }
-        activated = false;
-        DespawnItem(0.5f);
-
-    }
 }

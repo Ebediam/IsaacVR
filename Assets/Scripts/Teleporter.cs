@@ -14,7 +14,8 @@ public class Teleporter : MonoBehaviour
     {
         if(other.gameObject.layer == 10)
         {
-            Debug.Log("Teleport player!");
+            Player.local.data.completedLevel = true;
+            GameManager.GameOver();
         }
     }
 

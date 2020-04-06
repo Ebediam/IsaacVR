@@ -56,6 +56,10 @@ public class RoomManager : MonoBehaviour
                 roomContent = partsData.firstRoomContent;
                 break;
 
+            case Room.RoomType.Teleporter:
+                roomContent = partsData.teleporterRoomContent;
+                break;
+
 
             default:
                 return;
@@ -191,7 +195,7 @@ public class RoomManager : MonoBehaviour
                     {
                         //1-way east
                         availableRoomContent.AddRange(partsData.oneWayRoomContent);
-                        rotation = 270f;
+                        rotation = 90f;
 
                     }
                 }

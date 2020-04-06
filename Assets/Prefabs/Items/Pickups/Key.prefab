@@ -207,6 +207,7 @@ MonoBehaviour:
   rb: {fileID: 7581912499176380497}
   holdPoint: {fileID: 207105403016092510}
   holder: {fileID: 0}
+  data: {fileID: 11400000, guid: f99dfa4f5633b2541b7420733736a185, type: 2}
 --- !u!1 &5621398401338048728
 GameObject:
   m_ObjectHideFlags: 0

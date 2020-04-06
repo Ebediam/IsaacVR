@@ -16,15 +16,27 @@ public class HandUIManager : MonoBehaviour
         Player.UpdateInventoryEvent += UpdateBombText;
         Player.UpdateInventoryEvent += UpdateKeyText;
         Player.UpdateInventoryEvent += UpdateCoinText;
+
+        GameManager.GameOverEvent += OnGameOver;
         
     
     }
 
+    public void OnGameOver()
+    {
+        Player.UpdateHealthEvent -= UpdateHealthUIText;
+        Player.UpdateInventoryEvent -= UpdateBombText;
+        Player.UpdateInventoryEvent -= UpdateKeyText;
+        Player.UpdateInventoryEvent -= UpdateCoinText;
+
+        GameManager.GameOverEvent -= OnGameOver;
+    }
     public void UpdateHealthUIText()
     {
         string _healthText = Player.local.health.ToString();
+        string _maxHealthText = Player.local.maxHealth.ToString();
 
-        healthText.text = _healthText;
+        healthText.text = _healthText+"/"+_maxHealthText;
     }
 
     public void UpdateBombText()

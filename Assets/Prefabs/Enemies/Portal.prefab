@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5455758845986038331}
   - component: {fileID: 5455758845986038332}
   - component: {fileID: 5455758845986038333}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 5455758846263468464}
   - component: {fileID: 5455758846263468479}
   - component: {fileID: 5455758846263468478}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5455758846685388597}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

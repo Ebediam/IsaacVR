@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     float acceleration;
     float turnAngle;
     public float health;
+    public float maxHealth;
     float timer =0f;
 
     bool invincible = false;
@@ -33,19 +34,40 @@ public class Player : MonoBehaviour
     {
 
         local = this;
+        GameManager.GameOverEvent += OnGameOver;
         GameManager.leftJoystickEvent += Move;
         GameManager.rightJoystickEvent += Rotate;
 
-        data.ClearModifiers();
         data.ClearItems();
+        data.ClearModifiers();
+        data.completedLevel = false;
+
+        health = data.currentHealth;
 
         maxSpeed = data.maxSpeed;
         acceleration = data.acceleration;
         turnAngle = data.turnAngle;
-        health = data.maxHealth;
+        maxHealth = data.baseHealth+data.healthBoost;
+
+
 
         PlayerTookDamageEvent += UpdateHealth;
         UpdateHealth();
+
+        if (data.leftHandItem)
+        {
+            Item leftItem = Item.SpawnItem(data.leftHandItem);
+            Grabber.leftHand.Grab(leftItem);
+        }
+
+
+        if (data.rightHandItem)
+        {
+            Item rightItem = Item.SpawnItem(data.rightHandItem);
+            Grabber.rightHand.Grab(rightItem);
+        }
+
+
     }
 
     // Update is called once per frame
@@ -94,6 +116,8 @@ public class Player : MonoBehaviour
 
     public void Rotate (Vector2 direction2D)
     {
+
+
         if(direction2D.x > 0f)
         {
             transform.Rotate(transform.up, turnAngle);
@@ -118,6 +142,7 @@ public class Player : MonoBehaviour
         if (health <= 0f)
         {
             GameManager.GameOver();
+            Player.local = null;
         }
 
         invincible = true;
@@ -127,6 +152,8 @@ public class Player : MonoBehaviour
 
     static void UpdateHealth(float damage)
     {
+        local.data.currentHealth = local.health;
+        local.maxHealth = local.data.baseHealth + local.data.healthBoost;
         UpdateHealthEvent?.Invoke();
     }
 
@@ -163,5 +190,18 @@ public class Player : MonoBehaviour
         UpdateInventoryEvent?.Invoke();
     }
 
+    public void OnGameOver()
+    {
+        if (data.completedLevel)
+        {
+            data.currentHealth = health;
+        }
+
+        GameManager.leftJoystickEvent -= Move;
+        GameManager.rightJoystickEvent -= Rotate;
+        PlayerTookDamageEvent -= UpdateHealth;
+        GameManager.GameOverEvent -= OnGameOver;
+        local = null;
+    }
 
 }

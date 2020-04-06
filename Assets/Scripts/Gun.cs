@@ -5,7 +5,7 @@ using UnityEngine;
 public class Gun : Item
 {
 
-    public GunData data;
+    [HideInInspector]public GunData gunData;
     public Transform spawnPoint;
 
     public GameObject redCube;
@@ -22,6 +22,15 @@ public class Gun : Item
     {
         Player.EnterSafeZoneEvent += Deactivate;
         Player.ExitSafeZoneEvent += Activate;
+        GameManager.GameOverEvent += OnGameOver;
+        gunData = data as GunData;
+    }
+
+    public void OnGameOver()
+    {
+        Player.EnterSafeZoneEvent -= Deactivate;
+        Player.ExitSafeZoneEvent -= Activate;
+        GameManager.GameOverEvent -= OnGameOver;
     }
 
     public void Deactivate()
@@ -36,6 +45,11 @@ public class Gun : Item
     // Update is called once per frame
     void Update()
     {
+        if (!Player.local)
+        {
+            return;
+        }
+
         if (!active)
         {
             return;
@@ -48,7 +62,7 @@ public class Gun : Item
 
         timer += Time.deltaTime;
 
-        if(timer >= (data.fireRate+Player.local.data.fireRateBoost))
+        if(timer >= (gunData.fireRate+Player.local.data.fireRateBoost))
         {
             OnCooldown = false;
             timer = 0f;
@@ -70,14 +84,19 @@ public class Gun : Item
         {            
             return;
         }
-        GameObject bulletGO = Instantiate(data.bulletPrefab);
+
+        if (!active)
+        {
+            return;
+        }
+        GameObject bulletGO = Instantiate(gunData.bulletPrefab);
         bulletGO.transform.position = spawnPoint.position;
         bulletGO.transform.rotation = spawnPoint.rotation;
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         bullet.rb.velocity = Player.local.rb.velocity/10f;
-        bullet.rb.AddForce(bullet.transform.forward * (data.bulletSpeed+Player.local.data.bulletSpeedBoost), ForceMode.VelocityChange);
-        bullet.damage = data.bulletDamage + Player.local.data.damageBoost;
+        bullet.rb.AddForce(bullet.transform.forward * (gunData.bulletSpeed+Player.local.data.bulletSpeedBoost), ForceMode.VelocityChange);
+        bullet.damage = gunData.bulletDamage + Player.local.data.damageBoost;
         OnCooldown = true;
         redCube.SetActive(true);
         greenCube.SetActive(false);

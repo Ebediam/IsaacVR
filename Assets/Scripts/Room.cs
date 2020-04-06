@@ -11,7 +11,8 @@ public class Room : MonoBehaviour
         Regular,
         Start,
         Boss,
-        Treasure
+        Treasure,
+        Teleporter
     }
 
     public RoomType roomType;

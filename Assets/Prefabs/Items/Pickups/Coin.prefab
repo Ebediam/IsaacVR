@@ -49,6 +49,7 @@ MonoBehaviour:
   rb: {fileID: 8411635585441140733}
   holdPoint: {fileID: 8411635587007118616}
   holder: {fileID: 0}
+  data: {fileID: 11400000, guid: bb6730b713ab48541866f520472fc315, type: 2}
   coinValue: 1
 --- !u!54 &8411635585441140733
 Rigidbody:

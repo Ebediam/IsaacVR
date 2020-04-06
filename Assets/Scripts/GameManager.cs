@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
-
+    public delegate void GameManagerDelegate();
+    public static GameManagerDelegate GameOverEvent;
 
     public delegate void ButtonPressDelegate();
     public delegate void JoystickPressDelegate(Vector2 vector2);
@@ -15,10 +16,12 @@ public class GameManager : MonoBehaviour
 
     public static JoystickPressDelegate leftJoystickEvent;
     public static JoystickPressDelegate rightJoystickEvent;
+
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -27,6 +30,11 @@ public class GameManager : MonoBehaviour
         // A & X = One
         // B & Y = Two
         // Tres rayas (izq) = Start
+
+        if (!Player.local)
+        {
+            return;
+        }
 
         if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch).magnitude > 0)
         {
@@ -70,6 +78,7 @@ public class GameManager : MonoBehaviour
 
     public static void GameOver()
     {
-        SceneManager.LoadScene(0);
+        GameOverEvent?.Invoke();
+        SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
     }
 }

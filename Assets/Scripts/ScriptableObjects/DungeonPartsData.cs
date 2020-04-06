@@ -16,6 +16,7 @@ public class DungeonPartsData : ScriptableObject
     public GameObject firstRoomContent;
     public List<GameObject> treasureRoomContentList;
     public List<GameObject> bossRoomContentList;
+    public GameObject teleporterRoomContent;
 
     [Header("Room content list")]
     public List<GameObject> oneWayRoomContent;

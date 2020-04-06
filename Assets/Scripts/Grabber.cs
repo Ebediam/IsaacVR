@@ -33,6 +33,8 @@ public class Grabber : MonoBehaviour
             GameManager.L1PressEvent += IndexTriggerPress;
             GameManager.L2PressEvent += HandTriggerPress;
             leftHand = this;
+
+
         }
         else if(side == Side.Right)
         {
@@ -42,8 +44,29 @@ public class Grabber : MonoBehaviour
         }
 
         itemsInRange = new List<Item>();
+        GameManager.GameOverEvent += OnGameOver;
     }
 
+    public void OnGameOver()
+    {
+        if (side == Side.Left)
+        {
+            GameManager.L1PressEvent -= IndexTriggerPress;
+            GameManager.L2PressEvent -= HandTriggerPress;
+            leftHand = null;
+
+
+        }
+        else if (side == Side.Right)
+        {
+            GameManager.R1PressEvent -= IndexTriggerPress;
+            GameManager.R2PressEvent -= HandTriggerPress;
+            rightHand = null;
+        }
+
+        
+        GameManager.GameOverEvent -= OnGameOver;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -107,6 +130,16 @@ public class Grabber : MonoBehaviour
 
         heldItem.holder = this;
 
+        if(side == Side.Left)
+        {
+            Player.local.data.leftHandItem = item.data;
+        }
+        else if(side == Side.Right)
+        {
+            Player.local.data.rightHandItem = item.data;
+        }
+        
+
         heldItem.OnItemPickup?.Invoke();
     }
 
@@ -121,6 +154,15 @@ public class Grabber : MonoBehaviour
 
         heldItem.OnItemDrop?.Invoke();
         heldItem = null;
+
+        if (side == Side.Left)
+        {
+            Player.local.data.leftHandItem = null;
+        }
+        else if (side == Side.Right)
+        {
+            Player.local.data.rightHandItem = null;
+        }
 
 
         Invoke("ActivateHandCollider", 0.5f);

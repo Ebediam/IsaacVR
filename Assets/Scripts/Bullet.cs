@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : AllBullet
 {
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +25,7 @@ public class Bullet : AllBullet
         {
             target.TakeDamage(damage);
         }
-
+        rb.detectCollisions = false;
         DestroyBullet();
 
     }

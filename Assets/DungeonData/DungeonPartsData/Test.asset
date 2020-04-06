@@ -24,6 +24,8 @@ MonoBehaviour:
   bossRoomContentList:
   - {fileID: 3203354495437503398, guid: 1819b21b597898149980b08a50d6d456, type: 3}
   - {fileID: 5659395363089609975, guid: 339c1f6d49f313345a2a9ecff6648892, type: 3}
+  teleporterRoomContent: {fileID: 5818268876842542688, guid: 050a5e4bec7911d428600f2289546655,
+    type: 3}
   oneWayRoomContent:
   - {fileID: 1278797257751581654, guid: 5744657f477b6c74d98a2f51d63cd04f, type: 3}
   twoWayRoomContentStraigh:
@@ -40,3 +42,6 @@ MonoBehaviour:
   - {fileID: 567997171150273531, guid: ff89a5043097572468ae907f4b75bf55, type: 3}
   - {fileID: 299660875175389177, guid: c0ad7f8b907e9dd42bc0cc22d2c0a1ab, type: 3}
   - {fileID: 1614051402202671099, guid: 0d6e0d617651cee44831621bb871ff08, type: 3}
+  - {fileID: 6399114406703749428, guid: df467dfb3dd16134d941fdfced7a955e, type: 3}
+  - {fileID: 2420750501770543007, guid: cbef553081fd38a4e91705a23e89fc0c, type: 3}
+  - {fileID: 5257146527109862420, guid: 06d120874b3c9ab4e800c90ee1d095e5, type: 3}

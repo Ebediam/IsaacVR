@@ -9,7 +9,7 @@ public class PlayerData : ScriptableObject
     public float maxSpeed;
     public float acceleration;
     public float turnAngle;
-    public float maxHealth;
+    public float baseHealth;
     public float invincibilityTime;
 
     [Header("Modifiers")]
@@ -19,30 +19,59 @@ public class PlayerData : ScriptableObject
     public float movementBoost;
     public float healthBoost;
 
-    [Header("Inventory")]
+    [Header("Inventory/Stats")]
     public int coins;
     public int keys;
     public int bombs;
+    public float currentHealth;
+    public ItemData leftHandItem;
+    public ItemData rightHandItem;
+
 
     [Header("Data")]
     public ItemData bombData;
     public ItemData keyData;
-    
+
+    [Header("Settings")]
+    public bool completedLevel;
 
     public void ClearModifiers()
     {
-        damageBoost = 0f;
-        bulletSpeedBoost = 0f;
-        fireRateBoost = 0f;
-        movementBoost = 0f;
-        healthBoost = 0f;
+        if (completedLevel)
+        {
+
+        }
+        else
+        {
+            damageBoost = 0f;
+            bulletSpeedBoost = 0f;
+            fireRateBoost = 0f;
+            movementBoost = 0f;
+            healthBoost = 0f;
+
+
+
+        }
+
     }
 
     public void ClearItems()
     {
-        coins = 0;
-        keys = 0;
-        bombs = 0;
+        if (completedLevel)
+        {
+            
+        }
+        else
+        {
+            coins = 0;
+            keys = 0;
+            bombs = 0;
+            currentHealth = baseHealth;
+            leftHandItem = null;
+            rightHandItem = null;
+        }
+
+
     }
 
 }

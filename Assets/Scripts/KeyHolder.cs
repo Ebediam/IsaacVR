@@ -11,7 +11,13 @@ public class KeyHolder : Holder
     public void Start()
     {
         Grabber.FailGrabEvent += WithdrawKey;
+        GameManager.GameOverEvent += OnGameOver;
+    }
 
+    public void OnGameOver()
+    {
+        Grabber.FailGrabEvent -= WithdrawKey;
+        GameManager.GameOverEvent -= OnGameOver;
     }
 
     private void OnTriggerEnter(Collider other)

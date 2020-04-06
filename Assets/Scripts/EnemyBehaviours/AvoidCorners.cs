@@ -11,10 +11,6 @@ public class AvoidCorners : EnemyBehaviour
     public override void Start()
     {
         base.Start();
-
-
-
-
     }
 
     // Update is called once per frame

@@ -17,6 +17,7 @@ public class DungeonGenerator : MonoBehaviour
     RoomManager itemPosition;
     RoomManager bossPosition;
     List<RoomManager> positionsWithRoom;
+    bool movedPlayer = false;
 
     private void Awake()
     {
@@ -55,9 +56,23 @@ public class DungeonGenerator : MonoBehaviour
 
     public void Start()
     {
-        Player.local.transform.position = startPosition.transform.position + Vector3.up * 0.5f;
+
     }
 
+    public void Update()
+    {
+        if (!Player.local)
+        {
+            return;
+        }
+
+        if (movedPlayer)
+        {
+            return;
+        }
+        movedPlayer = true;
+        Player.local.transform.position = startPosition.transform.position + Vector3.up * 0.5f;
+    }
 
     public void CreateGrid()
     {
@@ -314,12 +329,36 @@ public class DungeonGenerator : MonoBehaviour
 
 
 
-                if (CheckIsolatedPosition(checkingPosition))
+                if (CheckIsolatedPosition(checkingPosition,1))
                 {
-                    CreateRoom(checkingPosition, "Boss");
-                    bossPosition = checkingPosition;
-                    bossPosition.room.roomType = Room.RoomType.Boss;
-                    return;
+                    foreach(DirectionData _direction in dungeonData.directionLibrary.directions)
+                    {
+                        if (!CheckAdjacentSpace(checkingPosition, direction, RoomManager.ZoneType.Empty))
+                        {
+                            continue;
+                        }
+
+
+
+                        RoomManager _checkingPosition = positions[(checkingPosition.row + direction.rowsModifier), (checkingPosition.column + direction.columnsModifier)];
+
+                        if(CheckIsolatedPosition(_checkingPosition, 0))
+                        {
+                            CreateRoom(checkingPosition, "Boss");
+                            bossPosition = checkingPosition;
+                            bossPosition.room.roomType = Room.RoomType.Boss;
+
+                            CreateRoom(_checkingPosition, "Teleporter");
+                            _checkingPosition.room.roomType = Room.RoomType.Teleporter;
+
+                            return;
+
+
+                        }
+                    }
+
+
+
                 }
             }
         }
@@ -337,7 +376,7 @@ public class DungeonGenerator : MonoBehaviour
                 }
 
                 RoomManager checkingPosition = positions[(positionsWithRoom[i].row + direction.rowsModifier), (positionsWithRoom[i].column + direction.columnsModifier)];
-                if (CheckIsolatedPosition(checkingPosition))
+                if (CheckIsolatedPosition(checkingPosition,1))
                 {
                     CreateRoom(checkingPosition, "Item");
                     itemPosition = checkingPosition;
@@ -348,7 +387,7 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    public bool CheckIsolatedPosition(RoomManager position)
+    public bool CheckIsolatedPosition(RoomManager position, int maxAdjacentPositions)
     {
         if (position.room)
         {
@@ -363,7 +402,7 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
-        if(adjacentRooms > 1)
+        if(adjacentRooms > maxAdjacentPositions)
         {
             return false;
         }

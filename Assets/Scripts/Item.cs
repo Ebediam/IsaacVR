@@ -8,11 +8,15 @@ public class Item : MonoBehaviour
     public ItemDelegate OnItemPickup;
     public ItemDelegate OnItemDrop;
 
+    public bool grababble = true;
+
     public Rigidbody rb;
 
     public Transform holdPoint;
 
-    public Grabber holder;
+    [HideInInspector]public Grabber holder;
+
+    public ItemData data;
     // Start is called before the first frame update
     void Start()
     {
