@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 
     public HandUIManager UIManager;
 
+    public Transform groundCheck;
+
     public static Player local;
     public Rigidbody rb;
     public Transform head;
@@ -26,9 +28,15 @@ public class Player : MonoBehaviour
     public float maxHealth;
     float timer =0f;
 
+    float jumpCooldown;
+    float jumpTimer;
+
+
     bool invincible = false;
-
-
+    bool canJump;
+    public bool flying;
+    public bool isGrounded;
+    Ray groundRay;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +45,7 @@ public class Player : MonoBehaviour
         GameManager.GameOverEvent += OnGameOver;
         GameManager.leftJoystickEvent += Move;
         GameManager.rightJoystickEvent += Rotate;
+        GameManager.rightThumbstickChangeEvent += Jump;
 
         data.ClearItems();
         data.ClearModifiers();
@@ -44,12 +53,14 @@ public class Player : MonoBehaviour
 
         health = data.currentHealth;
 
+
+
         maxSpeed = data.maxSpeed;
         acceleration = data.acceleration;
         turnAngle = data.turnAngle;
         maxHealth = data.baseHealth+data.healthBoost;
 
-
+  
 
         PlayerTookDamageEvent += UpdateHealth;
         UpdateHealth();
@@ -68,11 +79,44 @@ public class Player : MonoBehaviour
         }
 
 
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (canJump)
+        {
+            groundRay = new Ray(groundCheck.transform.position, transform.up * -1f);
+            Debug.DrawRay(groundCheck.transform.position, transform.up*0.3f * -1f, Color.red);
+            if (Physics.Raycast(groundRay, out RaycastHit hitInfo, 0.3f, data.groundLayer))
+            {
+               
+                isGrounded = true;
+                if (flying)
+                {
+                    DeactivateFly();
+                }
+            }
+            else
+            {
+                
+                isGrounded = false;
+            }
+        }
+        else
+        {
+            jumpTimer += Time.deltaTime;
+            if(jumpTimer > jumpCooldown)
+            {
+                jumpTimer = 0f;
+                canJump = true;
+            }
+        }
+
+   
+
+
         if (!invincible)
         {
             return;
@@ -85,6 +129,9 @@ public class Player : MonoBehaviour
             invincible = false;
             timer = 0f;
         }
+
+
+
     }
 
     public void Move(Vector2 direction2D)
@@ -114,18 +161,85 @@ public class Player : MonoBehaviour
                 
     }
 
+    public void Jump(bool buttonPressed)
+    {
+        if (buttonPressed)
+        {
+            if (isGrounded)
+            {
+                if (canJump)
+                {
+                    rb.AddForce(transform.up * data.jumpForce, ForceMode.VelocityChange);
+                    canJump = false;
+                    isGrounded = false;
+                }
+            }
+            else
+            {
+                if (data.canFly)
+                {
+                    if (flying)
+                    {
+                        DeactivateFly();
+                    }
+                    else
+                    {
+                        ActivateFly();
+                    }
+                }
+            }
+        }
+
+        
+
+
+
+
+
+    }
+
+    public void ActivateFly()
+    {
+        rb.useGravity = false;
+        flying = true;
+        rb.drag = 0.95f;
+    }
+
+    public void DeactivateFly()
+    {
+        rb.useGravity = true;
+        flying = false;
+        rb.drag = 0f;
+    }
+
+ 
     public void Rotate (Vector2 direction2D)
     {
 
 
-        if(direction2D.x > 0f)
+        if(Mathf.Abs(direction2D.x) > 0.3f)
         {
-            transform.Rotate(transform.up, turnAngle);
+            transform.Rotate(transform.up, turnAngle * direction2D.x);
         }
-        if(direction2D.x < 0f)
+
+
+
+        if (flying)
         {
-            transform.Rotate(transform.up, -turnAngle);
+            if(Mathf.Abs(direction2D.y) > 0.3f)
+            {
+                rb.AddForce(transform.up *direction2D.y* acceleration*Time.deltaTime, ForceMode.Acceleration);
+
+                if(Mathf.Abs(rb.velocity.y) > maxSpeed + data.movementBoost)
+                {
+                    rb.velocity = new Vector3(rb.velocity.x, Mathf.Sign(rb.velocity.y) * (maxSpeed + data.movementBoost), rb.velocity.z);
+                }
+                
+
+
+            }
         }
+
     }
 
     public void TakeDamage(float damage)

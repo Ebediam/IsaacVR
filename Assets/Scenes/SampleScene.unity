@@ -1745,7 +1745,7 @@ GameObject:
   - component: {fileID: 161204492}
   - component: {fileID: 161204491}
   - component: {fileID: 161204490}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2178,7 +2178,7 @@ GameObject:
   - component: {fileID: 229792738}
   - component: {fileID: 229792737}
   - component: {fileID: 229792736}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20533,7 +20533,7 @@ GameObject:
   - component: {fileID: 1896093012}
   - component: {fileID: 1896093011}
   - component: {fileID: 1896093010}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23468,6 +23468,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5625829950148011331, guid: 2dd73cb91eb80d14293d710ec9bb6619,
+        type: 3}
+      propertyPath: jumpCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5625829950148011331, guid: 2dd73cb91eb80d14293d710ec9bb6619,
+        type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 5625829950148011331, guid: 2dd73cb91eb80d14293d710ec9bb6619,
+        type: 3}
+      propertyPath: canFly
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5625829950148011333, guid: 2dd73cb91eb80d14293d710ec9bb6619,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24024,6 +24039,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306217427243944892, guid: 47403b541b305d9428a4e0459fd55c1d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47403b541b305d9428a4e0459fd55c1d, type: 3}

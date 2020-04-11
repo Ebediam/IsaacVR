@@ -2698,6 +2698,7 @@ Transform:
   - {fileID: 977710051845687063}
   - {fileID: 7658337965115152499}
   - {fileID: 7923610934679598880}
+  - {fileID: 2419265489660263574}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2730,11 +2731,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIManager: {fileID: 9158431554396429344}
+  groundCheck: {fileID: 2419265489660263574}
   rb: {fileID: 5625829950148011332}
   head: {fileID: 5625829949298228923}
   data: {fileID: 11400000, guid: 1e8f3e294dbdfe54aab5e01cdf9f6e14, type: 2}
   health: 0
   maxHealth: 0
+  jumpCooldown: 1
+  jumpForce: 5
+  canJump: 0
+  canFly: 0
+  flying: 0
+  isGrounded: 0
 --- !u!136 &3491729987934284869
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3453,6 +3461,36 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.35
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8395446969140392204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2419265489660263574}
+  m_Layer: 10
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2419265489660263574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8395446969140392204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.125, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5625829950148011333}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5625829949947862761
 PrefabInstance:
   m_ObjectHideFlags: 0

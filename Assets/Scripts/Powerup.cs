@@ -11,6 +11,7 @@ public class Powerup : Item
         BulletDamage,
         Health,
         Speed,
+        Fly
     }
 
     [HideInInspector]public PowerupData _data;
@@ -51,7 +52,11 @@ public class Powerup : Item
                 break;
 
 
+            case StatBoost.Fly:
+                Player.local.data.canFly = true;
+                break;
 
+               
 
 
         }

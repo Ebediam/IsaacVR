@@ -11,6 +11,7 @@ public class PlayerData : ScriptableObject
     public float turnAngle;
     public float baseHealth;
     public float invincibilityTime;
+    public float jumpForce;
 
     [Header("Modifiers")]
     public float damageBoost;
@@ -18,6 +19,8 @@ public class PlayerData : ScriptableObject
     public float fireRateBoost;
     public float movementBoost;
     public float healthBoost;
+    public bool canFly;
+
 
     [Header("Inventory/Stats")]
     public int coins;
@@ -34,6 +37,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Settings")]
     public bool completedLevel;
+    public LayerMask groundLayer;
 
     public void ClearModifiers()
     {
@@ -48,7 +52,7 @@ public class PlayerData : ScriptableObject
             fireRateBoost = 0f;
             movementBoost = 0f;
             healthBoost = 0f;
-
+            canFly = false;
 
 
         }

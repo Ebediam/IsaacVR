@@ -18,6 +18,13 @@ public class GameManager : MonoBehaviour
     public static JoystickPressDelegate rightJoystickEvent;
 
     public GameObject player;
+
+    public delegate void ButtonStateChangeDelegate(bool active);
+    public static ButtonStateChangeDelegate rightThumbstickChangeEvent;
+
+    bool currentThumbstickState;
+    bool lastThumbstickState;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +47,17 @@ public class GameManager : MonoBehaviour
         {
             leftJoystickEvent(OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch));
         }
+
+
+        currentThumbstickState = OVRInput.Get(OVRInput.Button.PrimaryThumbstick, OVRInput.Controller.RTouch);
+
+        if(currentThumbstickState != lastThumbstickState)
+        {
+            rightThumbstickChangeEvent?.Invoke(currentThumbstickState);
+        }
+
+        lastThumbstickState = currentThumbstickState;
+
 
 
         if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch).magnitude > 0)
