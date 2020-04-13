@@ -13,7 +13,11 @@ public class Explosive : ItemBehaviour
     public SphereCollider sphereCollider;
 
     public List<Explosive> inRangeExplosives;
-    
+
+    public delegate void ExplosionDelegate(Explosive source);
+    public ExplosionDelegate ExplosionEvent;
+
+    public bool alreadyExploded;
 
     // Start is called before the first frame update
     public override void Start()
@@ -36,10 +40,18 @@ public class Explosive : ItemBehaviour
     {
 
         base.Update();
+
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (alreadyExploded)
+        {
+            return;
+        }
+
+
         Explosive explosive = other.gameObject.GetComponentInParent<Explosive>();
         if (explosive)
         {
@@ -51,6 +63,8 @@ public class Explosive : ItemBehaviour
                 }
             }
             inRangeExplosives.Add(explosive);
+            explosive.ExplosionEvent += ChainExplosion;
+
             return;
         }
 
@@ -83,6 +97,11 @@ public class Explosive : ItemBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
+        if (alreadyExploded)
+        {
+            return;
+        }
+
         AllBullet bullet = collision.gameObject.GetComponent<AllBullet>();
 
         if (!bullet)
@@ -98,6 +117,12 @@ public class Explosive : ItemBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (alreadyExploded)
+        {
+            return;
+        }
+
+
         Explosive explosive = other.gameObject.GetComponentInParent<Explosive>();
         if (explosive)
         {
@@ -106,6 +131,7 @@ public class Explosive : ItemBehaviour
                 if (inRangeExplosives.Contains(explosive))
                 {
                     inRangeExplosives.Remove(explosive);
+                    explosive.ExplosionEvent -= ChainExplosion;
                     return;
                 }
             }
@@ -133,10 +159,25 @@ public class Explosive : ItemBehaviour
         inRangeDamageables.Remove(damageable);
     }
 
+    public void ChainExplosion(Explosive source)
+    {
+        if (alreadyExploded)
+        {
+            return;
+        }
 
+        source.ExplosionEvent -= ChainExplosion;
+        Invoke("Explode", 0.2f);
+
+    }
 
     public void Explode()
     {
+        if (alreadyExploded)
+        {
+            return;
+        }
+
         explosionVFX.Play();
 
         if(data.target != ExplosiveData.Target.Player)
@@ -162,7 +203,13 @@ public class Explosive : ItemBehaviour
             }
         }
 
-        foreach(Explosive explosive in inRangeExplosives)
+        inRangeExplosives.Clear();
+        inRangeDamageables.Clear();
+        ExplosionEvent?.Invoke(this);
+        Invoke("DeactivateExplosive", 0.5f);
+
+
+        /*foreach(Explosive explosive in inRangeExplosives)
         {
             if (explosive.inRangeExplosives.Count > 0)
             {
@@ -181,9 +228,15 @@ public class Explosive : ItemBehaviour
                 Destroy(gameObject, 0.5f);
             }
 
-        }
+        }*/
 
 
 
+    }
+
+    public void DeactivateExplosive()
+    {
+        gameObject.SetActive(false);
+        Destroy(gameObject, 5f);
     }
 }

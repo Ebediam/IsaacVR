@@ -104,6 +104,16 @@ public class Utils : MonoBehaviour
 
     } 
 
+    public static Vector3 HorizontalVectorToPlayer(Vector3 startPosition)
+    {
+         Vector3 vectorToPlayer = Player.local.transform.position - startPosition;
+
+        vectorToPlayer = new Vector3(vectorToPlayer.x, 0, vectorToPlayer.z);
+
+        return vectorToPlayer;
+
+    }
+
     public static Direction OpositeDirection(Direction direction)
     {
         switch (direction)

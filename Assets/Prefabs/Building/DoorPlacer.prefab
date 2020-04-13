@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5262451028585323820}
   - component: {fileID: 193885698842983088}
   - component: {fileID: 1068984775200692808}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: KeyLockedDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4557174611363494142}
   - component: {fileID: 8493962586722829932}
   - component: {fileID: 485894471834299885}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 4364083756499416200}
   - component: {fileID: 2505451533443407400}
   - component: {fileID: 2538445411161571176}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 2261671880053240989}
   - component: {fileID: 2261671880053240962}
   - component: {fileID: 2261671880053240963}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: OpenDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 8002171750774190017}
   - component: {fileID: 6329674694392088611}
   - component: {fileID: 5009207338145295072}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ClosedDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 3882014566536339961}
   - component: {fileID: 4504702765510689925}
   - component: {fileID: 7131525858441271114}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 7776214456225314831}
   - component: {fileID: 1118687295123751302}
   - component: {fileID: 5997015582034999772}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +558,7 @@ GameObject:
   - component: {fileID: 8681163964722402747}
   - component: {fileID: 1350768256478354808}
   - component: {fileID: 6260985730434029325}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -637,7 +637,7 @@ GameObject:
   - component: {fileID: 1922231390222130432}
   - component: {fileID: 4711992587885388536}
   - component: {fileID: 5138990276923909387}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -716,7 +716,7 @@ GameObject:
   - component: {fileID: 3512055463013948679}
   - component: {fileID: 282392239091543051}
   - component: {fileID: 7383374387230743344}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -793,7 +793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1338038196534914002}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: DoorPlacer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

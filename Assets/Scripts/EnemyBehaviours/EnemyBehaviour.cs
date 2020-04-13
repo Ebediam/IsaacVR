@@ -33,4 +33,15 @@ public class EnemyBehaviour : MonoBehaviour
         }
         initialized = true;
     }
+
+    public float RandomizeActionTimer()
+    {
+        float actionTimer = Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
+
+        return actionTimer;
+
+    }
+
+
+
 }
