@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: IdleFly
   m_EditorClassIdentifier: 
   prefab: {fileID: 7396412670916035834, guid: 5a98b853a646f10429906ab3d675cacf, type: 3}
+  name: Fly
   hitPoints: 3
   damage: 1
   maxSpeed: 1
@@ -22,4 +23,5 @@ MonoBehaviour:
   pushbackVelocity: 2
   actionCooldown: 0
   actionCooldownModifier: 0
+  actionDuration: 0
   bulletSpeed: 0

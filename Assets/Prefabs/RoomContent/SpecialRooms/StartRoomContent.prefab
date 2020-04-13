@@ -46,6 +46,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 0fd122f397832004a906eafb483f4490,
         type: 2}
+    - target: {fileID: 8287237133585989454, guid: a9fe4f9d6037cd04690a7bccdb64280d,
+        type: 3}
+      propertyPath: spawnInteractable
+      value: 
+      objectReference: {fileID: 11400000, guid: 0fd122f397832004a906eafb483f4490,
+        type: 2}
     - target: {fileID: 8287237133585989456, guid: a9fe4f9d6037cd04690a7bccdb64280d,
         type: 3}
       propertyPath: m_Name
@@ -121,6 +127,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 904129202788698987}
     m_Modifications:
+    - target: {fileID: 8287237133585989454, guid: a9fe4f9d6037cd04690a7bccdb64280d,
+        type: 3}
+      propertyPath: spawnInteractable
+      value: 
+      objectReference: {fileID: 11400000, guid: 729603148c548cf4191b4e7681ffcafd,
+        type: 2}
     - target: {fileID: 8287237133585989456, guid: a9fe4f9d6037cd04690a7bccdb64280d,
         type: 3}
       propertyPath: m_Name

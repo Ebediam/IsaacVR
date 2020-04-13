@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AttackFly
   m_EditorClassIdentifier: 
   prefab: {fileID: 7252315651492053306, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920, type: 3}
+  name: Attack Fly
   hitPoints: 5
   damage: 4
   maxSpeed: 2
@@ -22,4 +23,5 @@ MonoBehaviour:
   pushbackVelocity: 2
   actionCooldown: 0
   actionCooldownModifier: 0
+  actionDuration: 0
   bulletSpeed: 0

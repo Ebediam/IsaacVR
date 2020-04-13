@@ -60,34 +60,34 @@ public class Utils : MonoBehaviour
     }
 
 
-    public static Item CalculateNearestItem(List<Item> items, Vector3 centerPoint)
+    public static Interactable CalculateNearestItem(List<Interactable> interactables, Vector3 centerPoint)
     {
-        if(items.Count == 0)
+        if(interactables.Count == 0)
         {
             return null;
         }
 
 
-        Item nearestItem = null;
+        Interactable nearestInteractable = null;
 
         float nearestDistance = 9999f;
 
-        foreach(Item item in items)
+        foreach(Interactable interactable in interactables)
         {
-            if (item.holder)
+            if (interactable.holder) 
             {
                 continue;
             }
-
-            float distance = Vector3.Distance(item.transform.position, centerPoint);
+            
+            float distance = Vector3.Distance(interactable.transform.position, centerPoint);
             if (distance < nearestDistance)
             {
-                nearestItem = item;
+                nearestInteractable = interactable;
                 nearestDistance = distance;
             }
         }
 
-        return nearestItem;
+        return nearestInteractable;
     }
 
     public static Transform GetTarget()

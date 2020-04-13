@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Spider
   m_EditorClassIdentifier: 
   prefab: {fileID: 5982721578897821113, guid: af3cf9c57f2958340b060ff447048b86, type: 3}
+  name: Spider
   hitPoints: 6
   damage: 4
   maxSpeed: 3

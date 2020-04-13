@@ -4,23 +4,30 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
+    public enum ButtonState
+    {
+        Down,
+        Up
+    }
+
+
     public delegate void GameManagerDelegate();
     public static GameManagerDelegate GameOverEvent;
 
-    public delegate void ButtonPressDelegate();
+    public delegate void ButtonPressDelegate(ButtonState buttonState);
     public delegate void JoystickPressDelegate(Vector2 vector2);
     public static ButtonPressDelegate L1PressEvent;
     public static ButtonPressDelegate L2PressEvent;
     public static ButtonPressDelegate R1PressEvent;
     public static ButtonPressDelegate R2PressEvent;
+    public static ButtonPressDelegate RightThumbstickPressEvent;
 
     public static JoystickPressDelegate leftJoystickEvent;
     public static JoystickPressDelegate rightJoystickEvent;
 
     public GameObject player;
 
-    public delegate void ButtonStateChangeDelegate(bool active);
-    public static ButtonStateChangeDelegate rightThumbstickChangeEvent;
+
 
     bool currentThumbstickState;
     bool lastThumbstickState;
@@ -43,48 +50,87 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        // -------------------Left joystick
+
         if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch).magnitude > 0)
         {
             leftJoystickEvent(OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch));
         }
 
 
-        currentThumbstickState = OVRInput.Get(OVRInput.Button.PrimaryThumbstick, OVRInput.Controller.RTouch);
-
-        if(currentThumbstickState != lastThumbstickState)
-        {
-            rightThumbstickChangeEvent?.Invoke(currentThumbstickState);
-        }
-
-        lastThumbstickState = currentThumbstickState;
-
-
+        // ------------------Right joystick
 
         if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch).magnitude > 0)
         {
             rightJoystickEvent(OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch));
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch)) //L2
-        {
-            L2PressEvent?.Invoke();
-        }
 
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch)) //R2
-        {
-            R2PressEvent?.Invoke();
-        }
 
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch)) //L1
+        // ----------------Right Thumbstick press--------------
+
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstick, OVRInput.Controller.RTouch)) 
         {
-            L1PressEvent?.Invoke();
+            RightThumbstickPressEvent?.Invoke(ButtonState.Down);
+        }
+        else if (OVRInput.GetUp(OVRInput.Button.PrimaryThumbstick, OVRInput.Controller.RTouch))
+        {
+            RightThumbstickPressEvent?.Invoke(ButtonState.Up);
         }
 
 
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch)) //R1
+
+
+        //--------------R2----------------
+
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch)) 
         {
-            R1PressEvent?.Invoke();
+            R2PressEvent?.Invoke(ButtonState.Down);
         }
+        else if (OVRInput.GetUp(OVRInput.Button.PrimaryThumbstick, OVRInput.Controller.RTouch))
+        {
+            R2PressEvent?.Invoke(ButtonState.Up);
+        }
+
+        //------------------L2
+
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch)) //R2
+        {
+            L2PressEvent?.Invoke(ButtonState.Down);
+        }
+        else if (OVRInput.GetUp(OVRInput.Button.PrimaryThumbstick, OVRInput.Controller.LTouch))
+        {
+            L2PressEvent?.Invoke(ButtonState.Up);
+        }
+
+
+        //--------------------------L1
+
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
+        {
+            L1PressEvent?.Invoke(ButtonState.Down);
+
+        }
+        else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
+        {
+            L1PressEvent?.Invoke(ButtonState.Up);
+        }
+
+        //-----------------R1-----------------------
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch)) 
+        {
+            R1PressEvent?.Invoke(ButtonState.Down);
+            
+        }
+        else if(OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        {
+            R1PressEvent?.Invoke(ButtonState.Up);
+        }
+
+
+        
+
+
 
         if(OVRInput.GetDown(OVRInput.Button.Left, OVRInput.Controller.LTouch))
         {

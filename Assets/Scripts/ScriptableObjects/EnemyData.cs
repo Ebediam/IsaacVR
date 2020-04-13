@@ -7,6 +7,8 @@ public class EnemyData : ScriptableObject
 {
     [Header("Base for all")]
     public GameObject prefab;
+    public new string name;
+
 
     public float hitPoints;
     public float damage;

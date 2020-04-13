@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a238158069ef74194ca8b0a8a1b264, type: 3}
   m_Name: RegularKey
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 5234331301186289295, guid: fa7e6ea50ffb88f40aebca666fef1f26,
-    type: 3}
+  prefab: {fileID: 5234331301186289295, guid: fa7e6ea50ffb88f40aebca666fef1f26, type: 3}

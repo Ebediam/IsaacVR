@@ -589,7 +589,7 @@ MonoBehaviour:
   invencibilityTime: 0.1
   invicible: 0
   ignoreMaxSpeed: 0
-  itemPoolData: {fileID: 11400000, guid: d0bc48ae74dd14449aee52b8f1a98092, type: 2}
+  itemPoolData: {fileID: 11400000, guid: 7d60c60803d3aa04a828c42762f08893, type: 2}
   spawnPoint: {fileID: 4864201009078905771}
 --- !u!1 &4864201008984791400
 GameObject:

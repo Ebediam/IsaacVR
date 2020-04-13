@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SmallChaser
   m_EditorClassIdentifier: 
   prefab: {fileID: 5222449700273301106, guid: 0deeba3a7e9e512429b056ee5e031869, type: 3}
+  name: Small Chaser
   hitPoints: 10
   damage: 3
   maxSpeed: 1
@@ -22,4 +23,5 @@ MonoBehaviour:
   pushbackVelocity: 6
   actionCooldown: 0
   actionCooldownModifier: 0
+  actionDuration: 0
   bulletSpeed: 0

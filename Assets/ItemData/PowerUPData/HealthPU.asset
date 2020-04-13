@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959daec7bac7376449247d450abaaf22, type: 3}
   m_Name: HealthPU
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 4216971562896833087, guid: dd28fabc4b242fb45895bc2248c42f16,
-    type: 3}
+  prefab: {fileID: 4216971562896833087, guid: dd28fabc4b242fb45895bc2248c42f16, type: 3}
   boostedStat: 3
   amount: 10

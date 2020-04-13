@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959daec7bac7376449247d450abaaf22, type: 3}
   m_Name: DamagePU
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 2315962249870315285, guid: 12bd272e20f2b684b9a1f4c20f0d9764,
-    type: 3}
+  prefab: {fileID: 2315962249870315285, guid: 12bd272e20f2b684b9a1f4c20f0d9764, type: 3}
   boostedStat: 2
   amount: 0.75

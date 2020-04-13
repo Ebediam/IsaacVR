@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959daec7bac7376449247d450abaaf22, type: 3}
   m_Name: FireRatePU
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 1079512578132708179, guid: 69dd29b742189d044a230a88c26536fe,
-    type: 3}
+  prefab: {fileID: 1079512578132708179, guid: 69dd29b742189d044a230a88c26536fe, type: 3}
   boostedStat: 0
   amount: -0.5

@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Enemy : Damageable
 {
     public EnemyData data;
     [HideInInspector] public EnemyManager enemyManager;
     public bool active = false;
     [HideInInspector] public float maxSpeed;
+
+    public TextMeshPro enemyText;
 
     float timer2;
 
@@ -16,6 +18,13 @@ public class Enemy : Damageable
         currentHealth = data.hitPoints;
         rb.mass = data.mass;
         maxSpeed = data.maxSpeed;
+
+        if (enemyText)
+        {
+            enemyText.text = data.name;
+        }
+
+
     }
 
     // Update is called once per frame

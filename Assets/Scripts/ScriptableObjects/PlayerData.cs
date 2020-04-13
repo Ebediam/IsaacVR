@@ -29,7 +29,17 @@ public class PlayerData : ScriptableObject
     public float currentHealth;
     public ItemData leftHandItem;
     public ItemData rightHandItem;
+    public List<SpellData> availableSpells = new List<SpellData>();
+    public SpellData activeSpell;
 
+
+
+    [Header("Max allowed stats")]
+    public float maxFireRate;
+
+
+    [Header("Min allowed stats")]
+    public float minFireRate;
 
     [Header("Data")]
     public ItemData bombData;
@@ -38,6 +48,7 @@ public class PlayerData : ScriptableObject
     [Header("Settings")]
     public bool completedLevel;
     public LayerMask groundLayer;
+
 
     public void ClearModifiers()
     {
@@ -76,6 +87,22 @@ public class PlayerData : ScriptableObject
         }
 
 
+    }
+
+    public void ClearSpells()
+    {
+        if (completedLevel)
+        {
+
+
+        }
+        else
+        {
+            availableSpells.Clear();
+
+        }
+
+        
     }
 
 }

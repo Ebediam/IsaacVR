@@ -175,10 +175,15 @@ public class Explosive : ItemBehaviour
         }
         foreach (Explosive explosive in inRangeExplosives)
         {
-            explosive.Explode();
+            if (explosive)
+            {
+                explosive.Explode();
+                Destroy(gameObject, 0.5f);
+            }
+
         }
 
-        Destroy(gameObject, 0.5f);
+
 
     }
 }

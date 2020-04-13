@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959daec7bac7376449247d450abaaf22, type: 3}
   m_Name: FlyPU
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 9093836183662389967, guid: 3fd9f6bcbf2676848a848080bc774865,
-    type: 3}
+  prefab: {fileID: 9093836183662389967, guid: 3fd9f6bcbf2676848a848080bc774865, type: 3}
   boostedStat: 5
   amount: 0
