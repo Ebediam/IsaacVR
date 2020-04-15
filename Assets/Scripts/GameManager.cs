@@ -25,10 +25,6 @@ public class GameManager : MonoBehaviour
     public static JoystickPressDelegate leftJoystickEvent;
     public static JoystickPressDelegate rightJoystickEvent;
 
-    public GameObject player;
-
-
-
     bool currentThumbstickState;
     bool lastThumbstickState;
 

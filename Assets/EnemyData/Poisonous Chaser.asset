@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
-  m_Name: ShooterShyGuy
+  m_Name: Poisonous Chaser
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2393846888996878842, guid: b4ca4bb9e6f3e084684b604a9df03466, type: 3}
-  name: Shooter Shy Guy
-  hitPoints: 13
+  prefab: {fileID: 6145393285199150166, guid: 04637c4906509a44c912288d1ee19a3a, type: 3}
+  name: Poisonous Chaser
+  hitPoints: 20
   damage: 5
-  maxSpeed: 4
-  acceleration: 25
-  mass: 0.5
-  pushback: 0
-  pushbackVelocity: 0
-  actionCooldown: 0
-  actionCooldownModifier: 0
+  maxSpeed: 1.1
+  acceleration: 5
+  mass: 0.9
+  pushback: 1
+  pushbackVelocity: 6
+  actionCooldown: 1
+  actionCooldownModifier: 0.1
   actionDuration: 0
-  bulletSpeed: 2.5
-  bulletsPerShot: 1
-  shotCooldown: 1.5
-  shotCooldownModifier: 0.5
+  bulletSpeed: 0
+  bulletsPerShot: 0
+  shotCooldown: 0
+  shotCooldownModifier: 0
   delayBetweenBulletsPerShot: 0

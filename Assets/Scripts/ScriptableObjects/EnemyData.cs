@@ -21,13 +21,18 @@ public class EnemyData : ScriptableObject
     public bool pushback;
     public float pushbackVelocity;
 
-    [Header("If it performs any action")]
+    [Header("If it performs any movement action")]
     public float actionCooldown;
     public float actionCooldownModifier;
     public float actionDuration;
 
     [Header("If it shoots")]
     public float bulletSpeed;
+    public int bulletsPerShot;
+    public float shotCooldown;
+    public float shotCooldownModifier;
+    public float delayBetweenBulletsPerShot;
+
 
     
 

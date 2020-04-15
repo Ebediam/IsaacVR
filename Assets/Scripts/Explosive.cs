@@ -19,6 +19,8 @@ public class Explosive : ItemBehaviour
 
     public bool alreadyExploded;
 
+    [HideInInspector] Damageable currentDamageable;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -91,6 +93,7 @@ public class Explosive : ItemBehaviour
 
 
         inRangeDamageables.Add(damageable);
+        damageable.DamageableDestroyedEvent += OnDamageableDestroyed;
 
     }
 
@@ -157,6 +160,7 @@ public class Explosive : ItemBehaviour
         }
 
         inRangeDamageables.Remove(damageable);
+        damageable.DamageableDestroyedEvent -= OnDamageableDestroyed;
     }
 
     public void ChainExplosion(Explosive source)
@@ -167,7 +171,7 @@ public class Explosive : ItemBehaviour
         }
 
         source.ExplosionEvent -= ChainExplosion;
-        Invoke("Explode", 0.2f);
+        Invoke("Explode", Random.Range(0.15f, 0.30f));
 
     }
 
@@ -178,23 +182,35 @@ public class Explosive : ItemBehaviour
             return;
         }
 
+        alreadyExploded = true;
         explosionVFX.Play();
 
+ 
         if(data.target != ExplosiveData.Target.Player)
         {
+            Debug.Log("Damageable loop starts");
             foreach (Damageable damageable in inRangeDamageables)
             {
+                if (!damageable)
+                {
+                    continue;
+                }
+
+                currentDamageable = damageable;
 
                 Vector3 explosionDirection = damageable.transform.position - transform.position;
                 float forcePercent = ((data.explosionRadius - explosionDirection.magnitude) / data.explosionRadius);
-                damageable.TakeDamage(data.maxDamage * forcePercent);
-
+                
                 explosionDirection = explosionDirection.normalized;
 
                 damageable.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Impulse);
+                damageable.TakeDamage(data.maxDamage * forcePercent);
             }
         }
 
+        currentDamageable = null;
+
+        Debug.Log("Damageable loop ends, player loop starts");
         if(data.target != ExplosiveData.Target.Enemies)
         {
             if (Vector3.Distance(Player.local.head.position, transform.position) < data.explosionRadius)
@@ -203,8 +219,12 @@ public class Explosive : ItemBehaviour
             }
         }
 
-        inRangeExplosives.Clear();
-        inRangeDamageables.Clear();
+        Debug.Log("Player loop ends, removing listeners");
+        foreach(Damageable _damageable in inRangeDamageables)
+        {
+            _damageable.DamageableDestroyedEvent -= OnDamageableDestroyed;
+        }
+        Debug.Log("Listeners removed, invoking explosion event");
         ExplosionEvent?.Invoke(this);
         Invoke("DeactivateExplosive", 0.5f);
 
@@ -234,9 +254,29 @@ public class Explosive : ItemBehaviour
 
     }
 
+
+
     public void DeactivateExplosive()
     {
         gameObject.SetActive(false);
         Destroy(gameObject, 5f);
     }
+
+    public void OnDamageableDestroyed(Damageable damageable)
+    {
+        if(damageable == currentDamageable)
+        {
+            return;
+        }
+
+        if(inRangeDamageables.Count > 0)
+        {
+            if (inRangeDamageables.Contains(damageable))
+            {
+                inRangeDamageables.Remove(damageable);
+            }
+        }
+
+    }
+
 }

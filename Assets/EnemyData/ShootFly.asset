@@ -25,3 +25,7 @@ MonoBehaviour:
   actionCooldownModifier: 0.5
   actionDuration: 0
   bulletSpeed: 2.5
+  bulletsPerShot: 1
+  shotCooldown: 2
+  shotCooldownModifier: 0.5
+  delayBetweenBulletsPerShot: 0

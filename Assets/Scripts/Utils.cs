@@ -74,6 +74,11 @@ public class Utils : MonoBehaviour
 
         foreach(Interactable interactable in interactables)
         {
+            if (!interactable)
+            {
+                continue;
+            }
+
             if (interactable.holder) 
             {
                 continue;

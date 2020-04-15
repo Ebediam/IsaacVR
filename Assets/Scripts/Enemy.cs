@@ -9,6 +9,8 @@ public class Enemy : Damageable
     public bool active = false;
     [HideInInspector] public float maxSpeed;
 
+   
+
     public TextMeshPro enemyText;
 
     float timer2;

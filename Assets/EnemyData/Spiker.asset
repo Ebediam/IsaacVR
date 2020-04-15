@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
-  m_Name: ShooterShyGuy
+  m_Name: Spiker
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2393846888996878842, guid: b4ca4bb9e6f3e084684b604a9df03466, type: 3}
-  name: Shooter Shy Guy
-  hitPoints: 13
+  prefab: {fileID: 7932375021979695111, guid: 820f7fdb08ab3fd4499de774e8be55bc, type: 3}
+  name: Spiker
+  hitPoints: 18
   damage: 5
-  maxSpeed: 4
-  acceleration: 25
-  mass: 0.5
-  pushback: 0
-  pushbackVelocity: 0
-  actionCooldown: 0
-  actionCooldownModifier: 0
-  actionDuration: 0
-  bulletSpeed: 2.5
+  maxSpeed: 2
+  acceleration: 10
+  mass: 0.6
+  pushback: 1
+  pushbackVelocity: 3
+  actionCooldown: 0.75
+  actionCooldownModifier: 0.25
+  actionDuration: 0.75
+  bulletSpeed: 4
   bulletsPerShot: 1
   shotCooldown: 1.5
-  shotCooldownModifier: 0.5
+  shotCooldownModifier: 0.25
   delayBetweenBulletsPerShot: 0

@@ -305,8 +305,12 @@ public class Player : MonoBehaviour
 
         GameManager.leftJoystickEvent -= Move;
         GameManager.rightJoystickEvent -= Rotate;
+        GameManager.RightThumbstickPressEvent -= Jump;
+
         PlayerTookDamageEvent -= UpdateHealth;
+
         GameManager.GameOverEvent -= OnGameOver;
+
         local = null;
     }
 

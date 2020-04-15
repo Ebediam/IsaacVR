@@ -42,6 +42,13 @@ public class EnemyBehaviour : MonoBehaviour
 
     }
 
+    public float RandomizeShotTimer()
+    {
+        float shotTimer = Random.Range(-enemyController.data.shotCooldownModifier, enemyController.data.shotCooldownModifier);
+
+        return shotTimer;
+    }
+
 
 
 }

@@ -32,7 +32,11 @@ public class ShootAt : EnemyBehaviour
 
             if(timer >= enemyController.data.actionCooldown)
             {
-                Shoot();
+                for(int i = 0; i <= enemyController.data.bulletsPerShot; i++)
+                {
+                    Invoke("Shoot", enemyController.data.delayBetweenBulletsPerShot * i);
+                }
+                
 
             }
         }
@@ -42,7 +46,7 @@ public class ShootAt : EnemyBehaviour
     public override void Initialize()
     {
         base.Initialize();
-        timer = enemyController.data.actionCooldown / 2 + Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
+        timer = enemyController.data.shotCooldown / 2 + RandomizeShotTimer();
     }
 
 
@@ -55,6 +59,6 @@ public class ShootAt : EnemyBehaviour
         bulletInstantiate.rb.AddForce((target.transform.position-spawnPoint.position).normalized * enemyController.data.bulletSpeed, ForceMode.VelocityChange);
         bulletInstantiate.damage = enemyController.data.damage;
         cooldown = true;
-        timer = Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
+        timer = RandomizeShotTimer();
     }
 }
