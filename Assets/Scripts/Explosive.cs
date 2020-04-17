@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explosive : ItemBehaviour
+public class Explosive : MonoBehaviour
 {
 
     public ParticleSystem explosionVFX;
@@ -22,9 +22,8 @@ public class Explosive : ItemBehaviour
     [HideInInspector] Damageable currentDamageable;
 
     // Start is called before the first frame update
-    public override void Start()
+    public void Start()
     {
-        base.Start();
 
         sphereCollider.radius = data.explosionRadius;
 
@@ -35,19 +34,22 @@ public class Explosive : ItemBehaviour
             return;
         }
         inRangeDamageables = new List<Damageable>();
+
+        Damageable damageable = GetComponent<Damageable>();
+        if (damageable)
+        {
+            damageable.DamageableDestroyedEvent += OnDeath;
+        }
+
     }
 
     // Update is called once per frame
-    public override void Update()
-    {
 
-        base.Update();
-
-
-    }
+    
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (alreadyExploded)
         {
             return;
@@ -99,6 +101,10 @@ public class Explosive : ItemBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!data.explodesOnShoot)
+        {
+            return;
+        }
 
         if (alreadyExploded)
         {
@@ -183,7 +189,9 @@ public class Explosive : ItemBehaviour
         }
 
         alreadyExploded = true;
+        explosionVFX.transform.parent = null;
         explosionVFX.Play();
+        Destroy(explosionVFX.gameObject, 2f);
 
  
         if(data.target != ExplosiveData.Target.Player)
@@ -226,7 +234,7 @@ public class Explosive : ItemBehaviour
         }
         Debug.Log("Listeners removed, invoking explosion event");
         ExplosionEvent?.Invoke(this);
-        Invoke("DeactivateExplosive", 0.5f);
+        Invoke("DeactivateExplosive", 0.1f);
 
 
         /*foreach(Explosive explosive in inRangeExplosives)
@@ -254,12 +262,17 @@ public class Explosive : ItemBehaviour
 
     }
 
+    public void OnDeath(Damageable damageable)
+    {
+        damageable.DamageableDestroyedEvent -= OnDeath;
+        Explode();
+    }
 
 
     public void DeactivateExplosive()
     {
         gameObject.SetActive(false);
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 1f);
     }
 
     public void OnDamageableDestroyed(Damageable damageable)

@@ -11,11 +11,13 @@ public class ExplosiveData : ScriptableObject
         Enemies,
         All
     }
+
     public Target target;
     public float explosionForce;
     public float explosionRadius;
     public float maxDamage;
-
+    public bool explodesOnShoot;
+    public bool explodesOnDestroy;
 
 
 

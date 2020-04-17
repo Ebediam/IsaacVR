@@ -151,12 +151,9 @@ public class Player : MonoBehaviour
             horizontalSpeed = Vector2.ClampMagnitude(horizontalSpeed, (maxSpeed + data.movementBoost));
 
             rb.velocity = new Vector3(horizontalSpeed.x, rb.velocity.y, horizontalSpeed.y);
-        }
-
-        
-
-       
-                
+        }             
+              
+               
     }
 
     public void Jump(GameManager.ButtonState buttonState)

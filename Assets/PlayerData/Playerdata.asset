@@ -20,18 +20,17 @@ MonoBehaviour:
   jumpForce: 5
   damageBoost: 0
   bulletSpeedBoost: 0
-  fireRateBoost: 0
+  fireRateBoost: -0.5
   movementBoost: 0
-  healthBoost: 0
-  canFly: 0
+  healthBoost: 10
+  canFly: 1
   coins: 0
   keys: 0
   bombs: 0
-  currentHealth: 60
-  leftHandItem: {fileID: 0}
-  rightHandItem: {fileID: 0}
-  availableSpells:
-  - {fileID: 11400000, guid: 70c11e4cf9b5c164a92d0d49e62de2cd, type: 2}
+  currentHealth: 5
+  leftHandItem: {fileID: 11400000, guid: 729603148c548cf4191b4e7681ffcafd, type: 2}
+  rightHandItem: {fileID: 11400000, guid: 729603148c548cf4191b4e7681ffcafd, type: 2}
+  availableSpells: []
   activeSpell: {fileID: 11400000, guid: 70c11e4cf9b5c164a92d0d49e62de2cd, type: 2}
   maxFireRate: 20
   minFireRate: 0.1
