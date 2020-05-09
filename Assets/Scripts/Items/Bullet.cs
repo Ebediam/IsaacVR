@@ -17,6 +17,20 @@ public class Bullet : AllBullet
         
     }
 
+    public override void CollisionEnterEvent(Collision collision)
+    {
+        base.CollisionEnterEvent(collision);
+        Damageable target = collision.gameObject.GetComponentInParent<Damageable>();
+
+        if (target)
+        {
+            target.TakeDamage(damage);
+        }
+        rb.detectCollisions = false;
+        DestroyBullet();
+    }
+
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         Damageable target = collision.gameObject.GetComponentInParent<Damageable>();
@@ -29,7 +43,7 @@ public class Bullet : AllBullet
         DestroyBullet();
 
     }
-
+    */
     public void DestroyBullet()
     {
 

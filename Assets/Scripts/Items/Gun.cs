@@ -19,6 +19,9 @@ public class Gun : Item
 
      public float timer=0f;
 
+    public AudioSource shotSFX;
+    public ParticleSystem shotVFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,7 @@ public class Gun : Item
         Player.ExitSafeZoneEvent += Activate;
         GameManager.GameOverEvent += OnGameOver;
         gunData = data as GunData;
+        shotSFX.clip = gunData.shotSFX;
     }
 
     public void OnGameOver()
@@ -132,6 +136,10 @@ public class Gun : Item
         OnCooldown = true;
         redCube.SetActive(true);
         greenCube.SetActive(false);
+
+        shotSFX.Play();
+        shotVFX.Play();
+
 
     }
 

@@ -20,3 +20,4 @@ MonoBehaviour:
   bulletSpeed: 10
   bulletDamage: 3.5
   magCapacity: 0
+  shotSFX: {fileID: 8300000, guid: 75a672a9c812e1f429bbdc378e3b5c51, type: 3}

@@ -52,9 +52,9 @@ public class Door : MonoBehaviour
             other.gameObject.GetComponent<Bullet>().DestroyBullet();
         }
 
-        if (other.gameObject.GetComponent<Player>())
+        if (other.gameObject.GetComponentInParent<Player>())
         {
-            other.gameObject.GetComponent<Player>().DeactivateGuns();
+            other.gameObject.GetComponentInParent<Player>().DeactivateGuns();
         }
 
 
@@ -77,9 +77,9 @@ public class Door : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponent<Player>())
+        if (other.gameObject.GetComponentInParent<Player>())
         {
-            other.gameObject.GetComponent<Player>().ActivateGuns();
+            other.gameObject.GetComponentInParent<Player>().ActivateGuns();
             hasPassed = true;
 
             if (allClear)

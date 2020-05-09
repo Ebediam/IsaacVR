@@ -29,6 +29,7 @@ public class Room : MonoBehaviour
     public static Room activeRoom;
 
     public bool isCompleted = false;
+    public bool hasStarted;
 
     public List<Transform> corners;
 
@@ -67,9 +68,15 @@ public class Room : MonoBehaviour
             return;
         }
 
-        if (other.gameObject.GetComponent<Player>())
+        if (hasStarted)
+        {
+            return;
+        }
+
+        if (other.gameObject.GetComponentInParent<Body>())
         {
             RoomStartEvent?.Invoke();
+            hasStarted = true;
         }
     }
 }

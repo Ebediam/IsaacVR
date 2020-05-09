@@ -21,4 +21,6 @@ public class GunData : ItemData
     public float bulletDamage;
     public int magCapacity;
 
+    public AudioClip shotSFX;
+
 }

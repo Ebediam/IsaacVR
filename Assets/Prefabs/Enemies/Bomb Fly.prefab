@@ -87,7 +87,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2899537873191245401}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 598ef30ab3f019b459dfa311015431b2, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
@@ -119,7 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0c58372c70e1c4eab3bfd2cf103108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemController: {fileID: 0}
   explosionVFX: {fileID: 1854129512228988924}
   inRangeDamageables: []
   data: {fileID: 11400000, guid: 10ba493023376ff41814686f19b94209, type: 2}
@@ -143,6 +142,12 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 594641955654425342, guid: 46d5b0cc0174abd4f86097576814a62b,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 598ef30ab3f019b459dfa311015431b2,
+        type: 2}
     - target: {fileID: 5419626773174707252, guid: 46d5b0cc0174abd4f86097576814a62b,
         type: 3}
       propertyPath: data
@@ -254,6 +259,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ea79dac65cab27b4fa1352acddc76728, type: 2}
+    - target: {fileID: 8803635446161199473, guid: 46d5b0cc0174abd4f86097576814a62b,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 598ef30ab3f019b459dfa311015431b2,
+        type: 2}
     - target: {fileID: 8944378984694569658, guid: 46d5b0cc0174abd4f86097576814a62b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
