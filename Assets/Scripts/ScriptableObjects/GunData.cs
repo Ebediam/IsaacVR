@@ -11,10 +11,19 @@ public class GunData : ItemData
         Automatic
     }
 
+    public enum BulletUse
+    {
+        Main,
+        Alt,
+        Both
+    }
+
 
     public GameObject bulletPrefab;
+    public GameObject altBulletPrefab;
 
     public GunMode gunMode;
+    public BulletUse bulletUse;
 
     public float fireRate;
     public float bulletSpeed;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ArmController : MonoBehaviour
 {
+    public Transform armAttachment;
     public Transform forearm;
     public Transform forearmJoint;
     public Transform armJoint;
@@ -22,6 +23,9 @@ public class ArmController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        transform.position = armAttachment.position;
+
         Vector3 jointPosition = (forearmJoint.transform.position + armJoint.transform.position)/2f;
 
         float _distance = Vector3.Distance(jointPosition, transform.position);

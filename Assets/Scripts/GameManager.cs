@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public static ButtonPressDelegate R1PressEvent;
     public static ButtonPressDelegate R2PressEvent;
     public static ButtonPressDelegate RightThumbstickPressEvent;
+    public static ButtonPressDelegate ButtonOnePressEvent;
 
     public static JoystickPressDelegate leftJoystickEvent;
     public static JoystickPressDelegate rightJoystickEvent;
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour
         {
             leftJoystickEvent(OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch));
         }
+
+
 
 
         // ------------------Right joystick
@@ -124,13 +127,15 @@ public class GameManager : MonoBehaviour
         }
 
 
-        
-
-
-
-        if(OVRInput.GetDown(OVRInput.Button.Left, OVRInput.Controller.LTouch))
+        //-------------------A---------------------
+        if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
         {
+            ButtonOnePressEvent?.Invoke(ButtonState.Down);
 
+        }
+        else if (OVRInput.GetUp(OVRInput.Button.One, OVRInput.Controller.RTouch))
+        {
+            ButtonOnePressEvent?.Invoke(ButtonState.Up);
         }
 
 

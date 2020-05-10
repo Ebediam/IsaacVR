@@ -69,14 +69,32 @@ public class Player : MonoBehaviour
         if (data.leftHandItem)
         {
             Item leftItem = Item.SpawnItem(data.leftHandItem);
-            Grabber.leftHand.Grab(leftItem);
+            leftItem.transform.position = transform.position + transform.forward;
+            if (Grabber.leftHand)
+            {
+                Grabber.leftHand.Grab(leftItem);
+            }
+            else
+            {
+                Debug.LogError("Error: leftHand Grabber not initialized yet");
+            }
+            
         }
 
 
         if (data.rightHandItem)
         {
             Item rightItem = Item.SpawnItem(data.rightHandItem);
-            Grabber.rightHand.Grab(rightItem);
+            rightItem.transform.position = transform.position + transform.forward ;
+            if (Grabber.rightHand)
+            {
+                Grabber.rightHand.Grab(rightItem);
+            }
+            else
+            {
+                Debug.LogError("Error: rightHand Grabber not initialized yet");
+            }
+            
         }
 
 

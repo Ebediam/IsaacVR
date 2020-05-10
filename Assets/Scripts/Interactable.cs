@@ -23,6 +23,16 @@ public class Interactable : MonoBehaviour
 
     }
 
+    public virtual void AltUse()
+    {
+
+    }
+
+    public virtual void StopAltUse()
+    {
+
+    }
+
     public virtual void StopUsing()
     {
 

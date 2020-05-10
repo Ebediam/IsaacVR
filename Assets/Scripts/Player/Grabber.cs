@@ -54,6 +54,8 @@ public class Grabber : MonoBehaviour
         {
             GameManager.R1PressEvent += IndexTriggerPress;
             GameManager.R2PressEvent += HandTriggerPress;
+            GameManager.ButtonOnePressEvent += AltButtonPress;
+
             rightHand = this;
         }
 
@@ -75,6 +77,7 @@ public class Grabber : MonoBehaviour
         {
             GameManager.R1PressEvent -= IndexTriggerPress;
             GameManager.R2PressEvent -= HandTriggerPress;
+            GameManager.ButtonOnePressEvent -= AltButtonPress;
             rightHand = null;
         }
 
@@ -140,6 +143,24 @@ public class Grabber : MonoBehaviour
             else
             {
                 TryGrab();
+            }
+        }
+    }
+
+    void AltButtonPress(GameManager.ButtonState buttonState)
+    {
+        if (heldItem)
+        {
+            switch (buttonState)
+            {
+                case GameManager.ButtonState.Down:
+                    heldItem.AltUse();
+                    break;
+
+                case GameManager.ButtonState.Up:
+
+                    heldItem.StopAltUse();
+                    break;
             }
         }
     }

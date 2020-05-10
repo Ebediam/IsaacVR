@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Gun : Item
 {
-
     [HideInInspector]public GunData gunData;
     public Transform spawnPoint;
 
@@ -21,6 +20,14 @@ public class Gun : Item
 
     public AudioSource shotSFX;
     public ParticleSystem shotVFX;
+
+    public enum BulletType
+    {
+        Main,
+        Alt
+    }
+
+    BulletType bulletType;
 
     // Start is called before the first frame update
     void Start()
@@ -76,31 +83,64 @@ public class Gun : Item
             redCube.SetActive(false);
 
             if(automaticEnabled)
-            {
-                Shoot();
+            {                
+                Shoot(bulletType);
             }
 
         }
     }
 
+    public override void AltUse()
+    {
+        if(gunData.bulletUse == GunData.BulletUse.Main)
+        {
+            return;
+        }
+
+        base.AltUse();
+        bulletType = BulletType.Alt;
+        ShootCheck(bulletType);
+    }
+
     public override void Use()
     {
+        if (gunData.bulletUse == GunData.BulletUse.Alt)
+        {
+            return;
+        }
         base.Use();
+
+        bulletType = BulletType.Main;
+        ShootCheck(bulletType);
+        
+    }
+
+    public void ShootCheck(BulletType bulletType)
+    {
+
+        if (OnCooldown)
+        {
+            return;
+        }
+
+        if (!active)
+        {
+            return;
+        }
 
         switch (gunData.gunMode)
         {
             case GunData.GunMode.Manual:
-                Shoot();
+                Shoot(bulletType);
                 break;
 
 
             case GunData.GunMode.Automatic:
-                Shoot();
+                Shoot(bulletType);
                 automaticEnabled = true;
                 break;
 
         }
-        
     }
 
     public override void StopUsing()
@@ -114,21 +154,26 @@ public class Gun : Item
 
     }
 
-    void Shoot()
+    public AllBullet Shoot(BulletType bulletType)
     {
-        if (OnCooldown)
-        {            
-            return;
-        }
+        GameObject bulletGO;
 
-        if (!active)
+        switch (bulletType)
         {
-            return;
+            case BulletType.Alt:
+
+                bulletGO = Instantiate(gunData.altBulletPrefab);
+                break;
+
+            default:
+                bulletGO = Instantiate(gunData.bulletPrefab);
+                break;
+
         }
-        GameObject bulletGO = Instantiate(gunData.bulletPrefab);
+        
         bulletGO.transform.position = spawnPoint.position;
         bulletGO.transform.rotation = spawnPoint.rotation;
-        Bullet bullet = bulletGO.GetComponent<Bullet>();
+        AllBullet bullet = bulletGO.GetComponent<AllBullet>();
 
         bullet.rb.velocity = Player.local.rb.velocity/10f;
         bullet.rb.AddForce(bullet.transform.forward * (gunData.bulletSpeed+Player.local.data.bulletSpeedBoost), ForceMode.VelocityChange);
@@ -140,6 +185,7 @@ public class Gun : Item
         shotSFX.Play();
         shotVFX.Play();
 
+        return bullet;
 
     }
 
