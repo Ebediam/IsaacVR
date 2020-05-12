@@ -2,36 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PortalGun:MonoBehaviour
+namespace BOIVR
 {
-    public static Portal bluePortal;
-    public static Portal orangePortal;
-
-    public Portal bluePortalLocal;
-    public Portal orangePortalLocal;
-    // Start is called before the first frame update
-    void Start()
+    public class PortalGun : MonoBehaviour
     {
-        if (!bluePortal)
+        public static Portal bluePortal;
+        public static Portal orangePortal;
+
+        public Portal bluePortalLocal;
+        public Portal orangePortalLocal;
+        // Start is called before the first frame update
+        void Start()
         {
-            bluePortal = bluePortalLocal;
-            bluePortal.transform.parent = null;
+            if (!bluePortal)
+            {
+                bluePortal = bluePortalLocal;
+                bluePortal.transform.parent = null;
+            }
+
+            if (!orangePortal)
+            {
+                orangePortal = orangePortalLocal;
+                orangePortal.transform.parent = null;
+            }
+
+
         }
 
-        if (!orangePortal)
+
+
+        // Update is called once per frame
+        void Update()
         {
-            orangePortal = orangePortalLocal;
-            orangePortal.transform.parent = null;
+
         }
-
-        
-    }
-
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
+

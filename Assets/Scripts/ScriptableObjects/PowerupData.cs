@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class PowerupData : ItemData
+namespace BOIVR
 {
-    public Powerup.StatBoost boostedStat;
-    public float amount;
+    [CreateAssetMenu]
+    public class PowerupData : ItemData
+    {
+        public Powerup.StatBoost boostedStat;
+        public float amount;
 
 
+    }
 }
+

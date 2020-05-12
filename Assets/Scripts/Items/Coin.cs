@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : Item
+namespace BOIVR
 {
-    public int coinValue;
-    // Start is called before the first frame update
-    void Start()
+    public class Coin : Item
     {
-        OnItemPickup += OnPickUp;
-    }
+        public int coinValue;
+        // Start is called before the first frame update
+        void Start()
+        {
+            OnItemPickup += OnPickUp;
+        }
 
-    public void OnPickUp()
-    {
-        OnItemPickup -= OnPickUp;
-        Player.local.AddCoins(coinValue);
-        DespawnItem(0.1f);
-    }
+        public void OnPickUp()
+        {
+            OnItemPickup -= OnPickUp;
+            Player.local.AddCoins(coinValue);
+            DespawnItem(0.1f);
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }
+

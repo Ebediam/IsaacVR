@@ -2,57 +2,61 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spell : Interactable
-      
+namespace BOIVR
 {
+    public class Spell : Interactable
 
-    public ParticleSystem spellVFX;
-    public AudioSource spellSFX;
-    public SpellData data;
-
-    public GameObject idleSpell;
-
-    public Collider grabDetectionCollider;
-
-    [HideInInspector]public bool isCasting;
-
-    void Start()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        public ParticleSystem spellVFX;
+        public AudioSource spellSFX;
+        public SpellData data;
 
-    public override void Use()
-    {
-        base.Use();
+        public GameObject idleSpell;
 
-        spellVFX.Play();
-        spellSFX.Play();
+        public Collider grabDetectionCollider;
 
-        if(data.spellMode == SpellData.SpellMode.Continuous)
+        [HideInInspector] public bool isCasting;
+
+        void Start()
         {
-            isCasting = true;
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public override void Use()
+        {
+            base.Use();
+
+            spellVFX.Play();
+            spellSFX.Play();
+
+            if (data.spellMode == SpellData.SpellMode.Continuous)
+            {
+                isCasting = true;
+            }
+
+        }
+
+        public override void StopUsing()
+        {
+            base.StopUsing();
+
+            spellVFX.Stop();
+            spellSFX.Stop();
+
+            if (data.spellMode == SpellData.SpellMode.Continuous)
+            {
+                isCasting = false;
+            }
+
         }
 
     }
-
-    public override void StopUsing()
-    {
-        base.StopUsing();
-
-        spellVFX.Stop();
-        spellSFX.Stop();
-
-        if(data.spellMode == SpellData.SpellMode.Continuous)
-        {
-            isCasting = false;
-        }
-
-    }
-
 }
+

@@ -2,39 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
+namespace BOIVR
 {
-
-    [HideInInspector] public Grabber holder;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public virtual void Use()
+    public class Interactable : MonoBehaviour
     {
 
-    }
+        [HideInInspector] public Grabber holder;
+        // Start is called before the first frame update
+        void Start()
+        {
 
-    public virtual void AltUse()
-    {
+        }
 
-    }
+        // Update is called once per frame
+        void Update()
+        {
 
-    public virtual void StopAltUse()
-    {
+        }
 
-    }
+        public virtual void Use()
+        {
 
-    public virtual void StopUsing()
-    {
+        }
 
+        public virtual void AltUse()
+        {
+
+        }
+
+        public virtual void StopAltUse()
+        {
+
+        }
+
+        public virtual void StopUsing()
+        {
+
+        }
     }
 }
+

@@ -2,66 +2,71 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AvoidCorners : EnemyBehaviour
+namespace BOIVR
 {
-    public float cornerAvoidDistance = 2f;
-    public float accelerationMultiplier = 1f;
-    List<Transform> corners;
-    // Start is called before the first frame update
-    public override void Start()
+
+    public class AvoidCorners : EnemyBehaviour
     {
-        base.Start();
-    }
-
-    // Update is called once per frame
-    public override void Update()
-    {
-        if (!enemyController.active)
+        public float cornerAvoidDistance = 2f;
+        public float accelerationMultiplier = 1f;
+        List<Transform> corners;
+        // Start is called before the first frame update
+        public override void Start()
         {
-            return;
-        }
-        base.Update();
-
-
-
-        Vector3 direction = AvoidCornersDirection();
-
-        if(direction == Vector3.zero)
-        {
-            return;
+            base.Start();
         }
 
-
-        enemyController.rb.AddForce(direction * enemyController.data.acceleration*accelerationMultiplier, ForceMode.Acceleration);
-
-
-
-    }
-
-    public Vector3 AvoidCornersDirection()
-    {
-        Vector3 avoidCornersDirection = Vector3.zero;
-
-        foreach(Transform corner in corners)
+        // Update is called once per frame
+        public override void Update()
         {
-            if(Vector3.Distance(corner.position, transform.position) <= cornerAvoidDistance)
+            if (!enemyController.active)
             {
-                avoidCornersDirection += (transform.position - corner.position);
+                return;
             }
+            base.Update();
+
+
+
+            Vector3 direction = AvoidCornersDirection();
+
+            if (direction == Vector3.zero)
+            {
+                return;
+            }
+
+
+            enemyController.rb.AddForce(direction * enemyController.data.acceleration * accelerationMultiplier, ForceMode.Acceleration);
+
+
+
         }
 
-        avoidCornersDirection = new Vector3(avoidCornersDirection.x, 0f, avoidCornersDirection.z);
+        public Vector3 AvoidCornersDirection()
+        {
+            Vector3 avoidCornersDirection = Vector3.zero;
+
+            foreach (Transform corner in corners)
+            {
+                if (Vector3.Distance(corner.position, transform.position) <= cornerAvoidDistance)
+                {
+                    avoidCornersDirection += (transform.position - corner.position);
+                }
+            }
+
+            avoidCornersDirection = new Vector3(avoidCornersDirection.x, 0f, avoidCornersDirection.z);
 
 
-        return avoidCornersDirection;
-    }
+            return avoidCornersDirection;
+        }
 
-    public override void Initialize()
-    {
-        base.Initialize();
+        public override void Initialize()
+        {
+            base.Initialize();
 
 
-        corners = enemyController.enemyManager.room.corners;
+            corners = enemyController.enemyManager.room.corners;
+        }
+
     }
 
 }

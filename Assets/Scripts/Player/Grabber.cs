@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grabber : MonoBehaviour
+namespace BOIVR
 {
-    public delegate void GrabberDelegate(Grabber grabber);
-    public static GrabberDelegate FailGrabEvent;
-
     public enum Side
     {
         Right,
@@ -19,362 +16,399 @@ public class Grabber : MonoBehaviour
         Item,
         Spell
     }
-
-    public InteractableType interactableType = InteractableType.None;
-
-    public Side side;
-
-
-
-    public List<Interactable> interactablesInRange;
-
-    public Item heldItem;
-    public Spell activeSpell;
-
-    public Collider handCollider;
-    public Rigidbody handRB;
-
-    public Grabber otherHand;
-
-    public static Grabber leftHand;
-    public static Grabber rightHand;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Grabber : MonoBehaviour
     {
-        if(side == Side.Left)
+        public delegate void GrabberDelegate(Grabber grabber);
+        public static GrabberDelegate FailGrabEvent;
+
+
+
+        public InteractableType interactableType = InteractableType.None;
+
+        public Side side;
+
+
+
+        public List<Interactable> interactablesInRange;
+
+        public Item heldItem;
+        public Spell activeSpell;
+
+        public Collider handCollider;
+        public Hand hand;
+
+        public Grabber otherGrabber;
+
+        public static Grabber leftGrabber;
+        public static Grabber rightGrabber;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            GameManager.L1PressEvent += IndexTriggerPress;
-            GameManager.L2PressEvent += HandTriggerPress;
-            leftHand = this;
-
-
-        }
-        else if(side == Side.Right)
-        {
-            GameManager.R1PressEvent += IndexTriggerPress;
-            GameManager.R2PressEvent += HandTriggerPress;
-            GameManager.ButtonOnePressEvent += AltButtonPress;
-
-            rightHand = this;
-        }
-
-        interactablesInRange = new List<Interactable>();
-        GameManager.GameOverEvent += OnGameOver;
-    }
-
-    public void OnGameOver()
-    {
-        if (side == Side.Left)
-        {
-            GameManager.L1PressEvent -= IndexTriggerPress;
-            GameManager.L2PressEvent -= HandTriggerPress;
-            leftHand = null;
-
-
-        }
-        else if (side == Side.Right)
-        {
-            GameManager.R1PressEvent -= IndexTriggerPress;
-            GameManager.R2PressEvent -= HandTriggerPress;
-            GameManager.ButtonOnePressEvent -= AltButtonPress;
-            rightHand = null;
-        }
-
-        
-        GameManager.GameOverEvent -= OnGameOver;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void IndexTriggerPress(GameManager.ButtonState buttonState)
-    {
-        if (heldItem)
-        {
-            switch (buttonState)
+            if (side == Side.Left)
             {
-
-                case GameManager.ButtonState.Down:
-                    heldItem.Use();
-                    break;
-
-
-                case GameManager.ButtonState.Up:
-
-                    heldItem.StopUsing();
-                    break;
+                GameManager.L1PressEvent += IndexTriggerPress;
+                GameManager.L2PressEvent += HandTriggerPress;
+                leftGrabber = this;
 
 
             }
-
-
- 
-        }else if (activeSpell)
-        {
-            switch (buttonState)
+            else if (side == Side.Right)
             {
+                GameManager.R1PressEvent += IndexTriggerPress;
+                GameManager.R2PressEvent += HandTriggerPress;
+                GameManager.ButtonOnePressEvent += AltButtonPress;
 
-                case GameManager.ButtonState.Down:
-                    activeSpell.Use();
-                    break;
+                rightGrabber = this;
+            }
 
+            interactablesInRange = new List<Interactable>();
+            GameManager.GameOverEvent += OnGameOver;
+        }
 
-                case GameManager.ButtonState.Up:
-
-                    activeSpell.StopUsing();
-                    break;
+        public void OnGameOver()
+        {
+            if (side == Side.Left)
+            {
+                GameManager.L1PressEvent -= IndexTriggerPress;
+                GameManager.L2PressEvent -= HandTriggerPress;
+                leftGrabber = null;
 
 
             }
-        }
-    }
+            else if (side == Side.Right)
+            {
+                GameManager.R1PressEvent -= IndexTriggerPress;
+                GameManager.R2PressEvent -= HandTriggerPress;
+                GameManager.ButtonOnePressEvent -= AltButtonPress;
+                rightGrabber = null;
+            }
 
-    void HandTriggerPress(GameManager.ButtonState buttonState)
-    {
-        if(buttonState == GameManager.ButtonState.Down)
+
+            GameManager.GameOverEvent -= OnGameOver;
+        }
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        void IndexTriggerPress(GameManager.ButtonState buttonState)
         {
             if (heldItem)
             {
-                Release();
+                switch (buttonState)
+                {
+
+                    case GameManager.ButtonState.Down:
+                        heldItem.Use();
+                        break;
+
+
+                    case GameManager.ButtonState.Up:
+
+                        heldItem.StopUsing();
+                        break;
+
+
+                }
+
+
+
             }
-            else
+            else if (activeSpell)
             {
-                TryGrab();
+                switch (buttonState)
+                {
+
+                    case GameManager.ButtonState.Down:
+                        activeSpell.Use();
+                        break;
+
+
+                    case GameManager.ButtonState.Up:
+
+                        activeSpell.StopUsing();
+                        break;
+
+
+                }
             }
         }
-    }
 
-    void AltButtonPress(GameManager.ButtonState buttonState)
-    {
-        if (heldItem)
+        void HandTriggerPress(GameManager.ButtonState buttonState)
         {
-            switch (buttonState)
+            if (buttonState == GameManager.ButtonState.Down)
             {
-                case GameManager.ButtonState.Down:
-                    heldItem.AltUse();
-                    break;
-
-                case GameManager.ButtonState.Up:
-
-                    heldItem.StopAltUse();
-                    break;
+                if (heldItem)
+                {
+                    Release();
+                }
+                else
+                {
+                    TryGrab();
+                }
             }
         }
-    }
 
-    void TryGrab()
-    {
-       Interactable nearestInteractable =  Utils.CalculateNearestItem(interactablesInRange, transform.position);
-
-        if (!nearestInteractable)
+        void AltButtonPress(GameManager.ButtonState buttonState)
         {
-            FailGrabEvent?.Invoke(this);
-            return;
-        }
-
-        Grab(nearestInteractable);
-
-        
-
-    }
-
-    public void Grab(Interactable interactable)
-    {
-
-        if(interactable is Item)
-        {
-            Item item = interactable as Item;
-            handCollider.enabled = false;
-
-            item.rb.constraints = RigidbodyConstraints.FreezeAll;
-
-
-            item.transform.position = transform.position;
-            item.transform.parent = transform;
-            item.transform.localPosition -= item.holdPoint.localPosition;
-
-
-            item.transform.rotation = transform.rotation;
-
-            item.holder = this;
-            heldItem = item;
-
-
-            if (side == Side.Left)
+            if (heldItem)
             {
-                Player.local.data.leftHandItem = item.data;
+                switch (buttonState)
+                {
+                    case GameManager.ButtonState.Down:
+                        heldItem.AltUse();
+                        break;
+
+                    case GameManager.ButtonState.Up:
+
+                        heldItem.StopAltUse();
+                        break;
+                }
             }
-            else if (side == Side.Right)
+        }
+
+        void TryGrab()
+        {
+            Interactable nearestInteractable = Utils.CalculateNearestItem(interactablesInRange, transform.position);
+
+            if (!nearestInteractable)
             {
-                Player.local.data.rightHandItem = item.data;
+                FailGrabEvent?.Invoke(this);
+                return;
             }
 
-            item.OnItemPickup?.Invoke();
+            Grab(nearestInteractable);
 
-        }
-        else if(interactable is Spell)
-        {
-            Spell spell = interactable as Spell;
-
-            AddSpellAndActivate(spell, this);
-            Spell _spell = Instantiate(spell).GetComponentInChildren<Spell>();
-            AddSpellAndActivate(_spell, GetOtherHand());         
-
-        }
-
-
-
-
-    }
-
-    public Grabber GetOtherHand()
-    {
-
-        switch (side)
-        {
-
-            case Side.Left:
-                return rightHand;
-
-            case Side.Right:
-                return leftHand;
 
 
         }
 
-        return null;
-
-
-    }
-    
-    public static void AddSpellAndActivate(Spell spell, Grabber hand)
-    {
-        if(Player.local.data.availableSpells.Count > 0)
+        public void Grab(Interactable interactable)
         {
-            if (!Player.local.data.availableSpells.Contains(spell.data)) 
+
+            if (interactable is Item)
             {
-                Player.local.data.availableSpells.Add(spell.data);
+                Item item = interactable as Item;
+
+                DisableCollisions(item);
+                
+
+                
+
+                item.rb.velocity = Vector3.zero;
+                item.rb.angularVelocity = Vector3.zero;
+                item.rb.constraints = RigidbodyConstraints.FreezeAll;
+
+
+                item.transform.position = transform.position;
+                item.transform.parent = transform;
+                item.transform.localPosition -= item.holdPoint.localPosition;
+
+
+                item.transform.rotation = transform.rotation;
+
+                item.holder = this;
+                heldItem = item;
+
+
+                if (side == Side.Left)
+                {
+                    Player.local.data.leftGrabberItem = item.data;
+                }
+                else if (side == Side.Right)
+                {
+                    Player.local.data.rightGrabberItem = item.data;
+                }
+
+                item.OnItemPickup?.Invoke();
+
             }
-        }
-
-        Player.local.data.activeSpell = spell.data;
-
-        spell.holder = hand;
-        spell.grabDetectionCollider.enabled = false;
-        spell.transform.position = hand.transform.position;
-        spell.transform.rotation = hand.transform.rotation;
-        spell.transform.parent = hand.transform;
-        hand.activeSpell = spell;
-        spell.idleSpell.SetActive(false);
-
-        
-
-
-    }
-
-
-
-    public void Release()
-    {
-
-        if(heldItem)
-        {
-            heldItem.transform.parent = null;
-
-
-            heldItem.rb.constraints = RigidbodyConstraints.None;
-            heldItem.holder = null;
-
-            heldItem.OnItemDrop?.Invoke();
-            heldItem = null;
-
-            if (side == Side.Left)
+            else if (interactable is Spell)
             {
-                Player.local.data.leftHandItem = null;
+                Spell spell = interactable as Spell;
+
+                AddSpellAndActivate(spell, this);
+                Spell _spell = Instantiate(spell).GetComponentInChildren<Spell>();
+                AddSpellAndActivate(_spell, GetOtherHand());
+
             }
-            else if (side == Side.Right)
+
+
+
+
+        }
+
+        public void DisableCollisions(Item item)
+        {
+            foreach (Collider col in item.GetComponentsInChildren<Collider>())
             {
-                Player.local.data.rightHandItem = null;
+                Physics.IgnoreCollision(col, handCollider, true);
+            }
+        }
+
+        public Grabber GetOtherHand()
+        {
+
+            switch (side)
+            {
+
+                case Side.Left:
+                    return rightGrabber;
+
+                case Side.Right:
+                    return leftGrabber;
+
+
+            }
+
+            return null;
+
+
+        }
+
+        public static void AddSpellAndActivate(Spell spell, Grabber hand)
+        {
+            if (Player.local.data.availableSpells.Count > 0)
+            {
+                if (!Player.local.data.availableSpells.Contains(spell.data))
+                {
+                    Player.local.data.availableSpells.Add(spell.data);
+                }
+            }
+
+            Player.local.data.activeSpell = spell.data;
+
+            spell.holder = hand;
+            spell.grabDetectionCollider.enabled = false;
+            spell.transform.position = hand.transform.position;
+            spell.transform.rotation = hand.transform.rotation;
+            spell.transform.parent = hand.transform;
+            hand.activeSpell = spell;
+            spell.idleSpell.SetActive(false);
+
+
+
+
+        }
+
+
+
+        public void Release()
+        {
+
+            if (heldItem)
+            {
+                heldItem.transform.parent = null;
+
+
+                heldItem.rb.constraints = RigidbodyConstraints.None;
+                heldItem.holder = null;
+                heldItem.rb.useGravity = true;
+                heldItem.rb.velocity = hand.rb.velocity*2f;
+                heldItem.OnItemDrop?.Invoke();
+                StartCoroutine(ReenableCollisions(heldItem, 0.5f));
+
+                
+                heldItem = null;
+
+                if (side == Side.Left)
+                {
+                    Player.local.data.leftGrabberItem = null;
+                }
+                else if (side == Side.Right)
+                {
+                    Player.local.data.rightGrabberItem = null;
+                }
+
+
+                
             }
 
 
-            Invoke("ActivateHandCollider", 0.5f);
         }
 
-        
-    }
-
-   
-
-    public void ActivateHandCollider()
-    {
-        handCollider.enabled = true;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.isTrigger)
+        public IEnumerator ReenableCollisions(Item item, float time)
         {
-            return;
+            yield return new WaitForSeconds(time);
+            foreach (Collider col in item.GetComponentsInChildren<Collider>())
+            {
+                Physics.IgnoreCollision(col, handCollider, false);
+            }
+
         }
 
-        Interactable interactable = other.gameObject.GetComponentInParent<Interactable>();
-
-        if (!interactable)
+        public void ActivateHandCollider()
         {
-            return;
+            
+
+            handCollider.enabled = true;
         }
 
-
-        if(interactablesInRange.Count > 0)
+        private void OnTriggerEnter(Collider other)
         {
-            if (interactablesInRange.Contains(interactable))
+            if (other.isTrigger)
             {
                 return;
             }
-        }
 
-        interactablesInRange.Add(interactable);
-        
-    }
+            Interactable interactable = other.gameObject.GetComponentInParent<Interactable>();
 
-    private void OnTriggerExit(Collider other)
-    {
-        Interactable interactable = other.gameObject.GetComponentInParent<Interactable>();
-
-        if (interactablesInRange.Count == 0 || !interactable)
-        {
-            return;
-        }
-
-        if(interactablesInRange.Contains(interactable))
-        {
-            interactablesInRange.Remove(interactable);
-        }
-    }
-
-    public static void RemoveFromItemsInRange(Interactable interactable)
-    {
-        if(leftHand.interactablesInRange.Count > 0)
-        {
-            if (leftHand.interactablesInRange.Contains(interactable))
+            if (!interactable)
             {
-                leftHand.interactablesInRange.Remove(interactable);
+                return;
+            }
+
+
+            if (interactablesInRange.Count > 0)
+            {
+                if (interactablesInRange.Contains(interactable))
+                {
+                    return;
+                }
+            }
+
+            interactablesInRange.Add(interactable);
+
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            Interactable interactable = other.gameObject.GetComponentInParent<Interactable>();
+
+            if (interactablesInRange.Count == 0 || !interactable)
+            {
+                return;
+            }
+
+            if (interactablesInRange.Contains(interactable))
+            {
+                interactablesInRange.Remove(interactable);
             }
         }
 
-        if(rightHand.interactablesInRange.Count > 0)
+        public static void RemoveFromItemsInRange(Interactable interactable)
         {
-            if (rightHand.interactablesInRange.Contains(interactable))
+            if (leftGrabber.interactablesInRange.Count > 0)
             {
-                rightHand.interactablesInRange.Remove(interactable);
+                if (leftGrabber.interactablesInRange.Contains(interactable))
+                {
+                    leftGrabber.interactablesInRange.Remove(interactable);
+                }
             }
+
+            if (rightGrabber.interactablesInRange.Count > 0)
+            {
+                if (rightGrabber.interactablesInRange.Contains(interactable))
+                {
+                    rightGrabber.interactablesInRange.Remove(interactable);
+                }
+            }
+
+
         }
-
-
     }
+
 
 }

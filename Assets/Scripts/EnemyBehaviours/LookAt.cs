@@ -2,27 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LookAt : EnemyBehaviour
+namespace BOIVR
 {
-
-    // Start is called before the first frame update
-    public override void Start()
+    public class LookAt : EnemyBehaviour
     {
-        base.Start();
 
-    }
-
-    // Update is called once per frame
-    public override void Update()
-    {
-        if (!enemyController.active)
+        // Start is called before the first frame update
+        public override void Start()
         {
-            return;
+            base.Start();
+
         }
-        base.Update();
+
+        // Update is called once per frame
+        public override void Update()
+        {
+            if (!enemyController.active)
+            {
+                return;
+            }
+            base.Update();
 
 
-        transform.LookAt(target);
+            transform.LookAt(target);
+        }
+
     }
+
 
 }

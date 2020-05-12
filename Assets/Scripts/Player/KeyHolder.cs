@@ -2,116 +2,120 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyHolder : Holder
+namespace BOIVR
 {
-    public Key inRangeKey;
-    public GameObject keyIndicator;
-    public Grabber inRangeHand;
-
-    public void Start()
+    public class KeyHolder : Holder
     {
-        Grabber.FailGrabEvent += WithdrawKey;
-        GameManager.GameOverEvent += OnGameOver;
-    }
+        public Key inRangeKey;
+        public GameObject keyIndicator;
+        public Grabber inRangeHand;
 
-    public void OnGameOver()
-    {
-        Grabber.FailGrabEvent -= WithdrawKey;
-        GameManager.GameOverEvent -= OnGameOver;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Key key = other.gameObject.GetComponentInParent<Key>();
-
-        if (key)
+        public void Start()
         {
-            keyIndicator.SetActive(true);
-            inRangeKey = key;
-            inRangeKey.OnItemDrop += StoreKey;
-            return;
+            Grabber.FailGrabEvent += WithdrawKey;
+            GameManager.GameOverEvent += OnGameOver;
         }
 
-
-        /*
-        Grabber grabber = other.gameObject.GetComponentInChildren<Grabber>();
-               
-        if (grabber)
+        public void OnGameOver()
         {
-            if (!grabber.heldInteractable)
-            {
-                inRangeHand = grabber;
-                bombIndicator.SetActive(true);
-            }
+            Grabber.FailGrabEvent -= WithdrawKey;
+            GameManager.GameOverEvent -= OnGameOver;
         }
-        */
 
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-
-        Key key = other.gameObject.GetComponentInParent<Key>();
-        if (key)
+        private void OnTriggerEnter(Collider other)
         {
-            if (key == inRangeKey)
+            Key key = other.gameObject.GetComponentInParent<Key>();
+
+            if (key)
             {
-                inRangeKey = null;
-                keyIndicator.SetActive(false);
+                keyIndicator.SetActive(true);
+                inRangeKey = key;
+                inRangeKey.OnItemDrop += StoreKey;
                 return;
             }
+
+
+            /*
+            Grabber grabber = other.gameObject.GetComponentInChildren<Grabber>();
+
+            if (grabber)
+            {
+                if (!grabber.heldInteractable)
+                {
+                    inRangeHand = grabber;
+                    bombIndicator.SetActive(true);
+                }
+            }
+            */
+
         }
 
-        /*
-        Grabber hand = other.gameObject.GetComponentInChildren<Grabber>();
-
-        if (hand)
+        private void OnTriggerExit(Collider other)
         {
-            if(hand == inRangeHand)
+
+            Key key = other.gameObject.GetComponentInParent<Key>();
+            if (key)
             {
-                inRangeHand = null;
-                bombIndicator.SetActive(false);
+                if (key == inRangeKey)
+                {
+                    inRangeKey = null;
+                    keyIndicator.SetActive(false);
+                    return;
+                }
+            }
+
+            /*
+            Grabber hand = other.gameObject.GetComponentInChildren<Grabber>();
+
+            if (hand)
+            {
+                if(hand == inRangeHand)
+                {
+                    inRangeHand = null;
+                    bombIndicator.SetActive(false);
+                    return;
+                }
+            }
+            */
+
+        }
+
+        public void StoreKey()
+        {
+            if (!inRangeKey)
+            {
                 return;
             }
+
+            Player.local.AddKeys(1);
+            inRangeKey.DespawnItem();
+            inRangeKey = null;
+            keyIndicator.SetActive(false);
         }
-        */
 
-    }
-
-    public void StoreKey()
-    {
-        if (!inRangeKey)
+        public void WithdrawKey(Grabber hand)
         {
-            return;
+            if (Player.local.data.keys <= 0)
+            {
+                return;
+            }
+
+            if (hand.heldItem)
+            {
+                return;
+            }
+
+            if (Vector3.Distance(transform.position, hand.transform.position) > 0.35f)
+            {
+                return;
+            }
+
+            Item keyInstance = Item.SpawnItem(Player.local.data.keyData);
+            hand.Grab(keyInstance);
+            Player.local.AddKeys(-1);
+
+
         }
-
-        Player.local.AddKeys(1);
-        inRangeKey.DespawnItem();
-        inRangeKey = null;
-        keyIndicator.SetActive(false);
-    }
-
-    public void WithdrawKey(Grabber hand)
-    {
-        if (Player.local.data.keys <= 0)
-        {
-            return;
-        }
-
-        if (hand.heldItem)
-        {
-            return;
-        }
-
-        if (Vector3.Distance(transform.position, hand.transform.position) > 0.35f)
-        {
-            return;
-        }
-
-        Item keyInstance = Item.SpawnItem(Player.local.data.keyData);
-        hand.Grab(keyInstance);
-        Player.local.AddKeys(-1);
-
-
     }
 }
+

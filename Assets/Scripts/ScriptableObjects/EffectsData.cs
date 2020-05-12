@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class EffectsData : ScriptableObject
+namespace BOIVR
 {
-    public List<MaterialEffectData> materialEffects = new List<MaterialEffectData>();
+    [CreateAssetMenu]
+    public class EffectsData : ScriptableObject
+    {
+        public List<MaterialEffectData> materialEffects = new List<MaterialEffectData>();
 
+    }
 }
+
+

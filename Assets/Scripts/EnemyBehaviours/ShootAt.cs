@@ -2,63 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootAt : EnemyBehaviour
+namespace BOIVR
 {
-
-    public Transform spawnPoint;
-    public EnemyBullet bullet;
-
-    float timer = 0f;
-    bool cooldown = true;
-    // Start is called before the first frame update
-    public override void Start()
+    public class ShootAt : EnemyBehaviour
     {
-        base.Start();
-        
-    }
 
-    // Update is called once per frame
-    public override void Update()
-    {
-        if (!enemyController.active)
+        public Transform spawnPoint;
+        public EnemyBullet bullet;
+
+        float timer = 0f;
+        bool cooldown = true;
+        // Start is called before the first frame update
+        public override void Start()
         {
-            return;
+            base.Start();
+
         }
-        base.Update();
 
-        if (cooldown)
+        // Update is called once per frame
+        public override void Update()
         {
-            timer += Time.deltaTime;
-
-            if(timer >= enemyController.data.actionCooldown)
+            if (!enemyController.active)
             {
-                for(int i = 0; i <= enemyController.data.bulletsPerShot; i++)
-                {
-                    Invoke("Shoot", enemyController.data.delayBetweenBulletsPerShot * i);
-                }
-                
-
+                return;
             }
+            base.Update();
+
+            if (cooldown)
+            {
+                timer += Time.deltaTime;
+
+                if (timer >= enemyController.data.actionCooldown)
+                {
+                    for (int i = 0; i <= enemyController.data.bulletsPerShot; i++)
+                    {
+                        Invoke("Shoot", enemyController.data.delayBetweenBulletsPerShot * i);
+                    }
+
+
+                }
+            }
+
+
+        }
+        public override void Initialize()
+        {
+            base.Initialize();
+            timer = enemyController.data.shotCooldown / 2 + RandomizeShotTimer();
         }
 
 
-    }
-    public override void Initialize()
-    {
-        base.Initialize();
-        timer = enemyController.data.shotCooldown / 2 + RandomizeShotTimer();
-    }
+        public void Shoot()
+        {
+            EnemyBullet bulletInstantiate = Instantiate(bullet);
 
-
-    public void Shoot()
-    {
-        EnemyBullet bulletInstantiate = Instantiate(bullet);
-
-        bulletInstantiate.transform.position = spawnPoint.position;
-        bulletInstantiate.transform.rotation = spawnPoint.rotation;
-        bulletInstantiate.rb.AddForce((target.transform.position-spawnPoint.position).normalized * enemyController.data.bulletSpeed, ForceMode.VelocityChange);
-        bulletInstantiate.damage = enemyController.data.damage;
-        cooldown = true;
-        timer = RandomizeShotTimer();
+            bulletInstantiate.transform.position = spawnPoint.position;
+            bulletInstantiate.transform.rotation = spawnPoint.rotation;
+            bulletInstantiate.rb.AddForce((target.transform.position - spawnPoint.position).normalized * enemyController.data.bulletSpeed, ForceMode.VelocityChange);
+            bulletInstantiate.damage = enemyController.data.damage;
+            cooldown = true;
+            timer = RandomizeShotTimer();
+        }
     }
 }
+

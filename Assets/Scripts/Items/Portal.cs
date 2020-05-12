@@ -2,33 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Portal : MonoBehaviour
+namespace BOIVR
 {
 
-
-    public Portal otherPortal;
-    public PortalColor color;
-    public Camera portalCamera;
-    public Player player;
-    // Start is called before the first frame update
-    void Start()
+    public class Portal : MonoBehaviour
     {
-        player = Player.local;
-        if(color == PortalColor.Blue)
+
+
+        public Portal otherPortal;
+        public PortalColor color;
+        public Camera portalCamera;
+        public Player player;
+        // Start is called before the first frame update
+        void Start()
         {
-            otherPortal = PortalGun.orangePortal;
+            player = Player.local;
+            if (color == PortalColor.Blue)
+            {
+                otherPortal = PortalGun.orangePortal;
+            }
+            else
+            {
+                otherPortal = PortalGun.bluePortal;
+            }
         }
-        else
+
+        // Update is called once per frame
+        void Update()
         {
-            otherPortal = PortalGun.bluePortal;
+
+            Vector3 playerOffset = otherPortal.transform.position - player.transform.position;
+
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        Vector3 playerOffset = otherPortal.transform.position - player.transform.position;
-
-    }
 }

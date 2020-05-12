@@ -3,80 +3,83 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-
-public class Room : MonoBehaviour
+namespace BOIVR
 {
-    public enum RoomType
+    public class Room : MonoBehaviour
     {
-        Regular,
-        Start,
-        Boss,
-        Treasure,
-        Teleporter
-    }
-
-    public RoomType roomType;
-    public TextMeshPro text;
-    public int number;
-
-    public delegate void RoomDelegate();
-
-    public RoomDelegate RoomStartEvent;
-    public RoomDelegate RoomEndEvent;
-
-    public List<Door> doors;
-
-    public static Room activeRoom;
-
-    public bool isCompleted = false;
-    public bool hasStarted;
-
-    public List<Transform> corners;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        if(doors.Count > 0)
+        public enum RoomType
         {
-            foreach (Door door in doors)
+            Regular,
+            Start,
+            Boss,
+            Treasure,
+            Teleporter
+        }
+
+        public RoomType roomType;
+        public TextMeshPro text;
+        public int number;
+
+        public delegate void RoomDelegate();
+
+        public RoomDelegate RoomStartEvent;
+        public RoomDelegate RoomEndEvent;
+
+        public List<Door> doors;
+
+        public static Room activeRoom;
+
+        public bool isCompleted = false;
+        public bool hasStarted;
+
+        public List<Transform> corners;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            if (doors.Count > 0)
             {
-                RoomStartEvent += door.LockDoor;
-                RoomEndEvent += door.OpenDoor;
-                               
-                door.rooms.Add(this);
+                foreach (Door door in doors)
+                {
+                    RoomStartEvent += door.LockDoor;
+                    RoomEndEvent += door.OpenDoor;
+
+                    door.rooms.Add(this);
+                }
+            }
+
+        }
+
+        public void RoomClear()
+        {
+            isCompleted = true;
+            RoomEndEvent?.Invoke();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (isCompleted)
+            {
+                return;
+            }
+
+            if (hasStarted)
+            {
+                return;
+            }
+
+            if (other.gameObject.GetComponentInParent<Body>())
+            {
+                RoomStartEvent?.Invoke();
+                hasStarted = true;
             }
         }
-
     }
 
-    public void RoomClear()
-    {
-        isCompleted = true;
-        RoomEndEvent?.Invoke();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (isCompleted)
-        {
-            return;
-        }
-
-        if (hasStarted)
-        {
-            return;
-        }
-
-        if (other.gameObject.GetComponentInParent<Body>())
-        {
-            RoomStartEvent?.Invoke();
-            hasStarted = true;
-        }
-    }
 }

@@ -2,52 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmController : MonoBehaviour
+namespace BOIVR
 {
-    public Transform armAttachment;
-    public Transform forearm;
-    public Transform forearmJoint;
-    public Transform armJoint;
-    public GameObject joint;
-
-    float armLength;
-    float forearmLength;
-
-    // Start is called before the first frame update
-    void Start()
+    public class ArmController : MonoBehaviour
     {
-        armLength = Vector3.Distance(transform.position, armJoint.position);
-        forearmLength = Vector3.Distance(forearm.transform.position, forearmJoint.position);
-    }
+        public Transform armAttachment;
+        public Transform forearm;
+        public Transform forearmJoint;
+        public Transform armJoint;
+        public GameObject joint;
 
-    // Update is called once per frame
-    void Update()
-    {
+        float armLength;
+        float forearmLength;
 
-        transform.position = armAttachment.position;
-
-        Vector3 jointPosition = (forearmJoint.transform.position + armJoint.transform.position)/2f;
-
-        float _distance = Vector3.Distance(jointPosition, transform.position);
-
-        if (_distance < armLength)
+        // Start is called before the first frame update
+        void Start()
         {
-            jointPosition += (jointPosition - transform.position).normalized * ((armLength-_distance)/_distance);
+            armLength = Vector3.Distance(transform.position, armJoint.position);
+            forearmLength = Vector3.Distance(forearm.transform.position, forearmJoint.position);
         }
 
-        _distance = Vector3.Distance(jointPosition, forearm.position);
-
-        if(_distance < forearmLength)
+        // Update is called once per frame
+        void Update()
         {
-            jointPosition += (jointPosition - forearm.position).normalized * ((forearmLength - _distance) / _distance);
+
+            transform.position = armAttachment.position;
+
+            Vector3 jointPosition = (forearmJoint.transform.position + armJoint.transform.position) / 2f;
+
+            float _distance = Vector3.Distance(jointPosition, transform.position);
+
+            if (_distance < armLength)
+            {
+                jointPosition += (jointPosition - transform.position).normalized * ((armLength - _distance) / _distance);
+            }
+
+            _distance = Vector3.Distance(jointPosition, forearm.position);
+
+            if (_distance < forearmLength)
+            {
+                jointPosition += (jointPosition - forearm.position).normalized * ((forearmLength - _distance) / _distance);
+            }
+
+
+            joint.transform.position = jointPosition;
+
+
+
+            transform.LookAt(joint.transform.position, Vector3.up);
+            forearm.LookAt(joint.transform.position, Vector3.up);
         }
-
-
-        joint.transform.position = jointPosition;
-
-
-
-        transform.LookAt(joint.transform.position, Vector3.up);
-        forearm.LookAt(joint.transform.position, Vector3.up);
     }
 }
+

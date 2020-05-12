@@ -2,240 +2,244 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomManager : MonoBehaviour
+namespace BOIVR
 {
-
-    public DungeonPartsData partsData;
-    GameObject roomContent;
-    public RoomManager northPosition;
-    public RoomManager eastPosition;
-    public RoomManager southPosition;
-    public RoomManager westPosition;
-
-    public List<GameObject> availableRoomContent;
-
-    float rotation = 0f;
-
-    public enum ZoneType
+    public class RoomManager : MonoBehaviour
     {
-        Empty,
-        Room,
-        TheVoid
-    }
 
+        public DungeonPartsData partsData;
+        GameObject roomContent;
+        public RoomManager northPosition;
+        public RoomManager eastPosition;
+        public RoomManager southPosition;
+        public RoomManager westPosition;
 
+        public List<GameObject> availableRoomContent;
 
-    public ZoneType zoneType;
+        float rotation = 0f;
 
-    public int column;
-    public int row;
-    public Room room;
-
-
-    public void InitializeRoom()
-    {
-        availableRoomContent = new List<GameObject>();
-
-        AsignRoomContentList();
-
-        switch (room.roomType)
+        public enum ZoneType
         {
-            case Room.RoomType.Regular:
-                roomContent = availableRoomContent[Random.Range(0, availableRoomContent.Count)];
-                break;
-
-            case Room.RoomType.Boss:
-                roomContent = partsData.bossRoomContentList[Random.Range(0, partsData.bossRoomContentList.Count)];
-                break;
-
-            case Room.RoomType.Treasure:
-                roomContent = partsData.treasureRoomContentList[Random.Range(0, partsData.treasureRoomContentList.Count)];
-                break;
-
-            case Room.RoomType.Start:
-                roomContent = partsData.firstRoomContent;
-                break;
-
-            case Room.RoomType.Teleporter:
-                roomContent = partsData.teleporterRoomContent;
-                break;
+            Empty,
+            Room,
+            TheVoid
+        }
 
 
-            default:
-                return;
+
+        public ZoneType zoneType;
+
+        public int column;
+        public int row;
+        public Room room;
+
+
+        public void InitializeRoom()
+        {
+            availableRoomContent = new List<GameObject>();
+
+            AsignRoomContentList();
+
+            switch (room.roomType)
+            {
+                case Room.RoomType.Regular:
+                    roomContent = availableRoomContent[Random.Range(0, availableRoomContent.Count)];
+                    break;
+
+                case Room.RoomType.Boss:
+                    roomContent = partsData.bossRoomContentList[Random.Range(0, partsData.bossRoomContentList.Count)];
+                    break;
+
+                case Room.RoomType.Treasure:
+                    roomContent = partsData.treasureRoomContentList[Random.Range(0, partsData.treasureRoomContentList.Count)];
+                    break;
+
+                case Room.RoomType.Start:
+                    roomContent = partsData.firstRoomContent;
+                    break;
+
+                case Room.RoomType.Teleporter:
+                    roomContent = partsData.teleporterRoomContent;
+                    break;
+
+
+                default:
+                    return;
+
+
+            }
+
+            roomContent = Instantiate(roomContent);
+            roomContent.transform.parent = room.transform;
+            roomContent.transform.localPosition = Vector3.zero;
+            roomContent.transform.localRotation = Quaternion.identity;
+            roomContent.transform.Rotate(transform.up, rotation);
 
 
         }
 
-        roomContent = Instantiate(roomContent);
-        roomContent.transform.parent = room.transform;
-        roomContent.transform.localPosition = Vector3.zero;
-        roomContent.transform.localRotation = Quaternion.identity;
-        roomContent.transform.Rotate(transform.up, rotation);
-
-        
-    }
-
-    public void AsignRoomContentList()
-    {
-        if (northPosition.zoneType == ZoneType.Room)
+        public void AsignRoomContentList()
         {
-            if (eastPosition.zoneType == ZoneType.Room)
+            if (northPosition.zoneType == ZoneType.Room)
             {
-                if (southPosition.zoneType == ZoneType.Room)
+                if (eastPosition.zoneType == ZoneType.Room)
                 {
-                    if (westPosition.zoneType == ZoneType.Room)
+                    if (southPosition.zoneType == ZoneType.Room)
                     {
-                        //4-way room
-                        availableRoomContent.AddRange(partsData.fourWayRoomContent);
+                        if (westPosition.zoneType == ZoneType.Room)
+                        {
+                            //4-way room
+                            availableRoomContent.AddRange(partsData.fourWayRoomContent);
 
+                        }
+                        else
+                        {
+                            //3-way no west
+                            availableRoomContent.AddRange(partsData.threeWayRoomContent);
+                            availableRoomContent.AddRange(partsData.fourWayRoomContent);
+
+                        }
                     }
                     else
                     {
-                        //3-way no west
-                        availableRoomContent.AddRange(partsData.threeWayRoomContent);
-                        availableRoomContent.AddRange(partsData.fourWayRoomContent);
-                        
-                    }
-                }
-                else
-                {
-                    if (westPosition.zoneType == ZoneType.Room)
-                    {
-                        //3-way no south
-                        availableRoomContent.AddRange(partsData.threeWayRoomContent);
-                        availableRoomContent.AddRange(partsData.fourWayRoomContent);
-                        rotation = 270f;
+                        if (westPosition.zoneType == ZoneType.Room)
+                        {
+                            //3-way no south
+                            availableRoomContent.AddRange(partsData.threeWayRoomContent);
+                            availableRoomContent.AddRange(partsData.fourWayRoomContent);
+                            rotation = 270f;
 
-                    }
-                    else
-                    {
-                        //2-way NE
-                        availableRoomContent.AddRange(partsData.threeWayRoomContent);
-                        availableRoomContent.AddRange(partsData.fourWayRoomContent);
-                        availableRoomContent.AddRange(partsData.twoWayRoomContentTurn);
+                        }
+                        else
+                        {
+                            //2-way NE
+                            availableRoomContent.AddRange(partsData.threeWayRoomContent);
+                            availableRoomContent.AddRange(partsData.fourWayRoomContent);
+                            availableRoomContent.AddRange(partsData.twoWayRoomContentTurn);
+                        }
                     }
                 }
+                else // Yes north, no east
+                {
+                    if (southPosition.zoneType == ZoneType.Room)
+                    {
+                        if (westPosition.zoneType == ZoneType.Room)
+                        {
+                            //3-way no east
+                            availableRoomContent.AddRange(partsData.threeWayRoomContent);
+                            availableRoomContent.AddRange(partsData.fourWayRoomContent);
+                            rotation = 180f;
+                        }
+                        else
+                        {
+                            //2-way NS
+                            availableRoomContent.AddRange(partsData.threeWayRoomContent);
+                            availableRoomContent.AddRange(partsData.fourWayRoomContent);
+                            availableRoomContent.AddRange(partsData.twoWayRoomContentStraigh);
+
+                        }
+                    }
+                    else //Yes north, no east, no south
+                    {
+                        if (westPosition.zoneType == ZoneType.Room)
+                        {
+                            //2-way NW
+                            availableRoomContent.AddRange(partsData.threeWayRoomContent);
+                            availableRoomContent.AddRange(partsData.fourWayRoomContent);
+                            availableRoomContent.AddRange(partsData.twoWayRoomContentTurn);
+                            rotation = 270f;
+                        }
+                        else
+                        {
+                            //1-way North
+                            availableRoomContent.AddRange(partsData.oneWayRoomContent);
+                        }
+                    }
+                }
+
+
             }
-            else // Yes north, no east
+            else //No north
             {
-                if (southPosition.zoneType == ZoneType.Room)
+                if (eastPosition.zoneType == ZoneType.Room)
                 {
-                    if (westPosition.zoneType == ZoneType.Room)
+                    if (southPosition.zoneType == ZoneType.Room)
                     {
-                        //3-way no east
-                        availableRoomContent.AddRange(partsData.threeWayRoomContent);
-                        availableRoomContent.AddRange(partsData.fourWayRoomContent);
-                        rotation = 180f;
-                    }
-                    else
-                    {
-                        //2-way NS
-                        availableRoomContent.AddRange(partsData.threeWayRoomContent);
-                        availableRoomContent.AddRange(partsData.fourWayRoomContent);
-                        availableRoomContent.AddRange(partsData.twoWayRoomContentStraigh);
+                        if (westPosition.zoneType == ZoneType.Room)
+                        {
+                            //3-way no north
+                            availableRoomContent.AddRange(partsData.threeWayRoomContent);
+                            availableRoomContent.AddRange(partsData.fourWayRoomContent);
+                            rotation = 90f;
 
+                        }
+                        else
+                        {
+                            //2-way ES
+                            availableRoomContent.AddRange(partsData.threeWayRoomContent);
+                            availableRoomContent.AddRange(partsData.fourWayRoomContent);
+                            availableRoomContent.AddRange(partsData.twoWayRoomContentTurn);
+                            rotation = 90f;
+                        }
+                    }
+                    else //No north, no south, yes east
+                    {
+                        if (westPosition.zoneType == ZoneType.Room)
+                        {
+                            //2-way EW
+                            availableRoomContent.AddRange(partsData.threeWayRoomContent);
+                            availableRoomContent.AddRange(partsData.fourWayRoomContent);
+                            availableRoomContent.AddRange(partsData.twoWayRoomContentStraigh);
+                            rotation = 90f;
+
+                        }
+                        else
+                        {
+                            //1-way east
+                            availableRoomContent.AddRange(partsData.oneWayRoomContent);
+                            rotation = 90f;
+
+                        }
                     }
                 }
-                else //Yes north, no east, no south
+                else //No north, no east
                 {
-                    if (westPosition.zoneType == ZoneType.Room)
+                    if (southPosition.zoneType == ZoneType.Room)
                     {
-                        //2-way NW
-                        availableRoomContent.AddRange(partsData.threeWayRoomContent);
-                        availableRoomContent.AddRange(partsData.fourWayRoomContent);
-                        availableRoomContent.AddRange(partsData.twoWayRoomContentTurn);
-                        rotation = 270f;
+                        if (westPosition.zoneType == ZoneType.Room)
+                        {
+                            //2-way SW
+                            availableRoomContent.AddRange(partsData.threeWayRoomContent);
+                            availableRoomContent.AddRange(partsData.fourWayRoomContent);
+                            availableRoomContent.AddRange(partsData.twoWayRoomContentTurn);
+                            rotation = 180f;
+                        }
+                        else
+                        {
+                            //1-way south
+                            availableRoomContent.AddRange(partsData.oneWayRoomContent);
+                            rotation = 180f;
+
+                        }
                     }
-                    else
+                    else //No north, no east, no south
                     {
-                        //1-way North
-                        availableRoomContent.AddRange(partsData.oneWayRoomContent);
+                        if (westPosition.zoneType == ZoneType.Room)
+                        {
+                            //1-way west
+                            availableRoomContent.AddRange(partsData.oneWayRoomContent);
+                            rotation = 270f;
+
+                        }
+                        else
+                        {
+                            Debug.LogError("Room has spawned with no adjacent rooms!");
+                        }
                     }
                 }
+
             }
-
-
-        }
-        else //No north
-        {
-            if (eastPosition.zoneType == ZoneType.Room)
-            {
-                if (southPosition.zoneType == ZoneType.Room)
-                {
-                    if (westPosition.zoneType == ZoneType.Room)
-                    {
-                        //3-way no north
-                        availableRoomContent.AddRange(partsData.threeWayRoomContent);
-                        availableRoomContent.AddRange(partsData.fourWayRoomContent);
-                        rotation = 90f;
-
-                    }
-                    else
-                    {
-                        //2-way ES
-                        availableRoomContent.AddRange(partsData.threeWayRoomContent);
-                        availableRoomContent.AddRange(partsData.fourWayRoomContent);
-                        availableRoomContent.AddRange(partsData.twoWayRoomContentTurn);
-                        rotation = 90f;
-                    }
-                }
-                else //No north, no south, yes east
-                {
-                    if (westPosition.zoneType == ZoneType.Room)
-                    {
-                        //2-way EW
-                        availableRoomContent.AddRange(partsData.threeWayRoomContent);
-                        availableRoomContent.AddRange(partsData.fourWayRoomContent);
-                        availableRoomContent.AddRange(partsData.twoWayRoomContentStraigh);
-                        rotation = 90f;
-
-                    }
-                    else
-                    {
-                        //1-way east
-                        availableRoomContent.AddRange(partsData.oneWayRoomContent);
-                        rotation = 90f;
-
-                    }
-                }
-            }
-            else //No north, no east
-            {
-                if (southPosition.zoneType == ZoneType.Room)
-                {
-                    if (westPosition.zoneType == ZoneType.Room)
-                    {
-                        //2-way SW
-                        availableRoomContent.AddRange(partsData.threeWayRoomContent);
-                        availableRoomContent.AddRange(partsData.fourWayRoomContent);
-                        availableRoomContent.AddRange(partsData.twoWayRoomContentTurn);
-                        rotation = 180f;
-                    }
-                    else
-                    {
-                        //1-way south
-                        availableRoomContent.AddRange(partsData.oneWayRoomContent);
-                        rotation = 180f;
-
-                    }
-                }
-                else //No north, no east, no south
-                {
-                    if (westPosition.zoneType == ZoneType.Room)
-                    {
-                        //1-way west
-                        availableRoomContent.AddRange(partsData.oneWayRoomContent);
-                        rotation = 270f;
-
-                    }
-                    else
-                    {
-                        Debug.LogError("Room has spawned with no adjacent rooms!");
-                    }
-                }
-            }
-
         }
     }
 }
+

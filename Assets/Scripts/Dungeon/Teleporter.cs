@@ -2,26 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Teleporter : MonoBehaviour
+namespace BOIVR
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Teleporter : MonoBehaviour
     {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.layer == 10)
+        // Start is called before the first frame update
+        void Start()
         {
-            Player.local.data.completedLevel = true;
-            GameManager.GameOver();
+
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.layer == 10)
+            {
+                Player.local.data.completedLevel = true;
+                GameManager.GameOver();
+            }
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
+

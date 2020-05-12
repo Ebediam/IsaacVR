@@ -2,60 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MultiShooterRandom : EnemyBehaviour
+namespace BOIVR
 {
-    // Start is called before the first frame update
-
-    float timer = 0f;
-
-    public List<Transform> spawnPoints;
-    public EnemyBullet bullet;
-    public override void Start()
+    public class MultiShooterRandom : EnemyBehaviour
     {
-        base.Start();
-    }
+        // Start is called before the first frame update
 
-    // Update is called once per frame
-    public override void Update()
-    {
-        if (!enemyController.active)
+        float timer = 0f;
+
+        public List<Transform> spawnPoints;
+        public EnemyBullet bullet;
+        public override void Start()
         {
-            return;
+            base.Start();
         }
 
-        base.Update();
-
-        timer += Time.deltaTime;
-
-        if(timer > enemyController.data.shotCooldown)
+        // Update is called once per frame
+        public override void Update()
         {
-            for (int i = 0; i <= enemyController.data.bulletsPerShot; i++)
+            if (!enemyController.active)
             {
-                Invoke("Shoot", enemyController.data.delayBetweenBulletsPerShot * i);
+                return;
             }
-            timer = RandomizeShotTimer();
+
+            base.Update();
+
+            timer += Time.deltaTime;
+
+            if (timer > enemyController.data.shotCooldown)
+            {
+                for (int i = 0; i <= enemyController.data.bulletsPerShot; i++)
+                {
+                    Invoke("Shoot", enemyController.data.delayBetweenBulletsPerShot * i);
+                }
+                timer = RandomizeShotTimer();
+
+            }
+
 
         }
 
-
-    }
-
-    public void Shoot()
-    {
-        foreach(Transform spawnPoint in spawnPoints)
+        public void Shoot()
         {
-            EnemyBullet bulletInstantiate = Instantiate(bullet);
-            bulletInstantiate.transform.position = spawnPoint.position;
-            bulletInstantiate.transform.rotation = spawnPoint.rotation;
-            bulletInstantiate.rb.AddForce(bulletInstantiate.transform.forward * enemyController.data.bulletSpeed, ForceMode.VelocityChange);
-            bulletInstantiate.damage = enemyController.data.damage;
+            foreach (Transform spawnPoint in spawnPoints)
+            {
+                EnemyBullet bulletInstantiate = Instantiate(bullet);
+                bulletInstantiate.transform.position = spawnPoint.position;
+                bulletInstantiate.transform.rotation = spawnPoint.rotation;
+                bulletInstantiate.rb.AddForce(bulletInstantiate.transform.forward * enemyController.data.bulletSpeed, ForceMode.VelocityChange);
+                bulletInstantiate.damage = enemyController.data.damage;
 
+            }
         }
-    }
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        timer = RandomizeShotTimer();
+        public override void Initialize()
+        {
+            base.Initialize();
+            timer = RandomizeShotTimer();
+        }
     }
 }
+

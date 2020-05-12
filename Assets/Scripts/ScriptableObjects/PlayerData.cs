@@ -27,8 +27,8 @@ public class PlayerData : ScriptableObject
     public int keys;
     public int bombs;
     public float currentHealth;
-    public ItemData leftHandItem;
-    public ItemData rightHandItem;
+    public ItemData leftGrabberItem;
+    public ItemData rightGrabberItem;
     public List<SpellData> availableSpells = new List<SpellData>();
     public SpellData activeSpell;
 
@@ -82,8 +82,8 @@ public class PlayerData : ScriptableObject
             keys = 0;
             bombs = 0;
             currentHealth = baseHealth;
-            leftHandItem = null;
-            rightHandItem = null;
+            leftGrabberItem = null;
+            rightGrabberItem = null;
         }
 
 

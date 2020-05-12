@@ -2,97 +2,101 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : EnemyBehaviour
+namespace BOIVR
 {
-    public enum SpawnerType
+    public class EnemySpawner : EnemyBehaviour
     {
-        Random,
-        Defined
-    }
-
-    public SpawnerType spawnerType;
-
-    public EnemyPoolData enemyPoolData;
-    public EnemyData enemyToSpawn;
-    public Transform spawnPoint;
-    public float autoInflictedDamage = 0f;
-
-    float timer;
-    // Start is called before the first frame update
-    public override void Start()
-    {
-        base.Start();
-
-    }
-
-    // Update is called once per frame
-    public override void Update()
-    {
-        if (!enemyController.active)
+        public enum SpawnerType
         {
-            return;
-        }
-        base.Update();
-
-
-        timer += Time.deltaTime;
-
-        if(timer > enemyController.data.actionCooldown)
-        {
-            SpawnEnemy();
-            timer = Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
+            Random,
+            Defined
         }
 
-    }
+        public SpawnerType spawnerType;
 
-    public void SpawnEnemy()
-    {
-        Enemy enemyInstance = Instantiate(enemyToSpawn.prefab).GetComponent<Enemy>();
-        enemyInstance.transform.position = spawnPoint.transform.position;
-        enemyInstance.transform.rotation = spawnPoint.transform.rotation;
-        enemyInstance.enemyManager = enemyController.enemyManager;
-        enemyInstance.active = true;
+        public EnemyPoolData enemyPoolData;
+        public EnemyData enemyToSpawn;
+        public Transform spawnPoint;
+        public float autoInflictedDamage = 0f;
 
-        if(autoInflictedDamage != 0)
+        float timer;
+        // Start is called before the first frame update
+        public override void Start()
         {
-            enemyController.TakeDamage(autoInflictedDamage);
+            base.Start();
+
         }
 
-        if(spawnerType == SpawnerType.Random)
+        // Update is called once per frame
+        public override void Update()
         {
-            PickEnemyDataRandom();
+            if (!enemyController.active)
+            {
+                return;
+            }
+            base.Update();
+
+
+            timer += Time.deltaTime;
+
+            if (timer > enemyController.data.actionCooldown)
+            {
+                SpawnEnemy();
+                timer = Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
+            }
+
         }
-    }
 
-    public void PickEnemyDataRandom()
-    {
-        enemyToSpawn = enemyPoolData.enemyPoolList[Random.Range(0, enemyPoolData.enemyPoolList.Count)];
-    }
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        timer = (enemyController.data.actionCooldown / 2) + Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
-
-        switch (spawnerType)
+        public void SpawnEnemy()
         {
-            case SpawnerType.Defined:
-                if (!enemyToSpawn)
-                {
-                    Debug.LogError("EnemySpawner type Defined but no EnemyData found!");
-                    return;
-                }
-                break;
+            Enemy enemyInstance = Instantiate(enemyToSpawn.prefab).GetComponent<Enemy>();
+            enemyInstance.transform.position = spawnPoint.transform.position;
+            enemyInstance.transform.rotation = spawnPoint.transform.rotation;
+            enemyInstance.enemyManager = enemyController.enemyManager;
+            enemyInstance.active = true;
 
-            case SpawnerType.Random:
+            if (autoInflictedDamage != 0)
+            {
+                enemyController.TakeDamage(autoInflictedDamage);
+            }
+
+            if (spawnerType == SpawnerType.Random)
+            {
                 PickEnemyDataRandom();
-                break;
+            }
+        }
+
+        public void PickEnemyDataRandom()
+        {
+            enemyToSpawn = enemyPoolData.enemyPoolList[Random.Range(0, enemyPoolData.enemyPoolList.Count)];
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            timer = (enemyController.data.actionCooldown / 2) + Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
+
+            switch (spawnerType)
+            {
+                case SpawnerType.Defined:
+                    if (!enemyToSpawn)
+                    {
+                        Debug.LogError("EnemySpawner type Defined but no EnemyData found!");
+                        return;
+                    }
+                    break;
+
+                case SpawnerType.Random:
+                    PickEnemyDataRandom();
+                    break;
 
 
+
+
+            }
 
 
         }
-
-
     }
 }
+

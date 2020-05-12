@@ -2,35 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundLookAt : EnemyBehaviour
+namespace BOIVR
 {
-    // Start is called before the first frame update
-
-    public override void Start()
+    public class GroundLookAt : EnemyBehaviour
     {
-        base.Start();
+        // Start is called before the first frame update
 
-
-    }
-
-    // Update is called once per frame
-    public override void Update()
-    {
-        if (!enemyController.active)
+        public override void Start()
         {
-            return;
+            base.Start();
+
+
         }
-        base.Update();
 
-        Vector3 targetDirection = target.position - transform.position;
+        // Update is called once per frame
+        public override void Update()
+        {
+            if (!enemyController.active)
+            {
+                return;
+            }
+            base.Update();
 
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, enemyController.data.maxSpeed * Time.deltaTime, 0f);
+            Vector3 targetDirection = target.position - transform.position;
 
-        newDirection = new Vector3(newDirection.x, 0f, newDirection.z);
-        transform.rotation = Quaternion.LookRotation(newDirection);
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, enemyController.data.maxSpeed * Time.deltaTime, 0f);
+
+            newDirection = new Vector3(newDirection.x, 0f, newDirection.z);
+            transform.rotation = Quaternion.LookRotation(newDirection);
+
+
+        }
 
 
     }
-
-
 }
+

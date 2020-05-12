@@ -2,190 +2,195 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : Item
+namespace BOIVR
 {
-    [HideInInspector]public GunData gunData;
-    public Transform spawnPoint;
 
-    public GameObject redCube;
-    public GameObject greenCube;
-
-    public bool OnCooldown = false;
-
-    public bool active = true;
-
-    bool automaticEnabled = false;
-
-     public float timer=0f;
-
-    public AudioSource shotSFX;
-    public ParticleSystem shotVFX;
-
-    public enum BulletType
+    public class Gun : Item
     {
-        Main,
-        Alt
-    }
+        [HideInInspector] public GunData gunData;
+        public Transform spawnPoint;
 
-    BulletType bulletType;
+        public GameObject redCube;
+        public GameObject greenCube;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Player.EnterSafeZoneEvent += Deactivate;
-        Player.ExitSafeZoneEvent += Activate;
-        GameManager.GameOverEvent += OnGameOver;
-        gunData = data as GunData;
-        shotSFX.clip = gunData.shotSFX;
-    }
+        public bool OnCooldown = false;
 
-    public void OnGameOver()
-    {
-        Player.EnterSafeZoneEvent -= Deactivate;
-        Player.ExitSafeZoneEvent -= Activate;
-        GameManager.GameOverEvent -= OnGameOver;
-    }
+        public bool active = true;
 
-    public void Deactivate()
-    {
-        active = false;
-    }
+        bool automaticEnabled = false;
 
-    public void Activate()
-    {
-        active = true;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if (!Player.local)
+        public float timer = 0f;
+
+        public AudioSource shotSFX;
+        public ParticleSystem shotVFX;
+
+        public enum BulletType
         {
-            return;
+            Main,
+            Alt
         }
 
-        if (!active)
+        BulletType bulletType;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            return;
+            Player.EnterSafeZoneEvent += Deactivate;
+            Player.ExitSafeZoneEvent += Activate;
+            GameManager.GameOverEvent += OnGameOver;
+            gunData = data as GunData;
+            shotSFX.clip = gunData.shotSFX;
         }
 
-        if (!OnCooldown) 
+        public void OnGameOver()
         {
-            return;
+            Player.EnterSafeZoneEvent -= Deactivate;
+            Player.ExitSafeZoneEvent -= Activate;
+            GameManager.GameOverEvent -= OnGameOver;
         }
 
-        timer += Time.deltaTime;
-
-        if(timer >= (gunData.fireRate+Player.local.data.fireRateBoost))
+        public void Deactivate()
         {
-            OnCooldown = false;
-            timer = 0f;
-            greenCube.SetActive(true);
-            redCube.SetActive(false);
+            active = false;
+        }
 
-            if(automaticEnabled)
-            {                
-                Shoot(bulletType);
+        public void Activate()
+        {
+            active = true;
+        }
+        // Update is called once per frame
+        void Update()
+        {
+            if (!Player.local)
+            {
+                return;
+            }
+
+            if (!active)
+            {
+                return;
+            }
+
+            if (!OnCooldown)
+            {
+                return;
+            }
+
+            timer += Time.deltaTime;
+
+            if (timer >= (gunData.fireRate + Player.local.data.fireRateBoost))
+            {
+                OnCooldown = false;
+                timer = 0f;
+                greenCube.SetActive(true);
+                redCube.SetActive(false);
+
+                if (automaticEnabled)
+                {
+                    Shoot(bulletType);
+                }
+
+            }
+        }
+
+        public override void AltUse()
+        {
+            if (gunData.bulletUse == GunData.BulletUse.Main)
+            {
+                return;
+            }
+
+            base.AltUse();
+            bulletType = BulletType.Alt;
+            ShootCheck(bulletType);
+        }
+
+        public override void Use()
+        {
+            if (gunData.bulletUse == GunData.BulletUse.Alt)
+            {
+                return;
+            }
+            base.Use();
+
+            bulletType = BulletType.Main;
+            ShootCheck(bulletType);
+
+        }
+
+        public void ShootCheck(BulletType bulletType)
+        {
+
+            if (OnCooldown)
+            {
+                return;
+            }
+
+            if (!active)
+            {
+                return;
+            }
+
+            switch (gunData.gunMode)
+            {
+                case GunData.GunMode.Manual:
+                    Shoot(bulletType);
+                    break;
+
+
+                case GunData.GunMode.Automatic:
+                    Shoot(bulletType);
+                    automaticEnabled = true;
+                    break;
+
+            }
+        }
+
+        public override void StopUsing()
+        {
+            base.StopUsing();
+
+            if (gunData.gunMode == GunData.GunMode.Automatic)
+            {
+                automaticEnabled = false;
             }
 
         }
-    }
 
-    public override void AltUse()
-    {
-        if(gunData.bulletUse == GunData.BulletUse.Main)
+        public AllBullet Shoot(BulletType bulletType)
         {
-            return;
-        }
+            GameObject bulletGO;
 
-        base.AltUse();
-        bulletType = BulletType.Alt;
-        ShootCheck(bulletType);
-    }
+            switch (bulletType)
+            {
+                case BulletType.Alt:
 
-    public override void Use()
-    {
-        if (gunData.bulletUse == GunData.BulletUse.Alt)
-        {
-            return;
-        }
-        base.Use();
+                    bulletGO = Instantiate(gunData.altBulletPrefab);
+                    break;
 
-        bulletType = BulletType.Main;
-        ShootCheck(bulletType);
-        
-    }
+                default:
+                    bulletGO = Instantiate(gunData.bulletPrefab);
+                    break;
 
-    public void ShootCheck(BulletType bulletType)
-    {
+            }
 
-        if (OnCooldown)
-        {
-            return;
-        }
+            bulletGO.transform.position = spawnPoint.position;
+            bulletGO.transform.rotation = spawnPoint.rotation;
+            AllBullet bullet = bulletGO.GetComponent<AllBullet>();
 
-        if (!active)
-        {
-            return;
-        }
+            bullet.rb.velocity = Player.local.rb.velocity / 10f;
+            bullet.rb.AddForce(bullet.transform.forward * (gunData.bulletSpeed + Player.local.data.bulletSpeedBoost), ForceMode.VelocityChange);
+            bullet.damage = gunData.bulletDamage + Player.local.data.damageBoost;
+            OnCooldown = true;
+            redCube.SetActive(true);
+            greenCube.SetActive(false);
 
-        switch (gunData.gunMode)
-        {
-            case GunData.GunMode.Manual:
-                Shoot(bulletType);
-                break;
+            shotSFX.Play();
+            shotVFX.Play();
 
-
-            case GunData.GunMode.Automatic:
-                Shoot(bulletType);
-                automaticEnabled = true;
-                break;
+            return bullet;
 
         }
-    }
-
-    public override void StopUsing()
-    {
-        base.StopUsing();
-
-        if(gunData.gunMode == GunData.GunMode.Automatic)
-        {
-            automaticEnabled = false;
-        }
-
-    }
-
-    public AllBullet Shoot(BulletType bulletType)
-    {
-        GameObject bulletGO;
-
-        switch (bulletType)
-        {
-            case BulletType.Alt:
-
-                bulletGO = Instantiate(gunData.altBulletPrefab);
-                break;
-
-            default:
-                bulletGO = Instantiate(gunData.bulletPrefab);
-                break;
-
-        }
-        
-        bulletGO.transform.position = spawnPoint.position;
-        bulletGO.transform.rotation = spawnPoint.rotation;
-        AllBullet bullet = bulletGO.GetComponent<AllBullet>();
-
-        bullet.rb.velocity = Player.local.rb.velocity/10f;
-        bullet.rb.AddForce(bullet.transform.forward * (gunData.bulletSpeed+Player.local.data.bulletSpeedBoost), ForceMode.VelocityChange);
-        bullet.damage = gunData.bulletDamage + Player.local.data.damageBoost;
-        OnCooldown = true;
-        redCube.SetActive(true);
-        greenCube.SetActive(false);
-
-        shotSFX.Play();
-        shotVFX.Play();
-
-        return bullet;
 
     }
 

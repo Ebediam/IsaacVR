@@ -2,31 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowdownOther : EnemyBehaviour
+namespace BOIVR
 {
-    public Enemy enemyToSlowdown;
-    public float slowdownPercent;
 
-    // Start is called before the first frame update
-    public override void Start()
+    public class SlowdownOther : EnemyBehaviour
     {
-        base.Start();
-        enemyController.DamageableDestroyedEvent += Slowdown;
-    }
+        public Enemy enemyToSlowdown;
+        public float slowdownPercent;
 
-    /*
-    public override void Update()
-    {
-        if (!enemyController.active)
+        // Start is called before the first frame update
+        public override void Start()
         {
-            return;
+            base.Start();
+            enemyController.DamageableDestroyedEvent += Slowdown;
         }
-        base.Update();
-    }
-    */
-    public void Slowdown(Damageable damageable)
-    {
-        enemyToSlowdown.maxSpeed *= slowdownPercent;
-        enemyController.DamageableDestroyedEvent -= Slowdown;
+
+        /*
+        public override void Update()
+        {
+            if (!enemyController.active)
+            {
+                return;
+            }
+            base.Update();
+        }
+        */
+        public void Slowdown(Damageable damageable)
+        {
+            enemyToSlowdown.maxSpeed *= slowdownPercent;
+            enemyController.DamageableDestroyedEvent -= Slowdown;
+        }
     }
 }
+

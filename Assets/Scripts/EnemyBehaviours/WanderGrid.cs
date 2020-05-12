@@ -2,121 +2,125 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WanderGrid : EnemyBehaviour
+namespace BOIVR
 {
-
-    public bool isTurningInCooldown = false;
-    public float turnCooldownTime = 0.1f;
-    float timer = 0f;
-
-    float movementTimer = 0f;
-
-
-    public Sensor leftSensor;
-    public Sensor rightSensor;
-    // Start is called before the first frame update
-    public override void Start()
+    public class WanderGrid : EnemyBehaviour
     {
-        base.Start();
-    }
 
-    // Update is called once per frame
-    public override void Update()
-    {
-        if (!enemyController.active)
+        public bool isTurningInCooldown = false;
+        public float turnCooldownTime = 0.1f;
+        float timer = 0f;
+
+        float movementTimer = 0f;
+
+
+        public Sensor leftSensor;
+        public Sensor rightSensor;
+        // Start is called before the first frame update
+        public override void Start()
         {
-            return;
-        }
-        base.Update();
-
-
-
-        enemyController.rb.AddForce(transform.forward * enemyController.data.acceleration, ForceMode.Acceleration);
-
-        if(enemyController.rb.velocity.magnitude > enemyController.maxSpeed)
-        {
-            enemyController.rb.velocity *= (enemyController.maxSpeed / enemyController.rb.velocity.magnitude);
+            base.Start();
         }
 
-
-        movementTimer += Time.deltaTime;
-
-        if(movementTimer >= enemyController.data.actionCooldown)
+        // Update is called once per frame
+        public override void Update()
         {
-            movementTimer = Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
-            
-            Turn();
+            if (!enemyController.active)
+            {
+                return;
+            }
+            base.Update();
+
+
+
+            enemyController.rb.AddForce(transform.forward * enemyController.data.acceleration, ForceMode.Acceleration);
+
+            if (enemyController.rb.velocity.magnitude > enemyController.maxSpeed)
+            {
+                enemyController.rb.velocity *= (enemyController.maxSpeed / enemyController.rb.velocity.magnitude);
+            }
+
+
+            movementTimer += Time.deltaTime;
+
+            if (movementTimer >= enemyController.data.actionCooldown)
+            {
+                movementTimer = Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
+
+                Turn();
+            }
+
+
+            if (!isTurningInCooldown)
+            {
+                return;
+            }
+
+            timer += Time.deltaTime;
+
+            if (timer >= turnCooldownTime)
+            {
+                timer = 0f;
+                isTurningInCooldown = false;
+            }
+
+
+
         }
 
-
-        if (!isTurningInCooldown)
+        void Turn()
         {
-            return;
-        }
-
-        timer += Time.deltaTime;
-
-        if(timer >= turnCooldownTime)
-        {
-            timer = 0f;
-            isTurningInCooldown = false;
-        }
-
-
-
-    }
-
-    void Turn()
-    {
-        if (leftSensor.blocked)
-        {
-            transform.Rotate(transform.up, 90f);
-        }
-        else if (rightSensor.blocked)
-        {
-            transform.Rotate(transform.up, -90f);
-        }
-        else
-        {
-
-            int rand = Random.Range(0, 2);
-
-
-            if (rand == 0)
+            if (leftSensor.blocked)
             {
                 transform.Rotate(transform.up, 90f);
             }
-            else if (rand == 1)
+            else if (rightSensor.blocked)
             {
                 transform.Rotate(transform.up, -90f);
             }
+            else
+            {
+
+                int rand = Random.Range(0, 2);
+
+
+                if (rand == 0)
+                {
+                    transform.Rotate(transform.up, 90f);
+                }
+                else if (rand == 1)
+                {
+                    transform.Rotate(transform.up, -90f);
+                }
+            }
+
         }
 
-    }
-    
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (isTurningInCooldown)
+        private void OnTriggerStay(Collider other)
         {
-            return;
+            if (isTurningInCooldown)
+            {
+                return;
+            }
+
+            if (other.isTrigger)
+            {
+                return;
+            }
+
+            if (other.gameObject.layer == 10) //Player layer
+            {
+                return;
+            }
+
+            Turn();
+            isTurningInCooldown = true;
+            Debug.Log("LongWorm has collided with " + other.gameObject.name);
+
+
+
         }
-
-        if (other.isTrigger)
-        {
-            return;
-        }
-
-        if(other.gameObject.layer == 10) //Player layer
-        {
-            return;
-        }
-
-        Turn();
-        isTurningInCooldown = true;
-        Debug.Log("LongWorm has collided with "+other.gameObject.name);
-
-
-
     }
 }
+

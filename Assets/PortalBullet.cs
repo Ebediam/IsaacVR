@@ -3,53 +3,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PortalColor
-{
-    Orange,
-    Blue
-}
 
-public class PortalBullet : AllBullet
+namespace BOIVR
 {
-    public PortalColor color;
 
-    // Start is called before the first frame update
-    void Start()
+    public enum PortalColor
     {
+        Orange,
+        Blue
     }
 
-    public override void CollisionEnterEvent(Collision collision)
+    public class PortalBullet : AllBullet
     {
-        base.CollisionEnterEvent(collision);
+        public PortalColor color;
 
-        rb.detectCollisions = false;
-        rb.isKinematic = true;
-
-        Portal portal;
-        switch (color)
+        // Start is called before the first frame update
+        void Start()
         {
+        }
 
-            case PortalColor.Orange:
-                portal = PortalGun.orangePortal;                
-                break;
+        public override void CollisionEnterEvent(Collision collision)
+        {
+            base.CollisionEnterEvent(collision);
+
+            rb.detectCollisions = false;
+            rb.isKinematic = true;
+
+            Portal portal;
+            switch (color)
+            {
+
+                case PortalColor.Orange:
+                    portal = PortalGun.orangePortal;
+                    break;
 
 
-            default:
-                portal = PortalGun.bluePortal;
-                break;
+                default:
+                    portal = PortalGun.bluePortal;
+                    break;
+
+            }
+
+            portal.transform.position = transform.position;
+            portal.transform.LookAt(portal.transform.position + collision.GetContact(0).normal);
+            portal.gameObject.SetActive(true);
+            //gameObject.SetActive(false);
 
         }
 
-        portal.transform.position = transform.position;
-        portal.transform.LookAt(portal.transform.position + collision.GetContact(0).normal);
-        portal.gameObject.SetActive(true);
-        //gameObject.SetActive(false);
+        // Update is called once per frame
+        void Update()
+        {
 
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

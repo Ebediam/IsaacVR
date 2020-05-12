@@ -2,189 +2,193 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+namespace BOIVR
 {
-    public delegate void DoorDelegate();
-
-    public static DoorDelegate LockDoorsEvent;
-    public static DoorDelegate OpenDoorsEvent;
-    public BoxCollider boxCollider;
-
-    public GameObject openDoor;
-    public GameObject closedDoor;
-    public GameObject keyLockedDoor;
-
-    bool allClear = false;
-
-    public List<Room> rooms;
-
-    public enum DoorState
+    public class Door : MonoBehaviour
     {
-        Open,
-        Closed,
-        KeyLocked,
-        KeyLockedClosed
-    }
+        public delegate void DoorDelegate();
 
-    public bool hasPassed;
-    public DoorState state;
+        public static DoorDelegate LockDoorsEvent;
+        public static DoorDelegate OpenDoorsEvent;
+        public BoxCollider boxCollider;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        LockDoorsEvent += LockDoor;
-        OpenDoorsEvent += OpenDoor;
+        public GameObject openDoor;
+        public GameObject closedDoor;
+        public GameObject keyLockedDoor;
 
-        SetDoorState(state);
-    
-    }
+        bool allClear = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        public List<Room> rooms;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.GetComponent<Bullet>())
+        public enum DoorState
         {
-            other.gameObject.GetComponent<Bullet>().DestroyBullet();
+            Open,
+            Closed,
+            KeyLocked,
+            KeyLockedClosed
         }
 
-        if (other.gameObject.GetComponentInParent<Player>())
+        public bool hasPassed;
+        public DoorState state;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            other.gameObject.GetComponentInParent<Player>().DeactivateGuns();
+            LockDoorsEvent += LockDoor;
+            OpenDoorsEvent += OpenDoor;
+
+            SetDoorState(state);
+
         }
 
-
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(state != DoorState.KeyLocked)
+        // Update is called once per frame
+        void Update()
         {
-            return;
+
         }
 
-        if (collision.gameObject.GetComponentInParent<Key>())
+        private void OnTriggerEnter(Collider other)
         {
-            SetDoorState(DoorState.Open);
-            collision.gameObject.GetComponentInParent<Key>().DespawnItem();
-
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.GetComponentInParent<Player>())
-        {
-            other.gameObject.GetComponentInParent<Player>().ActivateGuns();
-            hasPassed = true;
-
-            if (allClear)
+            if (other.gameObject.GetComponent<Bullet>())
             {
-                RemoveDoor();
+                other.gameObject.GetComponent<Bullet>().DestroyBullet();
+            }
+
+            if (other.gameObject.GetComponentInParent<Player>())
+            {
+                other.gameObject.GetComponentInParent<Player>().DeactivateGuns();
+            }
+
+
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (state != DoorState.KeyLocked)
+            {
+                return;
+            }
+
+            if (collision.gameObject.GetComponentInParent<Key>())
+            {
+                SetDoorState(DoorState.Open);
+                collision.gameObject.GetComponentInParent<Key>().DespawnItem();
+
             }
         }
 
-
-
-    }
-
-    public void OpenDoor()
-    {          
-        if(state == DoorState.Closed)
+        private void OnTriggerExit(Collider other)
         {
-            SetDoorState(DoorState.Open);
-
-            allClear = true;
-            foreach(Room room in rooms)
+            if (other.gameObject.GetComponentInParent<Player>())
             {
-                if (!room.isCompleted)
+                other.gameObject.GetComponentInParent<Player>().ActivateGuns();
+                hasPassed = true;
+
+                if (allClear)
                 {
-                    allClear = false;
+                    RemoveDoor();
+                }
+            }
+
+
+
+        }
+
+        public void OpenDoor()
+        {
+            if (state == DoorState.Closed)
+            {
+                SetDoorState(DoorState.Open);
+
+                allClear = true;
+                foreach (Room room in rooms)
+                {
+                    if (!room.isCompleted)
+                    {
+                        allClear = false;
+                    }
+
                 }
 
-            }
+                if ((allClear == true) && hasPassed)
+                {
+                    RemoveDoor();
+                }
 
-            if((allClear == true) && hasPassed)
+
+            }
+            else if (state == DoorState.KeyLockedClosed)
             {
-                RemoveDoor();
+                SetDoorState(DoorState.KeyLocked);
             }
 
 
         }
-        else if(state == DoorState.KeyLockedClosed)
+
+        public void RemoveDoor()
         {
-            SetDoorState(DoorState.KeyLocked);
+            gameObject.SetActive(false);
         }
 
-
-    }
-
-    public void RemoveDoor()
-    {
-        gameObject.SetActive(false);
-    }
-
-    public void LockDoor()
-    {
-        if(state == DoorState.Open)
+        public void LockDoor()
         {
-            SetDoorState(DoorState.Closed);
+            if (state == DoorState.Open)
+            {
+                SetDoorState(DoorState.Closed);
+            }
+            else if (state == DoorState.KeyLocked)
+            {
+                SetDoorState(DoorState.KeyLockedClosed);
+            }
         }
-        else if(state == DoorState.KeyLocked)
+
+        public static void OpenDoors()
         {
-            SetDoorState(DoorState.KeyLockedClosed);
+            OpenDoorsEvent?.Invoke();
         }
-    }
-
-    public static void OpenDoors()
-    {
-        OpenDoorsEvent?.Invoke();
-    }
-    public static void LockDoors()
-    {
-        LockDoorsEvent?.Invoke();
-    } 
-
-    public void SetDoorState(DoorState _state)
-    {
-        openDoor.SetActive(false);
-        closedDoor.SetActive(false);
-        keyLockedDoor.SetActive(false);
-        state = _state;
-
-        switch (_state)
+        public static void LockDoors()
         {
-            case DoorState.Closed:
-                
-                closedDoor.SetActive(true);
-                boxCollider.isTrigger = false;
-                break;
-
-            case DoorState.KeyLockedClosed:
-
-                closedDoor.SetActive(true);
-                boxCollider.isTrigger = false;
-                break;
-
-            case DoorState.KeyLocked:
-                keyLockedDoor.SetActive(true);
-                boxCollider.isTrigger = false;
-                break;
-
-            case DoorState.Open:
-                openDoor.SetActive(true);
-                boxCollider.isTrigger = true;
-                break;
-
-            default:
-                Debug.LogError("Doorstate not valid");
-                break;
-
+            LockDoorsEvent?.Invoke();
         }
-    }
 
+        public void SetDoorState(DoorState _state)
+        {
+            openDoor.SetActive(false);
+            closedDoor.SetActive(false);
+            keyLockedDoor.SetActive(false);
+            state = _state;
+
+            switch (_state)
+            {
+                case DoorState.Closed:
+
+                    closedDoor.SetActive(true);
+                    boxCollider.isTrigger = false;
+                    break;
+
+                case DoorState.KeyLockedClosed:
+
+                    closedDoor.SetActive(true);
+                    boxCollider.isTrigger = false;
+                    break;
+
+                case DoorState.KeyLocked:
+                    keyLockedDoor.SetActive(true);
+                    boxCollider.isTrigger = false;
+                    break;
+
+                case DoorState.Open:
+                    openDoor.SetActive(true);
+                    boxCollider.isTrigger = true;
+                    break;
+
+                default:
+                    Debug.LogError("Doorstate not valid");
+                    break;
+
+            }
+        }
+
+    }
 }
+

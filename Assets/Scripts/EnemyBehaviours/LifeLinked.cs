@@ -2,49 +2,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeLinked : EnemyBehaviour
+namespace BOIVR
 {
-    public Damageable linkedTo;
-
-    // Start is called before the first frame update
-    public override void Start()
+    public class LifeLinked : EnemyBehaviour
     {
-        base.Start();
-        linkedTo.DamageableDestroyedEvent += LifeLinkedDestroyed;
-        enemyController.DamageableDestroyedEvent += CleanLifeLink;
-        //linkedTo.TakeDamageEvent += LifeLinkedDamaged;
-    }
+        public Damageable linkedTo;
 
-    // Update is called once per frame
-    public override void Update()
-    {
-        if (!enemyController.active)
+        // Start is called before the first frame update
+        public override void Start()
         {
-            return;
+            base.Start();
+            linkedTo.DamageableDestroyedEvent += LifeLinkedDestroyed;
+            enemyController.DamageableDestroyedEvent += CleanLifeLink;
+            //linkedTo.TakeDamageEvent += LifeLinkedDamaged;
         }
-        base.Update();
+
+        // Update is called once per frame
+        public override void Update()
+        {
+            if (!enemyController.active)
+            {
+                return;
+            }
+            base.Update();
 
 
 
 
+
+        }
+        /*
+        public void LifeLinkedDamaged(Damageable damageable, float damage)
+        {        
+            enemyController.TakeDamage(damage);
+        }
+        */
+        public void LifeLinkedDestroyed(Damageable damageable)
+        {
+            enemyController.DestroyDamageable();
+        }
+
+        public void CleanLifeLink(Damageable damageable)
+        {
+            enemyController.DamageableDestroyedEvent -= CleanLifeLink;
+            linkedTo.DamageableDestroyedEvent -= LifeLinkedDestroyed;
+            linkedTo = null;
+        }
 
     }
-    /*
-    public void LifeLinkedDamaged(Damageable damageable, float damage)
-    {        
-        enemyController.TakeDamage(damage);
-    }
-    */
-    public void LifeLinkedDestroyed(Damageable damageable)
-    {
-        enemyController.DestroyDamageable();
-    }
-
-    public void CleanLifeLink(Damageable damageable)
-    {
-        enemyController.DamageableDestroyedEvent -= CleanLifeLink;
-        linkedTo.DamageableDestroyedEvent -= LifeLinkedDestroyed;
-        linkedTo = null;
-    }
-
 }
+

@@ -2,189 +2,193 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public enum Direction
+namespace BOIVR
 {
-    North,
-    West,
-    East,
-    South,
-    None
-}
 
-public class Utils : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+    public enum Direction
     {
-        
+        North,
+        West,
+        East,
+        South,
+        None
     }
 
-    // Update is called once per frame
-    void Update()
+    public class Utils : MonoBehaviour
     {
-        
-    }
-
-    public static Vector3 RandomVector3()
-    {
-        Vector3 vector = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-
-        vector = vector.normalized;
-
-        return vector;
-    }
-    
-    public static Vector3 RandomVector3(bool zeroXaxis, bool zeroYaxis, bool zeroZaxis)
-    {
-        Vector3 vector = RandomVector3();
-
-        if (zeroXaxis)
+        // Start is called before the first frame update
+        void Start()
         {
-            
+
         }
 
-        if (zeroYaxis)
+        // Update is called once per frame
+        void Update()
         {
-            vector = new Vector3(vector.x, 0f, vector.z);
+
         }
 
-        if (zeroZaxis)
+        public static Vector3 RandomVector3()
         {
-            vector = new Vector3(vector.x, vector.y, 0f);
+            Vector3 vector = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+
+            vector = vector.normalized;
+
+            return vector;
         }
 
-        vector = vector.normalized;
-
-        return vector;
-    }
-
-
-    public static Interactable CalculateNearestItem(List<Interactable> interactables, Vector3 centerPoint)
-    {
-        if(interactables.Count == 0)
+        public static Vector3 RandomVector3(bool zeroXaxis, bool zeroYaxis, bool zeroZaxis)
         {
-            return null;
-        }
+            Vector3 vector = RandomVector3();
 
-
-        Interactable nearestInteractable = null;
-
-        float nearestDistance = 9999f;
-
-        foreach(Interactable interactable in interactables)
-        {
-            if (!interactable)
+            if (zeroXaxis)
             {
-                continue;
+
             }
 
-            if (interactable.holder) 
+            if (zeroYaxis)
             {
-                continue;
+                vector = new Vector3(vector.x, 0f, vector.z);
             }
-            
-            float distance = Vector3.Distance(interactable.transform.position, centerPoint);
-            if (distance < nearestDistance)
+
+            if (zeroZaxis)
             {
-                nearestInteractable = interactable;
-                nearestDistance = distance;
+                vector = new Vector3(vector.x, vector.y, 0f);
             }
-        }
 
-        return nearestInteractable;
-    }
+            vector = vector.normalized;
 
-    public static Transform GetTarget()
-    {
-        Transform target = null;
-
-        if (Player.local)
-        {
-           target = Player.local.head;
-        }
-
-        return target;
-
-
-    } 
-
-    public static Vector3 HorizontalVectorToPlayer(Vector3 startPosition)
-    {
-         Vector3 vectorToPlayer = Player.local.transform.position - startPosition;
-
-        vectorToPlayer = new Vector3(vectorToPlayer.x, 0, vectorToPlayer.z);
-
-        return vectorToPlayer;
-
-    }
-
-    public static Direction OpositeDirection(Direction direction)
-    {
-        switch (direction)
-        {
-            case Direction.East:
-                return Direction.West;
-
-            case Direction.North:
-                return Direction.South;
-
-            case Direction.South:
-                return Direction.North;
-
-            case Direction.West:
-                return Direction.East;
-
-            default:
-                return Direction.None;
-
+            return vector;
         }
 
 
-    }
-
-    public static Direction RandomDirection(Direction directionToExclude)
-    {
-        Direction direction;
-
-        do
+        public static Interactable CalculateNearestItem(List<Interactable> interactables, Vector3 centerPoint)
         {
-            int randomNumber = Random.Range(0, 4);
-
-            switch (randomNumber)
+            if (interactables.Count == 0)
             {
-                case 0:
-                    direction = Direction.North;
-                    break;
+                return null;
+            }
 
-                case 1:
-                    direction = Direction.West;
-                    break;
 
-                case 2:
-                    direction = Direction.East;
-                    break;
+            Interactable nearestInteractable = null;
 
-                case 3:
-                    direction = Direction.South;
-                    break;
+            float nearestDistance = 9999f;
+
+            foreach (Interactable interactable in interactables)
+            {
+                if (!interactable)
+                {
+                    continue;
+                }
+
+                if (interactable.holder)
+                {
+                    continue;
+                }
+
+                float distance = Vector3.Distance(interactable.transform.position, centerPoint);
+                if (distance < nearestDistance)
+                {
+                    nearestInteractable = interactable;
+                    nearestDistance = distance;
+                }
+            }
+
+            return nearestInteractable;
+        }
+
+        public static Transform GetTarget()
+        {
+            Transform target = null;
+
+            if (Player.local)
+            {
+                target = Player.local.head;
+            }
+
+            return target;
+
+
+        }
+
+        public static Vector3 HorizontalVectorToPlayer(Vector3 startPosition)
+        {
+            Vector3 vectorToPlayer = Player.local.transform.position - startPosition;
+
+            vectorToPlayer = new Vector3(vectorToPlayer.x, 0, vectorToPlayer.z);
+
+            return vectorToPlayer;
+
+        }
+
+        public static Direction OpositeDirection(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.East:
+                    return Direction.West;
+
+                case Direction.North:
+                    return Direction.South;
+
+                case Direction.South:
+                    return Direction.North;
+
+                case Direction.West:
+                    return Direction.East;
 
                 default:
-                    Debug.LogError("Error generation random direction");
-                    direction = Direction.South;
-                    break;
+                    return Direction.None;
 
             }
-        } while (direction == directionToExclude);
 
 
-        return direction;
+        }
+
+        public static Direction RandomDirection(Direction directionToExclude)
+        {
+            Direction direction;
+
+            do
+            {
+                int randomNumber = Random.Range(0, 4);
+
+                switch (randomNumber)
+                {
+                    case 0:
+                        direction = Direction.North;
+                        break;
+
+                    case 1:
+                        direction = Direction.West;
+                        break;
+
+                    case 2:
+                        direction = Direction.East;
+                        break;
+
+                    case 3:
+                        direction = Direction.South;
+                        break;
+
+                    default:
+                        Debug.LogError("Error generation random direction");
+                        direction = Direction.South;
+                        break;
+
+                }
+            } while (direction == directionToExclude);
 
 
-       
+            return direction;
 
 
 
 
+
+
+
+        }
     }
+
 }

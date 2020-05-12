@@ -2,43 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Poisonous : EnemyBehaviour
+namespace BOIVR
 {
-    public Poison poisonPrefab;
-    float timer;
-    public Transform spawnPoint;
 
-    // Start is called before the first frame update
-    public override void Start()
+    public class Poisonous : EnemyBehaviour
     {
-        base.Start();
-    }
+        public Poison poisonPrefab;
+        float timer;
+        public Transform spawnPoint;
 
-    // Update is called once per frame
-    public override void Update()
-    {
-        if (!enemyController.active)
+        // Start is called before the first frame update
+        public override void Start()
         {
-            return;
+            base.Start();
         }
 
-        base.Update();
-
-        timer += Time.deltaTime;
-
-        if(timer > enemyController.data.actionCooldown)
+        // Update is called once per frame
+        public override void Update()
         {
-            Poison poison = Instantiate(poisonPrefab);
-            poison.transform.position = spawnPoint.transform.position;
-            timer = RandomizeActionTimer();
+            if (!enemyController.active)
+            {
+                return;
+            }
+
+            base.Update();
+
+            timer += Time.deltaTime;
+
+            if (timer > enemyController.data.actionCooldown)
+            {
+                Poison poison = Instantiate(poisonPrefab);
+                poison.transform.position = spawnPoint.transform.position;
+                timer = RandomizeActionTimer();
+
+            }
 
         }
 
+        public override void Initialize()
+        {
+            base.Initialize();
+            timer = RandomizeActionTimer() + enemyController.data.actionCooldown / 2f;
+        }
     }
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        timer = RandomizeActionTimer()+enemyController.data.actionCooldown/2f;
-    }
 }

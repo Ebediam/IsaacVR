@@ -2,69 +2,73 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+namespace BOIVR
 {
-    public delegate void EnemyManagerDelegate();
-    public EnemyManagerDelegate AllEnemiesDeadEvent;
-    public Room room;
-
-    public List<Enemy> enemies;
-    public int totalEnemies;
-
-    public bool clear;
-
-    private void Start()
+    public class EnemyManager : MonoBehaviour
     {
-        totalEnemies = enemies.Count;
-        room = gameObject.GetComponentInParent<Room>();
-        room.RoomStartEvent += AwakeEnemies;
-        AllEnemiesDeadEvent += room.RoomClear;
+        public delegate void EnemyManagerDelegate();
+        public EnemyManagerDelegate AllEnemiesDeadEvent;
+        public Room room;
 
+        public List<Enemy> enemies;
+        public int totalEnemies;
 
-    }
+        public bool clear;
 
-    public void DeadEnemyListener(Damageable enemy)
-    {
-        if (clear)
+        private void Start()
         {
-            return;
+            totalEnemies = enemies.Count;
+            room = gameObject.GetComponentInParent<Room>();
+            room.RoomStartEvent += AwakeEnemies;
+            AllEnemiesDeadEvent += room.RoomClear;
+
+
         }
 
-        enemy.DamageableDestroyedEvent -= DeadEnemyListener;
-        totalEnemies--;
-        if(totalEnemies <= 0)
+        public void DeadEnemyListener(Damageable enemy)
         {
-            NoEnemiesLeft();
+            if (clear)
+            {
+                return;
+            }
+
+            enemy.DamageableDestroyedEvent -= DeadEnemyListener;
+            totalEnemies--;
+            if (totalEnemies <= 0)
+            {
+                NoEnemiesLeft();
+            }
+
         }
 
-    }
 
-
-    public void NoEnemiesLeft()
-    {
-        clear = true;
-        AllEnemiesDeadEvent?.Invoke();
-        room.RoomStartEvent -= AwakeEnemies;
-    }
-
-    public void AwakeEnemies()
-    {
-        if (clear)
+        public void NoEnemiesLeft()
         {
-            return;
+            clear = true;
+            AllEnemiesDeadEvent?.Invoke();
+            room.RoomStartEvent -= AwakeEnemies;
         }
 
-        if(enemies.Count == 0)
+        public void AwakeEnemies()
         {
-            NoEnemiesLeft();
-        }
+            if (clear)
+            {
+                return;
+            }
 
-        foreach(Enemy enemy in enemies)
-        {
-            enemy.active = true;
-            enemy.enemyManager = this;
-            enemy.DamageableDestroyedEvent += DeadEnemyListener;
-            
+            if (enemies.Count == 0)
+            {
+                NoEnemiesLeft();
+            }
+
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.active = true;
+                enemy.enemyManager = this;
+                enemy.DamageableDestroyedEvent += DeadEnemyListener;
+
+            }
         }
     }
 }
+
