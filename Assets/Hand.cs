@@ -11,7 +11,8 @@ namespace BOIVR
         public Grabber grabber;
         public TeleGrabber teleGrabber;
         public float springForce;
-
+        public Transform shoulder;
+        public Player player;
 
         // Start is called before the first frame update
         void Start()

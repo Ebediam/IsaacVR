@@ -15,21 +15,26 @@ MonoBehaviour:
   maxSpeed: 1.5
   acceleration: 2500
   turnAngle: 2
-  baseHealth: 60
-  invincibilityTime: 0.5
   jumpForce: 5
+  maxItemDistance: 10
+  itemGrabTreshold: 0.5
+  minHandDistance: 0.25
+  maxHandDistance: 0.75
+  springForce: 100
+  damper: 10
+  baseHealth: 60
   damageBoost: 0
   bulletSpeedBoost: 0
-  fireRateBoost: -0.5
+  fireRateBoost: 0
   movementBoost: 0
-  healthBoost: 10
-  canFly: 1
+  healthBoost: 0
+  canFly: 0
   coins: 0
   keys: 0
   bombs: 0
-  currentHealth: 5
-  leftHandItem: {fileID: 11400000, guid: 729603148c548cf4191b4e7681ffcafd, type: 2}
-  rightHandItem: {fileID: 11400000, guid: 729603148c548cf4191b4e7681ffcafd, type: 2}
+  currentHealth: 60
+  leftGrabberItem: {fileID: 0}
+  rightGrabberItem: {fileID: 0}
   availableSpells: []
   activeSpell: {fileID: 11400000, guid: 70c11e4cf9b5c164a92d0d49e62de2cd, type: 2}
   maxFireRate: 20
@@ -40,3 +45,4 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 16384
+  invincibilityTime: 0.5

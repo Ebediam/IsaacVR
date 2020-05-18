@@ -15,6 +15,8 @@ namespace BOIVR
         public static PlayerDelegate UpdateHealthEvent;
         public static PlayerDelegate UpdateInventoryEvent;
 
+        public Camera headCamera;
+
         public HandUIManager UIManager;
 
         public Transform groundCheck;
@@ -133,6 +135,9 @@ namespace BOIVR
                     canJump = true;
                 }
             }
+            
+
+            
 
 
 
@@ -150,6 +155,12 @@ namespace BOIVR
                 timer = 0f;
             }
 
+
+            if (headCamera)
+            {
+                transform.position = new Vector3(headCamera.transform.position.x, transform.position.y, headCamera.transform.position.z);
+                headCamera.transform.position = new Vector3(transform.position.x, headCamera.transform.position.y, transform.position.z);
+            }
 
 
         }

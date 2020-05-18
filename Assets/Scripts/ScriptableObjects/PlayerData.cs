@@ -5,13 +5,23 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PlayerData : ScriptableObject
 {
-    [Header("Base stats")]
+    [Header("Movement settings")]
     public float maxSpeed;
     public float acceleration;
     public float turnAngle;
-    public float baseHealth;
-    public float invincibilityTime;
     public float jumpForce;
+
+    [Header("Telekinesis settings")]
+    public float maxItemDistance;
+    public float itemGrabTreshold;
+    public float minHandDistance;
+    public float maxHandDistance;
+    public float springForce;
+    public float damper;
+
+    [Header("Base Stats")]
+    public float baseHealth;
+
 
     [Header("Modifiers")]
     public float damageBoost;
@@ -48,7 +58,7 @@ public class PlayerData : ScriptableObject
     [Header("Settings")]
     public bool completedLevel;
     public LayerMask groundLayer;
-
+    public float invincibilityTime;
 
     public void ClearModifiers()
     {
