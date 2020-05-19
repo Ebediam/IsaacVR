@@ -17,11 +17,13 @@ MonoBehaviour:
   turnAngle: 2
   jumpForce: 5
   maxItemDistance: 10
-  itemGrabTreshold: 0.5
+  itemGrabTreshold: 0.26
   minHandDistance: 0.25
   maxHandDistance: 0.75
   springForce: 100
   damper: 10
+  highlightMaterial: {fileID: 2100000, guid: 25380c15dd63b97479684fad63642b7d, type: 2}
+  highlightThickness: 0.01
   baseHealth: 60
   damageBoost: 0
   bulletSpeedBoost: 0
@@ -32,9 +34,9 @@ MonoBehaviour:
   coins: 0
   keys: 0
   bombs: 0
-  currentHealth: 60
+  currentHealth: 55
   leftGrabberItem: {fileID: 0}
-  rightGrabberItem: {fileID: 0}
+  rightGrabberItem: {fileID: 11400000, guid: 729603148c548cf4191b4e7681ffcafd, type: 2}
   availableSpells: []
   activeSpell: {fileID: 11400000, guid: 70c11e4cf9b5c164a92d0d49e62de2cd, type: 2}
   maxFireRate: 20

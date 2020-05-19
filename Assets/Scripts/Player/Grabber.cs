@@ -340,8 +340,7 @@ namespace BOIVR
         }
 
         public void ActivateHandCollider()
-        {
-            
+        {           
 
             handCollider.enabled = true;
         }

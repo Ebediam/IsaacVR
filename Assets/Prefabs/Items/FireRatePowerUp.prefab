@@ -29,9 +29,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2619525033023372017}
   - {fileID: 4443640653094619029}
   - {fileID: 2213569106950118369}
+  - {fileID: 2619525033023372017}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,10 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0390aa2e3cc42743ab81efdbedadd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holder: {fileID: 0}
+  model: {fileID: 7978150481878477568}
+  grababble: 1
   rb: {fileID: 3358381656784677352}
   holdPoint: {fileID: 4443640653094619029}
-  holder: {fileID: 0}
   data: {fileID: 11400000, guid: 846957f5e664db340892c7d055d4d9a3, type: 2}
+  _data: {fileID: 0}
 --- !u!54 &3358381656784677352
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -97,7 +100,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 324123901993131181}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &4544813522132296813
 ParticleSystem:
@@ -4849,7 +4852,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 324123901993131181}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7978150481878477568
 GameObject:
@@ -4864,7 +4867,7 @@ GameObject:
   - component: {fileID: 6323850134132286026}
   - component: {fileID: 3191730632231917888}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4882,7 +4885,7 @@ Transform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 324123901993131181}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3432679668288753511
 MeshFilter:

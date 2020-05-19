@@ -18,6 +18,8 @@ public class PlayerData : ScriptableObject
     public float maxHandDistance;
     public float springForce;
     public float damper;
+    public Material highlightMaterial;
+    public float highlightThickness;
 
     [Header("Base Stats")]
     public float baseHealth;

@@ -156,9 +156,25 @@ namespace BOIVR
                         }
 
 
+                        CheckForGrab();
+
                     }
                 }
             }
+        }
+
+        public void CheckForGrab()
+        {
+            float distance = Vector3.Distance(teleItem.transform.position, hand.transform.position);
+
+            if(distance < itemGrabThreshold)
+            {
+                hand.grabber.Grab(teleItem);
+                StopTelegrab();
+
+            }
+
+
         }
 
         private void OnTriggerEnter(Collider other)

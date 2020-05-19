@@ -11,6 +11,8 @@ namespace BOIVR
         public ItemDelegate OnItemPickup;
         public ItemDelegate OnItemDrop;
 
+        public GameObject model;
+
         public bool grababble = true;
 
         public Rigidbody rb;
@@ -31,6 +33,17 @@ namespace BOIVR
 
         }
 
+
+        public void AddHighlight()
+        {
+            GameObject highlight = Instantiate(model);
+            highlight.transform.position = model.transform.position;
+            highlight.transform.rotation = model.transform.rotation;
+            highlight.transform.parent = transform;
+
+           
+
+        }
 
         public void DespawnItem()
         {

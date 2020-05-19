@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2547730864186511008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2493878783854619589}
+  - component: {fileID: 5003281397063901834}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2493878783854619589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547730864186511008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8411635585441140734}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5003281397063901834
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547730864186511008}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.095544316, y: 0.09891796, z: 0.025143981}
+  m_Center: {x: -0.00020582601, y: -0.0011937618, z: 0}
 --- !u!1 &8411635585441140735
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +75,7 @@ Transform:
   m_Children:
   - {fileID: 8411635585562813112}
   - {fileID: 8411635587007118616}
+  - {fileID: 2493878783854619589}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46,9 +91,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a1490c5e644ce4f8c4a67e56945699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holder: {fileID: 0}
+  model: {fileID: 8411635585562813113}
+  grababble: 1
   rb: {fileID: 8411635585441140733}
   holdPoint: {fileID: 8411635587007118616}
-  holder: {fileID: 0}
   data: {fileID: 11400000, guid: bb6730b713ab48541866f520472fc315, type: 2}
   coinValue: 1
 --- !u!54 &8411635585441140733
@@ -78,9 +125,8 @@ GameObject:
   - component: {fileID: 8411635585562813112}
   - component: {fileID: 8411635585562813109}
   - component: {fileID: 8411635585562813110}
-  - component: {fileID: 8411635585562813111}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,19 +193,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8411635585562813111
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8411635585562813113}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 2.0000005, z: 1.0000005}
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940699}
 --- !u!1 &8411635587007118617
 GameObject:
   m_ObjectHideFlags: 0
