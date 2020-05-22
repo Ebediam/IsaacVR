@@ -352,6 +352,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holder: {fileID: 0}
+  model: {fileID: 2224963599862549109}
+  highlight: {fileID: 0}
   grababble: 1
   rb: {fileID: 2224963600838756189}
   holdPoint: {fileID: 2224963601630627474}

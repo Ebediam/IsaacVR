@@ -11,6 +11,7 @@ namespace BOIVR
         public Transform forearmJoint;
         public Transform armJoint;
         public GameObject joint;
+        public Hand hand;
 
         float armLength;
         float forearmLength;
@@ -20,11 +21,22 @@ namespace BOIVR
         {
             armLength = Vector3.Distance(transform.position, armJoint.position);
             forearmLength = Vector3.Distance(forearm.transform.position, forearmJoint.position);
+
+            if (!hand.player.data.showArms)
+            {
+                joint.SetActive(false);
+                gameObject.SetActive(false);
+            }
+
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (!gameObject.activeSelf)
+            {
+                return;
+            }
 
             transform.position = armAttachment.position;
 

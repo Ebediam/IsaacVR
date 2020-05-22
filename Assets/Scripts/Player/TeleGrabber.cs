@@ -128,6 +128,12 @@ namespace BOIVR
 
         public void FixedUpdate()
         {
+
+            if (hand.grabber.heldItem)
+            {
+                return;
+            }
+
             if (held)
             {
                 if (teleItem)
@@ -168,9 +174,9 @@ namespace BOIVR
             float distance = Vector3.Distance(teleItem.transform.position, hand.transform.position);
 
             if(distance < itemGrabThreshold)
-            {
+            {               
+                StopTelegrab(true);
                 hand.grabber.Grab(teleItem);
-                StopTelegrab();
 
             }
 
@@ -179,6 +185,17 @@ namespace BOIVR
 
         private void OnTriggerEnter(Collider other)
         {
+            if (hand.grabber.heldItem)
+            {
+                if (teleItem)
+                {
+                    DeselectTeleitem();
+                    held = false;
+                }
+                
+                return;
+            }
+
             if (held)
             {
                 return;
@@ -188,15 +205,22 @@ namespace BOIVR
 
             if (item)
             {
+                if (item.holder)
+                {
+                    return;
+                }
+
                 if (teleItem)
                 {
+                    //new item is farther away than actual option
                     if(Vector3.Distance(item.transform.position, hand.transform.position) > Vector3.Distance(teleItem.transform.position, hand.transform.position))
                     {
                         
                     }
-                    else
+                    else //new item is closer than actual item
                     {
-                        teleItem = item;
+                        DeselectTeleitem();
+                        SelectTeleItem(item);
                     }
 
 
@@ -204,16 +228,35 @@ namespace BOIVR
                 }
                 else
                 {
-                    teleItem = item;
+                    SelectTeleItem(item);
                 }
             }
+        }
 
+        public void DeselectTeleitem()
+        {
+            DeselectTeleitem(teleItem);
+        }
+        public void DeselectTeleitem(Item item)
+        {
+            if(item == teleItem)
+            {
+                item.RemoveHighlight();
+                teleItem = null;
+            }
 
+ 
+        }
 
+        public void SelectTeleItem(Item item)
+        {
+            teleItem = item;
+            teleItem.AddHighlight();
         }
 
         public void StartTelegrab(Item item)
         {
+            item.RemoveHighlight();
             held = true;
             oldDrag = item.rb.drag;
             item.rb.useGravity = false;
@@ -272,16 +315,45 @@ namespace BOIVR
 
         }
 
+
         public void StopTelegrab()
         {
-            teleItem.rb.drag = oldDrag;
+            StopTelegrab(false);
+        }
+
+        public void StopTelegrab(bool toGrab)
+        {
+
             held = false;
+            teleItem.rb.drag = oldDrag;
+
             teleItem.rb.useGravity = true;
+
+            if (toGrab)
+            {
+
+            }
+            else
+            {
+
+            }
+
             
         }
 
         private void OnTriggerExit(Collider other)
         {
+            if (hand.grabber.heldItem)
+            {
+                if (teleItem)
+                {
+                    DeselectTeleitem();
+                    held = false;
+                }
+
+                return;
+            }
+
             if (held)
             {
                 return;
@@ -294,7 +366,7 @@ namespace BOIVR
             {
                 if (item == teleItem)
                 {
-                    teleItem = null;
+                    DeselectTeleitem(item);
                 }
             }
 

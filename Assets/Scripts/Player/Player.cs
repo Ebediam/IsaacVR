@@ -15,6 +15,8 @@ namespace BOIVR
         public static PlayerDelegate UpdateHealthEvent;
         public static PlayerDelegate UpdateInventoryEvent;
 
+        public Collider bodyCollider;
+        public Body body;
         public Camera headCamera;
 
         public HandUIManager UIManager;

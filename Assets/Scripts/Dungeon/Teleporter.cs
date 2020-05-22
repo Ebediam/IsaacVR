@@ -14,6 +14,11 @@ namespace BOIVR
 
         private void OnTriggerEnter(Collider other)
         {
+            if (!Player.local)
+            {
+                return;
+            }
+
             if (other.gameObject.layer == 10)
             {
                 Player.local.data.completedLevel = true;

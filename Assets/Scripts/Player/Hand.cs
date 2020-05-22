@@ -13,12 +13,19 @@ namespace BOIVR
         public float springForce;
         public Transform shoulder;
         public Player player;
+        public GameObject foreArm;
 
         // Start is called before the first frame update
         void Start()
         {
             transform.position = targetPosition.transform.position;
             rb.velocity = Vector3.zero;
+
+            if (!player.data.showArms)
+            {
+                foreArm.SetActive(false);
+            }
+
         }
 
         // Update is called once per frame

@@ -21,12 +21,12 @@ namespace BOIVR
         public delegate void GrabberDelegate(Grabber grabber);
         public static GrabberDelegate FailGrabEvent;
 
-
-
         public InteractableType interactableType = InteractableType.None;
 
         public Side side;
 
+        float oldDrag;
+        float oldAngularDrag;
 
 
         public List<Interactable> interactablesInRange;
@@ -36,6 +36,8 @@ namespace BOIVR
 
         public Collider handCollider;
         public Hand hand;
+
+        Vector3 rotationOffset;
 
         public Grabber otherGrabber;
 
@@ -88,9 +90,22 @@ namespace BOIVR
             GameManager.GameOverEvent -= OnGameOver;
         }
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
+            return;
 
+            if (heldItem)
+            {               
+
+                heldItem.rb.AddForce(Player.local.data.grabSpring * (transform.position - heldItem.holdPoint.transform.position), ForceMode.Force);
+
+                heldItem.transform.rotation = transform.rotation;
+
+                //rotationOffset = transform.rotation.eulerAngles - heldItem.transform.rotation.eulerAngles;
+
+                //heldItem.rb.AddTorque(rotationOffset * Player.local.data.rotSpring, ForceMode.Force);
+
+            }
         }
 
         void IndexTriggerPress(GameManager.ButtonState buttonState)
@@ -190,39 +205,37 @@ namespace BOIVR
 
             if (interactable is Item)
             {
-                Item item = interactable as Item;
+                heldItem = interactable as Item;
 
-                DisableCollisions(item);
+                DisableCollisions(heldItem);
+
+                heldItem.rb.velocity = Vector3.zero;
+                heldItem.rb.angularVelocity = Vector3.zero;
                 
 
-                
 
-                item.rb.velocity = Vector3.zero;
-                item.rb.angularVelocity = Vector3.zero;
-                item.rb.constraints = RigidbodyConstraints.FreezeAll;
+                heldItem.transform.position = transform.position;
+                //heldItem.transform.parent = transform;
+                heldItem.transform.position -= heldItem.holdPoint.localPosition;
+                heldItem.transform.rotation = transform.rotation;
 
+                AddJoint(heldItem);
+                heldItem.transform.parent = Player.local.transform;
 
-                item.transform.position = transform.position;
-                item.transform.parent = transform;
-                item.transform.localPosition -= item.holdPoint.localPosition;
-
-
-                item.transform.rotation = transform.rotation;
-
-                item.holder = this;
-                heldItem = item;
+                heldItem.holder = this;
+                heldItem.rb.useGravity = false;
 
 
                 if (side == Side.Left)
                 {
-                    Player.local.data.leftGrabberItem = item.data;
+                    Player.local.data.leftGrabberItem = heldItem.data;
                 }
                 else if (side == Side.Right)
                 {
-                    Player.local.data.rightGrabberItem = item.data;
+                    Player.local.data.rightGrabberItem = heldItem.data;
                 }
 
-                item.OnItemPickup?.Invoke();
+                heldItem.OnItemPickup?.Invoke();
 
             }
             else if (interactable is Spell)
@@ -240,6 +253,19 @@ namespace BOIVR
 
         }
 
+        public void AddJoint(Item item)
+        {
+            item.AddJoint(this);
+        }
+
+
+        public void ChangeDrag()
+        {
+            oldDrag = heldItem.rb.drag;
+            oldAngularDrag = heldItem.rb.angularDrag;
+            heldItem.rb.drag = Player.local.data.grabDamper;
+            heldItem.rb.angularDrag = Player.local.data.rotDamper;
+        }
         public void DisableCollisions(Item item)
         {
             foreach (Collider col in item.GetComponentsInChildren<Collider>())
@@ -293,8 +319,19 @@ namespace BOIVR
 
         }
 
+        public void ResetDrag()
+        {
+            heldItem.rb.drag = oldDrag;
+            heldItem.rb.angularDrag = oldAngularDrag;
+        }
 
 
+        public void ResetJoint(Item item)
+        {
+
+             item.RemoveJoint();
+            
+        }
         public void Release()
         {
 
@@ -302,11 +339,13 @@ namespace BOIVR
             {
                 heldItem.transform.parent = null;
 
+                ResetJoint(heldItem);
 
-                heldItem.rb.constraints = RigidbodyConstraints.None;
+                //heldItem.rb.constraints = RigidbodyConstraints.None;
                 heldItem.holder = null;
                 heldItem.rb.useGravity = true;
                 heldItem.rb.velocity = hand.rb.velocity*2f;
+                
                 heldItem.OnItemDrop?.Invoke();
                 StartCoroutine(ReenableCollisions(heldItem, 0.5f));
 

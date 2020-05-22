@@ -12,8 +12,10 @@ namespace BOIVR
         public ItemDelegate OnItemDrop;
 
         public GameObject model;
-
+        GameObject highlight;
         public bool grababble = true;
+
+        public ConfigurableJoint joint;
 
         public Rigidbody rb;
 
@@ -34,15 +36,96 @@ namespace BOIVR
         }
 
 
+        public void AddJoint(Grabber grabber)
+        {
+            if (joint)
+            {
+                RemoveJoint();
+            }
+
+            joint = gameObject.AddComponent<ConfigurableJoint>();
+
+            joint.autoConfigureConnectedAnchor = false;
+            
+            joint.xDrive = CreateJointDrive();
+            joint.yDrive = CreateJointDrive();
+            joint.zDrive = CreateJointDrive();
+            joint.rotationDriveMode = RotationDriveMode.Slerp;
+            joint.slerpDrive = CreateSlerpDrive();
+            
+
+            joint.xMotion = ConfigurableJointMotion.Locked;
+            joint.yMotion = ConfigurableJointMotion.Locked;
+            joint.zMotion = ConfigurableJointMotion.Locked;
+            joint.angularXMotion = ConfigurableJointMotion.Locked;
+            joint.angularYMotion = ConfigurableJointMotion.Locked;
+            joint.angularZMotion = ConfigurableJointMotion.Locked;
+
+            joint.enableCollision = false;
+            
+
+            joint.connectedBody = grabber.hand.rb;
+
+            joint.connectedMassScale = 0f;
+
+            joint.connectedAnchor = -grabber.heldItem.holdPoint.localPosition;
+            
+        }
+
+
+        public void RemoveJoint()
+        {
+            if (joint)
+            {
+                Destroy(joint);
+            }
+        }
+
+        public JointDrive CreateJointDrive()
+        {
+            JointDrive drive = new JointDrive();
+            drive.positionSpring = Player.local.data.grabSpring;
+            drive.positionDamper = Player.local.data.grabDamper;
+            drive.maximumForce = Mathf.Infinity;
+            return drive;
+        }
+
+        public JointDrive CreateSlerpDrive()
+        {
+            JointDrive drive = new JointDrive();
+            drive.positionSpring = Player.local.data.rotSpring;
+            drive.positionDamper = Player.local.data.rotDamper;
+            drive.maximumForce = Mathf.Infinity;
+            return drive;
+        }
+
         public void AddHighlight()
         {
-            GameObject highlight = Instantiate(model);
-            highlight.transform.position = model.transform.position;
-            highlight.transform.rotation = model.transform.rotation;
-            highlight.transform.parent = transform;
+            if (highlight)
+            {
+                highlight.SetActive(true);
+            }
+            else
+            {
 
-           
+                highlight = Instantiate(model);
+                highlight.transform.position = model.transform.position;
+                highlight.transform.rotation = model.transform.rotation;
+                highlight.transform.parent = transform;
 
+                foreach (MeshRenderer mesh in highlight.GetComponentsInChildren<MeshRenderer>())
+                {
+                    mesh.material = Player.local.data.highlightMaterial;
+
+                    mesh.transform.localScale += Vector3.one * Player.local.data.highlightThickness;
+
+                }
+            }
+        }
+
+        public void RemoveHighlight()
+        {
+            highlight.SetActive(false);
         }
 
         public void DespawnItem()

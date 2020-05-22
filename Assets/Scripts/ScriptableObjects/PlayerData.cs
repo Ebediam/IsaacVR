@@ -21,6 +21,12 @@ public class PlayerData : ScriptableObject
     public Material highlightMaterial;
     public float highlightThickness;
 
+    [Header("Grab settings")]
+    public float grabSpring;
+    public float grabDamper;
+    public float rotSpring;
+    public float rotDamper;
+
     [Header("Base Stats")]
     public float baseHealth;
 
@@ -44,7 +50,8 @@ public class PlayerData : ScriptableObject
     public List<SpellData> availableSpells = new List<SpellData>();
     public SpellData activeSpell;
 
-
+    [Header("Model")]
+    public bool showArms;
 
     [Header("Max allowed stats")]
     public float maxFireRate;
@@ -61,6 +68,7 @@ public class PlayerData : ScriptableObject
     public bool completedLevel;
     public LayerMask groundLayer;
     public float invincibilityTime;
+    
 
     public void ClearModifiers()
     {
