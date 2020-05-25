@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace BOIVR
@@ -14,12 +15,15 @@ namespace BOIVR
         public GameObject greenCube;
 
         public bool OnCooldown = false;
+        public bool OnAltCooldown = false;
 
         public bool active = true;
 
         bool automaticEnabled = false;
+        bool altAutomaticEnabled = false;
 
-        public float timer = 0f;
+        float timer = 0f;
+        float altTimer = 0f;
 
         public AudioSource shotSFX;
         public ParticleSystem shotVFX;
@@ -30,7 +34,6 @@ namespace BOIVR
             Alt
         }
 
-        BulletType bulletType;
 
         // Start is called before the first frame update
         void Start()
@@ -71,92 +74,151 @@ namespace BOIVR
                 return;
             }
 
-            if (!OnCooldown)
+            if (OnCooldown)
             {
-                return;
-            }
+                timer += Time.deltaTime;
 
-            timer += Time.deltaTime;
-
-            if (timer >= (gunData.fireRate + Player.local.data.fireRateBoost))
-            {
-                OnCooldown = false;
-                timer = 0f;
-                greenCube.SetActive(true);
-                redCube.SetActive(false);
-
-                if (automaticEnabled)
+                if (timer >= (gunData.fireRate + Player.local.data.fireRateBoost))
                 {
-                    Shoot(bulletType);
-                }
+                    OnCooldown = false;
+                    timer = 0f;
+                    greenCube.SetActive(true);
+                    redCube.SetActive(false);
 
+                    if (automaticEnabled)
+                    {
+                        Shoot(BulletType.Main);
+                    }
+
+                }
             }
+
+            if (OnAltCooldown)
+            {
+                altTimer += Time.deltaTime;
+                if (altTimer >= (gunData.altFireRate + Player.local.data.fireRateBoost))
+                {
+                    OnAltCooldown = false;
+                    altTimer = 0f;
+                    greenCube.SetActive(true);
+                    redCube.SetActive(false);
+
+                    if (altAutomaticEnabled)
+                    {
+                        Shoot(BulletType.Alt);
+                    }
+
+                }
+            }
+
+            
         }
 
         public override void AltUse()
         {
-            if (gunData.bulletUse == GunData.BulletUse.Main)
+            if (gunData.altGunMode == GunData.GunMode.Disabled)
             {
                 return;
             }
 
             base.AltUse();
-            bulletType = BulletType.Alt;
-            ShootCheck(bulletType);
+            ShootCheck(BulletType.Alt);
         }
 
         public override void Use()
         {
-            if (gunData.bulletUse == GunData.BulletUse.Alt)
+            if (gunData.mainGunMode == GunData.GunMode.Disabled)
             {
                 return;
             }
             base.Use();
 
-            bulletType = BulletType.Main;
-            ShootCheck(bulletType);
+            ShootCheck(BulletType.Main);
 
         }
 
         public void ShootCheck(BulletType bulletType)
         {
 
-            if (OnCooldown)
-            {
-                return;
-            }
-
             if (!active)
             {
                 return;
             }
 
-            switch (gunData.gunMode)
+            switch (bulletType)
             {
-                case GunData.GunMode.Manual:
-                    Shoot(bulletType);
-                    break;
+                case BulletType.Main:
+                    if (OnCooldown)
+                    {
+                        return;
+                    }
+
+                    switch (gunData.mainGunMode)
+                    {
+                        case GunData.GunMode.Manual:
+                            Shoot(bulletType);
+                            break;
 
 
-                case GunData.GunMode.Automatic:
-                    Shoot(bulletType);
-                    automaticEnabled = true;
+                        case GunData.GunMode.Automatic:
+                            automaticEnabled = true;
+                            Shoot(bulletType);                            
+                            break;
+                    }
+
                     break;
+
+                case BulletType.Alt:
+                    if (OnAltCooldown)
+                    {
+                        return;
+                    }
+
+                    switch (gunData.altGunMode)
+                    {
+                        case GunData.GunMode.Manual:
+                            Shoot(bulletType);
+                            break;
+
+
+                        case GunData.GunMode.Automatic:
+                            automaticEnabled = true;
+                            Shoot(bulletType);
+                            break;
+                    }
+
+                    break;
+
 
             }
+
+
+   
+
+            
         }
 
         public override void StopUsing()
         {
             base.StopUsing();
 
-            if (gunData.gunMode == GunData.GunMode.Automatic)
+            if (gunData.mainGunMode == GunData.GunMode.Automatic)
             {
                 automaticEnabled = false;
             }
 
         }
 
+        public override void StopAltUse()
+        {
+            base.StopAltUse();
+
+            if (gunData.altGunMode == GunData.GunMode.Automatic)
+            {
+                altAutomaticEnabled = false;
+            }
+
+        }
         public AllBullet Shoot(BulletType bulletType)
         {
             GameObject bulletGO;
@@ -164,12 +226,13 @@ namespace BOIVR
             switch (bulletType)
             {
                 case BulletType.Alt:
-
                     bulletGO = Instantiate(gunData.altBulletPrefab);
+                    OnAltCooldown = true;
                     break;
 
                 default:
                     bulletGO = Instantiate(gunData.bulletPrefab);
+                    OnCooldown = true;
                     break;
 
             }
@@ -177,16 +240,31 @@ namespace BOIVR
             bulletGO.transform.position = spawnPoint.position;
             bulletGO.transform.rotation = spawnPoint.rotation;
             AllBullet bullet = bulletGO.GetComponent<AllBullet>();
-
             bullet.rb.velocity = Player.local.rb.velocity / 10f;
-            bullet.rb.AddForce(bullet.transform.forward * (gunData.bulletSpeed + Player.local.data.bulletSpeedBoost), ForceMode.VelocityChange);
-            bullet.damage = gunData.bulletDamage + Player.local.data.damageBoost;
-            OnCooldown = true;
+
+            bullet.IgnoreCollisionsWithItem(this);
+
+            switch (bulletType)
+            {
+                case BulletType.Alt:
+                    bullet.rb.AddForce(bullet.transform.forward * (gunData.altBulletSpeed + Player.local.data.bulletSpeedBoost), ForceMode.VelocityChange);
+                    bullet.damage = gunData.altBulletDamage + Player.local.data.damageBoost;
+                    break;
+
+                default:
+                    bullet.rb.AddForce(bullet.transform.forward * (gunData.bulletSpeed + Player.local.data.bulletSpeedBoost), ForceMode.VelocityChange);
+                    bullet.damage = gunData.bulletDamage + Player.local.data.damageBoost;
+                    break;
+
+            }
+            
+            
             redCube.SetActive(true);
             greenCube.SetActive(false);
 
             shotSFX.Play();
             shotVFX.Play();
+
 
             return bullet;
 

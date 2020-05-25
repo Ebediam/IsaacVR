@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectsData: {fileID: 11400000, guid: 35a0c523feb34604a964904b899172fc, type: 2}
   rb: {fileID: 4290915699790844803}
+  bulletCollider: {fileID: 4290915699790844802}
   damage: 0
 --- !u!1 &4318116920189682642
 GameObject:

@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectsData: {fileID: 0}
   rb: {fileID: 5522912565052400634}
+  bulletCollider: {fileID: 5522912565052400635}
   damage: 0
   color: 1
 --- !u!1 &5531615350569956267

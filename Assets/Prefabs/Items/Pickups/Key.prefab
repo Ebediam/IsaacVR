@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2892262780702254168}
   - component: {fileID: 6158785825188896366}
   - component: {fileID: 451748064002286231}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 207105403016092510}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5329594862298200129}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 3038036831864152364}
   - component: {fileID: 7581912499176380497}
   - component: {fileID: 8527545324603713250}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,6 +207,7 @@ MonoBehaviour:
   holder: {fileID: 0}
   model: {fileID: 2195566890137523787}
   grababble: 1
+  joint: {fileID: 0}
   rb: {fileID: 7581912499176380497}
   holdPoint: {fileID: 207105403016092510}
   data: {fileID: 11400000, guid: f99dfa4f5633b2541b7420733736a185, type: 2}
@@ -220,7 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8722648748364343362}
   - component: {fileID: 2726751118511127312}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 444427514965277604}
   - component: {fileID: 2608948258989412199}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

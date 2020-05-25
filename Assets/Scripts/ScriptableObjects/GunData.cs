@@ -10,30 +10,32 @@ namespace BOIVR
     {
         public enum GunMode
         {
+            Disabled,
             Manual,
             Automatic
         }
 
-        public enum BulletUse
-        {
-            Main,
-            Alt,
-            Both
-        }
-
-
+        [Header("Main")]
+        public GunMode mainGunMode;
         public GameObject bulletPrefab;
-        public GameObject altBulletPrefab;
-
-        public GunMode gunMode;
-        public BulletUse bulletUse;
-
         public float fireRate;
         public float bulletSpeed;
         public float bulletDamage;
         public int magCapacity;
-
         public AudioClip shotSFX;
+
+        [Header("Alt")]
+        public GunMode altGunMode;
+        public GameObject altBulletPrefab;
+        public float altFireRate;
+        public float altBulletSpeed;
+        public float altBulletDamage;
+        public int altMagCapacity;
+        public AudioClip altShotSFX;
+
+
+
+
 
     }
 

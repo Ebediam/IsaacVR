@@ -33,9 +33,6 @@ namespace BOIVR
         {
             base.Use();
 
-            spellVFX.Play();
-            spellSFX.Play();
-
             if (data.spellMode == SpellData.SpellMode.Continuous)
             {
                 isCasting = true;

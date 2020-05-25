@@ -12,9 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad7455bbae492741baf4b2a7b565007, type: 3}
   m_Name: ExplosiveEnemy
   m_EditorClassIdentifier: 
-  target: 2
   explosionForce: 10
   explosionRadius: 3
+  despawnAfterExplosion: 0
+  cooldownTimer: 0
+  canChainExplode: 1
   maxDamage: 80
-  explodesOnShoot: 0
-  explodesOnDestroy: 1
+  timerToExplodeOnSpawn: 0
+  timerToExplodeOnUngrab: 0
+  disallowExplosionWhileGrabbed: 0
+  explodesOnContact: 0
+  affectsEnemies: 1
+  affectsItems: 1
+  affectsPlayer: 0
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4608
+  ignorePlayer: 0
+  ignoreItems: 0
+  ignoreBullets: 0
+  ignoreEnemies: 0
+  ignoreEnvironment: 0

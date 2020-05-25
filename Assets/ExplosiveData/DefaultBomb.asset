@@ -12,8 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad7455bbae492741baf4b2a7b565007, type: 3}
   m_Name: DefaultBomb
   m_EditorClassIdentifier: 
-  target: 2
-  explosionForce: 10
+  explosionForce: 100
   explosionRadius: 3
+  despawnAfterExplosion: 1
+  cooldownTimer: 0
+  canChainExplode: 1
   maxDamage: 80
-  explodesOnShoot: 1
+  timerToExplodeOnSpawn: 0
+  timerToExplodeOnUngrab: 0
+  disallowExplosionWhileGrabbed: 0
+  explodesOnContact: 1
+  affectsEnemies: 1
+  affectsItems: 1
+  affectsPlayer: 0
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 5632
+  ignorePlayer: 1
+  ignoreItems: 1
+  ignoreBullets: 0
+  ignoreEnemies: 1
+  ignoreEnvironment: 1

@@ -12,6 +12,6 @@ public class SpellData : InteractableData
     }
 
     public SpellMode spellMode;
-
+    public GameObject burstProjectilePrefab;
 
 }

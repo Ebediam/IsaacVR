@@ -447,6 +447,7 @@ MonoBehaviour:
   doors:
   - {fileID: 749263184}
   isCompleted: 0
+  hasStarted: 0
   corners: []
 --- !u!1 &28735207
 GameObject:
@@ -5923,6 +5924,7 @@ MonoBehaviour:
   doors:
   - {fileID: 1724371710}
   isCompleted: 0
+  hasStarted: 0
   corners: []
 --- !u!4 &599061392
 Transform:
@@ -8111,6 +8113,7 @@ MonoBehaviour:
   - {fileID: 1453520160}
   - {fileID: 1494679229}
   isCompleted: 0
+  hasStarted: 0
   corners:
   - {fileID: 1750287545}
   - {fileID: 905525695}
@@ -11283,6 +11286,7 @@ MonoBehaviour:
   doors:
   - {fileID: 1037875355}
   isCompleted: 0
+  hasStarted: 0
   corners: []
 --- !u!4 &1060913512
 Transform:
@@ -12674,7 +12678,7 @@ PrefabInstance:
     - target: {fileID: 3038036831864152364, guid: fa7e6ea50ffb88f40aebca666fef1f26,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.74
+      value: -0.817
       objectReference: {fileID: 0}
     - target: {fileID: 3038036831864152364, guid: fa7e6ea50ffb88f40aebca666fef1f26,
         type: 3}
@@ -13610,7 +13614,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 01ac879f6ce09924e9c26663f798beaf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13890,7 +13894,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 41336c84534141c499b89305fb144fe9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -17141,6 +17145,7 @@ MonoBehaviour:
   doors:
   - {fileID: 1041540380}
   isCompleted: 0
+  hasStarted: 0
   corners: []
 --- !u!114 &1494679229 stripped
 MonoBehaviour:
@@ -18352,7 +18357,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -876546973899608171, guid: c70dab63d82f5b344bdfa62463ed8efa, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21104,6 +21109,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1566547611972882331, guid: 2dd73cb91eb80d14293d710ec9bb6619,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 2724046847258724345, guid: 2dd73cb91eb80d14293d710ec9bb6619,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -21562,6 +21572,7 @@ MonoBehaviour:
   - {fileID: 1041540380}
   - {fileID: 1222475774}
   isCompleted: 1
+  hasStarted: 0
   corners: []
 --- !u!1 &1896093009
 GameObject:
@@ -21614,7 +21625,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6c0b208d35ece4a459821be19df69561, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22368,6 +22379,7 @@ MonoBehaviour:
   - {fileID: 1453520160}
   - {fileID: 749263184}
   isCompleted: 0
+  hasStarted: 0
   corners: []
 --- !u!4 &1953936770
 Transform:
@@ -23022,6 +23034,7 @@ MonoBehaviour:
   - {fileID: 240191528}
   - {fileID: 1724371710}
   isCompleted: 0
+  hasStarted: 0
   corners: []
 --- !u!65 &2020790789
 BoxCollider:

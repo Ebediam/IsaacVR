@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2493878783854619589}
   - component: {fileID: 5003281397063901834}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 8411635585441140734}
   - component: {fileID: 8411635585441140732}
   - component: {fileID: 8411635585441140733}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,6 +94,7 @@ MonoBehaviour:
   holder: {fileID: 0}
   model: {fileID: 8411635585562813113}
   grababble: 1
+  joint: {fileID: 0}
   rb: {fileID: 8411635585441140733}
   holdPoint: {fileID: 8411635587007118616}
   data: {fileID: 11400000, guid: bb6730b713ab48541866f520472fc315, type: 2}
@@ -125,7 +126,7 @@ GameObject:
   - component: {fileID: 8411635585562813112}
   - component: {fileID: 8411635585562813109}
   - component: {fileID: 8411635585562813110}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8411635587007118616}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

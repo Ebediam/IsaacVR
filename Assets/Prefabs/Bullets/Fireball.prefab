@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2617746688322275691}
   - component: {fileID: 5995187515252318799}
   - component: {fileID: 2494046107767227904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ExplosionVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ Transform:
   - {fileID: 2352304777509272388}
   - {fileID: 4428097086127650946}
   m_Father: {fileID: 8322998701028168098}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &5995187515252318799
 ParticleSystem:
@@ -4814,6 +4814,50 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1 &1839201899915644226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4158028377439324437}
+  - component: {fileID: 6543970227578561096}
+  m_Layer: 8
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4158028377439324437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839201899915644226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8322998701028168098}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6543970227578561096
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839201899915644226}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2550656747809972776
 GameObject:
   m_ObjectHideFlags: 0
@@ -4824,7 +4868,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4717511384297273745}
   - component: {fileID: 7302981708045208663}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ExplosionSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4843,7 +4887,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8322998701028168098}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &7302981708045208663
 AudioSource:
@@ -4951,7 +4995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1959316243943959252}
   - component: {fileID: 8366578215664967141}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ThrowSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4970,7 +5014,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8322998701028168098}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8366578215664967141
 AudioSource:
@@ -5079,7 +5123,7 @@ GameObject:
   - component: {fileID: 6724871874580531969}
   - component: {fileID: 19431315734138841}
   - component: {fileID: 7468978694710338563}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: IdleVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5098,7 +5142,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8322998701028168098}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!198 &19431315734138841
 ParticleSystem:
@@ -9833,7 +9877,7 @@ GameObject:
   - component: {fileID: 2352304777509272388}
   - component: {fileID: 8673196509409413869}
   - component: {fileID: 2177910981120622481}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14634,66 +14678,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!1 &5904313595326088802
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8583316422638720725}
-  m_Layer: 0
-  m_Name: HolderPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8583316422638720725
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5904313595326088802}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8322998701028168098}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7042722202194419721
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 182744072178677940}
-  m_Layer: 0
-  m_Name: ParryPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &182744072178677940
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7042722202194419721}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8322998701028168098}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8322998701028168124
 GameObject:
   m_ObjectHideFlags: 0
@@ -14705,7 +14689,7 @@ GameObject:
   - component: {fileID: 8322998701028168098}
   - component: {fileID: 413196085455091265}
   - component: {fileID: 2720981423580866564}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14723,12 +14707,11 @@ Transform:
   m_LocalPosition: {x: -0.19326782, y: -0.0497818, z: 0.032226562}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8583316422638720725}
-  - {fileID: 182744072178677940}
   - {fileID: 6724871874580531969}
   - {fileID: 4717511384297273745}
   - {fileID: 2617746688322275691}
   - {fileID: 1959316243943959252}
+  - {fileID: 4158028377439324437}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14762,6 +14745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectsData: {fileID: 0}
   rb: {fileID: 413196085455091265}
+  bulletCollider: {fileID: 6543970227578561096}
   damage: 0
 --- !u!1 &8504111739089762724
 GameObject:
@@ -14774,7 +14758,7 @@ GameObject:
   - component: {fileID: 4428097086127650946}
   - component: {fileID: 3330391808903378937}
   - component: {fileID: 2006469623255659930}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}

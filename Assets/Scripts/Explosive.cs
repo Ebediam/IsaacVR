@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace BOIVR
@@ -8,36 +9,26 @@ namespace BOIVR
     {
 
         public ParticleSystem explosionVFX;
-        public List<Damageable> inRangeDamageables;
 
         public ExplosiveData data;
 
         public SphereCollider sphereCollider;
 
-        public List<Explosive> inRangeExplosives;
-
         public delegate void ExplosionDelegate(Explosive source);
+
         public ExplosionDelegate ExplosionEvent;
 
         public bool alreadyExploded;
 
         [HideInInspector] Damageable currentDamageable;
 
+
         // Start is called before the first frame update
         public void Start()
         {
-
-            sphereCollider.radius = data.explosionRadius;
-
-            inRangeExplosives = new List<Explosive>();
-
-            if (data.target == ExplosiveData.Target.Player)
-            {
-                return;
-            }
-            inRangeDamageables = new List<Damageable>();
-
+            
             Damageable damageable = GetComponent<Damageable>();
+
             if (damageable)
             {
                 damageable.DamageableDestroyedEvent += OnDeath;
@@ -47,143 +38,81 @@ namespace BOIVR
 
         // Update is called once per frame
 
-
-
-        private void OnTriggerEnter(Collider other)
-        {
-
-            if (alreadyExploded)
-            {
-                return;
-            }
-
-
-            Explosive explosive = other.gameObject.GetComponentInParent<Explosive>();
-            if (explosive)
-            {
-                if (inRangeExplosives.Count > 0)
-                {
-                    if (inRangeExplosives.Contains(explosive))
-                    {
-                        return;
-                    }
-                }
-                inRangeExplosives.Add(explosive);
-                explosive.ExplosionEvent += ChainExplosion;
-
-                return;
-            }
-
-            if (data.target == ExplosiveData.Target.Player)
-            {
-                return;
-            }
-
-            Damageable damageable = other.gameObject.GetComponentInParent<Damageable>();
-
-            if (!damageable)
-            {
-                return;
-            }
-
-            if (inRangeDamageables.Count > 0)
-            {
-                if (inRangeDamageables.Contains(damageable))
-                {
-                    return;
-                }
-            }
-
-
-
-            inRangeDamageables.Add(damageable);
-            damageable.DamageableDestroyedEvent += OnDamageableDestroyed;
-
-        }
+                   
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!data.explodesOnShoot)
-            {
-                return;
-            }
-
             if (alreadyExploded)
             {
                 return;
             }
 
-            AllBullet bullet = collision.gameObject.GetComponent<AllBullet>();
-
-            if (!bullet)
+            if (!data.explodesOnContact)
             {
                 return;
             }
 
-
-
-
-            Explode();
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (alreadyExploded)
+            switch (collision.gameObject.layer)
             {
-                return;
-            }
-
-
-            Explosive explosive = other.gameObject.GetComponentInParent<Explosive>();
-            if (explosive)
-            {
-                if (inRangeExplosives.Count > 0)
-                {
-                    if (inRangeExplosives.Contains(explosive))
+                case 8: //Bullets
+                case 11: //Enemy bullets
+                    if (!data.ignoreBullets)
                     {
-                        inRangeExplosives.Remove(explosive);
-                        explosive.ExplosionEvent -= ChainExplosion;
-                        return;
+                        Explode(collision.GetContact(0).point);
                     }
-                }
+                    break;
+
+                case 9: //Items
+                    if (!data.ignoreItems)
+                    {
+                        Explode(collision.GetContact(0).point);
+                    }
+                    break;
+
+                case 10: //Player
+                    if (!data.ignorePlayer)
+                    {
+                        Explode(collision.GetContact(0).point);
+                    }
+
+                    break;
+
+                case 12: //Enemies
+                    if (!data.ignoreEnemies)
+                    {
+                        Explode(collision.GetContact(0).point);
+                    }
+                    break;
+
+                default:
+                    if (!data.ignoreEnvironment)
+                    {
+                        Explode(collision.GetContact(0).point);
+                    }
+                    break;
 
             }
-
-
-            if (data.target == ExplosiveData.Target.Player)
-            {
-                return;
-            }
-
-            if (inRangeDamageables.Count == 0)
-            {
-                return;
-            }
-
-            Damageable damageable = other.gameObject.GetComponentInParent<Damageable>();
-
-            if (!damageable)
-            {
-                return;
-            }
-
-            inRangeDamageables.Remove(damageable);
-            damageable.DamageableDestroyedEvent -= OnDamageableDestroyed;
         }
 
-        public void ChainExplosion(Explosive source)
+        
+
+        public void ChainExplosion(Explosive source, float delay)
         {
             if (alreadyExploded)
             {
                 return;
             }
-
-            source.ExplosionEvent -= ChainExplosion;
             Invoke("Explode", Random.Range(0.15f, 0.30f));
 
         }
 
+
         public void Explode()
+        {
+            Explode(transform.position);
+        }
+
+        public void Explode(Vector3 sourcePoint)
         {
             if (alreadyExploded)
             {
@@ -195,72 +124,119 @@ namespace BOIVR
             explosionVFX.Play();
             Destroy(explosionVFX.gameObject, 2f);
 
+            List<Item> affectedItems = new List<Item>();
+            List<Explosive> affectedExplosives = new List<Explosive>();
+            List<Enemy> affectedEnemies = new List<Enemy>();
 
-            if (data.target != ExplosiveData.Target.Player)
+            foreach(Collider col in Physics.OverlapSphere(transform.position, data.explosionRadius, data.collisionLayerMask, QueryTriggerInteraction.Ignore))
             {
-                Debug.Log("Damageable loop starts");
-                foreach (Damageable damageable in inRangeDamageables)
-                {
-                    if (!damageable)
-                    {
-                        continue;
-                    }
+                Explosive explosive = col.GetComponentInParent<Explosive>();
 
-                    currentDamageable = damageable;
-
-                    Vector3 explosionDirection = damageable.transform.position - transform.position;
-                    float forcePercent = ((data.explosionRadius - explosionDirection.magnitude) / data.explosionRadius);
-
-                    explosionDirection = explosionDirection.normalized;
-
-                    damageable.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Impulse);
-                    damageable.TakeDamage(data.maxDamage * forcePercent);
-                }
-            }
-
-            currentDamageable = null;
-
-            Debug.Log("Damageable loop ends, player loop starts");
-            if (data.target != ExplosiveData.Target.Enemies)
-            {
-                if (Vector3.Distance(Player.local.head.position, transform.position) < data.explosionRadius)
-                {
-                    Player.local.TakeDamage(10f);
-                }
-            }
-
-            Debug.Log("Player loop ends, removing listeners");
-            foreach (Damageable _damageable in inRangeDamageables)
-            {
-                _damageable.DamageableDestroyedEvent -= OnDamageableDestroyed;
-            }
-            Debug.Log("Listeners removed, invoking explosion event");
-            ExplosionEvent?.Invoke(this);
-            Invoke("DeactivateExplosive", 0.1f);
-
-
-            /*foreach(Explosive explosive in inRangeExplosives)
-            {
-                if (explosive.inRangeExplosives.Count > 0)
-                {
-                    if (explosive.inRangeExplosives.Contains(this))
-                    {
-                        explosive.inRangeExplosives.Remove(this);
-                    }
-                }           
-
-            }
-            foreach (Explosive explosive in inRangeExplosives)
-            {
                 if (explosive)
                 {
-                    explosive.Explode();
-                    Destroy(gameObject, 0.5f);
+                    if (explosive.data.canChainExplode)
+                    {
+                        if (!affectedExplosives.Contains(explosive))
+                        {
+                            affectedExplosives.Add(explosive);
+                            continue;
+                        }
+                    }
+
+                    
                 }
 
-            }*/
+                if (data.affectsEnemies)
+                {
+                    Enemy enemy = col.GetComponentInParent<Enemy>();
+
+                    if (enemy)
+                    {
+                        if (!affectedEnemies.Contains(enemy))
+                        {
+                            affectedEnemies.Add(enemy);
+                            continue;
+                        }
+                    }
+                }
+
+                if (data.affectsItems)
+                {
+                    Item item = col.GetComponentInParent<Item>();
+
+                    if (item)
+                    {
+                        if (!affectedItems.Contains(item))
+                        {
+                            affectedItems.Add(item);
+                            continue;
+                        }
+                    }
+
+                }
+
+            }
+
+            if(affectedEnemies.Count > 0)
+            {
+                foreach (Enemy _enemy in affectedEnemies)
+                {
+                    Vector3 explosionDirection = _enemy.transform.position - sourcePoint;
+                    float forcePercent = ((data.explosionRadius - explosionDirection.magnitude) / data.explosionRadius);
+                    explosionDirection = explosionDirection.normalized;
+                    _enemy.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Force);
+                    _enemy.TakeDamage(data.maxDamage * forcePercent);
+
+                }
+            }
+   
+
+            if(affectedItems.Count > 0)
+            {
+                foreach (Item _item in affectedItems)
+                {
+                    Vector3 explosionDirection = _item.transform.position - sourcePoint;
+                    float forcePercent = ((data.explosionRadius - explosionDirection.magnitude) / data.explosionRadius);
+                    explosionDirection = explosionDirection.normalized;
+                    _item.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Force);
+                    
+
+                }
+            }
+
+           if(affectedExplosives.Count > 0)
+           {
+                foreach(Explosive _explosive in affectedExplosives)
+                {
+                    Vector3 explosionDirection = _explosive.transform.position - sourcePoint;
+                    float forcePercent = ((data.explosionRadius - explosionDirection.magnitude) / data.explosionRadius);
+                    _explosive.ChainExplosion(this, 0.5f * forcePercent);
 
 
+                }
+           }
+
+            if (data.affectsPlayer)
+            {
+                Vector3 explosionDirection = Player.local.headCamera.transform.position - sourcePoint;
+
+                if(explosionDirection.magnitude < data.explosionRadius)
+                {
+                    explosionDirection = explosionDirection.normalized;
+                    float forcePercent = ((data.explosionRadius - explosionDirection.magnitude) / data.explosionRadius);
+                    Player.local.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Force);
+                    Player.local.TakeDamage(10f);
+                }
+
+
+            }
+
+            ExplosionEvent?.Invoke(this);
+
+            if (data.despawnAfterExplosion)
+            {
+                DeactivateExplosive();
+            }
 
         }
 
@@ -274,25 +250,10 @@ namespace BOIVR
         public void DeactivateExplosive()
         {
             gameObject.SetActive(false);
-            Destroy(gameObject, 1f);
+            
         }
 
-        public void OnDamageableDestroyed(Damageable damageable)
-        {
-            if (damageable == currentDamageable)
-            {
-                return;
-            }
 
-            if (inRangeDamageables.Count > 0)
-            {
-                if (inRangeDamageables.Contains(damageable))
-                {
-                    inRangeDamageables.Remove(damageable);
-                }
-            }
-
-        }
 
     }
 }

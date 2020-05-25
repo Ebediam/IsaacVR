@@ -13,11 +13,19 @@ MonoBehaviour:
   m_Name: BasicGun
   m_EditorClassIdentifier: 
   prefab: {fileID: 7743832118939548052, guid: 158d034fa48dbe540a8cc5abb3a7bcd6, type: 3}
+  mainGunMode: 2
   bulletPrefab: {fileID: 4290915699790844812, guid: 9d4b9681e7e6e9b4daa2cf31750e8a7e,
     type: 3}
-  gunMode: 1
   fireRate: 1
   bulletSpeed: 10
   bulletDamage: 3.5
   magCapacity: 0
   shotSFX: {fileID: 8300000, guid: 75a672a9c812e1f429bbdc378e3b5c51, type: 3}
+  altGunMode: 1
+  altBulletPrefab: {fileID: 8322998701028168124, guid: f54a90aebaedc7043a5640a1d9197e9f,
+    type: 3}
+  altFireRate: 1
+  altBulletSpeed: 10
+  altBulletDamage: 1
+  altMagCapacity: 0
+  altShotSFX: {fileID: 0}
