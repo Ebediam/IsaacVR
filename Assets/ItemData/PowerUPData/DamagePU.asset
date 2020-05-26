@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: DamagePU
   m_EditorClassIdentifier: 
   prefab: {fileID: 2315962249870315285, guid: 12bd272e20f2b684b9a1f4c20f0d9764, type: 3}
+  ID: PUDamage
   boostedStat: 2
   amount: 0.75

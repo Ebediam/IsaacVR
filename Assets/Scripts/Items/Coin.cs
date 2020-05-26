@@ -16,8 +16,10 @@ namespace BOIVR
         public void OnPickUp()
         {
             OnItemPickup -= OnPickUp;
-            Player.local.AddCoins(coinValue);
-            DespawnItem(0.1f);
+            Player.local.AddCoins(coinValue+Player.local.data.coins);
+
+            DespawnItem();
+
         }
 
         // Update is called once per frame

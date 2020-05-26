@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BasicGun
   m_EditorClassIdentifier: 
   prefab: {fileID: 7743832118939548052, guid: 158d034fa48dbe540a8cc5abb3a7bcd6, type: 3}
+  ID: BasicGun
   mainGunMode: 2
   bulletPrefab: {fileID: 4290915699790844812, guid: 9d4b9681e7e6e9b4daa2cf31750e8a7e,
     type: 3}

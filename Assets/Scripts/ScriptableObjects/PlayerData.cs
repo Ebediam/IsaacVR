@@ -53,6 +53,10 @@ public class PlayerData : ScriptableObject
     [Header("Model")]
     public bool showArms;
 
+    [Header("GodMode")]
+    public bool invincible;
+    public float invincibilityTime;
+
     [Header("Max allowed stats")]
     public float maxFireRate;
 
@@ -67,7 +71,7 @@ public class PlayerData : ScriptableObject
     [Header("Settings")]
     public bool completedLevel;
     public LayerMask groundLayer;
-    public float invincibilityTime;
+
     
 
     public void ClearModifiers()

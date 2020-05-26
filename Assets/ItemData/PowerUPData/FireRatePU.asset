@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: FireRatePU
   m_EditorClassIdentifier: 
   prefab: {fileID: 1079512578132708179, guid: 69dd29b742189d044a230a88c26536fe, type: 3}
+  ID: PUFireRate
   boostedStat: 0
   amount: -0.5

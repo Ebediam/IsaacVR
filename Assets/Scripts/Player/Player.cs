@@ -70,38 +70,12 @@ namespace BOIVR
 
 
             PlayerTookDamageEvent += UpdateHealth;
+            Holder.HolderUpdate += HolderUpdater;
+
+
             UpdateHealth();
 
-            if (data.leftGrabberItem)
-            {
-                Item leftItem = Item.SpawnItem(data.leftGrabberItem);
-                leftItem.transform.position = transform.position + transform.forward;
-                if (Grabber.leftGrabber)
-                {
-                    Grabber.leftGrabber.Grab(leftItem);
-                }
-                else
-                {
-                    Debug.LogError("Error: leftGrabber Grabber not initialized yet");
-                }
-
-            }
-
-
-            if (data.rightGrabberItem)
-            {
-                Item rightItem = Item.SpawnItem(data.rightGrabberItem);
-                rightItem.transform.position = transform.position + transform.forward;
-                if (Grabber.rightGrabber)
-                {
-                    Grabber.rightGrabber.Grab(rightItem);
-                }
-                else
-                {
-                    Debug.LogError("Error: rightGrabber Grabber not initialized yet");
-                }
-
-            }
+       
 
 
 
@@ -166,6 +140,22 @@ namespace BOIVR
 
 
         }
+
+        void HolderUpdater(ItemData itemData, int count)
+        {
+            if(itemData == data.bombData)
+            {
+                AddBombs(count);
+            }
+            else if(itemData == data.keyData)
+            {
+                AddKeys(count);
+            }
+
+
+
+
+        }  
 
         public void Move(Vector2 direction2D)
         {
@@ -266,6 +256,11 @@ namespace BOIVR
 
         public void TakeDamage(float damage)
         {
+            if (data.invincible)
+            {
+                return;
+            }
+
             if (invincible)
             {
                 return;
@@ -309,20 +304,20 @@ namespace BOIVR
 
         public void AddBombs(int number)
         {
-            data.bombs += number;
+            data.bombs = number;
             UpdateInventoryEvent?.Invoke();
 
         }
 
         public void AddKeys(int number)
         {
-            data.keys += number;
+            data.keys = number;
             UpdateInventoryEvent?.Invoke();
         }
 
         public void AddCoins(int number)
         {
-            data.coins += number;
+            data.coins = number;
             UpdateInventoryEvent?.Invoke();
         }
 
@@ -338,6 +333,7 @@ namespace BOIVR
             GameManager.RightThumbstickPressEvent -= Jump;
 
             PlayerTookDamageEvent -= UpdateHealth;
+            Holder.HolderUpdate -= HolderUpdater;
 
             GameManager.GameOverEvent -= OnGameOver;
 

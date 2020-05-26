@@ -19,7 +19,11 @@ namespace BOIVR
     public class Grabber : MonoBehaviour
     {
         public delegate void GrabberDelegate(Grabber grabber);
+        public delegate void GrabberItemDelegate(Grabber grabber, Item item);
         public static GrabberDelegate FailGrabEvent;
+        public static GrabberItemDelegate GrabEvent;
+        public static GrabberItemDelegate ReleaseEvent;
+        public static GrabberDelegate GetSpellEvent;
 
         public InteractableType interactableType = InteractableType.None;
 
@@ -28,7 +32,7 @@ namespace BOIVR
         float oldDrag;
         float oldAngularDrag;
 
-
+        
         public List<Interactable> interactablesInRange;
 
         public Item heldItem;
@@ -53,6 +57,12 @@ namespace BOIVR
                 GameManager.L2PressEvent += HandTriggerPress;
                 leftGrabber = this;
 
+                if (hand.player.data.leftGrabberItem)
+                {
+                    Item leftItem = Item.SpawnItem(hand.player.data.leftGrabberItem);
+                    leftItem.transform.position = transform.position + transform.forward;
+                    Grab(leftItem);
+                }
 
             }
             else if (side == Side.Right)
@@ -62,10 +72,21 @@ namespace BOIVR
                 GameManager.ButtonOnePressEvent += AltButtonPress;
 
                 rightGrabber = this;
+
+                if (hand.player.data.rightGrabberItem)
+                {
+                    Item rightItem = Item.SpawnItem(hand.player.data.rightGrabberItem);
+                    rightItem.transform.position = transform.position + transform.forward;
+                    Grab(rightItem);
+                }
+
             }
 
             interactablesInRange = new List<Interactable>();
             GameManager.GameOverEvent += OnGameOver;
+
+
+
         }
 
         public void OnGameOver()
@@ -92,20 +113,7 @@ namespace BOIVR
         // Update is called once per frame
         void FixedUpdate()
         {
-            return;
 
-            if (heldItem)
-            {               
-
-                heldItem.rb.AddForce(Player.local.data.grabSpring * (transform.position - heldItem.holdPoint.transform.position), ForceMode.Force);
-
-                heldItem.transform.rotation = transform.rotation;
-
-                //rotationOffset = transform.rotation.eulerAngles - heldItem.transform.rotation.eulerAngles;
-
-                //heldItem.rb.AddTorque(rotationOffset * Player.local.data.rotSpring, ForceMode.Force);
-
-            }
         }
 
         void IndexTriggerPress(GameManager.ButtonState buttonState)
@@ -220,7 +228,7 @@ namespace BOIVR
                 heldItem.transform.rotation = transform.rotation;
 
                 AddJoint(heldItem);
-                heldItem.transform.parent = Player.local.transform;
+                heldItem.transform.parent = hand.player.transform;
 
                 heldItem.holder = this;
                 heldItem.rb.useGravity = false;
@@ -228,14 +236,18 @@ namespace BOIVR
 
                 if (side == Side.Left)
                 {
-                    Player.local.data.leftGrabberItem = heldItem.data;
+                    hand.player.data.leftGrabberItem = heldItem.data;
                 }
                 else if (side == Side.Right)
                 {
-                    Player.local.data.rightGrabberItem = heldItem.data;
+                    hand.player.data.rightGrabberItem = heldItem.data;
                 }
 
                 heldItem.OnItemPickup?.Invoke();
+
+
+                GrabEvent?.Invoke(this, heldItem);
+
 
             }
             else if (interactable is Spell)
@@ -245,6 +257,8 @@ namespace BOIVR
                 AddSpellAndActivate(spell, this);
                 Spell _spell = Instantiate(spell).GetComponentInChildren<Spell>();
                 AddSpellAndActivate(_spell, GetOtherHand());
+
+                GetSpellEvent?.Invoke(this);
 
             }
 
@@ -263,8 +277,8 @@ namespace BOIVR
         {
             oldDrag = heldItem.rb.drag;
             oldAngularDrag = heldItem.rb.angularDrag;
-            heldItem.rb.drag = Player.local.data.grabDamper;
-            heldItem.rb.angularDrag = Player.local.data.rotDamper;
+            heldItem.rb.drag = hand.player.data.grabDamper;
+            heldItem.rb.angularDrag = hand.player.data.rotDamper;
         }
         public void DisableCollisions(Item item)
         {
@@ -344,25 +358,23 @@ namespace BOIVR
                 //heldItem.rb.constraints = RigidbodyConstraints.None;
                 heldItem.holder = null;
                 heldItem.rb.useGravity = true;
-                heldItem.rb.velocity = hand.rb.velocity*2f;
-                
+                interactablesInRange.Remove(heldItem);
+                heldItem.rb.velocity = hand.rb.velocity*2f;                
                 heldItem.OnItemDrop?.Invoke();
                 StartCoroutine(ReenableCollisions(heldItem, 0.5f));
 
-                
+                ReleaseEvent?.Invoke(this, heldItem);
                 heldItem = null;
 
                 if (side == Side.Left)
                 {
-                    Player.local.data.leftGrabberItem = null;
+                    hand.player.data.leftGrabberItem = null;
                 }
                 else if (side == Side.Right)
                 {
-                    Player.local.data.rightGrabberItem = null;
+                    hand.player.data.rightGrabberItem = null;
                 }
-
-
-                
+                                
             }
 
 

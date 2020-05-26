@@ -50,7 +50,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnInteractable
       value: 
-      objectReference: {fileID: 11400000, guid: 28c6ee099dfb56c40976895c120e5d88,
+      objectReference: {fileID: 11400000, guid: 0fd122f397832004a906eafb483f4490,
         type: 2}
     - target: {fileID: 8287237133585989456, guid: a9fe4f9d6037cd04690a7bccdb64280d,
         type: 3}

@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Ice Wind
   m_EditorClassIdentifier: 
   prefab: {fileID: 409336345936112742, guid: 728c97466bde1ce40a5ceb3abf678fb9, type: 3}
+  ID: Spell_Freeze
   spellMode: 0
+  burstProjectilePrefab: {fileID: 0}

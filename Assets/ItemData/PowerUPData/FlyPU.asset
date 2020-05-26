@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: FlyPU
   m_EditorClassIdentifier: 
   prefab: {fileID: 9093836183662389967, guid: 3fd9f6bcbf2676848a848080bc774865, type: 3}
+  ID: PUWings
   boostedStat: 5
   amount: 0

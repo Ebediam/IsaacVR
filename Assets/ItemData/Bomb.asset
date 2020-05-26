@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Bomb
   m_EditorClassIdentifier: 
   prefab: {fileID: 1334286980203861583, guid: 01730188edd4c194d99770daf3c82182, type: 3}
+  ID: Bomb

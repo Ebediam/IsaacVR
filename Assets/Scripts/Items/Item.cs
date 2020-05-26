@@ -47,11 +47,11 @@ namespace BOIVR
 
             joint.autoConfigureConnectedAnchor = false;
             
-            joint.xDrive = CreateJointDrive();
-            joint.yDrive = CreateJointDrive();
-            joint.zDrive = CreateJointDrive();
+            joint.xDrive = CreateJointDrive(grabber);
+            joint.yDrive = CreateJointDrive(grabber);
+            joint.zDrive = CreateJointDrive(grabber);
             joint.rotationDriveMode = RotationDriveMode.Slerp;
-            joint.slerpDrive = CreateSlerpDrive();
+            joint.slerpDrive = CreateSlerpDrive(grabber);
             
 
             joint.xMotion = ConfigurableJointMotion.Locked;
@@ -81,20 +81,20 @@ namespace BOIVR
             }
         }
 
-        public JointDrive CreateJointDrive()
+        public JointDrive CreateJointDrive(Grabber grabber)
         {
             JointDrive drive = new JointDrive();
-            drive.positionSpring = Player.local.data.grabSpring;
-            drive.positionDamper = Player.local.data.grabDamper;
+            drive.positionSpring = grabber.hand.player.data.grabSpring;
+            drive.positionDamper = grabber.hand.player.data.grabDamper;
             drive.maximumForce = Mathf.Infinity;
             return drive;
         }
 
-        public JointDrive CreateSlerpDrive()
+        public JointDrive CreateSlerpDrive(Grabber grabber)
         {
             JointDrive drive = new JointDrive();
-            drive.positionSpring = Player.local.data.rotSpring;
-            drive.positionDamper = Player.local.data.rotDamper;
+            drive.positionSpring = grabber.hand.player.data.rotSpring;
+            drive.positionDamper = grabber.hand.player.data.rotDamper;
             drive.maximumForce = Mathf.Infinity;
             return drive;
         }
@@ -153,7 +153,8 @@ namespace BOIVR
 
             Grabber.RemoveFromItemsInRange(this);
 
-            Destroy(gameObject, timer);
+            //Destroy(gameObject, timer);
+            gameObject.SetActive(false);
         }
     }
 

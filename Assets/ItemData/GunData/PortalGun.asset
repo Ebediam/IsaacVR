@@ -13,14 +13,20 @@ MonoBehaviour:
   m_Name: PortalGun
   m_EditorClassIdentifier: 
   prefab: {fileID: 2224963600838756259, guid: 468a3a595b8dcd24b83c0dd134d64846, type: 3}
+  ID: PortalGun
+  mainGunMode: 0
   bulletPrefab: {fileID: 5522912565052400629, guid: dedf2f15d1cee2e49bf99641d791f357,
     type: 3}
-  altBulletPrefab: {fileID: 2142413134265438991, guid: daaf6f5221b85d5469ec51fadeda5825,
-    type: 3}
-  gunMode: 0
-  bulletUse: 2
   fireRate: 1
   bulletSpeed: 10
   bulletDamage: 0
   magCapacity: 0
   shotSFX: {fileID: 8300000, guid: 75a672a9c812e1f429bbdc378e3b5c51, type: 3}
+  altGunMode: 0
+  altBulletPrefab: {fileID: 2142413134265438991, guid: daaf6f5221b85d5469ec51fadeda5825,
+    type: 3}
+  altFireRate: 0
+  altBulletSpeed: 0
+  altBulletDamage: 0
+  altMagCapacity: 0
+  altShotSFX: {fileID: 0}
