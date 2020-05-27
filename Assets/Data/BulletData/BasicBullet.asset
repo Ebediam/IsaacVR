@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3f7a388c66ddcc4aa9865b3edd21615, type: 3}
-  m_Name: Ice Wind
+  m_Script: {fileID: 11500000, guid: f09ec59d976bbd549967d02b3b890f51, type: 3}
+  m_Name: BasicBullet
   m_EditorClassIdentifier: 
-  prefab: {fileID: 409336345936112742, guid: 728c97466bde1ce40a5ceb3abf678fb9, type: 3}
-  ID: Spell_Freeze
-  spellMode: 0
-  burstProjectilePrefab: {fileID: 0}
+  prefab: {fileID: 4290915699790844812, guid: 9d4b9681e7e6e9b4daa2cf31750e8a7e, type: 3}
+  damage: 3.5
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0

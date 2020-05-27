@@ -13,23 +13,14 @@ namespace BOIVR
         public Collider detectionCollider;
 
         // Start is called before the first frame update
-        void Start()
+
+
+        public override void OnCast()
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-        public override void Use()
-        {
-            base.Use();
+            base.OnCast();
             detectionCollider.enabled = true;
-
         }
+
 
         public void OnTriggerEnter(Collider other)
         {
@@ -73,15 +64,16 @@ namespace BOIVR
 
         }
 
-        public override void StopUsing()
+        public override void OnCastStop()
         {
-            base.StopUsing();
+            base.OnCastStop();
             detectionCollider.enabled = false;
             foreach (Frozen frozenEnemy in frozenEnemies)
             {
                 frozenEnemy.isBeingFrozen = false;
             }
         }
+
     }
 
 }

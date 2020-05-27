@@ -8,10 +8,19 @@ public class SpellData : InteractableData
     public enum SpellMode
     {
         Continuous,
-        Burst
+        Instant
+    }
+
+    public enum CastAllowed
+    {
+        HandFree,
+        handFull,
+        Both
     }
 
     public SpellMode spellMode;
-    public GameObject burstProjectilePrefab;
+    public CastAllowed castAllowed;
+    public float manaCost;
+    public float cooldown;
 
 }

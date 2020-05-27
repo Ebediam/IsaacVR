@@ -210,7 +210,6 @@ namespace BOIVR
 
         public void Grab(Interactable interactable)
         {
-
             if (interactable is Item)
             {
                 heldItem = interactable as Item;
@@ -243,10 +242,11 @@ namespace BOIVR
                     hand.player.data.rightGrabberItem = heldItem.data;
                 }
 
+                GrabEvent?.Invoke(this, heldItem);
                 heldItem.OnItemPickup?.Invoke();
 
 
-                GrabEvent?.Invoke(this, heldItem);
+                
 
 
             }
@@ -255,8 +255,12 @@ namespace BOIVR
                 Spell spell = interactable as Spell;
 
                 AddSpellAndActivate(spell, this);
-                Spell _spell = Instantiate(spell).GetComponentInChildren<Spell>();
-                AddSpellAndActivate(_spell, GetOtherHand());
+                if (!GetOtherHand().activeSpell)
+                {
+                    Spell _spell = Instantiate(spell).GetComponentInChildren<Spell>();
+                    AddSpellAndActivate(_spell, GetOtherHand());
+                }
+
 
                 GetSpellEvent?.Invoke(this);
 
@@ -320,16 +324,9 @@ namespace BOIVR
 
             Player.local.data.activeSpell = spell.data;
 
-            spell.holder = hand;
-            spell.grabDetectionCollider.enabled = false;
-            spell.transform.position = hand.transform.position;
-            spell.transform.rotation = hand.transform.rotation;
-            spell.transform.parent = hand.transform;
+            spell.OnSpellGrabbed(hand);
+
             hand.activeSpell = spell;
-            spell.idleSpell.SetActive(false);
-
-
-
 
         }
 

@@ -32,6 +32,10 @@ namespace BOIVR
         float turnAngle;
         public float health;
         public float maxHealth;
+
+        public float mana;
+        public float maxMana;
+
         float timer = 0f;
 
         float jumpCooldown;
