@@ -10,7 +10,7 @@ namespace BOIVR
         [HideInInspector] public Enemy enemyController;
         [HideInInspector] public Transform target;
         protected bool initialized;
-
+        
 
         // Start is called before the first frame update
         public virtual void Start()

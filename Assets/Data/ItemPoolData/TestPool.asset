@@ -19,6 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9f85b6bb17678cd429d8b490c86f6f21, type: 2}
   - {fileID: 11400000, guid: ebf8bc73c816ed24cb148093599fbb38, type: 2}
   - {fileID: 11400000, guid: 70c11e4cf9b5c164a92d0d49e62de2cd, type: 2}
+  - {fileID: 11400000, guid: 2f7fa8bfae4cb0e4e96208e2ae17335f, type: 2}
   pickupPool:
   - {fileID: 11400000, guid: 0fd122f397832004a906eafb483f4490, type: 2}
   - {fileID: 11400000, guid: bb6730b713ab48541866f520472fc315, type: 2}

@@ -63,9 +63,7 @@ namespace BOIVR
 
             foreach (Enemy enemy in enemies)
             {
-                enemy.active = true;
-                enemy.enemyManager = this;
-                enemy.DamageableDestroyedEvent += DeadEnemyListener;
+                enemy.ActivateEnemy(this);                
 
             }
         }

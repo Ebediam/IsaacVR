@@ -12,8 +12,7 @@ namespace BOIVR
         public bool active = false;
         [HideInInspector] public float maxSpeed;
 
-
-
+        public Animator animator;
         public TextMeshPro enemyText;
 
         float timer2;
@@ -62,6 +61,13 @@ namespace BOIVR
                 return;
             }
 
+            DamagePlayer(player);
+
+
+        }
+
+        public void DamagePlayer(Player player)
+        {
             player.TakeDamage(data.damage);
 
             if (data.pushback)
@@ -69,13 +75,29 @@ namespace BOIVR
                 ignoreMaxSpeed = true;
                 Pushback();
             }
+        }
 
+        public void ActivateEnemy()
+        {
+            active = true;
+            if (animator)
+            {
+                animator.SetBool("isActive", true);
+            }
+            
+        }
 
+        public void ActivateEnemy(EnemyManager _enemyManager)
+        {
+            
+            enemyManager = _enemyManager;
+            DamageableDestroyedEvent += _enemyManager.DeadEnemyListener;
+
+            ActivateEnemy();
         }
 
         public void Pushback()
         {
-
             rb.AddForce(transform.forward * -data.pushbackVelocity, ForceMode.VelocityChange);
         }
 
