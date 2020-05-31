@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
-  m_Name: LongWorm
+  m_Name: LongWormBody
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7055455999984757162, guid: f78d073adcfac744eb340d17886fd170, type: 3}
-  name: Longworm
-  hitPoints: 50
+  prefab: {fileID: 0}
+  name: 
+  hitPoints: 40
   damage: 8
   maxSpeed: 4
   acceleration: 20
   mass: 10
+  targetType: 2
   pushback: 0
   pushbackVelocity: 0
   actionCooldown: 0

@@ -2,24 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace BOIVR
 {
-    public class EnemyBehaviour : MonoBehaviour
+    public class EnemyAction : MonoBehaviour
     {
 
         [HideInInspector] public Enemy enemyController;
-
         [HideInInspector] public bool initialized;
-        
-
         // Start is called before the first frame update
-        public void Start()
+        void Start()
         {
             enemyController = gameObject.GetComponent<Enemy>();
-
             //Initialize();
         }
-
 
         public virtual void Initialize()
         {
@@ -30,7 +26,6 @@ namespace BOIVR
         {
 
         }
-
 
 
     }

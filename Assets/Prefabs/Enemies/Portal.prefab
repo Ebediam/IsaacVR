@@ -145,12 +145,17 @@ MonoBehaviour:
   rb: {fileID: 5455758846263468479}
   invencibilityTime: 0.1
   invicible: 0
-  ignoreMaxSpeed: 0
   data: {fileID: 11400000, guid: 4d06a27c0f2e1ab478812247c868cd67, type: 2}
   enemyManager: {fileID: 0}
   active: 0
-  maxSpeed: 0
+  target: {fileID: 0}
+  animator: {fileID: 0}
   enemyText: {fileID: 9064305628429713938}
+  ignoreMaxSpeed: 0
+  maxSpeed: 0
+  enemyBehaviours: []
+  enemyActions: []
+  actionTimer: 0
 --- !u!54 &5455758846263468479
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -180,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
   spawnerType: 0
   enemyPoolData: {fileID: 11400000, guid: 17cf1f2b491141b46948791ed9bca79e, type: 2}
   enemyToSpawn: {fileID: 0}
@@ -210,7 +215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5455758846685388598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.103, z: 0.519}
+  m_LocalPosition: {x: 0, y: 0, z: 0.519}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5455758846263468465}

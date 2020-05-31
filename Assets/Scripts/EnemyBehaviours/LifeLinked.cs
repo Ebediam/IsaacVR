@@ -8,35 +8,19 @@ namespace BOIVR
     {
         public Damageable linkedTo;
 
-        // Start is called before the first frame update
-        public override void Start()
+        public override void Initialize()
         {
-            base.Start();
             linkedTo.DamageableDestroyedEvent += LifeLinkedDestroyed;
             enemyController.DamageableDestroyedEvent += CleanLifeLink;
-            //linkedTo.TakeDamageEvent += LifeLinkedDamaged;
+            base.Initialize();
         }
 
-        // Update is called once per frame
-        public override void Update()
-        {
-            if (!enemyController.active)
-            {
-                return;
-            }
-            base.Update();
 
-
-
-
-
-        }
-        /*
         public void LifeLinkedDamaged(Damageable damageable, float damage)
         {        
             enemyController.TakeDamage(damage);
         }
-        */
+        
         public void LifeLinkedDestroyed(Damageable damageable)
         {
             enemyController.DestroyDamageable();

@@ -6,29 +6,13 @@ namespace BOIVR
 {
     public class VibratesInPlace : EnemyBehaviour
     {
-        public Vector3 startPosition;
+        [HideInInspector]public Vector3 startPosition;
 
         // Start is called before the first frame update
-        public override void Start()
-        {
-            base.Start();
-
-
-
-        }
 
         // Update is called once per frame
-        public override void Update()
+        public override void Action()
         {
-            if (!enemyController.active)
-            {
-                return;
-            }
-            base.Update();
-
-
-
-
             Vector3 direction = Utils.RandomVector3() + (startPosition - transform.position).normalized;
 
             direction = direction.normalized;
@@ -43,9 +27,8 @@ namespace BOIVR
 
         public override void Initialize()
         {
-            base.Initialize();
-
             startPosition = transform.position;
+            base.Initialize();
         }
     }
 }

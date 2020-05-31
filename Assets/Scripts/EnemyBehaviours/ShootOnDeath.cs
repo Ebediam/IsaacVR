@@ -8,15 +8,17 @@ namespace BOIVR
     {
         public List<Transform> spawnPoints;
         public EnemyBullet bulletPrefab;
+        public float bulletSpeed;
 
         // Start is called before the first frame update
-        public override void Start()
-        {
-            base.Start();
-            enemyController.DamageableDestroyedEvent += OnDeath;
-        }
 
         // Update is called once per frame
+
+        public override void Initialize()
+        {
+            enemyController.DamageableDestroyedEvent += OnDeath;
+            base.Initialize();
+        }
 
         public void OnDeath(Damageable damageable)
         {
@@ -26,12 +28,11 @@ namespace BOIVR
 
                 bullet.transform.position = spawnPoint.position;
                 bullet.transform.rotation = spawnPoint.rotation;
-                bullet.rb.AddForce(bullet.transform.forward * enemyController.data.bulletSpeed, ForceMode.VelocityChange);
+                bullet.rb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.VelocityChange);
                 bullet.damage = enemyController.data.damage;
-
-
             }
 
+            enemyController.DamageableDestroyedEvent -= OnDeath;
 
         }
 

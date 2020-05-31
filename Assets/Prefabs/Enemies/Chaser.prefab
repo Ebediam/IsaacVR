@@ -447,12 +447,17 @@ MonoBehaviour:
   rb: {fileID: 5050721514545258175}
   invencibilityTime: 0.1
   invicible: 0
-  ignoreMaxSpeed: 0
   data: {fileID: 11400000, guid: c9077b5466dd63745aed8f01c13e64de, type: 2}
   enemyManager: {fileID: 0}
   active: 0
-  maxSpeed: 0
+  target: {fileID: 0}
+  animator: {fileID: 0}
   enemyText: {fileID: 3467339445878580843}
+  ignoreMaxSpeed: 0
+  maxSpeed: 0
+  enemyBehaviours: []
+  enemyActions: []
+  actionTimer: 0
 --- !u!114 &-7099875282013383916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
   agentController: {fileID: -296386955900766380}
 --- !u!195 &-296386955900766380
 NavMeshAgent:
@@ -475,7 +480,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4063344774492290957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.4
   m_Speed: 3.5

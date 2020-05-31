@@ -21,11 +21,5 @@ MonoBehaviour:
   mass: 0.5
   pushback: 0
   pushbackVelocity: 0
-  actionCooldown: 0
-  actionCooldownModifier: 0
-  actionDuration: 0
-  bulletSpeed: 2.5
-  bulletsPerShot: 1
-  shotCooldown: 1.5
-  shotCooldownModifier: 0.5
-  delayBetweenBulletsPerShot: 0
+  actionCooldown: 2
+  actionCooldownModifier: 0.5

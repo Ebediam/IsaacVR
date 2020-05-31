@@ -797,7 +797,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7252315651492053306}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 7252315653053854593}
@@ -838,13 +838,17 @@ MonoBehaviour:
   rb: {fileID: 7252315651492053300}
   invencibilityTime: 0.1
   invicible: 0
-  ignoreMaxSpeed: 0
   data: {fileID: 11400000, guid: 4d6ea452aa87d8848b23aa56abe1a69a, type: 2}
   enemyManager: {fileID: 0}
   active: 0
-  maxSpeed: 0
+  target: {fileID: 0}
   animator: {fileID: 3084024100790886888}
   enemyText: {fileID: 6402416714190308732}
+  ignoreMaxSpeed: 0
+  maxSpeed: 0
+  enemyBehaviours: []
+  enemyActions: []
+  actionTimer: 0
 --- !u!114 &5701190086592886076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,7 +862,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
 --- !u!1 &7252315653053854598
 GameObject:
   m_ObjectHideFlags: 0

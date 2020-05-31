@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Damageable : MonoBehaviour
@@ -14,36 +15,12 @@ public class Damageable : MonoBehaviour
 
     public Rigidbody rb;
     public float invencibilityTime = 0.1f;
-    float timer = 0f;
+
     [HideInInspector] public bool invicible = false;
-    [HideInInspector] public bool ignoreMaxSpeed = false;
+
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
-    public void CheckInvincibility()
-    {
-
-        if (!invicible)
-        {
-            return;
-        }
-
-        timer += Time.deltaTime;
-
-        if (timer >= invencibilityTime)
-        {
-            invicible = false;
-            timer = 0f;
-        }
-    }
 
     public virtual void TakeDamage(float damage)
     {
@@ -53,10 +30,8 @@ public class Damageable : MonoBehaviour
         }
 
         currentHealth -= damage;
-        invicible = true;
 
-
-        if(currentHealth <= 0f)
+        if (currentHealth <= 0f)
         {
             DestroyDamageable();
         }
@@ -66,11 +41,25 @@ public class Damageable : MonoBehaviour
         }
 
 
+        invicible = true;
+        if (gameObject.activeSelf)
+        {
+            StartCoroutine(InvincibleTimer(invencibilityTime));
+        }
+        
+
+    }
+
+    public IEnumerator InvincibleTimer(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        invicible = false;
     }
 
     public virtual void DestroyDamageable()
     {
         DamageableDestroyedEvent?.Invoke(this);
-        Destroy(gameObject, 0.1f);
+        //Destroy(gameObject, 0.1f);
+        gameObject.SetActive(false);
     }
 }

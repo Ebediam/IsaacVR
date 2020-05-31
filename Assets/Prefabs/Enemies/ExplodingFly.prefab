@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
   spawnPoints:
   - {fileID: 3138967264826652206}
   - {fileID: 2616547105534824785}
@@ -23,6 +22,7 @@ MonoBehaviour:
   - {fileID: 4070106992164592756}
   bulletPrefab: {fileID: 2660910708425824620, guid: 97cbc7862e49d3e43a7bc06157bd2259,
     type: 3}
+  bulletSpeed: 2
 --- !u!1 &726275191965301227
 GameObject:
   m_ObjectHideFlags: 0

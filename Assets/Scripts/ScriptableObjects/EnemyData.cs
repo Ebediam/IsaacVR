@@ -5,6 +5,13 @@ using UnityEngine;
 [CreateAssetMenu]
 public class EnemyData : ScriptableObject
 {
+    public enum Target
+    {
+        Player,
+        NearestEnemy,
+        Custom
+    }
+
     [Header("Base for all")]
     public GameObject prefab;
     public new string name;
@@ -16,25 +23,16 @@ public class EnemyData : ScriptableObject
     public float acceleration;
     public float mass;
 
+    public Target targetType;
 
     [Header("Pushback after hit")]
     public bool pushback;
     public float pushbackVelocity;
 
-    [Header("If it performs any movement action")]
+    [Header("If it performs any actions")]
     public float actionCooldown;
-    public float actionCooldownModifier;
-    public float actionDuration;
+    public float actionCooldownModifier;   
 
-    [Header("If it shoots")]
-    public float bulletSpeed;
-    public int bulletsPerShot;
-    public float shotCooldown;
-    public float shotCooldownModifier;
-    public float delayBetweenBulletsPerShot;
-
-
-    
 
 
 }

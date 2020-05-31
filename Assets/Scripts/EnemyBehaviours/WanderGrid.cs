@@ -7,7 +7,7 @@ namespace BOIVR
     public class WanderGrid : EnemyBehaviour
     {
 
-        public bool isTurningInCooldown = false;
+        [HideInInspector]public bool isTurningInCooldown = false;
         public float turnCooldownTime = 0.1f;
         float timer = 0f;
 
@@ -17,21 +17,11 @@ namespace BOIVR
         public Sensor leftSensor;
         public Sensor rightSensor;
         // Start is called before the first frame update
-        public override void Start()
-        {
-            base.Start();
-        }
+
 
         // Update is called once per frame
-        public override void Update()
-        {
-            if (!enemyController.active)
-            {
-                return;
-            }
-            base.Update();
-
-
+        public override void Action()
+        { 
 
             enemyController.rb.AddForce(transform.forward * enemyController.data.acceleration, ForceMode.Acceleration);
 

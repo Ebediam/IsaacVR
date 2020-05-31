@@ -11,21 +11,11 @@ namespace BOIVR
         public float accelerationMultiplier = 1f;
         List<Transform> corners;
         // Start is called before the first frame update
-        public override void Start()
-        {
-            base.Start();
-        }
+
 
         // Update is called once per frame
-        public override void Update()
+        public override void Action()
         {
-            if (!enemyController.active)
-            {
-                return;
-            }
-            base.Update();
-
-
 
             Vector3 direction = AvoidCornersDirection();
 
@@ -36,8 +26,6 @@ namespace BOIVR
 
 
             enemyController.rb.AddForce(direction * enemyController.data.acceleration * accelerationMultiplier, ForceMode.Acceleration);
-
-
 
         }
 
@@ -61,10 +49,8 @@ namespace BOIVR
 
         public override void Initialize()
         {
-            base.Initialize();
-
-
             corners = enemyController.enemyManager.room.corners;
+            base.Initialize();
         }
 
     }

@@ -8,23 +8,13 @@ namespace BOIVR
     {
         // Start is called before the first frame update
 
-        public override void Start()
-        {
-            base.Start();
 
-
-        }
 
         // Update is called once per frame
-        public override void Update()
+        public override void Action()
         {
-            if (!enemyController.active)
-            {
-                return;
-            }
-            base.Update();
-
-            Vector3 targetDirection = target.position - transform.position;
+ 
+            Vector3 targetDirection = enemyController.target.position - transform.position;
 
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, enemyController.data.maxSpeed * Time.deltaTime, 0f);
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BOIVR
 {
-    public class EnemySpawner : EnemyBehaviour
+    public class EnemySpawner : EnemyAction
     {
         public enum SpawnerType
         {
@@ -21,30 +21,12 @@ namespace BOIVR
 
         float timer;
         // Start is called before the first frame update
-        public override void Start()
-        {
-            base.Start();
 
-        }
 
         // Update is called once per frame
-        public override void Update()
+        public override void Action()
         {
-            if (!enemyController.active)
-            {
-                return;
-            }
-            base.Update();
-
-
-            timer += Time.deltaTime;
-
-            if (timer > enemyController.data.actionCooldown)
-            {
-                SpawnEnemy();
-                timer = Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
-            }
-
+            SpawnEnemy();
         }
 
         public void SpawnEnemy()
@@ -52,8 +34,9 @@ namespace BOIVR
             Enemy enemyInstance = Instantiate(enemyToSpawn.prefab).GetComponent<Enemy>();
             enemyInstance.transform.position = spawnPoint.transform.position;
             enemyInstance.transform.rotation = spawnPoint.transform.rotation;
-            enemyInstance.enemyManager = enemyController.enemyManager;
-            enemyInstance.active = true;
+
+            enemyInstance.ActivateEnemy(enemyController.enemyManager);
+
 
             if (autoInflictedDamage != 0)
             {
@@ -73,9 +56,6 @@ namespace BOIVR
 
         public override void Initialize()
         {
-            base.Initialize();
-            timer = (enemyController.data.actionCooldown / 2) + Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
-
             switch (spawnerType)
             {
                 case SpawnerType.Defined:
@@ -89,13 +69,9 @@ namespace BOIVR
                 case SpawnerType.Random:
                     PickEnemyDataRandom();
                     break;
-
-
-
-
             }
 
-
+            base.Initialize();
         }
     }
 }

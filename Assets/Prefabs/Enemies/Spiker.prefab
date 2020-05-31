@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7932375021931104680}
   - component: {fileID: 7932375021931104681}
   - component: {fileID: 7932375021931104682}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 7932375021946792399}
   - component: {fileID: 7932375021946792400}
   - component: {fileID: 7932375021946792401}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 1860570670474056530}
   - component: {fileID: 523594475989040703}
   - component: {fileID: 4478588430076433419}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Spiker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,13 +237,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
   spawnPoints:
   - {fileID: 7932375022891823332}
   - {fileID: 7932375023563440147}
   - {fileID: 7932375023199373299}
   - {fileID: 7932375022766977485}
   bullet: {fileID: 2660910708425824620, guid: 97cbc7862e49d3e43a7bc06157bd2259, type: 3}
+  bulletsPerShot: 2
+  delayBetweenBullets: 0.5
+  bulletSpeed: 3
 --- !u!114 &1860570670474056530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,12 +263,17 @@ MonoBehaviour:
   rb: {fileID: 523594475989040703}
   invencibilityTime: 0.1
   invicible: 0
-  ignoreMaxSpeed: 0
   data: {fileID: 11400000, guid: e8ccca43695ff3247bf732a705f45e05, type: 2}
   enemyManager: {fileID: 0}
   active: 0
-  maxSpeed: 0
+  target: {fileID: 0}
+  animator: {fileID: 0}
   enemyText: {fileID: 3703459698613569260}
+  ignoreMaxSpeed: 0
+  maxSpeed: 0
+  enemyBehaviours: []
+  enemyActions: []
+  actionTimer: 0
 --- !u!54 &523594475989040703
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -295,7 +303,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
+  actionDuration: 0.5
 --- !u!1 &7932375022135881925
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +317,7 @@ GameObject:
   - component: {fileID: 7932375022135881921}
   - component: {fileID: 7932375022135881922}
   - component: {fileID: 7932375022135881923}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +411,7 @@ GameObject:
   - component: {fileID: 7932375022313792813}
   - component: {fileID: 7932375022313792814}
   - component: {fileID: 7932375022313792815}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +505,7 @@ GameObject:
   - component: {fileID: 7932375022341100675}
   - component: {fileID: 7932375022341100676}
   - component: {fileID: 7932375022341100677}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,7 +599,7 @@ GameObject:
   - component: {fileID: 7932375022424785914}
   - component: {fileID: 7932375022424785915}
   - component: {fileID: 7932375022424785916}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -684,7 +693,7 @@ GameObject:
   - component: {fileID: 7932375022457015237}
   - component: {fileID: 7932375022457015238}
   - component: {fileID: 7932375022457015239}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,7 +784,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7932375022458754840}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Leg (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,7 +816,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7932375022516201028}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +861,7 @@ GameObject:
   - component: {fileID: 7932375022573860861}
   - component: {fileID: 7932375022573860862}
   - component: {fileID: 7932375022573860863}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -943,7 +952,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7932375022766977485}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -976,7 +985,7 @@ GameObject:
   - component: {fileID: 7932375022787906374}
   - component: {fileID: 7932375022787906375}
   - component: {fileID: 7932375022787906376}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1067,7 +1076,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7932375022891823332}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1100,7 +1109,7 @@ GameObject:
   - component: {fileID: 7932375022955627110}
   - component: {fileID: 7932375022955627111}
   - component: {fileID: 7932375022955627112}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1191,7 +1200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7932375023067666262}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Leg (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1223,7 +1232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7932375023199373299}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1253,7 +1262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7932375023207028038}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1288,7 +1297,7 @@ GameObject:
   - component: {fileID: 7932375023267597429}
   - component: {fileID: 7932375023267597430}
   - component: {fileID: 7932375023267597431}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1381,7 +1390,7 @@ GameObject:
   - component: {fileID: 7932375023276144331}
   - component: {fileID: 7932375023276144332}
   - component: {fileID: 7932375023276144333}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1475,7 +1484,7 @@ GameObject:
   - component: {fileID: 7932375023382197584}
   - component: {fileID: 7932375023382197585}
   - component: {fileID: 7932375023382197586}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1569,7 +1578,7 @@ GameObject:
   - component: {fileID: 7932375023382552867}
   - component: {fileID: 7932375023382552868}
   - component: {fileID: 7932375023382552869}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1663,7 +1672,7 @@ GameObject:
   - component: {fileID: 7932375023447388502}
   - component: {fileID: 7932375023447388503}
   - component: {fileID: 7932375023447388504}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1757,7 +1766,7 @@ GameObject:
   - component: {fileID: 7932375023487777013}
   - component: {fileID: 7932375023487777014}
   - component: {fileID: 7932375023487777015}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1848,7 +1857,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7932375023496365361}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Leg (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1883,7 +1892,7 @@ GameObject:
   - component: {fileID: 7932375023512296815}
   - component: {fileID: 7932375023512296816}
   - component: {fileID: 7932375023512296817}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1974,7 +1983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7932375023563440147}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2007,7 +2016,7 @@ GameObject:
   - component: {fileID: 7932375023624201306}
   - component: {fileID: 7932375023624201307}
   - component: {fileID: 7932375023624201308}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2098,7 +2107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7932375023738992751}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Leg (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2130,7 +2139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7932375023805638765}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Leg (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

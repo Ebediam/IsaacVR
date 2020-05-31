@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
 --- !u!114 &2272284666317318574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,12 +129,17 @@ MonoBehaviour:
   rb: {fileID: 2272284666317318561}
   invencibilityTime: 0.1
   invicible: 0
-  ignoreMaxSpeed: 0
-  data: {fileID: 11400000, guid: c7a16247275075148a633ef47a0268aa, type: 2}
+  data: {fileID: 11400000, guid: acfcb01a85d591747aec0e767b5806c4, type: 2}
   enemyManager: {fileID: 0}
   active: 0
-  maxSpeed: 0
+  target: {fileID: 0}
+  animator: {fileID: 0}
   enemyText: {fileID: 0}
+  ignoreMaxSpeed: 0
+  maxSpeed: 0
+  enemyBehaviours: []
+  enemyActions: []
+  actionTimer: 0
 --- !u!54 &2272284666317318561
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -164,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
   linkedTo: {fileID: 0}
 --- !u!114 &-3309318666789801307
 MonoBehaviour:
@@ -179,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
   enemyToSlowdown: {fileID: 0}
   slowdownPercent: 0.25
 --- !u!1 &9182064209693849998

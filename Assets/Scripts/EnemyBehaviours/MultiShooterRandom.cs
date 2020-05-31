@@ -4,41 +4,25 @@ using UnityEngine;
 
 namespace BOIVR
 {
-    public class MultiShooterRandom : EnemyBehaviour
+    public class MultiShooterRandom : EnemyAction
     {
         // Start is called before the first frame update
 
-        float timer = 0f;
 
         public List<Transform> spawnPoints;
         public EnemyBullet bullet;
-        public override void Start()
-        {
-            base.Start();
-        }
+        public int bulletsPerShot;
+        public float delayBetweenBullets;
+        public float bulletSpeed;
+
 
         // Update is called once per frame
-        public override void Update()
-        {
-            if (!enemyController.active)
+        public override void Action()
+        {  
+            for (int i = 0; i <= bulletsPerShot; i++)
             {
-                return;
+                Invoke("Shoot", delayBetweenBullets * i);
             }
-
-            base.Update();
-
-            timer += Time.deltaTime;
-
-            if (timer > enemyController.data.shotCooldown)
-            {
-                for (int i = 0; i <= enemyController.data.bulletsPerShot; i++)
-                {
-                    Invoke("Shoot", enemyController.data.delayBetweenBulletsPerShot * i);
-                }
-                timer = RandomizeShotTimer();
-
-            }
-
 
         }
 
@@ -49,17 +33,12 @@ namespace BOIVR
                 EnemyBullet bulletInstantiate = Instantiate(bullet);
                 bulletInstantiate.transform.position = spawnPoint.position;
                 bulletInstantiate.transform.rotation = spawnPoint.rotation;
-                bulletInstantiate.rb.AddForce(bulletInstantiate.transform.forward * enemyController.data.bulletSpeed, ForceMode.VelocityChange);
+                bulletInstantiate.rb.AddForce(bulletInstantiate.transform.forward * bulletSpeed, ForceMode.VelocityChange);
                 bulletInstantiate.damage = enemyController.data.damage;
 
             }
         }
 
-        public override void Initialize()
-        {
-            base.Initialize();
-            timer = RandomizeShotTimer();
-        }
     }
 }
 

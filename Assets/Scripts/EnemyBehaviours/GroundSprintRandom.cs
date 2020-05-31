@@ -4,64 +4,43 @@ using UnityEngine;
 
 namespace BOIVR
 {
-    public class GroundSprintRandom : EnemyBehaviour
+    public class GroundSprintRandom : EnemyAction
     {
 
-        float coolDownTimer = 0f;
-        float actionTimer = 0f;
+        public float actionDuration;
         bool sprinting = false;
         Vector3 sprintDirection;
-        // Start is called before the first frame update
-        public override void Start()
+
+        public override void Action()
         {
-            base.Start();
+            StartSprint();
+            StartCoroutine(EndSprint(actionDuration));
+            StartCoroutine(KeepSprinting());
+
         }
 
-        public override void Initialize()
+
+        public IEnumerator EndSprint(float timer)
         {
-            base.Initialize();
-            coolDownTimer = Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
+            yield return new WaitForSeconds(timer);
+            sprinting = false;
         }
 
-        // Update is called once per frame
-        public override void Update()
+        public IEnumerator KeepSprinting()
         {
-            if (!enemyController.active)
-            {
-                return;
-            }
-
-            base.Update();
-
-            coolDownTimer += Time.deltaTime;
-
-            if (coolDownTimer > enemyController.data.actionCooldown)
-            {
-                StartSprint();
-                coolDownTimer = Random.Range(-enemyController.data.actionCooldownModifier, enemyController.data.actionCooldownModifier);
-            }
-
-            if (sprinting)
+            while (sprinting)
             {
                 Sprint();
-                actionTimer += Time.deltaTime;
-
-                if (actionTimer > enemyController.data.actionDuration)
-                {
-                    actionTimer = 0f;
-                    sprinting = false;
-                }
+                yield return null;
             }
-
-
-
+            
         }
 
 
         public void StartSprint()
         {
             sprintDirection = Utils.RandomVector3(false, true, false);
-            Vector3 playerDirection = new Vector3((target.position - transform.position).x, 0f, (target.position - transform.position).z);
+            Vector3 playerDirection = new Vector3((enemyController.target.position - transform.position).x, 0f, (enemyController.target.position - transform.position).z);
 
             float followPlayerPercent = Random.Range(0f, 1f);
 

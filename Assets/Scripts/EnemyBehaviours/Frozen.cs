@@ -12,21 +12,9 @@ namespace BOIVR
         public float minSpeedMultiplier = 0.1f;
 
 
-        public override void Start()
-        {
-            base.Start();
-        }
-
         // Update is called once per frame
-        public override void Update()
+        public override void Action()
         {
-            if (!enemyController.active)
-            {
-                return;
-            }
-
-            base.Update();
-
             if (isBeingFrozen)
             {
                 enemyController.maxSpeed = Mathf.Lerp(enemyController.maxSpeed, enemyController.maxSpeed * minSpeedMultiplier, freezingSpeed * Time.deltaTime);

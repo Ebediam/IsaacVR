@@ -5,52 +5,22 @@ using UnityEngine;
 namespace BOIVR
 {
 
-    public class JumpRandomly : EnemyBehaviour
+    public class JumpRandomly : EnemyAction
     {
-
-        float actionTimer;
         public float maxUpForwardJumpRatio = 3f;
         public float minUpForwardJumpRatio = 1f;
 
         // Start is called before the first frame update
-        public override void Start()
-        {
-            base.Start();
 
-            actionTimer = RandomizeActionTimer();
-
-
-        }
 
         // Update is called once per frame
-        public override void Update()
+        public override void Action()
         {
-            if (!enemyController.active)
+            if(enemyController.rb.velocity.y != 0)
             {
-                return;
-            }
-
-            base.Update();
-
-            actionTimer += Time.deltaTime;
-
-            if (actionTimer > enemyController.data.actionCooldown)
-            {
-                if (enemyController.rb.velocity.y != 0)
-                {
-                    return;
-                }
-
-
-                actionTimer = RandomizeActionTimer();
-
                 ChangeOrientation();
                 Jump();
-
-
             }
-
-
 
         }
 

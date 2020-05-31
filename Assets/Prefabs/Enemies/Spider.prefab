@@ -734,12 +734,17 @@ MonoBehaviour:
   rb: {fileID: 2336079590076821740}
   invencibilityTime: 0.1
   invicible: 0
-  ignoreMaxSpeed: 0
   data: {fileID: 11400000, guid: 86a443b53735e6b4bb52ecfdbc082197, type: 2}
   enemyManager: {fileID: 0}
   active: 0
-  maxSpeed: 0
+  target: {fileID: 0}
+  animator: {fileID: 0}
   enemyText: {fileID: 1223413861345095531}
+  ignoreMaxSpeed: 0
+  maxSpeed: 0
+  enemyBehaviours: []
+  enemyActions: []
+  actionTimer: 0
 --- !u!114 &7238622686792869639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,7 +758,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
+  actionDuration: 0.5
 --- !u!54 &2336079590076821740
 Rigidbody:
   m_ObjectHideFlags: 0

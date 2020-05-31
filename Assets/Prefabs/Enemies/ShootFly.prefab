@@ -320,13 +320,17 @@ MonoBehaviour:
   rb: {fileID: 3169880825914856724}
   invencibilityTime: 0.1
   invicible: 0
-  ignoreMaxSpeed: 0
   data: {fileID: 11400000, guid: 9402200183e2e464fb966ba81e75d395, type: 2}
   enemyManager: {fileID: 0}
   active: 0
-  maxSpeed: 0
+  target: {fileID: 0}
   animator: {fileID: 1276952411710415387}
   enemyText: {fileID: 3094617548813652255}
+  ignoreMaxSpeed: 0
+  maxSpeed: 0
+  enemyBehaviours: []
+  enemyActions: []
+  actionTimer: 0
 --- !u!114 &3539811168441254427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
 --- !u!114 &339748120388898279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +357,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
   startPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &8198163054609722961
 MonoBehaviour:
@@ -369,9 +371,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
   spawnPoint: {fileID: 7050655866406970741}
   bullet: {fileID: 2660910708425824620, guid: 97cbc7862e49d3e43a7bc06157bd2259, type: 3}
+  bulletsPerShot: 1
+  delayBetweenBullets: 0
+  bulletSpeed: 2
 --- !u!1 &3169880827602216870
 GameObject:
   m_ObjectHideFlags: 0

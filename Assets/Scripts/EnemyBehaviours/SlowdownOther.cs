@@ -11,22 +11,15 @@ namespace BOIVR
         public float slowdownPercent;
 
         // Start is called before the first frame update
-        public override void Start()
+
+
+        public override void Initialize()
         {
-            base.Start();
             enemyController.DamageableDestroyedEvent += Slowdown;
+            base.Initialize();
         }
 
-        /*
-        public override void Update()
-        {
-            if (!enemyController.active)
-            {
-                return;
-            }
-            base.Update();
-        }
-        */
+
         public void Slowdown(Damageable damageable)
         {
             enemyToSlowdown.maxSpeed *= slowdownPercent;

@@ -7,21 +7,11 @@ namespace BOIVR
     public class RunFromPlayer : EnemyBehaviour
     {
         // Start is called before the first frame update
-        public override void Start()
-        {
-            base.Start();
-        }
+
 
         // Update is called once per frame
-        public override void Update()
+        public override void Action()
         {
-            if (!enemyController.active)
-            {
-                return;
-            }
-            base.Update();
-
-
 
             Vector3 awayFromPlayer = transform.position - Player.local.transform.position;
             awayFromPlayer = new Vector3(awayFromPlayer.x, 0f, awayFromPlayer.z);
@@ -29,7 +19,6 @@ namespace BOIVR
             enemyController.rb.AddForce(awayFromPlayer.normalized * enemyController.data.acceleration, ForceMode.Acceleration);
 
             enemyController.rb.velocity = Vector3.ClampMagnitude(enemyController.rb.velocity, enemyController.maxSpeed);
-
 
 
         }
