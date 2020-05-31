@@ -50,7 +50,6 @@ namespace BOIVR
         // Start is called before the first frame update
         void Start()
         {
-
             local = this;
             GameManager.GameOverEvent += OnGameOver;
             GameManager.leftJoystickEvent += Move;
@@ -330,6 +329,10 @@ namespace BOIVR
             if (data.completedLevel)
             {
                 data.currentHealth = health;
+            }
+            else
+            {
+                data.currentLevel = 0;
             }
 
             GameManager.leftJoystickEvent -= Move;

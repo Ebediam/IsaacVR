@@ -16,6 +16,9 @@ MonoBehaviour:
   acceleration: 2500
   turnAngle: 2
   jumpForce: 5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 16384
   maxItemDistance: 10
   itemGrabTreshold: 0.26
   minHandDistance: 0.25
@@ -37,12 +40,12 @@ MonoBehaviour:
   canFly: 0
   coins: 0
   keys: 0
-  bombs: 2
+  bombs: 0
   currentHealth: 60
   leftGrabberItem: {fileID: 0}
-  rightGrabberItem: {fileID: 11400000, guid: 729603148c548cf4191b4e7681ffcafd, type: 2}
+  rightGrabberItem: {fileID: 0}
   availableSpells: []
-  activeSpell: {fileID: 11400000, guid: 70c11e4cf9b5c164a92d0d49e62de2cd, type: 2}
+  activeSpell: {fileID: 11400000, guid: 2f7fa8bfae4cb0e4e96208e2ae17335f, type: 2}
   showArms: 1
   invincible: 1
   invincibilityTime: 0.5
@@ -51,6 +54,4 @@ MonoBehaviour:
   bombData: {fileID: 11400000, guid: 0fd122f397832004a906eafb483f4490, type: 2}
   keyData: {fileID: 11400000, guid: f99dfa4f5633b2541b7420733736a185, type: 2}
   completedLevel: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 16384
+  currentLevel: 0

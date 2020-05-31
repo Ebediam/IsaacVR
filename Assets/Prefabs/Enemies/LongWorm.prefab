@@ -40,7 +40,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2217960786356359399}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 598ef30ab3f019b459dfa311015431b2, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
@@ -145,7 +145,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8007240109173351084}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 598ef30ab3f019b459dfa311015431b2, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
@@ -538,6 +538,7 @@ MonoBehaviour:
   enemyManager: {fileID: 0}
   active: 0
   maxSpeed: 0
+  animator: {fileID: 0}
   enemyText: {fileID: 7035037676632279072}
 --- !u!114 &8120706793934215706
 MonoBehaviour:
@@ -564,7 +565,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8120706793934215709}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 598ef30ab3f019b459dfa311015431b2, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2

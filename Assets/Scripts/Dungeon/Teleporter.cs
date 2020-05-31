@@ -22,6 +22,7 @@ namespace BOIVR
             if (other.gameObject.layer == 10)
             {
                 Player.local.data.completedLevel = true;
+                Player.local.data.currentLevel++;
                 GameManager.GameOver();
             }
         }

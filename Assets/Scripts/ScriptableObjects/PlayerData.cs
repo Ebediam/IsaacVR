@@ -10,6 +10,7 @@ public class PlayerData : ScriptableObject
     public float acceleration;
     public float turnAngle;
     public float jumpForce;
+    public LayerMask groundLayer;
 
     [Header("Telekinesis settings")]
     public float maxItemDistance;
@@ -39,7 +40,6 @@ public class PlayerData : ScriptableObject
     public float healthBoost;
     public bool canFly;
 
-
     [Header("Inventory/Stats")]
     public int coins;
     public int keys;
@@ -60,19 +60,18 @@ public class PlayerData : ScriptableObject
     [Header("Max allowed stats")]
     public float maxFireRate;
 
-
     [Header("Min allowed stats")]
     public float minFireRate;
 
-    [Header("Data")]
+    [Header("Data for holders")]
     public ItemData bombData;
     public ItemData keyData;
 
-    [Header("Settings")]
+    [Header("Level Settings")]
     public bool completedLevel;
-    public LayerMask groundLayer;
+    public int currentLevel;
 
-    
+
 
     public void ClearModifiers()
     {

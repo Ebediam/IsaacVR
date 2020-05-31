@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace BOIVR
@@ -12,6 +13,7 @@ namespace BOIVR
 
         public RoomManager theVoidPosition;
         public DungeonData dungeonData;
+        public PlayerData playerData;
         public RoomManager[,] positions;
         int generatedRooms = 0;
         int generatedBrances = 0;
@@ -21,16 +23,26 @@ namespace BOIVR
         List<RoomManager> positionsWithRoom;
         bool movedPlayer = false;
 
+        int maxColumns;
+        int maxRows;
+        int minRooms;
+        int maxRooms;
+
         private void Awake()
         {
-            positions = new RoomManager[dungeonData.maxColumns, dungeonData.maxRows];
+            maxColumns = dungeonData.maxColumns + playerData.currentLevel;
+            maxRows = dungeonData.maxRows + playerData.currentLevel;
+            minRooms = dungeonData.minRooms + playerData.currentLevel*5;
+            maxRooms = dungeonData.maxRooms + playerData.currentLevel * 5;
+
+            positions = new RoomManager[maxColumns, maxRows];
             CreateGrid();
             positionsWithRoom = new List<RoomManager>();
 
 
-
+            
             //startPosition = positions[Random.Range(0, dungeonData.maxColumns), Random.Range(0, dungeonData.maxRows)];
-            startPosition = positions[Mathf.RoundToInt(dungeonData.maxRows) / 2, Mathf.RoundToInt(dungeonData.maxColumns / 2)];
+            startPosition = positions[Mathf.RoundToInt(maxRows / 2), Mathf.RoundToInt(maxColumns / 2)];
             CreateRoom(startPosition);
             startPosition.room.roomType = Room.RoomType.Start;
 
@@ -42,7 +54,7 @@ namespace BOIVR
 
 
             }
-            while ((generatedRooms <= dungeonData.minRooms) && (iterations < 100));
+            while ((generatedRooms <= minRooms) && (iterations < 100));
 
             Debug.Log(iterations + " iterations to complete the dungeon");
 
@@ -78,9 +90,9 @@ namespace BOIVR
 
         public void CreateGrid()
         {
-            for (int column = 0; column < dungeonData.maxColumns; column++)
+            for (int column = 0; column < maxColumns; column++)
             {
-                for (int row = 0; row < dungeonData.maxRows; row++)
+                for (int row = 0; row < maxRows; row++)
                 {
                     positions[row, column] = new GameObject().AddComponent<RoomManager>();
                     positions[row, column].transform.parent = transform;
@@ -97,7 +109,7 @@ namespace BOIVR
                         positions[row, column].southPosition = positions[row - 1, column];
                         positions[row - 1, column].northPosition = positions[row, column];
 
-                        if (row == (dungeonData.maxRows - 1))
+                        if (row == (maxRows - 1))
                         {
                             positions[row, column].northPosition = theVoidPosition;
                         }
@@ -115,7 +127,7 @@ namespace BOIVR
                         positions[row, column].westPosition = positions[row, column - 1];
                         positions[row, column - 1].eastPosition = positions[row, column];
 
-                        if (column == (dungeonData.maxColumns - 1))
+                        if (column == (maxColumns - 1))
                         {
                             positions[row, column].eastPosition = theVoidPosition;
                         }
@@ -144,7 +156,7 @@ namespace BOIVR
             generatedBrances++;
             Debug.Log("Iniciando rama " + generatedBrances + " en la habitacion " + currentPosition.room.number);
             int safetyCounter = 0;
-            while (generatedRooms < dungeonData.maxRooms)
+            while (generatedRooms < maxRooms)
             {
                 safetyCounter++;
                 if (safetyCounter > dungeonData.maxBranchSize)
@@ -208,7 +220,7 @@ namespace BOIVR
         {
             int checkingColumn = startingRoom.column + checkDirection.columnsModifier;
 
-            if (checkingColumn > dungeonData.maxColumns - 1)
+            if (checkingColumn > maxColumns - 1)
             {
                 return false;
             }
@@ -220,7 +232,7 @@ namespace BOIVR
 
             int checkingRow = startingRoom.row + checkDirection.rowsModifier;
 
-            if (checkingRow > dungeonData.maxRows - 1)
+            if (checkingRow > maxRows - 1)
             {
                 return false;
             }
