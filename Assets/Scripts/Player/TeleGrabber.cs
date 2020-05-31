@@ -177,7 +177,7 @@ namespace BOIVR
             {               
                 StopTelegrab(true);
                 hand.grabber.Grab(teleItem);
-
+                teleItem = null;
             }
 
 
@@ -325,6 +325,7 @@ namespace BOIVR
         {
 
             held = false;
+
             teleItem.rb.drag = oldDrag;
 
             teleItem.rb.useGravity = true;
@@ -374,8 +375,6 @@ namespace BOIVR
 
         public void OnGameOver()
         {
-
-
             switch (side)
             {
                 case Side.Left:

@@ -128,6 +128,7 @@ MonoBehaviour:
   rb: {fileID: 4290915699790844803}
   bulletCollider: {fileID: 4290915699790844802}
   damage: 0
+  data: {fileID: 11400000, guid: b08ae3a06e4777446bf40ac83855d8a0, type: 2}
 --- !u!1 &4318116920189682642
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,8 +221,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0, g: 1, b: 0.91385865, a: 1}
+      key1: {r: 0, g: 0.5986471, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

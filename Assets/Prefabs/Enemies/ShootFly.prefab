@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
+  initialized: 0
 --- !u!114 &339748120388898279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
+  initialized: 0
   startPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &8198163054609722961
 MonoBehaviour:

@@ -39,6 +39,8 @@ namespace BOIVR
 
             SetDoorState(state);
 
+            
+
         }
 
         // Update is called once per frame
@@ -49,17 +51,17 @@ namespace BOIVR
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.GetComponent<Bullet>())
+            if (other.isTrigger)
             {
-                other.gameObject.GetComponent<Bullet>().DestroyBullet();
+                return;
             }
-
-            if (other.gameObject.GetComponentInParent<Player>())
+            if(state == DoorState.Open)
             {
-                other.gameObject.GetComponentInParent<Player>().DeactivateGuns();
+                if (other.gameObject.GetComponentInParent<Player>())
+                {
+                    other.gameObject.GetComponentInParent<Player>().DeactivateGuns();
+                }
             }
-
-
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -89,9 +91,6 @@ namespace BOIVR
                     RemoveDoor();
                 }
             }
-
-
-
         }
 
         public void OpenDoor()

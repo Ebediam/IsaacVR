@@ -107,17 +107,18 @@ namespace BOIVR
                     onCooldown = true;
                     StartCoroutine(Cooldown(data.cooldown));
                 }
-                
-            }
 
-            if (spellSFX)
-            {
-                spellSFX.Stop();
-            }
+                if (spellSFX)
+                {
+                    spellSFX.Stop();
+                }
 
-            if (spellVFX)
-            {
-                spellVFX.Stop();
+                if (spellVFX)
+                {
+                    spellVFX.Stop();
+                }
+
+
             }
 
             OnCastStop();

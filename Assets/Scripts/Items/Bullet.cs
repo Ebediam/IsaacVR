@@ -6,6 +6,7 @@ namespace BOIVR
 {
     public class Bullet : AllBullet
     {
+        public BulletData data;
         // Start is called before the first frame update
         void Start()
         {
@@ -26,10 +27,16 @@ namespace BOIVR
 
             if (target)
             {
-                target.TakeDamage(damage);
+                target.TakeDamage(data.damage);
             }
-            rb.detectCollisions = false;
-            DestroyBullet();
+
+            if (data.despawnAfterHit)
+            {
+                rb.detectCollisions = false;
+                DestroyBullet();
+            }
+
+      
         }
 
 

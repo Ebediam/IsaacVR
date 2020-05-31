@@ -101,7 +101,7 @@ namespace BOIVR
                     positions[row, column].column = column;
                     positions[row, column].row = row;
                     positions[row, column].zoneType = RoomManager.ZoneType.Empty;
-
+                    positions[row, column].dungeonGenerator = this;
                     positions[row, column].partsData = dungeonData.dungeonParts;
 
                     if (row > 0)
@@ -266,6 +266,7 @@ namespace BOIVR
             InitializeRoomsEvent += roomManager.InitializeRoom;
             roomManager.room.text.text = roomName;
             roomManager.room.roomType = Room.RoomType.Regular;
+            roomManager.room.roomManager = roomManager;
 
         }
 

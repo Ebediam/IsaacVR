@@ -15,8 +15,9 @@ namespace BOIVR
 
         public override void Initialize()
         {
-            enemyController.DamageableDestroyedEvent += Slowdown;
             base.Initialize();
+            enemyController.DamageableDestroyedEvent += Slowdown;
+
         }
 
 

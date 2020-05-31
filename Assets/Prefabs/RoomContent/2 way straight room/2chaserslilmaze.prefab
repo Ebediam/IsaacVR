@@ -293,6 +293,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chaser
       objectReference: {fileID: 0}
+    - target: {fileID: 7743181936627988360, guid: adcddf4decf849f46b05b12913b18bfd,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adcddf4decf849f46b05b12913b18bfd, type: 3}
 --- !u!114 &2525168189420739213 stripped
@@ -373,6 +378,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Chaser (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7743181936627988360, guid: adcddf4decf849f46b05b12913b18bfd,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adcddf4decf849f46b05b12913b18bfd, type: 3}
@@ -759,6 +769,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899008773682292038, guid: 64e0804c2cdb16548a2d145dbf9349db,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899008773682292038, guid: 64e0804c2cdb16548a2d145dbf9349db,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.56
       objectReference: {fileID: 0}
     - target: {fileID: 3955008446538324581, guid: 64e0804c2cdb16548a2d145dbf9349db,
         type: 3}

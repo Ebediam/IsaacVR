@@ -16,7 +16,7 @@ namespace BOIVR
         // Update is called once per frame
         public override void Action()
         {
-            if(enemyController.rb.velocity.y != 0)
+            if(enemyController.rb.velocity.y == 0)
             {
                 ChangeOrientation();
                 Jump();

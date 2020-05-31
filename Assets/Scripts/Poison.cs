@@ -36,7 +36,14 @@ namespace BOIVR
 
         public void OnTriggerEnter(Collider other)
         {
+
+
             if (!active)
+            {
+                return;
+            }
+
+            if (other.isTrigger)
             {
                 return;
             }

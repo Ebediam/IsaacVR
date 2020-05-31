@@ -35,7 +35,9 @@ namespace BOIVR
             enemyInstance.transform.position = spawnPoint.transform.position;
             enemyInstance.transform.rotation = spawnPoint.transform.rotation;
 
-            enemyInstance.ActivateEnemy(enemyController.enemyManager);
+            enemyController.enemyManager.AddEnemy(enemyInstance);
+
+            
 
 
             if (autoInflictedDamage != 0)
@@ -56,6 +58,8 @@ namespace BOIVR
 
         public override void Initialize()
         {
+            base.Initialize();
+
             switch (spawnerType)
             {
                 case SpawnerType.Defined:
@@ -71,7 +75,7 @@ namespace BOIVR
                     break;
             }
 
-            base.Initialize();
+
         }
     }
 }

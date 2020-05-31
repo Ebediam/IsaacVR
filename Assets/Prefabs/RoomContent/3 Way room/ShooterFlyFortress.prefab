@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShootFly (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8185699601745838332, guid: 7bbd26cff65ce6644aec03b67eb8b845,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bbd26cff65ce6644aec03b67eb8b845, type: 3}
 --- !u!114 &862373576952630290 stripped
@@ -287,6 +292,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShootFly (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185699601745838332, guid: 7bbd26cff65ce6644aec03b67eb8b845,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bbd26cff65ce6644aec03b67eb8b845, type: 3}
@@ -514,6 +524,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1899008773682292038, guid: 64e0804c2cdb16548a2d145dbf9349db,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899008773682292038, guid: 64e0804c2cdb16548a2d145dbf9349db,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.07
+      objectReference: {fileID: 0}
     - target: {fileID: 3955008446538324581, guid: 64e0804c2cdb16548a2d145dbf9349db,
         type: 3}
       propertyPath: enemies.Array.size
@@ -629,6 +649,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShootFly (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8185699601745838332, guid: 7bbd26cff65ce6644aec03b67eb8b845,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bbd26cff65ce6644aec03b67eb8b845, type: 3}
 --- !u!114 &862373575669560204 stripped
@@ -709,6 +734,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShootFly (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185699601745838332, guid: 7bbd26cff65ce6644aec03b67eb8b845,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bbd26cff65ce6644aec03b67eb8b845, type: 3}
@@ -791,6 +821,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShootFly
       objectReference: {fileID: 0}
+    - target: {fileID: 8185699601745838332, guid: 7bbd26cff65ce6644aec03b67eb8b845,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bbd26cff65ce6644aec03b67eb8b845, type: 3}
 --- !u!114 &862373575580768351 stripped
@@ -871,6 +906,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShootFly (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185699601745838332, guid: 7bbd26cff65ce6644aec03b67eb8b845,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bbd26cff65ce6644aec03b67eb8b845, type: 3}

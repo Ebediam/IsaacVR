@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad7455bbae492741baf4b2a7b565007, type: 3}
   m_Name: ExplosiveBarrel
   m_EditorClassIdentifier: 
-  explosionForce: 100
+  explosionForce: 20
   explosionRadius: 3
   despawnAfterExplosion: 1
   cooldownTimer: 0
@@ -24,10 +24,10 @@ MonoBehaviour:
   explodesOnContact: 1
   affectsEnemies: 1
   affectsItems: 1
-  affectsPlayer: 0
+  affectsPlayer: 1
   collisionLayerMask:
     serializedVersion: 2
-    m_Bits: 4608
+    m_Bits: 5633
   ignorePlayer: 1
   ignoreItems: 1
   ignoreBullets: 0

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c417c0ad3202595469c320c0b647c082, type: 3}
+  m_Name: WindBurst
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4472504870861133622, guid: 9afc282575028da4e8d6f5409945e267, type: 3}
+  ID: WindBurst
+  spellMode: 1
+  castAllowed: 0
+  manaCost: 0
+  cooldown: 5
+  bulletData: {fileID: 11400000, guid: 99cf0d78befb1544a815e840d80334ea, type: 2}
+  bulletSpeed: 0.1

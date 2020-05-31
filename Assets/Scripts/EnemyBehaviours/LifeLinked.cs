@@ -10,9 +10,10 @@ namespace BOIVR
 
         public override void Initialize()
         {
+            base.Initialize();
             linkedTo.DamageableDestroyedEvent += LifeLinkedDestroyed;
             enemyController.DamageableDestroyedEvent += CleanLifeLink;
-            base.Initialize();
+
         }
 
 

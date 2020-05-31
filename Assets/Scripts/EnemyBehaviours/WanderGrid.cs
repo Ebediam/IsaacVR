@@ -108,8 +108,6 @@ namespace BOIVR
             isTurningInCooldown = true;
             Debug.Log("LongWorm has collided with " + other.gameObject.name);
 
-
-
         }
     }
 }

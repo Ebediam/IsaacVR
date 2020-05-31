@@ -29,8 +29,8 @@ namespace BOIVR
         public static JoystickPressDelegate leftJoystickEvent;
         public static JoystickPressDelegate rightJoystickEvent;
 
-        bool currentThumbstickState;
-        bool lastThumbstickState;
+
+
 
         // Start is called before the first frame update
         void Start()

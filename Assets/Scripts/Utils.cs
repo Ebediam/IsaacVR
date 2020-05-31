@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 namespace BOIVR
@@ -14,19 +15,8 @@ namespace BOIVR
         None
     }
 
-    public class Utils : MonoBehaviour
+    public static class Utils
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         public static Vector3 RandomVector3()
         {
@@ -111,6 +101,14 @@ namespace BOIVR
 
         }
 
+        public static void ChangeObjectLayer(GameObject gameObject, int layer)
+        {
+            gameObject.layer = layer;
+            foreach(Transform transform in gameObject.GetComponentsInChildren<Transform>())
+            {
+                transform.gameObject.layer = layer;
+            }
+        }
         public static Vector3 HorizontalVectorToPlayer(Vector3 startPosition)
         {
             Vector3 vectorToPlayer = Player.local.transform.position - startPosition;

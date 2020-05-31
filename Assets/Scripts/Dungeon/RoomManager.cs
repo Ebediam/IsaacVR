@@ -16,6 +16,8 @@ namespace BOIVR
 
         public List<GameObject> availableRoomContent;
 
+        public DungeonGenerator dungeonGenerator;
+
         float rotation = 0f;
 
         public enum ZoneType
@@ -24,8 +26,6 @@ namespace BOIVR
             Room,
             TheVoid
         }
-
-
 
         public ZoneType zoneType;
 
@@ -36,6 +36,8 @@ namespace BOIVR
 
         public void InitializeRoom()
         {
+            
+
             availableRoomContent = new List<GameObject>();
 
             AsignRoomContentList();

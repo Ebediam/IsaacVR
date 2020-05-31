@@ -27,9 +27,7 @@ namespace BOIVR
 
         void Start()
         {
-            
 
-            target = Utils.GetTarget();
             currentHealth = data.hitPoints;
             rb.mass = data.mass;
             maxSpeed = data.maxSpeed;
@@ -41,15 +39,6 @@ namespace BOIVR
                 enemyText.text = data.name;
             }
 
-            foreach(EnemyBehaviour behaviour in gameObject.GetComponents<EnemyBehaviour>())
-            {
-                enemyBehaviours.Add(behaviour);
-            }
-
-            foreach(EnemyAction action in gameObject.GetComponents<EnemyAction>())
-            {
-                enemyActions.Add(action);
-            }
         }
 
 
@@ -125,18 +114,29 @@ namespace BOIVR
 
         public void ActivateEnemy()
         {
-            foreach(EnemyBehaviour behaviour in enemyBehaviours)
+            if(data.targetType == EnemyData.Target.Player)
             {
-                behaviour.Initialize();
+                target = Utils.GetTarget();
             }
-
-            foreach(EnemyAction action in enemyActions)
+            else if(data.targetType == EnemyData.Target.NearestEnemy)
             {
+                FindNearestEnemy();
+            }
+            
+            foreach (EnemyBehaviour behaviour in gameObject.GetComponents<EnemyBehaviour>())
+            {
+                enemyBehaviours.Add(behaviour);
+                behaviour.Initialize();
+            }   
+
+
+            foreach (EnemyAction action in gameObject.GetComponents<EnemyAction>())
+            {
+                enemyActions.Add(action);
                 action.Initialize();
             }
 
             active = true;
-
 
 
             if (animator)
@@ -144,6 +144,11 @@ namespace BOIVR
                 animator.SetBool("isActive", true);
             }
             
+        }
+
+        public void FindNearestEnemy()
+        {
+
         }
 
         public void ActivateEnemy(EnemyManager _enemyManager)

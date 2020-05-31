@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f09ec59d976bbd549967d02b3b890f51, type: 3}
+  m_Name: WindBurstBullet
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8484943196577375301, guid: 80e8c2640b0043d4b85f37d1816d5369, type: 3}
+  damage: 0
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0

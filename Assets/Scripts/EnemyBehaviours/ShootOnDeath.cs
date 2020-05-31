@@ -16,8 +16,9 @@ namespace BOIVR
 
         public override void Initialize()
         {
-            enemyController.DamageableDestroyedEvent += OnDeath;
             base.Initialize();
+            enemyController.DamageableDestroyedEvent += OnDeath;
+  
         }
 
         public void OnDeath(Damageable damageable)

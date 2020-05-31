@@ -74,6 +74,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5238710061030597759}
     m_Modifications:
+    - target: {fileID: 266499887278986399, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7252315651492053301, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -530,6 +535,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5238710061030597759}
     m_Modifications:
+    - target: {fileID: 266499887278986399, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7252315651492053301, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -666,6 +676,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1899008773682292038, guid: 64e0804c2cdb16548a2d145dbf9349db,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899008773682292038, guid: 64e0804c2cdb16548a2d145dbf9349db,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.32
+      objectReference: {fileID: 0}
     - target: {fileID: 3955008446538324581, guid: 64e0804c2cdb16548a2d145dbf9349db,
         type: 3}
       propertyPath: enemies.Array.size
@@ -711,6 +731,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5238710061030597759}
     m_Modifications:
+    - target: {fileID: 266499887278986399, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7252315651492053301, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -792,6 +817,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5238710061030597759}
     m_Modifications:
+    - target: {fileID: 266499887278986399, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7252315651492053301, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
         type: 3}
       propertyPath: m_LocalPosition.x

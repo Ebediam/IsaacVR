@@ -8,12 +8,14 @@ namespace BOIVR
     {
         public delegate void EnemyManagerDelegate();
         public EnemyManagerDelegate AllEnemiesDeadEvent;
-        public Room room;
+        [HideInInspector]public Room room;
 
         public List<Enemy> enemies;
-        public int totalEnemies;
+        [HideInInspector] public int totalEnemies;
 
-        public bool clear;
+        [HideInInspector] public bool clear;
+
+        public Transform rewardSpawn;
 
         private void Start()
         {
@@ -35,8 +37,9 @@ namespace BOIVR
             enemy.DamageableDestroyedEvent -= DeadEnemyListener;
             totalEnemies--;
             if (totalEnemies <= 0)
-            {
+            {                
                 NoEnemiesLeft();
+                SpawnReward();
             }
 
         }
@@ -47,6 +50,55 @@ namespace BOIVR
             clear = true;
             AllEnemiesDeadEvent?.Invoke();
             room.RoomStartEvent -= AwakeEnemies;
+
+        }
+
+        public void SpawnReward()
+        {
+            if (!Player.local)
+            {
+                return;
+            }
+
+            float randomNumber = Random.Range(0f, 1f);
+
+            if(randomNumber > (Player.local.data.baseLuck + Player.local.data.luckBoost))
+            {
+                return;
+            }
+
+            if (room)
+            {
+                if (room.roomManager)
+                {
+                    if (room.roomManager.dungeonGenerator)
+                    {
+                        PoolData itemPoolData;
+
+                        itemPoolData = room.roomManager.dungeonGenerator.dungeonData.itemPoolData;
+
+                        GameObject pickup = Instantiate(itemPoolData.pickupPool[Random.Range(0, itemPoolData.pickupPool.Count)].prefab);
+                        pickup.transform.position = rewardSpawn.transform.position;
+                        pickup.transform.rotation = rewardSpawn.transform.rotation;
+
+                    }
+                }
+            }
+        }
+
+        public void AddEnemy(Enemy enemy)
+        {
+            if (enemies.Contains(enemy))
+            {
+                Debug.Log("Enemy not included in the manager because it is already present");
+            }
+            else
+            {
+                enemies.Add(enemy);
+                totalEnemies++;
+                enemy.ActivateEnemy(this);
+            }
+
         }
 
         public void AwakeEnemies()

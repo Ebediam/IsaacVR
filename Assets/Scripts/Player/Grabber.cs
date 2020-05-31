@@ -41,8 +41,6 @@ namespace BOIVR
         public Collider handCollider;
         public Hand hand;
 
-        Vector3 rotationOffset;
-
         public Grabber otherGrabber;
 
         public static Grabber leftGrabber;
@@ -57,6 +55,7 @@ namespace BOIVR
                 GameManager.L2PressEvent += HandTriggerPress;
                 leftGrabber = this;
 
+   
                 if (hand.player.data.leftGrabberItem)
                 {
                     Item leftItem = Item.SpawnItem(hand.player.data.leftGrabberItem);
@@ -80,6 +79,13 @@ namespace BOIVR
                     Grab(rightItem);
                 }
 
+            }
+
+            if (hand.player.data.activeSpell)
+            {
+                Spell spell = Instantiate(hand.player.data.activeSpell.prefab).GetComponent<Spell>();
+
+                AddSpellAndActivate(spell, this);
             }
 
             interactablesInRange = new List<Interactable>();
@@ -222,7 +228,6 @@ namespace BOIVR
 
 
                 heldItem.transform.position = transform.position;
-                //heldItem.transform.parent = transform;
                 heldItem.transform.position -= heldItem.holdPoint.localPosition;
                 heldItem.transform.rotation = transform.rotation;
 
@@ -242,12 +247,10 @@ namespace BOIVR
                     hand.player.data.rightGrabberItem = heldItem.data;
                 }
 
+                Utils.ChangeObjectLayer(heldItem.gameObject, 20);
+
                 GrabEvent?.Invoke(this, heldItem);
                 heldItem.OnItemPickup?.Invoke();
-
-
-                
-
 
             }
             else if (interactable is Spell)
@@ -312,21 +315,21 @@ namespace BOIVR
 
         }
 
-        public static void AddSpellAndActivate(Spell spell, Grabber hand)
+        public static void AddSpellAndActivate(Spell spell, Grabber grabber)
         {
-            if (Player.local.data.availableSpells.Count > 0)
+            if (grabber.hand.player.data.availableSpells.Count > 0)
             {
-                if (!Player.local.data.availableSpells.Contains(spell.data))
+                if (!grabber.hand.player.data.availableSpells.Contains(spell.data))
                 {
-                    Player.local.data.availableSpells.Add(spell.data);
+                    grabber.hand.player.data.availableSpells.Add(spell.data);
                 }
             }
 
-            Player.local.data.activeSpell = spell.data;
+            grabber.hand.player.data.activeSpell = spell.data;
 
-            spell.OnSpellGrabbed(hand);
+            spell.OnSpellGrabbed(grabber);
 
-            hand.activeSpell = spell;
+            grabber.activeSpell = spell;
 
         }
 
@@ -360,6 +363,8 @@ namespace BOIVR
                 heldItem.OnItemDrop?.Invoke();
                 StartCoroutine(ReenableCollisions(heldItem, 0.5f));
 
+                Utils.ChangeObjectLayer(heldItem.gameObject, 9);
+
                 ReleaseEvent?.Invoke(this, heldItem);
                 heldItem = null;
 
@@ -385,7 +390,12 @@ namespace BOIVR
                 Physics.IgnoreCollision(col, handCollider, false);
             }
 
+
+            
+
         }
+
+        
 
         public void ActivateHandCollider()
         {           

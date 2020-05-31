@@ -38,9 +38,8 @@ namespace BOIVR
 
         float timer = 0f;
 
-        float jumpCooldown;
         float jumpTimer;
-
+        float jumpCooldown;
 
         bool invincible = false;
         bool canJump;
@@ -77,11 +76,6 @@ namespace BOIVR
 
 
             UpdateHealth();
-
-       
-
-
-
         }
 
         // Update is called once per frame
@@ -114,12 +108,6 @@ namespace BOIVR
                     canJump = true;
                 }
             }
-            
-
-            
-
-
-
 
             if (!invincible)
             {
@@ -135,12 +123,13 @@ namespace BOIVR
             }
 
 
+            /*
             if (headCamera)
             {
                 transform.position = new Vector3(headCamera.transform.position.x, transform.position.y, headCamera.transform.position.z);
                 headCamera.transform.position = new Vector3(transform.position.x, headCamera.transform.position.y, transform.position.z);
             }
-
+            */
 
         }
 
@@ -154,9 +143,6 @@ namespace BOIVR
             {
                 AddKeys(count);
             }
-
-
-
 
         }  
 
@@ -237,8 +223,6 @@ namespace BOIVR
                 transform.Rotate(transform.up, turnAngle * direction2D.x);
             }
 
-
-
             if (flying)
             {
                 if (Mathf.Abs(direction2D.y) > 0.3f)
@@ -259,6 +243,7 @@ namespace BOIVR
 
         public void TakeDamage(float damage)
         {
+            
             if (data.invincible)
             {
                 return;
@@ -268,27 +253,41 @@ namespace BOIVR
             {
                 return;
             }
-
+    
 
             health -= damage;
-
+           
 
             if (health <= 0f)
             {
                 GameManager.GameOver();
                 Player.local = null;
             }
-
+            
             invincible = true;
 
             PlayerTookDamageEvent?.Invoke(damage);
         }
 
-        static void UpdateHealth(float damage)
+
+
+
+        public static void UpdateHealth(float damage)
         {
             local.data.currentHealth = local.health;
             local.maxHealth = local.data.baseHealth + local.data.healthBoost;
             UpdateHealthEvent?.Invoke();
+        }
+
+        public static void Heal(float amount)
+        {
+            local.health += amount;
+            if(local.health > local.maxHealth)
+            {
+                local.health = local.maxHealth;
+            }
+
+            UpdateHealth();
         }
 
         public static void UpdateHealth()

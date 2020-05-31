@@ -238,7 +238,8 @@ GameObject:
   - component: {fileID: 2261671880053240989}
   - component: {fileID: 2261671880053240962}
   - component: {fileID: 2261671880053240963}
-  m_Layer: 15
+  - component: {fileID: 1565723128833629894}
+  m_Layer: 17
   m_Name: OpenDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,6 +309,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1565723128833629894
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2261671880053240961}
+  m_Material: {fileID: 13400000, guid: 60316603b03e0864489bbd94cb6af563, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2804462760374838410
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +493,7 @@ GameObject:
   - component: {fileID: 7776214456225314831}
   - component: {fileID: 1118687295123751302}
   - component: {fileID: 5997015582034999772}
-  m_Layer: 15
+  m_Layer: 17
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -637,7 +651,7 @@ GameObject:
   - component: {fileID: 1922231390222130432}
   - component: {fileID: 4711992587885388536}
   - component: {fileID: 5138990276923909387}
-  m_Layer: 15
+  m_Layer: 17
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

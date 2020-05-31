@@ -26,28 +26,30 @@ MonoBehaviour:
   springForce: 100
   damper: 10
   highlightMaterial: {fileID: 2100000, guid: 25380c15dd63b97479684fad63642b7d, type: 2}
-  highlightThickness: 0.01
+  highlightThickness: 0.1
   grabSpring: 3000
   grabDamper: 20
   rotSpring: 800
   rotDamper: 10
   baseHealth: 60
+  baseLuck: 0.3
   damageBoost: 0
   bulletSpeedBoost: 0
   fireRateBoost: 0
   movementBoost: 0
   healthBoost: 0
+  luckBoost: 0
   canFly: 0
   coins: 0
   keys: 0
   bombs: 0
   currentHealth: 60
   leftGrabberItem: {fileID: 0}
-  rightGrabberItem: {fileID: 0}
+  rightGrabberItem: {fileID: 11400000, guid: 729603148c548cf4191b4e7681ffcafd, type: 2}
   availableSpells: []
-  activeSpell: {fileID: 11400000, guid: 2f7fa8bfae4cb0e4e96208e2ae17335f, type: 2}
+  activeSpell: {fileID: 0}
   showArms: 1
-  invincible: 1
+  invincible: 0
   invincibilityTime: 0.5
   maxFireRate: 20
   minFireRate: 0.1

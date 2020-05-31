@@ -16,7 +16,6 @@ namespace BOIVR
         // Update is called once per frame
         public override void Action()
         {
-
             Vector3 direction = AvoidCornersDirection();
 
             if (direction == Vector3.zero)
@@ -49,8 +48,9 @@ namespace BOIVR
 
         public override void Initialize()
         {
-            corners = enemyController.enemyManager.room.corners;
             base.Initialize();
+            corners = enemyController.enemyManager.room.corners;
+
         }
 
     }

@@ -22,10 +22,10 @@ TagManager:
   - Ground
   - Walls
   - IgnoreWalls
-  - 
+  - GreenDoor
   - Hands
   - Camera
-  - 
+  - HeldItem
   - 
   - 
   - 

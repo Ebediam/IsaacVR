@@ -9,19 +9,15 @@ namespace BOIVR
     {
 
         public ParticleSystem explosionVFX;
+        public AudioSource explosionSFX;
 
         public ExplosiveData data;
-
-        public SphereCollider sphereCollider;
 
         public delegate void ExplosionDelegate(Explosive source);
 
         public ExplosionDelegate ExplosionEvent;
 
-        public bool alreadyExploded;
-
-        [HideInInspector] Damageable currentDamageable;
-
+        [HideInInspector] public bool alreadyExploded;
 
         // Start is called before the first frame update
         public void Start()
@@ -32,6 +28,11 @@ namespace BOIVR
             if (damageable)
             {
                 damageable.DamageableDestroyedEvent += OnDeath;
+            }
+
+            if(data.timerToExplodeOnSpawn != 0)
+            {
+                Invoke("Explode", data.timerToExplodeOnSpawn);
             }
 
         }
@@ -63,6 +64,7 @@ namespace BOIVR
                     break;
 
                 case 9: //Items
+                case 20: //HeldItems
                     if (!data.ignoreItems)
                     {
                         Explode(collision.GetContact(0).point);
@@ -70,6 +72,7 @@ namespace BOIVR
                     break;
 
                 case 10: //Player
+                case 18: //Hands
                     if (!data.ignorePlayer)
                     {
                         Explode(collision.GetContact(0).point);
@@ -102,7 +105,7 @@ namespace BOIVR
             {
                 return;
             }
-            Invoke("Explode", Random.Range(0.15f, 0.30f));
+            Invoke("Explode", delay);
 
         }
 
@@ -120,9 +123,21 @@ namespace BOIVR
             }
 
             alreadyExploded = true;
-            explosionVFX.transform.parent = null;
-            explosionVFX.Play();
-            Destroy(explosionVFX.gameObject, 2f);
+
+            if (explosionVFX)
+            {
+                explosionVFX.transform.parent = null;
+                explosionVFX.Play();
+                Destroy(explosionVFX.gameObject, 2f);
+            }
+
+            if (explosionSFX)
+            {
+                explosionSFX.transform.parent = null;
+                explosionSFX.Play();
+                Destroy(explosionSFX.gameObject, 2f);
+            }
+   
 
             List<Item> affectedItems = new List<Item>();
             List<Explosive> affectedExplosives = new List<Explosive>();
@@ -184,7 +199,7 @@ namespace BOIVR
                     Vector3 explosionDirection = _enemy.transform.position - sourcePoint;
                     float forcePercent = ((data.explosionRadius - explosionDirection.magnitude) / data.explosionRadius);
                     explosionDirection = explosionDirection.normalized;
-                    _enemy.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Force);
+                    _enemy.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Impulse);
                     _enemy.TakeDamage(data.maxDamage * forcePercent);
 
                 }
@@ -198,7 +213,7 @@ namespace BOIVR
                     Vector3 explosionDirection = _item.transform.position - sourcePoint;
                     float forcePercent = ((data.explosionRadius - explosionDirection.magnitude) / data.explosionRadius);
                     explosionDirection = explosionDirection.normalized;
-                    _item.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Force);
+                    _item.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Impulse);
                     
 
                 }
@@ -224,7 +239,7 @@ namespace BOIVR
                 {
                     explosionDirection = explosionDirection.normalized;
                     float forcePercent = ((data.explosionRadius - explosionDirection.magnitude) / data.explosionRadius);
-                    Player.local.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Force);
+                    Player.local.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Impulse);
                     Player.local.TakeDamage(10f);
                 }
 

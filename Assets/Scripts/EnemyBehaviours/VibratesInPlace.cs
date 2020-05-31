@@ -27,8 +27,9 @@ namespace BOIVR
 
         public override void Initialize()
         {
-            startPosition = transform.position;
             base.Initialize();
+            startPosition = transform.position;
+
         }
     }
 }

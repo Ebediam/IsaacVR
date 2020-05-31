@@ -15,7 +15,7 @@ namespace BOIVR
         GameObject highlight;
         public bool grababble = true;
 
-        public ConfigurableJoint joint;
+        [HideInInspector] public ConfigurableJoint joint;
 
         public Rigidbody rb;
 
@@ -117,7 +117,9 @@ namespace BOIVR
                 {
                     mesh.material = Player.local.data.highlightMaterial;
 
-                    mesh.transform.localScale += Vector3.one * Player.local.data.highlightThickness;
+                    Vector3 localScale = mesh.transform.localScale * Player.local.data.highlightThickness;
+
+                    mesh.transform.localScale += localScale;
 
                 }
             }

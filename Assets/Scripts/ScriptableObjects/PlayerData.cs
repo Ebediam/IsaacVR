@@ -30,6 +30,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Base Stats")]
     public float baseHealth;
+    public float baseLuck;
 
 
     [Header("Modifiers")]
@@ -38,6 +39,7 @@ public class PlayerData : ScriptableObject
     public float fireRateBoost;
     public float movementBoost;
     public float healthBoost;
+    public float luckBoost;
     public bool canFly;
 
     [Header("Inventory/Stats")]
@@ -87,6 +89,7 @@ public class PlayerData : ScriptableObject
             movementBoost = 0f;
             healthBoost = 0f;
             canFly = false;
+            luckBoost = 0f;
 
 
         }
@@ -122,6 +125,7 @@ public class PlayerData : ScriptableObject
         else
         {
             availableSpells.Clear();
+            activeSpell = null;
 
         }
 

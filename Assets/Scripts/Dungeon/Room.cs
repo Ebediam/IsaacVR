@@ -33,6 +33,7 @@ namespace BOIVR
         public bool hasStarted;
 
         public List<Transform> corners;
+        public RoomManager roomManager;
 
         // Start is called before the first frame update
         void Start()

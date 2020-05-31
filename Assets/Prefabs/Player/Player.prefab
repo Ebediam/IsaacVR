@@ -3394,6 +3394,8 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 1e8f3e294dbdfe54aab5e01cdf9f6e14, type: 2}
   health: 0
   maxHealth: 0
+  mana: 0
+  maxMana: 0
   flying: 0
   isGrounded: 0
 --- !u!1 &5625829950374801594
@@ -3621,7 +3623,7 @@ Transform:
   m_GameObject: {fileID: 5654523400994656651}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 3}
   m_Children:
   - {fileID: 2301742134988275648}
   m_Father: {fileID: 5354056547122031894}
@@ -4017,7 +4019,7 @@ Transform:
   m_GameObject: {fileID: 6540621673631235082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 3}
   m_Children:
   - {fileID: 7991118435569148739}
   m_Father: {fileID: 5354056549151419933}

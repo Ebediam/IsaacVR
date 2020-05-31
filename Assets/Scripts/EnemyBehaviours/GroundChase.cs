@@ -12,12 +12,13 @@ namespace BOIVR
 
         public override void Initialize()
         {
+            base.Initialize();
             agentController.enabled = true;
             agentController.speed = 0.1f;
             agentController.acceleration = 1f;
             agentController.angularSpeed = 200000f;
 
-            base.Initialize();
+
         }
 
         public override void Action()

@@ -15,7 +15,7 @@ namespace BOIVR
         // Start is called before the first frame update
         public void Start()
         {
-            enemyController = gameObject.GetComponent<Enemy>();
+
 
             //Initialize();
         }
@@ -24,6 +24,7 @@ namespace BOIVR
         public virtual void Initialize()
         {
             initialized = true;
+            enemyController = gameObject.GetComponent<Enemy>();
         }
 
         public virtual void Action()
