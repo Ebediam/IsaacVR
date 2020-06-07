@@ -17,6 +17,6 @@ MonoBehaviour:
   spellMode: 1
   castAllowed: 0
   manaCost: 0
-  cooldown: 5
+  cooldown: 1
   bulletData: {fileID: 11400000, guid: 99cf0d78befb1544a815e840d80334ea, type: 2}
   bulletSpeed: 0.1

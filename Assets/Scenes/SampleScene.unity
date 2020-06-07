@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -449,6 +449,7 @@ MonoBehaviour:
   isCompleted: 0
   hasStarted: 0
   corners: []
+  roomManager: {fileID: 0}
 --- !u!1 &28735207
 GameObject:
   m_ObjectHideFlags: 0
@@ -2167,6 +2168,7 @@ MonoBehaviour:
   - {fileID: 1315405005}
   totalEnemies: 0
   clear: 0
+  rewardSpawn: {fileID: 0}
 --- !u!1 &229792734
 GameObject:
   m_ObjectHideFlags: 0
@@ -5926,6 +5928,7 @@ MonoBehaviour:
   isCompleted: 0
   hasStarted: 0
   corners: []
+  roomManager: {fileID: 0}
 --- !u!4 &599061392
 Transform:
   m_ObjectHideFlags: 0
@@ -8119,6 +8122,7 @@ MonoBehaviour:
   - {fileID: 905525695}
   - {fileID: 784074735}
   - {fileID: 1833360052}
+  roomManager: {fileID: 0}
 --- !u!1 &809232607
 GameObject:
   m_ObjectHideFlags: 0
@@ -10026,6 +10030,7 @@ MonoBehaviour:
   - {fileID: 646892420}
   totalEnemies: 0
   clear: 0
+  rewardSpawn: {fileID: 0}
 --- !u!1 &999020413
 GameObject:
   m_ObjectHideFlags: 0
@@ -11288,6 +11293,7 @@ MonoBehaviour:
   isCompleted: 0
   hasStarted: 0
   corners: []
+  roomManager: {fileID: 0}
 --- !u!4 &1060913512
 Transform:
   m_ObjectHideFlags: 0
@@ -11681,6 +11687,7 @@ MonoBehaviour:
   - {fileID: 88227159}
   totalEnemies: 0
   clear: 0
+  rewardSpawn: {fileID: 0}
 --- !u!1 &1092159644
 GameObject:
   m_ObjectHideFlags: 0
@@ -14440,7 +14447,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 26cadeeaa29498d4889f43542f3add58, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15303,7 +15310,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 114d3df3ed4c607459a4dcd158be86ef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -17147,6 +17154,7 @@ MonoBehaviour:
   isCompleted: 0
   hasStarted: 0
   corners: []
+  roomManager: {fileID: 0}
 --- !u!114 &1494679229 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2538445411161571176, guid: 0d4740b05f8788f4283c63a518697e24,
@@ -18829,6 +18837,7 @@ MonoBehaviour:
   - {fileID: 1198133599}
   totalEnemies: 0
   clear: 0
+  rewardSpawn: {fileID: 0}
 --- !u!1001 &1688872087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21306,6 +21315,7 @@ MonoBehaviour:
   - {fileID: 397591055}
   totalEnemies: 0
   clear: 0
+  rewardSpawn: {fileID: 0}
 --- !u!1 &1867850816
 GameObject:
   m_ObjectHideFlags: 0
@@ -21574,6 +21584,7 @@ MonoBehaviour:
   isCompleted: 1
   hasStarted: 0
   corners: []
+  roomManager: {fileID: 0}
 --- !u!1 &1896093009
 GameObject:
   m_ObjectHideFlags: 0
@@ -22381,6 +22392,7 @@ MonoBehaviour:
   isCompleted: 0
   hasStarted: 0
   corners: []
+  roomManager: {fileID: 0}
 --- !u!4 &1953936770
 Transform:
   m_ObjectHideFlags: 0
@@ -22550,7 +22562,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 114d3df3ed4c607459a4dcd158be86ef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -23036,6 +23048,7 @@ MonoBehaviour:
   isCompleted: 0
   hasStarted: 0
   corners: []
+  roomManager: {fileID: 0}
 --- !u!65 &2020790789
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23192,6 +23205,7 @@ MonoBehaviour:
   - {fileID: 705667659}
   totalEnemies: 0
   clear: 0
+  rewardSpawn: {fileID: 0}
 --- !u!4 &2052516399 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8287237133585989457, guid: a9fe4f9d6037cd04690a7bccdb64280d,

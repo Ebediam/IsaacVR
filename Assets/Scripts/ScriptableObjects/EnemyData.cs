@@ -12,18 +12,18 @@ public class EnemyData : ScriptableObject
         Custom
     }
 
-    [Header("Base for all")]
-    public GameObject prefab;
+    [Header("Settings")]
     public new string name;
+    public GameObject prefab;
+    public Target targetType;
 
-
+    [Header("Stats")]
     public float hitPoints;
     public float damage;
     public float maxSpeed;
     public float acceleration;
-    public float mass;
+    public WeightClass weightClass;
 
-    public Target targetType;
 
     [Header("Pushback after hit")]
     public bool pushback;

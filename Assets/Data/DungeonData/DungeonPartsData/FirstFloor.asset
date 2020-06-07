@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b0b533e0f3efe49a5bb4d188b39415, type: 3}
+  m_Name: FirstFloor
+  m_EditorClassIdentifier: 
+  room: {fileID: 3575179940754599242, guid: 219c64e16372bfb44994be4c3533cbcc, type: 3}
+  doorFrame: {fileID: 8767979215165880271, guid: 64c9436b7386b2b4ca6531b76692108d,
+    type: 3}
+  wall: {fileID: 8097191043991752959, guid: 981e481e807ece343b6142ec0073326c, type: 3}
+  door: {fileID: 9048337207877526877, guid: 0d4740b05f8788f4283c63a518697e24, type: 3}
+  firstRoomContent: {fileID: 904129202788698996, guid: f0fcb9fbc4bcdf848b8c58f91b1eebc9,
+    type: 3}
+  treasureRoomContentList:
+  - {fileID: 7257769133482576059, guid: c74afbae975c83e449b2d9c7c7458e10, type: 3}
+  bossRoomContentList:
+  - {fileID: 3203354495437503398, guid: 1819b21b597898149980b08a50d6d456, type: 3}
+  - {fileID: 5659395363089609975, guid: 339c1f6d49f313345a2a9ecff6648892, type: 3}
+  teleporterRoomContent: {fileID: 5818268876842542688, guid: 050a5e4bec7911d428600f2289546655,
+    type: 3}
+  oneWayRoomContent:
+  - {fileID: 1278797257751581654, guid: 5744657f477b6c74d98a2f51d63cd04f, type: 3}
+  twoWayRoomContentStraigh:
+  - {fileID: 8813047297828500530, guid: 3e95ff9810d3382469a57dc8554f7324, type: 3}
+  - {fileID: 1091748516858444191, guid: 75c3c047460fb344490ee74cc5e87a8d, type: 3}
+  - {fileID: 5452993869665580896, guid: a0a51de42a0f6944faddd068577ac371, type: 3}
+  twoWayRoomContentTurn: []
+  threeWayRoomContent:
+  - {fileID: 4734852797100110562, guid: 9a4bc3eeea840214fb31a8bb1ef141fc, type: 3}
+  - {fileID: 2662053863941580992, guid: 584f379a60dbfb84b8c20e4158b8f7a3, type: 3}
+  - {fileID: 1033982186169825014, guid: 1221ad9f0f1299e45b317f32ade3d328, type: 3}
+  - {fileID: 1507932111242637817, guid: d32a29d32dd43b7478e295b792df4583, type: 3}
+  fourWayRoomContent:
+  - {fileID: 1319188541931169180, guid: 7bbb0e4e25e97d4439d45a7814513a12, type: 3}
+  - {fileID: 4948576820272814102, guid: aa4c5c073563709448667cbf7b8ade29, type: 3}
+  - {fileID: 567997171150273531, guid: ff89a5043097572468ae907f4b75bf55, type: 3}
+  - {fileID: 299660875175389177, guid: c0ad7f8b907e9dd42bc0cc22d2c0a1ab, type: 3}
+  - {fileID: 1614051402202671099, guid: 0d6e0d617651cee44831621bb871ff08, type: 3}
+  - {fileID: 6399114406703749428, guid: df467dfb3dd16134d941fdfced7a955e, type: 3}
+  - {fileID: 2420750501770543007, guid: cbef553081fd38a4e91705a23e89fc0c, type: 3}
+  - {fileID: 5257146527109862420, guid: 06d120874b3c9ab4e800c90ee1d095e5, type: 3}
+  - {fileID: 7588979945868192246, guid: e8179dd01e215f84ea288f859046ccf7, type: 3}
+  - {fileID: 2050270314754506375, guid: f83ca7e6d20eb2e458e784e170c4c10b, type: 3}
+  - {fileID: 419907614054191640, guid: de11f5d7b0bb5d248af88c1ee515b19a, type: 3}

@@ -893,12 +893,17 @@ MonoBehaviour:
   rb: {fileID: 3275466061829337905}
   invencibilityTime: 0.1
   invicible: 0
-  ignoreMaxSpeed: 0
   data: {fileID: 11400000, guid: bebfe009d5725154994f57ba64a43127, type: 2}
   enemyManager: {fileID: 0}
   active: 0
-  maxSpeed: 0
+  target: {fileID: 0}
+  animator: {fileID: 0}
   enemyText: {fileID: 6395524731480164109}
+  ignoreMaxSpeed: 0
+  maxSpeed: 0
+  enemyBehaviours: []
+  enemyActions: []
+  actionTimer: 0
 --- !u!54 &3275466061829337905
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -928,7 +933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
 --- !u!114 &4736900588172525886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -942,7 +947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
 --- !u!114 &1823723911626772267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -956,7 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
 --- !u!114 &7622047374066378721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -970,7 +975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  target: {fileID: 0}
+  initialized: 0
   cornerAvoidDistance: 2
   accelerationMultiplier: 1
 --- !u!1 &3275466062009760340
@@ -997,7 +1002,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3275466062009760340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.83799994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3275466060623321740}
@@ -1050,7 +1055,7 @@ PrefabInstance:
     - target: {fileID: 2677352554840111752, guid: 07151bca125035d4e9022a95ede7c281,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.18
+      value: 2.018
       objectReference: {fileID: 0}
     - target: {fileID: 2677352554840111752, guid: 07151bca125035d4e9022a95ede7c281,
         type: 3}

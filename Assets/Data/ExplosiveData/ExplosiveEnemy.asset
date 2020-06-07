@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad7455bbae492741baf4b2a7b565007, type: 3}
   m_Name: ExplosiveEnemy
   m_EditorClassIdentifier: 
-  explosionForce: 20
+  explosionForce: 10
   explosionRadius: 3
   despawnAfterExplosion: 0
   cooldownTimer: 0
   canChainExplode: 1
   maxDamage: 80
+  forceMode: 1
   timerToExplodeOnSpawn: 0
   timerToExplodeOnUngrab: 0
   disallowExplosionWhileGrabbed: 0

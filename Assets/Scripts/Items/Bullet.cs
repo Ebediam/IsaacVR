@@ -10,7 +10,8 @@ namespace BOIVR
         // Start is called before the first frame update
         void Start()
         {
-            
+            rb.mass = data.pushback;
+            damage = data.damage;
         }
 
         // Update is called once per frame
@@ -27,7 +28,7 @@ namespace BOIVR
 
             if (target)
             {
-                target.TakeDamage(data.damage);
+                target.TakeDamage(damage);
             }
 
             if (data.despawnAfterHit)

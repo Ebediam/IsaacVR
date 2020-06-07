@@ -30,18 +30,30 @@ namespace BOIVR
 
         private void Awake()
         {
-            maxColumns = dungeonData.maxColumns + playerData.currentLevel;
-            maxRows = dungeonData.maxRows + playerData.currentLevel;
-            minRooms = dungeonData.minRooms + playerData.currentLevel*5;
-            maxRooms = dungeonData.maxRooms + playerData.currentLevel * 5;
+
+            if (playerData.completedLevel)
+            {
+                maxColumns = dungeonData.maxColumns + playerData.currentLevel;
+                maxRows = dungeonData.maxRows + playerData.currentLevel;
+                minRooms = dungeonData.minRooms + playerData.currentLevel * 5;
+                maxRooms = dungeonData.maxRooms + playerData.currentLevel * 5;
+            }
+            else
+            {
+                maxColumns = dungeonData.maxColumns;
+                maxRows = dungeonData.maxRows;
+                minRooms = dungeonData.minRooms;
+                maxRooms = dungeonData.maxRooms;
+            }
+
+
+            
 
             positions = new RoomManager[maxColumns, maxRows];
             CreateGrid();
             positionsWithRoom = new List<RoomManager>();
 
 
-            
-            //startPosition = positions[Random.Range(0, dungeonData.maxColumns), Random.Range(0, dungeonData.maxRows)];
             startPosition = positions[Mathf.RoundToInt(maxRows / 2), Mathf.RoundToInt(maxColumns / 2)];
             CreateRoom(startPosition);
             startPosition.room.roomType = Room.RoomType.Start;

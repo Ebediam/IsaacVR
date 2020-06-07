@@ -18,14 +18,9 @@ MonoBehaviour:
   damage: 5
   maxSpeed: 2
   acceleration: 10
-  mass: 0.6
+  weightClass: {fileID: 11400000, guid: 1202d89b9755dd3438049f05e07e0ce2, type: 2}
+  targetType: 0
   pushback: 1
   pushbackVelocity: 3
   actionCooldown: 0.75
   actionCooldownModifier: 0.25
-  actionDuration: 0.75
-  bulletSpeed: 4
-  bulletsPerShot: 1
-  shotCooldown: 1.5
-  shotCooldownModifier: 0.25
-  delayBetweenBulletsPerShot: 0

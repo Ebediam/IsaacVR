@@ -58,11 +58,10 @@ namespace BOIVR
             data.ClearItems();
             data.ClearModifiers();
             data.ClearSpells();
-            data.completedLevel = false;
+
+            StartCoroutine(CompletedLevelBoolChange());
 
             health = data.currentHealth;
-
-
 
             maxSpeed = data.maxSpeed;
             acceleration = data.acceleration;
@@ -74,8 +73,13 @@ namespace BOIVR
             PlayerTookDamageEvent += UpdateHealth;
             Holder.HolderUpdate += HolderUpdater;
 
-
             UpdateHealth();
+        }
+
+        IEnumerator CompletedLevelBoolChange() 
+        {
+            yield return new WaitForSeconds(1f);
+            data.completedLevel = false;
         }
 
         // Update is called once per frame

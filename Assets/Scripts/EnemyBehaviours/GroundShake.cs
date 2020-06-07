@@ -18,8 +18,6 @@ namespace BOIVR
 
             enemyController.rb.AddForce(randomDirection.normalized * enemyController.data.acceleration, ForceMode.Acceleration);
 
-            enemyController.rb.velocity = Vector3.ClampMagnitude(enemyController.rb.velocity, enemyController.maxSpeed);
-
         }
     }
 

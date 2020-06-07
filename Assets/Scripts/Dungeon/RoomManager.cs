@@ -45,6 +45,7 @@ namespace BOIVR
             switch (room.roomType)
             {
                 case Room.RoomType.Regular:
+
                     roomContent = availableRoomContent[Random.Range(0, availableRoomContent.Count)];
                     break;
 

@@ -21,6 +21,8 @@ namespace BOIVR
   
         }
 
+
+
         public void OnDeath(Damageable damageable)
         {
             foreach (Transform spawnPoint in spawnPoints)

@@ -199,7 +199,7 @@ namespace BOIVR
                     Vector3 explosionDirection = _enemy.transform.position - sourcePoint;
                     float forcePercent = ((data.explosionRadius - explosionDirection.magnitude) / data.explosionRadius);
                     explosionDirection = explosionDirection.normalized;
-                    _enemy.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Impulse);
+                    _enemy.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, data.forceMode);
                     _enemy.TakeDamage(data.maxDamage * forcePercent);
 
                 }
@@ -213,7 +213,7 @@ namespace BOIVR
                     Vector3 explosionDirection = _item.transform.position - sourcePoint;
                     float forcePercent = ((data.explosionRadius - explosionDirection.magnitude) / data.explosionRadius);
                     explosionDirection = explosionDirection.normalized;
-                    _item.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Impulse);
+                    _item.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, data.forceMode);
                     
 
                 }
@@ -239,7 +239,7 @@ namespace BOIVR
                 {
                     explosionDirection = explosionDirection.normalized;
                     float forcePercent = ((data.explosionRadius - explosionDirection.magnitude) / data.explosionRadius);
-                    Player.local.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, ForceMode.Impulse);
+                    Player.local.rb.AddForce(explosionDirection * data.explosionForce * forcePercent, data.forceMode);
                     Player.local.TakeDamage(10f);
                 }
 

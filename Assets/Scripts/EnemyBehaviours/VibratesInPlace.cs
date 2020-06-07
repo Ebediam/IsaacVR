@@ -19,10 +19,7 @@ namespace BOIVR
 
             enemyController.rb.AddForce(direction * enemyController.data.acceleration, ForceMode.Acceleration);
 
-            if (enemyController.rb.velocity.magnitude > enemyController.maxSpeed)
-            {
-                enemyController.rb.velocity *= (enemyController.maxSpeed / enemyController.rb.velocity.magnitude);
-            }
+
         }
 
         public override void Initialize()

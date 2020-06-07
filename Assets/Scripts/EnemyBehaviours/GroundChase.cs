@@ -14,30 +14,33 @@ namespace BOIVR
         {
             base.Initialize();
             agentController.enabled = true;
-            agentController.speed = 0.1f;
-            agentController.acceleration = 1f;
+            agentController.speed = enemyController.data.maxSpeed;
+            agentController.acceleration = enemyController.data.acceleration;
             agentController.angularSpeed = 200000f;
+            agentController.autoRepath = false;
 
+           /*
+            agentController.updatePosition = false;
+            agentController.updateRotation = false;
 
+            */
+
+            
         }
 
         public override void Action()
         {
+            agentController.SetDestination(enemyController.target.position);
 
-            agentController.destination = enemyController.target.position;
+            /*
+            Debug.Log("Desired velocity: " + agentController.desiredVelocity);
 
+            transform.LookAt(transform.position + agentController.desiredVelocity);
+            enemyController.rb.velocity = agentController.desiredVelocity;
+            */
             
-            enemyController.rb.AddForce(transform.forward * enemyController.data.acceleration, ForceMode.Acceleration);
+            //enemyController.rb.AddRelativeForce(agentController.desiredVelocity, ForceMode.VelocityChange);
 
-            if (enemyController.ignoreMaxSpeed)
-            {
-                return;
-            }
-
-            if (enemyController.rb.velocity.magnitude > enemyController.maxSpeed)
-            {
-                enemyController.rb.velocity *= (enemyController.maxSpeed / enemyController.rb.velocity.magnitude);
-            }
 
 
         }

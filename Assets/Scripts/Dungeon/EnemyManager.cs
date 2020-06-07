@@ -16,7 +16,7 @@ namespace BOIVR
         [HideInInspector] public bool clear;
 
         public Transform rewardSpawn;
-
+        public AudioSource pickupSFX;
         private void Start()
         {
             totalEnemies = enemies.Count;
@@ -80,10 +80,19 @@ namespace BOIVR
                         GameObject pickup = Instantiate(itemPoolData.pickupPool[Random.Range(0, itemPoolData.pickupPool.Count)].prefab);
                         pickup.transform.position = rewardSpawn.transform.position;
                         pickup.transform.rotation = rewardSpawn.transform.rotation;
+                        GameManager.ChangeMusicVolume(0.3f);
+                        pickupSFX.Play();
+                        StartCoroutine(ResetMusicLevel(1f));
 
                     }
                 }
             }
+        }
+
+        public IEnumerator ResetMusicLevel(float time)
+        {
+            yield return new WaitForSeconds(time);
+            GameManager.ChangeMusicVolume(1f);
         }
 
         public void AddEnemy(Enemy enemy)

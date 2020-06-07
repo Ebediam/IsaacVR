@@ -15,7 +15,10 @@ namespace BOIVR
 
 
         public delegate void GameManagerDelegate();
+        public delegate void GameManagerFloatDelegate(float value);
+
         public static GameManagerDelegate GameOverEvent;
+        public static GameManagerFloatDelegate VolumeChangeEvent;
 
         public delegate void ButtonPressDelegate(ButtonState buttonState);
         public delegate void JoystickPressDelegate(Vector2 vector2);
@@ -24,19 +27,22 @@ namespace BOIVR
         public static ButtonPressDelegate R1PressEvent;
         public static ButtonPressDelegate R2PressEvent;
         public static ButtonPressDelegate RightThumbstickPressEvent;
-        public static ButtonPressDelegate ButtonOnePressEvent;
+        public static ButtonPressDelegate LButtonOnePressEvent;
+        public static ButtonPressDelegate RButtonOnePressEvent;
 
         public static JoystickPressDelegate leftJoystickEvent;
         public static JoystickPressDelegate rightJoystickEvent;
+        public AudioSource music;
 
-
-
+        
 
         // Start is called before the first frame update
         void Start()
         {
-
+            VolumeChangeEvent += ChangeMusicVolumeLocal;
+            GameOverEvent += GameOverLocal;
         }
+
 
         // Update is called once per frame
         void Update()
@@ -133,20 +139,49 @@ namespace BOIVR
             //-------------------A---------------------
             if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
             {
-                ButtonOnePressEvent?.Invoke(ButtonState.Down);
+                RButtonOnePressEvent?.Invoke(ButtonState.Down);
 
             }
             else if (OVRInput.GetUp(OVRInput.Button.One, OVRInput.Controller.RTouch))
             {
-                ButtonOnePressEvent?.Invoke(ButtonState.Up);
+                RButtonOnePressEvent?.Invoke(ButtonState.Up);
             }
 
+            //-------------------X---------------------
+            if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch))
+            {
+                LButtonOnePressEvent?.Invoke(ButtonState.Down);
 
+            }
+            else if (OVRInput.GetUp(OVRInput.Button.One, OVRInput.Controller.LTouch))
+            {
+                LButtonOnePressEvent?.Invoke(ButtonState.Up);
+            }
+
+        }
+
+        public static void ChangeMusicVolume(float volumePercent)
+        {
+            VolumeChangeEvent?.Invoke(volumePercent);
+        }
+
+        void ChangeMusicVolumeLocal(float volumePercent)
+        {
+            music.volume = volumePercent;
+        }
+
+        void GameOverLocal()
+        {
+            VolumeChangeEvent -= ChangeMusicVolumeLocal;
+            GameOverEvent -= GameOverLocal;
         }
 
         public static void GameOver()
         {
             GameOverEvent?.Invoke();
+            
+
+
             SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
         }
     }

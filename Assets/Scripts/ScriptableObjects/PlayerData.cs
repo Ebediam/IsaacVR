@@ -91,6 +91,7 @@ public class PlayerData : ScriptableObject
             canFly = false;
             luckBoost = 0f;
 
+            currentLevel = 0;
 
         }
 

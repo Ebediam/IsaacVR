@@ -11,7 +11,15 @@ public class LevelCount : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levelText.text = playerData.currentLevel.ToString();
+        if (playerData.completedLevel)
+        {
+            levelText.text = playerData.currentLevel.ToString();
+        }
+        else
+        {
+            levelText.text = "0";
+        }
+ 
     }
 
     // Update is called once per frame

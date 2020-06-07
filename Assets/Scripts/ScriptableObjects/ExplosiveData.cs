@@ -13,6 +13,7 @@ public class ExplosiveData : ScriptableObject
     public float cooldownTimer;
     public bool canChainExplode;
     public float maxDamage;
+    public ForceMode forceMode;
 
     [Header("Trigger settings")]
     public float timerToExplodeOnSpawn;

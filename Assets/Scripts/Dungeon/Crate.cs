@@ -6,7 +6,8 @@ public class Crate : Damageable
 {
     public PoolData itemPoolData;
     public Transform spawnPoint;
-    
+    public AudioSource pickupSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class Crate : Damageable
         GameObject randomPickup = Instantiate(itemPoolData.pickupPool[Random.Range(0, itemPoolData.pickupPool.Count)].prefab);
         randomPickup.transform.position = spawnPoint.position;
         randomPickup.transform.rotation = spawnPoint.rotation;
+        pickupSFX.Play();
 
     }
 

@@ -248,12 +248,12 @@ namespace BOIVR
             {
                 case BulletType.Alt:
                     bullet.rb.AddForce(bullet.transform.forward * (gunData.altBulletSpeed + Player.local.data.bulletSpeedBoost), ForceMode.VelocityChange);
-                    bullet.damage = gunData.altBulletDamage + Player.local.data.damageBoost;
+                    bullet.damage +=  Player.local.data.damageBoost;
                     break;
 
                 default:
                     bullet.rb.AddForce(bullet.transform.forward * (gunData.bulletSpeed + Player.local.data.bulletSpeedBoost), ForceMode.VelocityChange);
-                    bullet.damage = gunData.bulletDamage + Player.local.data.damageBoost;
+                    bullet.damage += Player.local.data.damageBoost;
                     break;
 
             }

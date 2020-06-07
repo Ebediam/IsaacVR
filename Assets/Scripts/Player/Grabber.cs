@@ -53,40 +53,55 @@ namespace BOIVR
             {
                 GameManager.L1PressEvent += IndexTriggerPress;
                 GameManager.L2PressEvent += HandTriggerPress;
+                GameManager.LButtonOnePressEvent += AltButtonPress;
                 leftGrabber = this;
 
-   
-                if (hand.player.data.leftGrabberItem)
+                if (hand.player.data.completedLevel)
                 {
-                    Item leftItem = Item.SpawnItem(hand.player.data.leftGrabberItem);
-                    leftItem.transform.position = transform.position + transform.forward;
-                    Grab(leftItem);
+                    if (hand.player.data.leftGrabberItem)
+                    {
+                        Item leftItem = Item.SpawnItem(hand.player.data.leftGrabberItem);
+                        leftItem.transform.position = transform.position + transform.forward;
+                        Grab(leftItem);
+                    }
                 }
+
+
 
             }
             else if (side == Side.Right)
             {
                 GameManager.R1PressEvent += IndexTriggerPress;
                 GameManager.R2PressEvent += HandTriggerPress;
-                GameManager.ButtonOnePressEvent += AltButtonPress;
+                GameManager.RButtonOnePressEvent += AltButtonPress;
 
                 rightGrabber = this;
 
-                if (hand.player.data.rightGrabberItem)
+                if (hand.player.data.completedLevel)
                 {
-                    Item rightItem = Item.SpawnItem(hand.player.data.rightGrabberItem);
-                    rightItem.transform.position = transform.position + transform.forward;
-                    Grab(rightItem);
+                    if (hand.player.data.rightGrabberItem)
+                    {
+                        Item rightItem = Item.SpawnItem(hand.player.data.rightGrabberItem);
+                        rightItem.transform.position = transform.position + transform.forward;
+                        Grab(rightItem);
+                    }
                 }
 
+
+
+
             }
 
-            if (hand.player.data.activeSpell)
+            if (hand.player.data.completedLevel)
             {
-                Spell spell = Instantiate(hand.player.data.activeSpell.prefab).GetComponent<Spell>();
+                if (hand.player.data.activeSpell)
+                {
+                    Spell spell = Instantiate(hand.player.data.activeSpell.prefab).GetComponent<Spell>();
 
-                AddSpellAndActivate(spell, this);
+                    AddSpellAndActivate(spell, this);
+                }
             }
+
 
             interactablesInRange = new List<Interactable>();
             GameManager.GameOverEvent += OnGameOver;
@@ -101,6 +116,7 @@ namespace BOIVR
             {
                 GameManager.L1PressEvent -= IndexTriggerPress;
                 GameManager.L2PressEvent -= HandTriggerPress;
+                GameManager.LButtonOnePressEvent -= AltButtonPress;
                 leftGrabber = null;
 
 
@@ -109,7 +125,7 @@ namespace BOIVR
             {
                 GameManager.R1PressEvent -= IndexTriggerPress;
                 GameManager.R2PressEvent -= HandTriggerPress;
-                GameManager.ButtonOnePressEvent -= AltButtonPress;
+                GameManager.RButtonOnePressEvent -= AltButtonPress;
                 rightGrabber = null;
             }
 

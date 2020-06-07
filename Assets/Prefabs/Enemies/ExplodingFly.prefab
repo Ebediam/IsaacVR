@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
+  initialized: 0
   spawnPoints:
   - {fileID: 3138967264826652206}
   - {fileID: 2616547105534824785}
@@ -634,7 +635,7 @@ PrefabInstance:
     - target: {fileID: 7252315653053854593, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7252315653053854593, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
         type: 3}
@@ -644,12 +645,12 @@ PrefabInstance:
     - target: {fileID: 7252315653053854593, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7252315653053854593, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7252315653088567084, guid: 6f09fdb2ff5ce6e4aa0ed3859f0df920,
         type: 3}

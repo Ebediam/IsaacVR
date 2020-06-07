@@ -15,6 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 8322998701028168124, guid: f54a90aebaedc7043a5640a1d9197e9f, type: 3}
   damage: 5
   despawnAfterHit: 1
+  pushback: 2
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 0

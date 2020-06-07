@@ -17,7 +17,6 @@ namespace BOIVR
         public Animator animator;
         public TextMeshPro enemyText;
 
-        [HideInInspector] public bool ignoreMaxSpeed;
         [HideInInspector] public float maxSpeed;
         public List<EnemyBehaviour> enemyBehaviours = new List<EnemyBehaviour>();
         public List<EnemyAction> enemyActions = new List<EnemyAction>();
@@ -29,7 +28,8 @@ namespace BOIVR
         {
 
             currentHealth = data.hitPoints;
-            rb.mass = data.mass;
+            rb.mass = data.weightClass.mass;
+            rb.drag = data.weightClass.drag;
             maxSpeed = data.maxSpeed;
 
             actionTimer = UnityEngine.Random.Range(0, data.actionCooldown);
@@ -106,8 +106,6 @@ namespace BOIVR
 
             if (data.pushback)
             {
-                ignoreMaxSpeed = true;
-                StartCoroutine(IgnoreMaxSpeedTimer(0.5f));
                 Pushback();
             }
         }
@@ -164,11 +162,6 @@ namespace BOIVR
             rb.AddForce(transform.forward * -data.pushbackVelocity, ForceMode.VelocityChange);
         }
 
-        public IEnumerator IgnoreMaxSpeedTimer(float timer)
-        {
-            yield return new WaitForSeconds(timer);
-            ignoreMaxSpeed = false;
-        }
 
         public override void DestroyDamageable()
         {

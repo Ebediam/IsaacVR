@@ -16,12 +16,11 @@ MonoBehaviour:
   name: Small Chaser
   hitPoints: 10
   damage: 3
-  maxSpeed: 1
+  maxSpeed: 1.1
   acceleration: 5
-  mass: 0.1
+  weightClass: {fileID: 11400000, guid: 1202d89b9755dd3438049f05e07e0ce2, type: 2}
+  targetType: 0
   pushback: 1
   pushbackVelocity: 6
   actionCooldown: 0
   actionCooldownModifier: 0
-  actionDuration: 0
-  bulletSpeed: 0

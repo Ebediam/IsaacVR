@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad7455bbae492741baf4b2a7b565007, type: 3}
   m_Name: WindBurst
   m_EditorClassIdentifier: 
-  explosionForce: 30
-  explosionRadius: 3
+  explosionForce: 10
+  explosionRadius: 4
   despawnAfterExplosion: 1
   cooldownTimer: 0
   canChainExplode: 0
   maxDamage: 0
+  forceMode: 2
   timerToExplodeOnSpawn: 0.1
   timerToExplodeOnUngrab: 0
   disallowExplosionWhileGrabbed: 0
