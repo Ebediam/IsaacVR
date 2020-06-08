@@ -12,11 +12,12 @@ GameObject:
   - component: {fileID: 2272284666317318570}
   - component: {fileID: 2272284666317318573}
   - component: {fileID: 2272284666317318572}
-  - component: {fileID: 2272284666317318575}
   - component: {fileID: 2272284666317318574}
   - component: {fileID: 2272284666317318561}
   - component: {fileID: 2272284666317318571}
   - component: {fileID: -3309318666789801307}
+  - component: {fileID: 4812982606233456000}
+  - component: {fileID: 7480681258378510955}
   m_Layer: 12
   m_Name: LongWormBody
   m_TagString: Untagged
@@ -99,20 +100,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2272284666317318575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2272284666317318563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 372e0a7644e1f7949826796c71f40ec3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyController: {fileID: 0}
-  initialized: 0
 --- !u!114 &2272284666317318574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,7 +122,6 @@ MonoBehaviour:
   target: {fileID: 0}
   animator: {fileID: 0}
   enemyText: {fileID: 0}
-  ignoreMaxSpeed: 0
   maxSpeed: 0
   enemyBehaviours: []
   enemyActions: []
@@ -187,6 +173,40 @@ MonoBehaviour:
   initialized: 0
   enemyToSlowdown: {fileID: 0}
   slowdownPercent: 0.25
+--- !u!114 &4812982606233456000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2272284666317318563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c059941f65e92f419280037d83d6ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+--- !u!114 &7480681258378510955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2272284666317318563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 372e0a7644e1f7949826796c71f40ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyController: {fileID: 0}
+  initialized: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 16384
+  distanceThreshold: 0.5
+  pathfindingStep: 1
+  maxIterations: 5
+  allowPathfind: 0
 --- !u!1 &9182064209693849998
 GameObject:
   m_ObjectHideFlags: 0

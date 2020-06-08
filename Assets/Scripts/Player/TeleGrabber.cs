@@ -147,7 +147,7 @@ namespace BOIVR
                         
                         handRatio = Vector3.Distance(hand.transform.position, hand.shoulder.position);
                         itemRatio = Vector3.Distance(telePoint.position, hand.shoulder.position);
-                        Debug.Log("handDistance: " + handRatio);
+
                         handRatio = Mathf.Clamp(handRatio, minHandDistance, maxHandDistance);
                                                 
 

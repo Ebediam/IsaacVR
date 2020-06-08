@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq.Expressions;
 using UnityEngine;
 
@@ -15,6 +16,16 @@ namespace BOIVR
         None
     }
 
+    public enum PathfindDirection
+    {
+        None,
+        Up,
+        Down,
+        Right,
+        Left,
+        Forward,
+        Backwards
+    }
     public static class Utils
     {
 
@@ -180,13 +191,154 @@ namespace BOIVR
 
             return direction;
 
-
-
-
-
-
-
         }
+
+
+
+        public static PathfindDirection RandomPathfindDirection(PathfindDirection lastDirection)
+        {
+
+            PathfindDirection direction = PathfindDirection.None;
+            int random = Random.Range(0, 6);
+
+            switch (random)
+            {
+                case 0:
+
+                    if (lastDirection == PathfindDirection.Down)
+                    {
+                        direction = RandomPathfindDirection(lastDirection);
+                    }
+                    else
+                    {
+                        direction = PathfindDirection.Up;
+                    }
+
+                    break;
+
+                case 1:
+
+                    if (lastDirection == PathfindDirection.Up)
+                    {
+                        direction = RandomPathfindDirection(lastDirection);
+                    }
+                    else
+                    {
+                        direction = PathfindDirection.Down;
+                    }
+
+                    break;
+
+                case 2:
+
+                    if (lastDirection == PathfindDirection.Left)
+                    {
+                        direction = RandomPathfindDirection(lastDirection);
+                    }
+                    else
+                    {
+                        direction = PathfindDirection.Right;
+
+                    }
+
+                    break;
+
+                case 3:
+
+                    if (lastDirection == PathfindDirection.Right)
+                    {
+                        direction = RandomPathfindDirection(lastDirection);
+                    }
+                    else
+                    {
+                        direction = PathfindDirection.Left;
+                    }
+                    break;
+
+                case 4:
+
+                    if (lastDirection == PathfindDirection.Backwards)
+                    {
+                        direction = RandomPathfindDirection(lastDirection);
+                    }
+                    else
+                    {
+                        direction = PathfindDirection.Forward;
+                    }
+
+                    break;
+
+                case 5:
+
+                    if (lastDirection == PathfindDirection.Forward)
+                    {
+                        direction = RandomPathfindDirection(lastDirection);
+                    }
+                    else
+                    {
+                        direction = PathfindDirection.Backwards;
+                    }
+
+                    break;
+            }
+
+            return direction;
+        }
+
+
+        public static Vector3 VectorFromDirection(PathfindDirection direction)
+        {
+            Vector3 rdir = Vector3.zero;
+
+            switch (direction)
+            {
+                case PathfindDirection.Up:
+
+                    rdir = Vector3.up;
+                    break;
+
+                case PathfindDirection.Down:
+                    
+                    rdir = Vector3.up * -1f;  
+                    break;
+
+                case PathfindDirection.Right:
+
+                    rdir = Vector3.right;      
+                    break;
+
+                case PathfindDirection.Left:
+ 
+                    rdir = Vector3.right * -1f;                    
+                    break;
+
+                case PathfindDirection.Forward:
+
+
+                    rdir = Vector3.forward;      
+                    break;
+
+                case PathfindDirection.Backwards:
+
+                    rdir = Vector3.forward * -1f;
+                    break;
+
+            }
+
+            return rdir;
+        }
+
+        public static void IgnoreCollisionsBetween(GameObject entity1, GameObject entity2)
+        {
+            foreach(Collider col in entity1.GetComponentsInChildren<Collider>())
+            {
+                foreach(Collider _col in entity2.GetComponentsInChildren<Collider>())
+                {
+                    Physics.IgnoreCollision(col, _col);
+                }
+            }
+        }
+
     }
 
 }

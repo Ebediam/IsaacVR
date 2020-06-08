@@ -844,7 +844,6 @@ MonoBehaviour:
   target: {fileID: 0}
   animator: {fileID: 3084024100790886888}
   enemyText: {fileID: 6402416714190308732}
-  ignoreMaxSpeed: 0
   maxSpeed: 0
   enemyBehaviours: []
   enemyActions: []
@@ -862,6 +861,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
+  initialized: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 16384
+  distanceThreshold: 0.5
+  pathfindingStep: 1
+  maxIterations: 5
+  allowPathfind: 1
 --- !u!1 &7252315653053854598
 GameObject:
   m_ObjectHideFlags: 0

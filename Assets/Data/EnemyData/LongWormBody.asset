@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697a8e2490a31c848aee59430ca4222a, type: 3}
   m_Name: LongWormBody
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
   name: 
+  prefab: {fileID: 0}
+  targetType: 2
   hitPoints: 40
   damage: 8
-  maxSpeed: 4
-  acceleration: 20
-  weightClass: {fileID: 11400000, guid: d1f52d7f04ac9aa4c8dfeeb3f7a4eebb, type: 2}
-  targetType: 2
+  maxSpeed: 6
+  acceleration: 15
+  weightClass: {fileID: 11400000, guid: e82423be14c876f4fb27d937449f5cc7, type: 2}
   pushback: 0
   pushbackVelocity: 0
   actionCooldown: 0
