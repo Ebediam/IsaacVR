@@ -6,6 +6,8 @@ namespace BOIVR
 {
     public class Powerup : Item
     {
+        public delegate void PowerupDelegate();
+        public static PowerupDelegate PowerupEvent;
         public enum StatBoost
         {
             FireRate,
@@ -57,23 +59,15 @@ namespace BOIVR
                 case StatBoost.Fly:
                     Player.local.data.canFly = true;
                     break;
-
-
-
-
             }
 
             OnItemPickup -= PowerUp;
+            PowerupEvent?.Invoke();
             DespawnItem();
 
 
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }
 

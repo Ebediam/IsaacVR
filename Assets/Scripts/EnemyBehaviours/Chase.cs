@@ -47,7 +47,7 @@ namespace BOIVR
                 if(Physics.Raycast(transform.position, playerDirection, playerDirection.magnitude, groundLayer))
                 {
                     distance = Vector3.Distance(transform.position, target.position);
-                    Debug.Log("Distance to target: " + distance);
+
                     if (distance < distanceThreshold)
                     {
                         EndPathfinding();

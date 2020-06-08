@@ -81,6 +81,17 @@ namespace BOIVR
                 hasStarted = true;
             }
         }
+
+        private void OnTriggerExit(Collider other)
+        {
+            Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
+
+            if (enemy)
+            {
+                enemy.Kill();
+            }
+
+        }
     }
 
 }

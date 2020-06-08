@@ -15,6 +15,8 @@ namespace BOIVR
         public static PlayerDelegate UpdateHealthEvent;
         public static PlayerDelegate UpdateInventoryEvent;
 
+        public static PlayerDelegate playerJumpEvent;
+
         public Collider bodyCollider;
         public Body body;
         public Camera headCamera;
@@ -127,14 +129,6 @@ namespace BOIVR
             }
 
 
-            /*
-            if (headCamera)
-            {
-                transform.position = new Vector3(headCamera.transform.position.x, transform.position.y, headCamera.transform.position.z);
-                headCamera.transform.position = new Vector3(transform.position.x, headCamera.transform.position.y, transform.position.z);
-            }
-            */
-
         }
 
         void HolderUpdater(ItemData itemData, int count)
@@ -183,6 +177,7 @@ namespace BOIVR
                         rb.AddForce(transform.up * data.jumpForce, ForceMode.VelocityChange);
                         canJump = false;
                         isGrounded = false;
+                        playerJumpEvent?.Invoke();
                     }
                 }
                 else

@@ -162,7 +162,10 @@ namespace BOIVR
             rb.AddForce(transform.forward * -data.pushbackVelocity, ForceMode.VelocityChange);
         }
 
-
+        public void Kill()
+        {
+            DestroyDamageable();
+        }
         public override void DestroyDamageable()
         {
             base.DestroyDamageable();
